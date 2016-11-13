@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "358499009693",
+    "firebase_url": "https://beautyblink-d8643.firebaseio.com",
+    "project_id": "beautyblink-d8643",
+    "storage_bucket": "beautyblink-d8643.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:358499009693:android:a12c7508928e5b0d",
+        "android_client_info": {
+          "package_name": "com.example.captain_pc.beautyblinkcustomer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "358499009693-i6g3qnl4j1qkgrg0b5ibm1ld6766b0lm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.captain_pc.beautyblinkcustomer",
+            "certificate_hash": "DC10311AD2BAA0290829E436320979C8550DF84A"
+          }
+        },
+        {
+          "client_id": "358499009693-kh2lc7nrgci38homjgnp3o723pmj3rj0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvBh1hgLIMjfDbYqcQ0tUjS699oTwdEGQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "358499009693-kh2lc7nrgci38homjgnp3o723pmj3rj0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
