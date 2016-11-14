@@ -112,7 +112,8 @@ public class GoogleSignIn extends AppCompatActivity implements View.OnClickListe
     }
 
     private void updateUI() {
-        finish();
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
     // [START auth_with_google]
