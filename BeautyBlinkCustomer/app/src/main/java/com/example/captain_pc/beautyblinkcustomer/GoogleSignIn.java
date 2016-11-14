@@ -137,8 +137,7 @@ public class GoogleSignIn extends AppCompatActivity implements View.OnClickListe
                             Toast.makeText(GoogleSignIn.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                         } else {
-                            Intent intent = new Intent(GoogleSignIn.this, MainActivity.class);
-                            startActivity(intent);
+                            updateUI();
                         }
 
                         // [START_EXCLUDE]
