@@ -111,6 +111,10 @@ public class GoogleSignIn extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    private void updateUI() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
     // [START auth_with_google]
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
         Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
