@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">BeautyBlinkCustomer</string>
+    <string name="date_button_set">Set Date</string>
+    <string name="date_selected"></string>
+    <string name="open_drawer">Open Menu</string>
+    <string name="close_drawer">Close Menu</string>
+    <string name="msg">Option_msg</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

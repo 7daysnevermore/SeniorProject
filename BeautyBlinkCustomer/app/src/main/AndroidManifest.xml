@@ -15,7 +15,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".GoogleSignIn"></activity>
+        <activity android:name=".GoogleSignIn" />
+        <activity android:name=".Register"></activity>
     </application>
 
 </manifest>
