@@ -4,8 +4,12 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
@@ -30,8 +34,13 @@ public class GoogleSignIn extends AppCompatActivity implements View.OnClickListe
     private static final int RC_SIGN_IN = 9001;
 
     private GoogleApiClient mGoogleApiClient;
+    private EditText inputEmail, inputPassword;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseAuth mAuth;
+    private TextView btnRegister;
+    private Button btnLogin;
+    private FirebaseAuth mFirebaseAuth;
+    private FirebaseUser mFirebaseUser;
 
     // [START onCreate]
     @Override
@@ -56,6 +65,16 @@ public class GoogleSignIn extends AppCompatActivity implements View.OnClickListe
 
         };
 
+
+        inputEmail = (EditText) findViewById(R.id.email);
+        inputPassword = (EditText) findViewById(R.id.pass);
+        btnLogin = (Button) findViewById(R.id.btn_login);
+        btnRegister = (TextView) findViewById(R.id.register);
+
+
+
+        btnLogin.setOnClickListener(this);
+        btnRegister.setOnClickListener(this);
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -89,6 +108,54 @@ public class GoogleSignIn extends AppCompatActivity implements View.OnClickListe
         }
     }
     // [END on_stop_remove_listener]
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_login:
+                EmailPasswordLogin();
+                break;
+            case R.id.register:
+                Intent intent = new Intent(this, Register.class);
+                startActivity(intent);
+            case R.id.sign_in_button:
+                signIn();
+                break;
+        }
+    }
+    private void EmailPasswordLogin() {
+        String email = inputEmail.getText().toString();
+        final String password = inputPassword.getText().toString();
+
+        if (TextUtils.isEmpty(email)) {
+            Toast.makeText(getApplicationContext(), "Enter email address!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (TextUtils.isEmpty(password)) {
+            Toast.makeText(getApplicationContext(), "Enter password!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+
+        //authenticate user
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(GoogleSignIn.this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+
+                        // If sign in fails, display a message to the user. If sign in succeeds
+                        // the auth state listener will be notified and logic to handle the
+                        // signed in user can be handled in the listener.
+                        if (!task.isSuccessful()) {
+
+                            Toast.makeText(GoogleSignIn.this, "Fail", Toast.LENGTH_LONG).show();
+
+                        } else {
+                            updateUI();
+                        }
+                    }
+                });
+    }
+
 
     // [START onactivityresult]
     @Override
@@ -155,15 +222,6 @@ public class GoogleSignIn extends AppCompatActivity implements View.OnClickListe
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
     // [END signin]
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.sign_in_button:
-                signIn();
-                break;
-        }
-    }
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
