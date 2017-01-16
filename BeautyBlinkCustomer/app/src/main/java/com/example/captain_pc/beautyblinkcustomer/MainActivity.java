@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(mFirebaseUser == null){
             // Not signed in, launch the sign in activity.
             startActivity(new Intent(this, GoogleSignIn.class));
-            return;
+
         }else {
 
             uid = mFirebaseUser.getUid().toString();
@@ -78,12 +78,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         }
         initInstances();
-        findViewById(R.id.sign_out_button).setOnClickListener(this);
-        TextView name = (TextView) findViewById(R.id.name);
-        name.setText(displayname);
-        TextView email = (TextView) findViewById(R.id.email);
-        email.setText(personalEmail);
+
     }
+
+
     private  void initInstances(){
         DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -102,6 +100,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.bt_request).setOnClickListener(this);
         findViewById(R.id.bt_noti).setOnClickListener(this);
         findViewById(R.id.bt_userprofile).setOnClickListener(this);
+
+        findViewById(R.id.sign_out_button).setOnClickListener(this);
+        TextView name = (TextView) findViewById(R.id.name);
+        name.setText(displayname);
+        TextView email = (TextView) findViewById(R.id.email);
+        email.setText(personalEmail);
 
     }
 
@@ -165,7 +169,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // Firebase sign out
         FirebaseAuth.getInstance().signOut();
         finish();
-        startActivity(getIntent());
     }
 
 
