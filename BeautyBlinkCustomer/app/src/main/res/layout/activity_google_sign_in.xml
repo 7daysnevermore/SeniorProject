@@ -61,6 +61,7 @@ android:layout_marginRight="20dp">
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:layout_weight="3">
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -75,6 +76,7 @@ android:layout_marginRight="20dp">
         android:layout_weight="1"
         android:text="Register"
         android:textSize="18sp"/>
+
 </LinearLayout>
 
 

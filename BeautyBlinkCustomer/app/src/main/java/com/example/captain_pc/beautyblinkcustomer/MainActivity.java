@@ -71,9 +71,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if(savedInstanceState==null){
                 //first create
                 //Place fragment
-                /**getSupportFragmentManager().beginTransaction()
-                        .add(R.id.contentcontainer,new GalleryFragment())
-                        .commit();**/
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.contentcontainer, new Promotions())
+                        .addToBackStack(null)
+                        .commit();
             }
 
         }

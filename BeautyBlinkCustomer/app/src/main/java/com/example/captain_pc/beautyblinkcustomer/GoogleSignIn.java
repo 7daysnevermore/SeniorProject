@@ -27,6 +27,11 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class GoogleSignIn extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
 
@@ -179,18 +184,21 @@ public class GoogleSignIn extends AppCompatActivity implements View.OnClickListe
     }
 
     private void updateUI() {
+
+
+
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 
     // [START auth_with_google]
-    private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
+    private void firebaseAuthWithGoogle(final GoogleSignInAccount acct) {
         Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
         // [START_EXCLUDE silent]
         //showProgressDialog();
         // [END_EXCLUDE]
 
-        AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
+        final AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -202,9 +210,30 @@ public class GoogleSignIn extends AppCompatActivity implements View.OnClickListe
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
                             Log.w(TAG, "signInWithCredential", task.getException());
+
                             Toast.makeText(GoogleSignIn.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                         } else {
+
+                            //Get current to pull UID and email
+                            //mFirebaseAuth = FirebaseAuth.getInstance();
+
+
+                            //create root of Beautician
+                            DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+
+                            DatabaseReference mUsersRef = mRootRef.child("customer");
+
+                            HashMap<String, Object> UserValues = new HashMap<>();
+                            UserValues.put("email",acct.getEmail().toString() );
+                            UserValues.put("firstname",acct.getGivenName().toString() );
+                            UserValues.put("lastname", acct.getFamilyName().toString());
+
+                            mFirebaseUser = mAuth.getCurrentUser();
+                            Map<String, Object> childUpdates = new HashMap<>();
+                            childUpdates.put(mFirebaseUser.getUid(), UserValues);
+                            mUsersRef.updateChildren(childUpdates);
+
                             updateUI();
                         }
 

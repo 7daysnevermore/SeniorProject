@@ -1,13 +1,14 @@
 package com.example.captain_pc.beautyblinkcustomer;
 
-import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.text.TextUtils;
 import android.view.View;
+
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -23,9 +24,14 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+
+/**
+ * Created by NunePC on 23/11/2559.
+ */
 
 public class Register extends AppCompatActivity implements View.OnClickListener {
 
@@ -44,23 +50,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     private TextView inputFirstname;
     private TextView inputLastname;
     private TextView inputPhoneNo;
-    private TextView inputAddr_num;
-    private TextView inputAddr_s_dist;
-    private TextView inputAddr_dist;
-    private TextView inputAddr_province;
-    private TextView inputAddr_code;
     private String input_gender;
-
-    private int s01_price;
-    private int s02_price;
-    private int s03_price;
-    private int s04_price;
-
-    private EditText inputS01;
-    private EditText inputS02;
-    private EditText inputS03;
-    private EditText inputS04;
-
 
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
@@ -94,13 +84,8 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         inputFirstname = (EditText) findViewById(R.id.fname);
         inputLastname = (EditText) findViewById(R.id.lname);
         inputPhoneNo = (EditText) findViewById(R.id.phone);
-        inputAddr_num = (EditText) findViewById(R.id.addressnum);
-        inputAddr_s_dist = (EditText) findViewById(R.id.sub_district);
-        inputAddr_dist = (EditText) findViewById(R.id.district);
-        inputAddr_province = (EditText) findViewById(R.id.province);
-        inputAddr_code = (EditText) findViewById(R.id.code);
 
-        findViewById(R.id.btn_continue).setOnClickListener(this);
+        findViewById(R.id.btn_register).setOnClickListener(this);
 
     }
 
@@ -145,10 +130,11 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btn_continue:
+            case R.id.btn_register:
 
                 addNewUser();
                 break;
+
         }
     }
 
@@ -172,11 +158,56 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         final String fname = inputFirstname.getText().toString();
         final String lname = inputLastname.getText().toString();
         final String phone = inputPhoneNo.getText().toString();
-        final String addr_num = inputAddr_num.getText().toString();
-        final String addr_s_dist = inputAddr_s_dist.getText().toString();
-        final String addr_dist = inputAddr_dist.getText().toString();
-        final String addr_province = inputAddr_province.getText().toString();
-        final String addr_code = inputAddr_code.getText().toString();
+
+        /*if (TextUtils.isEmpty(email)) {
+            Toast.makeText(getApplicationContext(), "Enter email address!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (TextUtils.isEmpty(pass)) {
+            Toast.makeText(getApplicationContext(), "Enter password!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (TextUtils.isEmpty(fname)) {
+            Toast.makeText(getApplicationContext(), "Enter firstname!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (TextUtils.isEmpty(lname)) {
+            Toast.makeText(getApplicationContext(), "Enter lastname!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (TextUtils.isEmpty(phone)) {
+            Toast.makeText(getApplicationContext(), "Enter phone number!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (TextUtils.isEmpty(addr_num)) {
+            Toast.makeText(getApplicationContext(), "Enter house number!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (TextUtils.isEmpty(addr_s_dist)) {
+            Toast.makeText(getApplicationContext(), "Enter sub district!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (TextUtils.isEmpty(addr_dist)) {
+            Toast.makeText(getApplicationContext(), "Enter district!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (TextUtils.isEmpty(addr_province)) {
+            Toast.makeText(getApplicationContext(), "Enter province!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (TextUtils.isEmpty(addr_code)) {
+            Toast.makeText(getApplicationContext(), "Enter code!", Toast.LENGTH_SHORT).show();
+            return;
+        }*/
 
         //create user
         mAuth.createUserWithEmailAndPassword(email, password)
@@ -191,6 +222,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                             Toast.makeText(Register.this, "Authentication failed." + task.getException(),
                                     Toast.LENGTH_SHORT).show();
                         } else {
+
                             //Get current to pull UID and email
                             mFirebaseAuth = FirebaseAuth.getInstance();
                             mFirebaseUser = mFirebaseAuth.getCurrentUser();
@@ -198,32 +230,31 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                             //create root of Beautician
                             DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
 
-                            DatabaseReference mUsersRef = mRootRef.child("beautician");
+                            DatabaseReference mUsersRef = mRootRef.child("customer");
 
                             HashMap<String, Object> UserValues = new HashMap<>();
-                            UserValues.put("email", email);
+                            UserValues.put("email", mFirebaseUser.getEmail().toString());
                             UserValues.put("firstname", fname);
                             UserValues.put("lastname", lname);
                             UserValues.put("phone", phone);
                             UserValues.put("birthday", dd + "/" + mm + "/" + yyyy);
                             UserValues.put("gender", input_gender);
-                            UserValues.put("address_number", addr_num);
-                            UserValues.put("address_sub_district", addr_s_dist);
-                            UserValues.put("address_district", addr_dist);
-                            UserValues.put("address_province", addr_province);
-                            UserValues.put("address_code", addr_code);
+
                             Map<String, Object> childUpdates = new HashMap<>();
-                            childUpdates.put(mFirebaseUser.getUid(), UserValues);
+                            childUpdates.put(mFirebaseUser.getUid().toString(), UserValues);
 
                             mUsersRef.updateChildren(childUpdates);
+
+                            startActivity(new Intent(Register.this, MainActivity.class));
 
                         }
                     }
                 });
 
 
+
+
     }
 
 
-
-    }
+}
