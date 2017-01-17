@@ -8,10 +8,18 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.example.captain_pc.beautyblinkcustomer.R;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class Promotions extends Fragment {
+
+    private EditText mF;
+    private Button mB;
+    private DatabaseReference mRef;
     public Promotions() {
         // Required empty public constructor
     }
@@ -21,13 +29,17 @@ public class Promotions extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_promotions,container,false);
+         mRef = FirebaseDatabase.getInstance().getReference();
+       // mRef.setValue(getContext());
         initInstance(rootView);
         return rootView;
     }
 
     private void initInstance(View rootView){
 
-
+        mB = (Button)rootView.findViewById(R.id.button2);
+        DatabaseReference mChild = mRef.child("GG");
+        mChild.setValue("Gameeeee");
     }
 
     @Override

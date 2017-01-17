@@ -7,4 +7,11 @@
     <string name="msg">Option_msg</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="pro_sercive">
+        <item>HairCut</item>
+        <item>HairStyle</item>
+        <item>MakeUp</item>
+        <item>Hairdressing</item>
+        <item>Cafe Zorro</item>
+    </string-array>
 </resources>

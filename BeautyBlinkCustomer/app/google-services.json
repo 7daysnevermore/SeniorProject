@@ -15,6 +15,30 @@
       },
       "oauth_client": [
         {
+          "client_id": "358499009693-tagi9i4mokodtqrrku10bjl0d0kedvro.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.captain_pc.beautyblinkcustomer",
+            "certificate_hash": "B5F148670267D69E4D87D1626625EE811B14B8E2"
+          }
+        },
+        {
+          "client_id": "358499009693-03oh3b4pfcp1oagtl0qi16oipevb859b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.captain_pc.beautyblinkcustomer",
+            "certificate_hash": "648AB499344C761BBE62B710869D55BBC8853DE7"
+          }
+        },
+        {
+          "client_id": "358499009693-urbgiibbe51bek5v572el94da6clol0c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.captain_pc.beautyblinkcustomer",
+            "certificate_hash": "400F96294D4CA2CC2F6E81473DDA67284761B796"
+          }
+        },
+        {
           "client_id": "358499009693-i6g3qnl4j1qkgrg0b5ibm1ld6766b0lm.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -52,18 +76,18 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:358499009693:android:7baf337b28410ba4",
+        "mobilesdk_app_id": "1:358499009693:android:98b33ce0e32a082c",
         "android_client_info": {
-          "package_name": "com.example.nunepc.db"
+          "package_name": "com.example.nunepc.beautyblinkbeautician"
         }
       },
       "oauth_client": [
         {
-          "client_id": "358499009693-ki8u6vvedfu5k31ea7imar8cop2ch4ek.apps.googleusercontent.com",
+          "client_id": "358499009693-ms0jd0b8jvov2oh726er4jotl5bik4ua.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.nunepc.db",
-            "certificate_hash": "648AB499344C761BBE62B710869D55BBC8853DE7"
+            "package_name": "com.example.nunepc.beautyblinkbeautician",
+            "certificate_hash": "400F96294D4CA2CC2F6E81473DDA67284761B796"
           }
         },
         {
