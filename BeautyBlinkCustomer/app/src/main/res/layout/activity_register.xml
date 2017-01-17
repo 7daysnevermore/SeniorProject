@@ -144,68 +144,16 @@
                     android:inputType="number"
                     android:maxLines="1" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Address"
-                    android:inputType="text"
-                    android:maxLines="1" />
-
-                <EditText
-                    android:id="@+id/addressnum"
-                    android:paddingLeft="20dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Number"
-                    android:inputType="text"
-                    android:maxLines="1" />
-
-                <EditText
-                    android:id="@+id/sub_district"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="20dp"
-                    android:hint="Sub-district"
-                    android:inputType="text"
-                    android:maxLines="1" />
-
-                <EditText
-                    android:id="@+id/district"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="20dp"
-                    android:hint="District"
-                    android:inputType="text"
-                    android:maxLines="1" />
-
-                <EditText
-                    android:id="@+id/province"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="20dp"
-                    android:hint="Province"
-                    android:inputType="text"
-                    android:maxLines="1" />
-
-                <EditText
-                    android:id="@+id/code"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="20dp"
-                    android:hint="Postal Code"
-                    android:inputType="text"
-                    android:maxLines="1" />
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                     <Button
-                        android:id="@+id/btn_continue"
+                        android:id="@+id/btn_register"
                         android:layout_marginBottom="10dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Continue" />
+                        android:text="Register" />
                 </LinearLayout>
 
             </LinearLayout>
