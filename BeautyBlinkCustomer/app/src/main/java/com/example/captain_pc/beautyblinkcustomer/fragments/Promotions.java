@@ -12,27 +12,17 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-<<<<<<< HEAD
+
 import android.widget.Button;
 import android.widget.EditText;
-=======
+
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
->>>>>>> develop
-
 import com.example.captain_pc.beautyblinkcustomer.PromotionDetails;
 import com.example.captain_pc.beautyblinkcustomer.R;
-<<<<<<< HEAD
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-public class Promotions extends Fragment {
-
-    private EditText mF;
-    private Button mB;
-    private DatabaseReference mRef;
-=======
 import com.example.captain_pc.beautyblinkcustomer.model.DataPromotion;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
@@ -40,11 +30,13 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
-
 import java.util.HashMap;
 
 public class Promotions extends Fragment {
 
+    private EditText mF;
+    private Button mB;
+    private DatabaseReference mRef;
     private TextView postP;
     private RecyclerView recyclerView;
     private FirebaseAuth mAuth;
@@ -52,8 +44,6 @@ public class Promotions extends Fragment {
     private FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference databaseReference;
     private LinearLayout create_pro;
-
->>>>>>> develop
     public Promotions() {
         // Required empty public constructor
     }
@@ -68,7 +58,6 @@ public class Promotions extends Fragment {
         initInstance(rootView);
         return rootView;
     }
-
     private void initInstance(final View rootView){
 
         databaseReference = FirebaseDatabase.getInstance().getReference().child("promotion");
@@ -145,15 +134,6 @@ public class Promotions extends Fragment {
         recyclerView.setLayoutManager(mLayoutManager);
 
 
-    }
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        mB = (Button)rootView.findViewById(R.id.button2);
-        DatabaseReference mChild = mRef.child("GG");
-        mChild.setValue("Gameeeee");
     }
 
     @Override

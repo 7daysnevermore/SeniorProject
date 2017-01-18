@@ -5,7 +5,6 @@
     android:orientation="vertical"
     tools:context="com.example.captain_pc.beautyblinkcustomer.fragments.Promotions">
 
-<<<<<<< HEAD
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
         android:orientation="vertical"
@@ -31,11 +30,10 @@
             android:layout_height="wrap_content"
             android:id="@+id/button2" />
     </LinearLayout>
-=======
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
->>>>>>> develop
 
         <LinearLayout
             android:layout_width="match_parent"

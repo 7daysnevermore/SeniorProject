@@ -205,6 +205,7 @@ public class CreateRequest extends AppCompatActivity {
                     RequestValues.put("status",status);
                     RequestValues.put("uid", mFirebaseUser.getUid().toString());
                     RequestValues.put("name", username);
+                    RequestValues.put("color", 0xFFFFFF);
 
                     Map<String, Object> childUpdate = new HashMap<>();
                     childUpdate.put("/request/" + key, RequestValues);
