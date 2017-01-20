@@ -18,8 +18,14 @@
         <activity android:name=".GoogleSignIn" />
         <activity android:name=".Register" />
         <activity android:name=".CreateRequest"></activity>
-        <activity android:name=".Register"></activity>
         <activity android:name=".PromotionDetails"></activity>
+
+        <activity android:name=".MyAccount"></activity>
+        <activity android:name=".MyLikes"></activity>
+        <activity android:name=".RecentlyViewed"></activity>
+        <activity android:name=".MyPromotion"></activity>
+        <activity android:name=".Setting"></activity>
+        <activity android:name=".Support"></activity>
 
     </application>
 
