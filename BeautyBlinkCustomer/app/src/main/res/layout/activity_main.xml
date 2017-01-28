@@ -76,20 +76,6 @@ android:orientation="vertical">
             android:layout_weight="1">
 
             <ImageView
-                android:id="@+id/bt_promotion"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_pro"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <ImageView
                 android:id="@+id/bt_search"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -108,7 +94,7 @@ android:orientation="vertical">
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_request"/>
+                android:src="@mipmap/request_70"/>
 
         </LinearLayout>
 
@@ -122,7 +108,7 @@ android:orientation="vertical">
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_noti"/>
+                android:src="@mipmap/noti_70"/>
 
         </LinearLayout>
 
@@ -136,7 +122,7 @@ android:orientation="vertical">
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_face"/>
+                android:src="@mipmap/setting_70"/>
         </LinearLayout>
 
     </LinearLayout>
