@@ -30,33 +30,59 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="25dp"
             android:gravity="center_vertical"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
             android:paddingLeft="10dp"
             android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <ImageView
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/sale"
-                android:textSize="18dp"
-                android:textColor="#FF0000"
-                android:text="Sale"
-                android:textStyle="normal|bold"
-                android:layout_marginLeft="5dp"
-                />
+                android:layout_weight="10"
+                android:src="@mipmap/cosmetics"/>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
-                android:id="@+id/price"
-                android:textSize="14dp"
+                android:id="@+id/service"
+                android:textSize="12dp"
                 android:textColor="#808080"
+                android:text="MakeupandHair" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingBottom="3dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="3dp">
+
+            <TextView
+                android:id="@+id/sale"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
                 android:text="Sale"
-                android:layout_marginLeft="10dp" />
+                android:textColor="#FF0000"
+                android:textSize="16dp"
+                android:textStyle="normal|bold" />
+
+            <TextView
+                android:id="@+id/price"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:gravity="center_vertical"
+                android:text="Sale"
+                android:textColor="#808080"
+                android:textSize="12dp" />
 
         </LinearLayout>
 

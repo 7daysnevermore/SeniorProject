@@ -19,9 +19,11 @@ import android.widget.EditText;
 
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.example.captain_pc.beautyblinkcustomer.PromotionDetails;
 import com.example.captain_pc.beautyblinkcustomer.R;
+import com.example.captain_pc.beautyblinkcustomer.SearchDetails;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.example.captain_pc.beautyblinkcustomer.model.DataPromotion;
@@ -44,7 +46,8 @@ public class Search extends Fragment {
     private FirebaseUser mFirebaseUser;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference databaseReference;
-    private LinearLayout create_pro;
+    private RelativeLayout btn_cate1, btn_cate2, btn_cate3, btn_cate4;
+
     public Search() {
         // Required empty public constructor
     }
@@ -53,31 +56,32 @@ public class Search extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.fragment_search,container,false);
+        View rootView = inflater.inflate(R.layout.fragment_search, container, false);
         mRef = FirebaseDatabase.getInstance().getReference();
         // mRef.setValue(getContext());
         initInstance(rootView);
         return rootView;
     }
-    private void initInstance(final View rootView){
+
+    private void initInstance(final View rootView) {
 
         databaseReference = FirebaseDatabase.getInstance().getReference().child("promotion");
         //professor promotion feeds
-        recyclerView =(RecyclerView) rootView.findViewById(R.id.recycler_view);
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
 
         //Order from latest data
-        final GridLayoutManager mLayoutManager = new GridLayoutManager(getActivity(),2);
+        final GridLayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 2);
         mLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
 
 
-        final FirebaseRecyclerAdapter<DataPromotion,PromotionViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<DataPromotion, PromotionViewHolder>
-                (DataPromotion.class,R.layout.promotion_row,PromotionViewHolder.class,databaseReference) {
+        final FirebaseRecyclerAdapter<DataPromotion, PromotionViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<DataPromotion, PromotionViewHolder>
+                (DataPromotion.class, R.layout.promotion_row, PromotionViewHolder.class, databaseReference) {
 
             @Override
             protected void populateViewHolder(PromotionViewHolder viewHolder, final DataPromotion model, final int position) {
 
-                viewHolder.setImage(getActivity().getApplicationContext(),model.getImage());
+                viewHolder.setImage(getActivity().getApplicationContext(), model.getImage());
                 viewHolder.setPromotion(model.getPromotion());
                 viewHolder.setPrice(model.getPrice());
                 viewHolder.setSale(model.getSale());
@@ -85,6 +89,7 @@ public class Search extends Fragment {
                 viewHolder.mview.setOnClickListener(new View.OnClickListener() {
                     //private static final String TAG = "Promotion";
                     final String cshow = getRef(position).getKey();
+
                     @Override
                     public void onClick(View view) {
                         //Log.w(TAG, "You clicked on "+position);
@@ -92,18 +97,21 @@ public class Search extends Fragment {
                         //Toast.makeText(Promotion.this, "This is my Toast message!",
                         // Toast.LENGTH_LONG).show();
                         HashMap<String, Object> promotionValues = new HashMap<>();
-                        promotionValues.put("key",cshow);
-                        promotionValues.put("promotion",model.getPromotion());
-                        promotionValues.put("image",model.getImage());
-                        promotionValues.put("details",model.getDetails());
-                        promotionValues.put("price",model.getPrice());
-                        promotionValues.put("sale",model.getSale());
-                        promotionValues.put("dateFrom",model.getDateFrom());
-                        promotionValues.put("dateTo",model.getDateTo());
-                        promotionValues.put("uid",model.getUid());
-                        promotionValues.put("name",model.getName());
-                        Intent cPro = new Intent(getActivity(),PromotionDetails.class);
-                        cPro.putExtra("promotion",  promotionValues);
+                        promotionValues.put("key", cshow);
+                        promotionValues.put("promotion", model.getPromotion());
+                        promotionValues.put("image", model.getImage());
+                        promotionValues.put("details", model.getDetails());
+                        promotionValues.put("price", model.getPrice());
+                        promotionValues.put("sale", model.getSale());
+                        promotionValues.put("dateFrom", model.getDateFrom());
+                        promotionValues.put("dateTo", model.getDateTo());
+                        promotionValues.put("uid", model.getUid());
+                        promotionValues.put("name", model.getName());
+                        promotionValues.put("service", model.getService());
+                        promotionValues.put("status", model.getStatus());
+                        promotionValues.put("profile", model.getProfile());
+                        Intent cPro = new Intent(getActivity(), PromotionDetails.class);
+                        cPro.putExtra("promotion", promotionValues);
                         startActivity(cPro);
                     }
                 });
@@ -133,34 +141,65 @@ public class Search extends Fragment {
         recyclerView.setLayoutManager(mLayoutManager);
 
 
+        rootView.findViewById(R.id.btn_cate1).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), SearchDetails.class));
+            }
+        });
+        rootView.findViewById(R.id.btn_cate2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), SearchDetails.class));
+            }
+        });
+        rootView.findViewById(R.id.btn_cate3).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), SearchDetails.class));
+            }
+        });
+        rootView.findViewById(R.id.btn_cate4).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), SearchDetails.class));
+            }
+        });
+
+
     }
 
     @Override
-    public void onStart(){ super.onStart(); }
+    public void onStart() {
+        super.onStart();
+    }
 
     @Override
-    public void onStop(){ super.onStop(); }
+    public void onStop() {
+        super.onStop();
+    }
 
     @Override
-    public void onSaveInstanceState(Bundle outState){
+    public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState){
+    public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        if(savedInstanceState != null){
+        if (savedInstanceState != null) {
             //Restore Instance State here
         }
     }
 
-    public static Search newInstance(){
+    public static Search newInstance() {
         Search fragment = new Search();
         Bundle args = new Bundle(); //Argument
         fragment.setArguments(args);
         return fragment;
     }
+
 
 
     public static class PromotionViewHolder extends RecyclerView.ViewHolder  {
@@ -192,5 +231,6 @@ public class Search extends Fragment {
             post_sale.setText(sale);
         }
     }
-
 }
+
+

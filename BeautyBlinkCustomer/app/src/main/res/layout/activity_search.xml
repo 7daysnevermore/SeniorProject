@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorBG">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -21,17 +22,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
+                android:maxLines="1"
                 android:ems="10"
-                android:id="@+id/promotion"
+                android:id="@+id/word"
+                android:imeOptions="actionSearch"
                 android:hint="Search"
-                android:background="#FFFFFF"
+                android:background="@drawable/input_outline"
                 android:padding="5dp" />
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:src="@mipmap/ic_launcher"/>
+                android:layout_weight="5"
+                android:src="@mipmap/filter_70"/>
 
         </LinearLayout>
 
@@ -40,46 +43,51 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
+        android:background="#FCFCFC"
         android:gravity="center"
-        android:layout_height="30dp">
+        android:layout_height="35dp">
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/popular"
             android:gravity="center"
             android:layout_weight="1"
             android:text="Popular"/>
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
+            android:id="@+id/latest"
             android:gravity="center"
             android:text="Latest" />
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
+            android:id="@+id/nearby"
             android:text="NearBy" />
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
+            android:id="@+id/price"
             android:text="Price" />
 
     </LinearLayout>
 
-    <!-- TODO: Update blank fragment layout -->
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view"
+    <!--Fragment-->
+    <FrameLayout
+        android:id="@+id/contentcontainer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scrollbars="vertical"
+        android:layout_height="wrap_content">
 
-        />
+    </FrameLayout>
+
 
 </LinearLayout>

@@ -19,6 +19,7 @@
         <activity android:name=".Register" />
         <activity android:name=".CreateRequest"></activity>
         <activity android:name=".Register"></activity>
+        <activity android:name=".SearchDetails"></activity>
         <activity android:name=".PromotionDetails"></activity>
 
     </application>
