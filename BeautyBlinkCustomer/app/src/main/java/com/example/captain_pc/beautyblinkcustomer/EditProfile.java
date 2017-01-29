@@ -121,7 +121,7 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
         //create root of Beautician
         DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
 
-        DatabaseReference mUsersRef = mRootRef.child("beautician");
+        DatabaseReference mUsersRef = mRootRef.child("customer");
 
         HashMap<String, Object> UserUpdate = new HashMap<>();
         UserUpdate.put("firstname", fname);
