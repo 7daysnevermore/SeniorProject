@@ -54,24 +54,11 @@ public class SearchViewHolder extends RecyclerView.ViewHolder  {
         Picasso.with(context).load(image).fit().centerCrop().into(profile);
     }
 
-    public void setS01(Integer price){
-        priceS01 = (TextView) mview.findViewById(R.id.priceS01);
-        priceS01.setText("Hair and Makeup : "+price);
+    public void setStart(Integer price){
+        priceS01 = (TextView) mview.findViewById(R.id.startprice);
+        priceS01.setText("฿"+price);
     }
 
-    public void setS02(Integer price) {
-        priceS02 = (TextView) mview.findViewById(R.id.priceS02);
-        priceS02.setText("Hair and Makeup : " + price);
-    }
 
-    public void setS03(Integer price) {
-        priceS03 = (TextView) mview.findViewById(R.id.priceS03);
-        priceS03.setText("Hair and Makeup : " + price);
-    }
-
-    public void setS04(Integer price) {
-        priceS04 = (TextView) mview.findViewById(R.id.priceS04);
-        priceS04.setText("Hair and Makeup : " + price);
-    }
 
 }

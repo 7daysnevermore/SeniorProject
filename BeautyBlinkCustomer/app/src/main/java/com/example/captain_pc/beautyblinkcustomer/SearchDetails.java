@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -45,6 +46,7 @@ public class SearchDetails extends AppCompatActivity implements View.OnClickList
     private DatabaseReference databaseReference;
 
     public EditText word;
+    public String search;
 
 
     @Override
@@ -55,8 +57,13 @@ public class SearchDetails extends AppCompatActivity implements View.OnClickList
         mAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mAuth.getCurrentUser();
 
+
+
         word = (EditText) findViewById(R.id.word);
 
+        search = getIntent().getStringExtra("search");
+
+        word.setHint(search);
         word.setFocusableInTouchMode(true);
         word.requestFocus();
 
@@ -77,6 +84,7 @@ public class SearchDetails extends AppCompatActivity implements View.OnClickList
             if(savedInstanceState==null){
                 //first create
                 //Place fragment
+
                 getSupportFragmentManager().beginTransaction()
                         .add(R.id.contentcontainer,new SearchPopular())
                         .commit();

@@ -120,71 +120,32 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1.7"
-            android:orientation="vertical">
+            android:layout_weight="2"
+            android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/priceS01"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="15dp"
-                    android:text="Hair and Makeup : 1,500B"
-                    android:textSize="13sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Starting price "
+                android:gravity="center_vertical"
+                android:textSize="16sp"
+                android:paddingLeft="15dp"/>
 
                 <TextView
-                    android:id="@+id/priceS02"
-                    android:layout_width="match_parent"
+                    android:id="@+id/startprice"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:textColor="#FF0000"
                     android:gravity="center_vertical"
-                    android:paddingLeft="15dp"
-                    android:text="Makeup          : 2,000B"
-                    android:textSize="13sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/priceS03"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="15dp"
-                    android:text="Hairstylist              : 1,500B"
-                    android:textSize="13sp" />
-
-                <TextView
-                    android:id="@+id/priceS04"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="15dp"
-                    android:text="Hairdressing : 1,000B"
-                    android:textSize="13sp" />
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@android:color/darker_gray" />
+                    android:paddingLeft="5dp"
+                    android:textSize="17sp" />
 
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@android:color/darker_gray" />
 
         <LinearLayout
             android:layout_width="match_parent"

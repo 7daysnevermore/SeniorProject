@@ -144,25 +144,33 @@ public class Search extends Fragment {
         rootView.findViewById(R.id.btn_cate1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), SearchDetails.class));
+                Intent cate = new Intent(getActivity(),SearchDetails.class);
+                cate.putExtra("search","S01");
+                startActivity(cate);
             }
         });
         rootView.findViewById(R.id.btn_cate2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), SearchDetails.class));
+                Intent cate = new Intent(getActivity(),SearchDetails.class);
+                cate.putExtra("search","S02");
+                startActivity(cate);
             }
         });
         rootView.findViewById(R.id.btn_cate3).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), SearchDetails.class));
+                Intent cate = new Intent(getActivity(),SearchDetails.class);
+                cate.putExtra("search","S03");
+                startActivity(cate);
             }
         });
         rootView.findViewById(R.id.btn_cate4).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), SearchDetails.class));
+                Intent cate = new Intent(getActivity(),SearchDetails.class);
+                cate.putExtra("search","S04");
+                startActivity(cate);
             }
         });
 

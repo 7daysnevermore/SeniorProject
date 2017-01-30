@@ -24,6 +24,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 
 import static android.R.attr.key;
 
@@ -38,9 +39,8 @@ public class SearchPopular extends Fragment {
     private FirebaseUser mFirebaseUser;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference databaseReference;
+    private Query databaseQuery;
 
-    public EditText word;
-    TextView test;
 
     public SearchPopular(){ super(); }
 
@@ -70,12 +70,10 @@ public class SearchPopular extends Fragment {
         recyclerView =(RecyclerView)rootView.findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
 
-        word = (EditText) rootView.findViewById(R.id.word);
-        test = (TextView) rootView.findViewById(R.id.test);
-
-        if(word!=null){
-            test.setText(word.getText().toString());
-        }
+        //Get search to order in fragment
+        final SearchDetails search = (SearchDetails) getActivity();
+        //search for each service
+        databaseQuery = databaseReference.orderByChild(search.search).startAt(1);
 
         //Order from latest data
         final LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
@@ -83,7 +81,7 @@ public class SearchPopular extends Fragment {
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 
         final FirebaseRecyclerAdapter<DataProfilePromote,SearchViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<DataProfilePromote, SearchViewHolder>
-                (DataProfilePromote.class,R.layout.profilepromote_row,SearchViewHolder.class,databaseReference) {
+                (DataProfilePromote.class,R.layout.profilepromote_row,SearchViewHolder.class,databaseQuery) {
 
             @Override
             protected void populateViewHolder(SearchViewHolder viewHolder, final DataProfilePromote model, final int position) {
@@ -105,17 +103,17 @@ public class SearchPopular extends Fragment {
                     viewHolder.setPicture3(getActivity().getApplicationContext(), model.picture3);
                 }
 
-                if(model.S01 != 0){
-                    viewHolder.setS01(model.S01);
+                if(model.S01 != 0 && search.search.equals("S01")){
+                    viewHolder.setStart(model.S01);
                 }
-                if (model.S02 != 0) {
-                    viewHolder.setS02(model.S02);
+                if (model.S02 != 0 && search.search.equals("S02")) {
+                    viewHolder.setStart(model.S02);
                 }
-                if (model.S03 != 0) {
-                    viewHolder.setS03(model.S03);
+                if (model.S03 != 0 && search.search.equals("S03")) {
+                    viewHolder.setStart(model.S03);
                 }
-                if (model.S04 != 0) {
-                    viewHolder.setS04(model.S04);
+                if (model.S04 != 0 && search.search.equals("S04")) {
+                    viewHolder.setStart(model.S04);
                 }
 
 
