@@ -34,7 +34,6 @@ public class PromotionDetails extends AppCompatActivity implements View.OnClickL
         proDT = (TextView) findViewById(R.id.proDT);
         proDetails = (TextView) findViewById(R.id.proDetails);
         proImg = (ImageView) findViewById(R.id.proImg);
-
         name.setText(promotionValues.get("name").toString());
         proTopic.setText(promotionValues.get("promotion").toString());
         proPrice.setText(promotionValues.get("price").toString()+" Bath");

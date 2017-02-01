@@ -5,98 +5,92 @@ package com.example.captain_pc.beautyblinkcustomer.model;
  */
 
 public class DataRequest {
-    private String promotion,image,details,price,
-            sale,datefrom,dateto,uid,name;
+    private String date,event,service,special_cus,status,time,numP,maxP,special_beau,locate;
+    private int color;
 
     public DataRequest(){
 
     }
 
-    public DataRequest(String promotion,String image,String details,String price,String sale
-            , String datefrom, String dateto,String uid, String name){
+    public DataRequest(int color,String date, String event,String service,String special_cus,String status,
+                       String time, String numP,String maxP,String special_beau,String locate){
 
-        this.promotion=promotion;
-        this.image=image;
-        this.details=details;
-        this.price = price;
-        this.sale = sale;
-        this.datefrom = datefrom;
-        this.dateto = dateto;
-        this.uid = uid;
-        this.name = name;
+        this.color=color;
+        this.date=date;
+        this.event=event;
+        this.service=service;
+        this.special_cus=special_cus;
+        this.status=status;
+        this.time=time;
+        this.numP=numP;
+        this.maxP=maxP;
+        this.special_beau=special_beau;
+        this.locate=locate;
 
     }
-    public String getPromotion(){
-        return this.promotion;
+    public String getLocate(){
+        return this.locate;
     }
-
-    public void setPromotion(String promotion) {
-        this.promotion = promotion;
+    public void setLocate(String locate){
+        this.locate=locate;
     }
-
-    public String getImage(){
-        return this.image;
+    public String getNumP(){
+        return this.numP;
     }
-
-    public void setImage(String image) {
-        this.image = image;
+    public void setNumP(String numP){
+        this.numP=numP;
     }
-
-    public String getDetails(){
-        return this.details;
+    public String getMaxP(){
+        return this.maxP;
     }
-
-    public void setDetails(String detail) {
-        this.details = details;
+    public void setMaxP(String maxP){this.maxP=maxP;}
+    public String getBeau(){
+        return  this.special_beau;
     }
-
-    public String getPrice() {
-        return this.price;
+    public void setBeau(String special_beau){
+        this.special_beau = special_beau;
     }
-
-    public void setPrice(String price) {
-        this.price = price;
+     public int getColor(){
+       return  this.color;
+   }
+    public void setColor(int color){
+        this.color=color;
     }
-
-    public String getSale() {
-        return this.sale;
+    public String getDate(){
+        return  this.date;
     }
-
-    public void setSale(String sale) {
-        this.sale = sale;
+    public void setDate(String date){
+        this.date=date;
     }
-
-    public String getDateFrom() {
-        return this.datefrom;
+    public String getEvent(){
+        return this.event;
     }
-
-    public void setDateFrom(String datefrom) {
-        this.datefrom = datefrom;
+    public void setEvent(String event){
+        this.event=event;
     }
-
-    public String getDateTo() {
-        return this.dateto;
+    public String getService(){
+        return this.service;
     }
-
-    public void setDateTo(String dateto) {
-        this.dateto = dateto;
+    public void setService(String service){
+        this.service=service;
     }
-
-    public String getUid() {
-        return this.uid;
+    public String getCus(){
+        return this.special_cus;
     }
-
-    public void setUid(String uid) {
-        this.uid = uid;
+    public void setCus(String special_cus){
+        this.special_cus=special_cus;
     }
-
-    public String getName() {
-        return this.name;
+    public String getStatus(){
+        return this.status;
     }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setStatus(String status){
+        this.status=status;
     }
-
+    public String getTime(){
+        return  this.time;
+    }
+    public void setTime(String time){
+        this.time=time;
+    }
 
 }
