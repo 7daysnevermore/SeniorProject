@@ -95,7 +95,7 @@
 
                             <EditText
                                 android:id="@+id/event"
-                                android:inputType="number"
+                                android:inputType="text"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:paddingLeft="5sp"

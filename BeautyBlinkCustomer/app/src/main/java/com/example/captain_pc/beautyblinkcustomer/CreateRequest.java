@@ -165,7 +165,7 @@ public class CreateRequest extends AppCompatActivity {
         final String location = eLocation.getText().toString();
         final String time = eTime.getText().toString();
         final String specialReq = eSpecial.getText().toString();
-        final String status = "request";
+        final String status = "offer";
 
         if(!TextUtils.isEmpty(service) && !TextUtils.isEmpty(event) &&
                 !TextUtils.isEmpty(numberP) && !TextUtils.isEmpty(maxPrice) &&
@@ -200,7 +200,7 @@ public class CreateRequest extends AppCompatActivity {
                     RequestValues.put("status",status);
                     RequestValues.put("uid", mFirebaseUser.getUid().toString());
                     RequestValues.put("name", username);
-                    RequestValues.put("color", 0xFFFFFF);
+                    RequestValues.put("color", "#f2f2f2");
 
                     Map<String, Object> childUpdate = new HashMap<>();
                     childUpdate.put("/request/" + key, RequestValues);

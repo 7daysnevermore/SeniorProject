@@ -18,10 +18,10 @@
         <activity android:name=".GoogleSignIn"></activity>
         <activity android:name=".Register"></activity>
         <activity android:name=".CreateRequest"></activity>
+        <activity android:name=".OfferPage"></activity>
         <activity android:name=".SearchDetails"></activity>
         <activity android:name=".PromotionDetails"></activity>
         <activity android:name=".SpecificSearch"></activity>
-
     </application>
 
 </manifest>
