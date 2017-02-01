@@ -17,10 +17,10 @@
         </activity>
         <activity android:name=".GoogleSignIn" />
         <activity android:name=".Register" />
-        <activity android:name=".CreateRequest"></activity>
-        <activity android:name=".Register"></activity>
-        <activity android:name=".PromotionDetails"></activity>
-
+        <activity android:name=".CreateRequest" />
+        <activity android:name=".Register" />
+        <activity android:name=".PromotionDetails" />
+        <activity android:name=".OfferPage"></activity>
     </application>
 
 </manifest>
