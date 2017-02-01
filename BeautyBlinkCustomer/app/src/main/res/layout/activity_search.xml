@@ -26,7 +26,7 @@
                 android:ems="10"
                 android:id="@+id/word"
                 android:imeOptions="actionSearch"
-                android:hint="Search"
+                android:hint="Search by name or place"
                 android:background="@drawable/input_outline"
                 android:padding="5dp" />
 

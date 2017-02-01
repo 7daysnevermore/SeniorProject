@@ -79,7 +79,14 @@ public class SearchPopular extends Fragment {
             //Method to multiple queries
             DatabaseReference databaseRef =databaseQuery.getRef();
             dataQuery1 = databaseRef.orderByChild("name").equalTo(search.wording);
-            QueryRecycle(dataQuery1,search);
+            if(dataQuery1.equals(null)){
+                Query dataQueryplace = databaseRef.orderByChild("sub_district").equalTo(search.wording);
+                QueryRecycle(dataQueryplace,search);
+
+            }else{
+                QueryRecycle(dataQuery1,search);
+            }
+
         }else{
             QueryRecycle(databaseQuery,search);
         }
