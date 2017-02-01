@@ -22,6 +22,16 @@
         <activity android:name=".SearchDetails"></activity>
         <activity android:name=".PromotionDetails"></activity>
         <activity android:name=".SpecificSearch"></activity>
+
+=======
+        <activity android:name=".GoogleSignIn" />
+        <activity android:name=".Register" />
+        <activity android:name=".CreateRequest" />
+        <activity android:name=".Register" />
+        <activity android:name=".PromotionDetails" />
+        <activity android:name=".OfferPage"></activity>
+>>>>>>> Temporary merge branch 2
     </application>
 
 </manifest>
+        <activity android:name=".MyAccount"></activity>

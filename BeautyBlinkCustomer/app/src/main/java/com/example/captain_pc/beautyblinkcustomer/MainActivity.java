@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.captain_pc.beautyblinkcustomer.fragments.Fragment_Setting;
 import com.example.captain_pc.beautyblinkcustomer.fragments.Notification;
 import com.example.captain_pc.beautyblinkcustomer.fragments.Request;
 import com.example.captain_pc.beautyblinkcustomer.fragments.Search;
@@ -83,13 +84,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.bt_request).setOnClickListener(this);
         findViewById(R.id.bt_noti).setOnClickListener(this);
         findViewById(R.id.bt_userprofile).setOnClickListener(this);
-
-        findViewById(R.id.sign_out_button).setOnClickListener(this);
-        TextView name = (TextView) findViewById(R.id.name);
-        name.setText(displayname);
-        TextView email = (TextView) findViewById(R.id.email);
-        email.setText(personalEmail);
-
     }
 
     @Override
@@ -127,12 +121,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.bt_userprofile:
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.contentcontainer, UserProfilePage.newInstance())
+                        .replace(R.id.contentcontainer, Fragment_Setting.newInstance())
                         .addToBackStack(null)
                         .commit();
-                break;
-            case R.id.sign_out_button:
-                signOut();
                 break;
         }
     }
