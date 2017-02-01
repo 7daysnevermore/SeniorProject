@@ -146,6 +146,7 @@ public class Search extends Fragment {
             public void onClick(View v) {
                 Intent cate = new Intent(getActivity(),SearchDetails.class);
                 cate.putExtra("search","S01");
+                cate.putExtra("word","");
                 startActivity(cate);
             }
         });
@@ -154,6 +155,7 @@ public class Search extends Fragment {
             public void onClick(View v) {
                 Intent cate = new Intent(getActivity(),SearchDetails.class);
                 cate.putExtra("search","S02");
+                cate.putExtra("word","");
                 startActivity(cate);
             }
         });
@@ -162,6 +164,7 @@ public class Search extends Fragment {
             public void onClick(View v) {
                 Intent cate = new Intent(getActivity(),SearchDetails.class);
                 cate.putExtra("search","S03");
+                cate.putExtra("word","");
                 startActivity(cate);
             }
         });
@@ -170,6 +173,7 @@ public class Search extends Fragment {
             public void onClick(View v) {
                 Intent cate = new Intent(getActivity(),SearchDetails.class);
                 cate.putExtra("search","S04");
+                cate.putExtra("word","");
                 startActivity(cate);
             }
         });

@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -46,7 +47,7 @@ public class SearchDetails extends AppCompatActivity implements View.OnClickList
     private DatabaseReference databaseReference;
 
     public EditText word;
-    public String search;
+    public String search,wording;
 
 
     @Override
@@ -62,24 +63,26 @@ public class SearchDetails extends AppCompatActivity implements View.OnClickList
         word = (EditText) findViewById(R.id.word);
 
         search = getIntent().getStringExtra("search");
+        wording = getIntent().getStringExtra("word");
 
         word.setHint(search);
         word.setFocusableInTouchMode(true);
         word.requestFocus();
 
-        word.setOnKeyListener(new View.OnKeyListener() {
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                // If the event is a key-down event on the "enter" button
-                if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
-                        (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                    // Perform action on key press
-                    Toast.makeText(SearchDetails.this, word.getText().toString(),
-                            Toast.LENGTH_LONG).show();
-                    return true;
+        word.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if(MotionEvent.ACTION_UP == event.getAction()) {
+                    Intent cate = new Intent(SearchDetails.this,SearchDetails.class);
+                    cate.putExtra("search","S04");
+                    cate.putExtra("word",word.getText().toString());
+                    startActivity(cate);
                 }
-                return false;
+
+                return true; // return is important...
             }
         });
+
 
             if(savedInstanceState==null){
                 //first create

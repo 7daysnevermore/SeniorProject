@@ -31,7 +31,7 @@ public class SearchNearby extends Fragment {
     private FirebaseUser mFirebaseUser;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference databaseReference;
-    private Query databaseQuery;
+    private Query databaseQuery,dataQuery1;
 
     public SearchNearby(){ super(); }
 
@@ -66,13 +66,27 @@ public class SearchNearby extends Fragment {
         //search for each service
         databaseQuery = databaseReference.orderByChild(search.search).startAt(1);
 
+        if(!search.wording.equals("")){
+            //Method to multiple queries
+            DatabaseReference databaseRef =databaseQuery.getRef();
+            dataQuery1 = databaseRef.orderByChild("name").equalTo(search.wording);
+            QueryRecycle(dataQuery1,search);
+        }else{
+            QueryRecycle(databaseQuery,search);
+        }
+
+
+    }
+
+    public void QueryRecycle(Query dataQuery, final SearchDetails search){
+
         //Order from latest data
         final LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         mLayoutManager.setReverseLayout(true);
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 
         final FirebaseRecyclerAdapter<DataProfilePromote,SearchViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<DataProfilePromote, SearchViewHolder>
-                (DataProfilePromote.class,R.layout.profilepromote_row,SearchViewHolder.class,databaseQuery) {
+                (DataProfilePromote.class,R.layout.profilepromote_row,SearchViewHolder.class,dataQuery) {
 
             @Override
             protected void populateViewHolder(SearchViewHolder viewHolder, final DataProfilePromote model, final int position) {
@@ -93,7 +107,6 @@ public class SearchNearby extends Fragment {
                 if (!model.picture3.equals("")) {
                     viewHolder.setPicture3(getActivity().getApplicationContext(), model.picture3);
                 }
-
 
                 if(model.S01 != 0 && search.search.equals("S01")){
                     viewHolder.setStart(model.S01);
@@ -150,6 +163,7 @@ public class SearchNearby extends Fragment {
         recyclerView.setLayoutManager(mLayoutManager);
 
     }
+
 
     @Override
     public void onStart(){ super.onStart(); }
