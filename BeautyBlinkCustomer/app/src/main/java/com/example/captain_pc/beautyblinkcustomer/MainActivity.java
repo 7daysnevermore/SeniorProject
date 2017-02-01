@@ -14,9 +14,9 @@ import android.widget.TextView;
 
 import com.example.captain_pc.beautyblinkcustomer.fragments.Fragment_Setting;
 import com.example.captain_pc.beautyblinkcustomer.fragments.Notification;
-import com.example.captain_pc.beautyblinkcustomer.fragments.Promotions;
 import com.example.captain_pc.beautyblinkcustomer.fragments.Request;
 import com.example.captain_pc.beautyblinkcustomer.fragments.Search;
+import com.example.captain_pc.beautyblinkcustomer.fragments.UserProfilePage;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //first create
                 //Place fragment
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.contentcontainer, new Promotions())
+                        .replace(R.id.contentcontainer, new Search())
                         .addToBackStack(null)
                         .commit();
             }
@@ -80,7 +80,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         );
 
         //tab button
-        findViewById(R.id.bt_promotion).setOnClickListener(this);
         findViewById(R.id.bt_search).setOnClickListener(this);
         findViewById(R.id.bt_request).setOnClickListener(this);
         findViewById(R.id.bt_noti).setOnClickListener(this);
@@ -102,12 +101,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.bt_promotion:
-               getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.contentcontainer, Promotions.newInstance())
-                        .addToBackStack(null)
-                        .commit();
-                break;
             case R.id.bt_search:
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.contentcontainer, Search.newInstance())

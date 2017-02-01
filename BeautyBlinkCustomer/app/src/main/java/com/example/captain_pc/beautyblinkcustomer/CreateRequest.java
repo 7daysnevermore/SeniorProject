@@ -1,8 +1,5 @@
 package com.example.captain_pc.beautyblinkcustomer;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
@@ -20,8 +17,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.captain_pc.beautyblinkcustomer.fragments.Promotions;
-import com.example.captain_pc.beautyblinkcustomer.fragments.Request;
 import com.example.captain_pc.beautyblinkcustomer.model.User;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
