@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -25,11 +26,16 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.sql.Time;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -187,6 +193,9 @@ public class CreateRequest extends AppCompatActivity {
                     DatabaseReference mRequestRef = mRootRef.child("request");
 
                     String key = mRequestRef.push().getKey();
+                    Calendar c = Calendar.getInstance();
+                    SimpleDateFormat sdf = new SimpleDateFormat("MMM dd yyyy hh:mm a");
+                    String date = sdf.format(c.getTime());
 
                     final HashMap<String, Object> RequestValues = new HashMap<String, Object>();
                     RequestValues.put("service", service);
@@ -201,10 +210,13 @@ public class CreateRequest extends AppCompatActivity {
                     RequestValues.put("uid", mFirebaseUser.getUid().toString());
                     RequestValues.put("name", username);
                     RequestValues.put("color", "#f2f2f2");
-
+                    RequestValues.put("currenttime", date);
                     Map<String, Object> childUpdate = new HashMap<>();
                     childUpdate.put("/request/" + key, RequestValues);
                     childUpdate.put("/customer-request/" + mFirebaseUser.getUid().toString() + "/" + key, RequestValues);
+
+
+
 
                     mRootRef.updateChildren(childUpdate);
 

@@ -150,12 +150,55 @@
 
             </LinearLayout>
 
-            <Button
-                android:text="Button"
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/btnStat"
-                android:layout_weight="0.50" />
+                android:layout_weight="0.50">
+
+                <Button
+                    android:text="Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btnStat"
+                    android:theme="@style/ChangeColorBtn"
+                    android:layout_weight="0.50"
+                    style="@style/Widget.AppCompat.Button.Borderless"/>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="20dp">
+                    <Button
+
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:id="@+id/message"
+                        android:background="@drawable/ic_email"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="10dp"
+                        android:fadeScrollbars="false" />
+                    <Button
+
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:id="@+id/payment"
+                        android:background="@drawable/ic_credit_card"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="10dp" />
+                    <Button
+
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:id="@+id/review"
+                        android:background="@drawable/ic_rate_review"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="10dp" />
+                </LinearLayout>
+
+
+            </LinearLayout>
 
 
         </LinearLayout>

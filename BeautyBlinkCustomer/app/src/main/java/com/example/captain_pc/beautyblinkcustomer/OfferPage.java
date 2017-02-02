@@ -15,6 +15,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -72,6 +74,7 @@ public class OfferPage extends AppCompatActivity {
                 final String specus = special.getText().toString();
                 final String locate = location.getText().toString();
                 final String spebeau = spe_b.getText().toString();*/
+
                 final String status = "confirm";
 
                 if( !TextUtils.isEmpty(status)  )
@@ -81,11 +84,14 @@ public class OfferPage extends AppCompatActivity {
                     DatabaseReference mRequestRef = mRootRef.child("accept");
 
                     String key = mRequestRef.push().getKey();
-
+                    Calendar c = Calendar.getInstance();
+                    SimpleDateFormat sdf = new SimpleDateFormat("MMM dd yyyy hh:mm a");
+                    String date = sdf.format(c.getTime());
                     final HashMap<String, Object> RequestValues = new HashMap<String, Object>();
                     RequestValues.put("color","#f2f28f");
                     RequestValues.put("status",status);
                     RequestValues.put("type","accept");
+                    RequestValues.put("currenttime", date);
 
                     Map<String, Object> childUpdate = new HashMap<>();
                     childUpdate.put("/request/" + key, RequestValues);
