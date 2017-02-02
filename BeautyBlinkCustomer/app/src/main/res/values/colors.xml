@@ -12,4 +12,5 @@
     <color name="even_color">#D8D8D8</color>
     <color name="row_color">#CECCCC</color>
     <color name="hint_text_color">#ABA0A0</color>
+    <color name="colorBG">#E8E8E8</color>
 </resources>
