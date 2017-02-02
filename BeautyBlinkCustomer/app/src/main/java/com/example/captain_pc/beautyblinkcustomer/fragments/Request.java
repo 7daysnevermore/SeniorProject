@@ -27,7 +27,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
@@ -82,8 +84,10 @@ public class Request extends Fragment {
                viewHolder.setService(model.getService());
                 viewHolder.setColor(model.getColor());
                 viewHolder.setMaxP(model.getMaxP());
+
                 viewHolder.mview.setOnClickListener(new View.OnClickListener() {
                     final String cshow = getRef(position).getKey();
+
                     @Override
                     public void onClick(View v) {
                         HashMap<String, Object> RequestValues = new HashMap<>();
@@ -100,6 +104,7 @@ public class Request extends Fragment {
                         RequestValues.put("offer",model.getStatus());
                         RequestValues.put("uid", mFirebaseUser.getUid().toString());
                         RequestValues.put("specialbeau",model.getBeau());
+
                         Intent intent = new Intent(getActivity(),OfferPage.class);
                         intent.putExtra("request",  RequestValues);
                         startActivity(intent);
