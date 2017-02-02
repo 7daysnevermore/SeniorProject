@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#FF6633</color>
+    <color name="colorPrimary">#f07c7c</color>
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#FF4081</color>
     <color name="red">#ffff0000</color>
+    <color name="bg_grey">#EEEEEE</color>
+    <color name="darker_orange">#BF360C</color>
+    <color name="mytransient">#00FFFFFF</color>
+    <color name="streak_color">#8E8686</color>
+    <color name="streak_color_light">#8B8282</color>
+    <color name="even_color">#D8D8D8</color>
+    <color name="row_color">#CECCCC</color>
+    <color name="hint_text_color">#ABA0A0</color>
 </resources>

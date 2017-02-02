@@ -13,14 +13,14 @@ public class DataPromotion {
     private String datefrom;
     private String dateto;
     private String uid;
-    private String name;
+    private String name,service,status,profile;
 
     public DataPromotion(){
 
     }
 
     public DataPromotion(String promotion,String image,String details,String price,String sale
-            , String datefrom, String dateto,String uid, String name){
+            , String datefrom, String dateto,String uid, String name,String service,String statu,String profile){
 
         this.promotion=promotion;
         this.image=image;
@@ -31,7 +31,9 @@ public class DataPromotion {
         this.dateto = dateto;
         this.uid = uid;
         this.name = name;
-
+        this.service = service;
+        this.status = status;
+        this.profile = profile;
     }
     public String getPromotion(){
         return this.promotion;
@@ -103,6 +105,30 @@ public class DataPromotion {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getService() {
+        return this.service;
+    }
+
+    public void setService(String service) {
+        this.service = service;
+    }
+
+    public String getStatus() {
+        return this.status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getProfile() {
+        return this.profile;
+    }
+
+    public void setProfile(String profile) {
+        this.profile = profile;
     }
 
 

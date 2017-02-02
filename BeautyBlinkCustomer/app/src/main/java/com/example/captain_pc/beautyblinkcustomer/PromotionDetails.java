@@ -17,7 +17,7 @@ public class PromotionDetails extends AppCompatActivity implements View.OnClickL
 
     HashMap<String, Object> promotionValues;
     private TextView proTopic,proPrice,proSale,proDF,proDT,proDetails,name ;
-    ImageView proImg;
+    ImageView proImg,profile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,16 +34,21 @@ public class PromotionDetails extends AppCompatActivity implements View.OnClickL
         proDT = (TextView) findViewById(R.id.proDT);
         proDetails = (TextView) findViewById(R.id.proDetails);
         proImg = (ImageView) findViewById(R.id.proImg);
-        name.setText(promotionValues.get("name").toString());
-        proTopic.setText(promotionValues.get("promotion").toString());
-        proPrice.setText(promotionValues.get("price").toString()+" Bath");
-        proPrice.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
-        proSale.setText(promotionValues.get("sale").toString()+" Bath");
-        proDF.setText("Date from : "+promotionValues.get("dateFrom").toString());
-        proDT.setText("Date to     : "+promotionValues.get("dateTo").toString());
-        proDetails.setText(promotionValues.get("details").toString());
+        profile = (ImageView) findViewById(R.id.profile);
 
-        Picasso.with(this).load(promotionValues.get("image").toString()).into(proImg);
+
+            name.setText(promotionValues.get("name").toString());
+            proTopic.setText(promotionValues.get("promotion").toString());
+            proPrice.setText(promotionValues.get("price").toString()+" Bath");
+            proPrice.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+            proSale.setText(promotionValues.get("sale").toString()+" Bath");
+            proDF.setText("Date from : "+promotionValues.get("dateFrom").toString());
+            proDT.setText("Date to     : "+promotionValues.get("dateTo").toString());
+            proDetails.setText(promotionValues.get("details").toString());
+
+            Picasso.with(this).load(promotionValues.get("image").toString()).into(proImg);
+            Picasso.with(this).load(promotionValues.get("profile").toString()).into(profile);
+
 
         findViewById(R.id.btn_usepromotion).setOnClickListener(this);
 
