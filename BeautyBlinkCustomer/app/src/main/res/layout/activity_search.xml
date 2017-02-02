@@ -17,6 +17,16 @@
             android:gravity="center"
             android:orientation="horizontal">
 
+            <TextView
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:textSize="18sp"
+                android:text="MakeupandHair"
+                android:id="@+id/showservice"
+                android:layout_weight="1"/>
+
             <EditText
                 android:layout_weight="1"
                 android:layout_width="match_parent"
@@ -31,9 +41,19 @@
                 android:padding="5dp" />
 
             <ImageView
+                android:visibility="gone"
+                android:id="@+id/icon_search"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="5"
+                android:layout_weight="4"
+                android:src="@drawable/ic_action_search"/>
+
+            <ImageView
+                android:id="@+id/icon_filter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:layout_marginRight="5dp"
                 android:src="@mipmap/filter_70"/>
 
         </LinearLayout>

@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -48,6 +49,7 @@ public class SearchDetails extends AppCompatActivity implements View.OnClickList
 
     public EditText word;
     public String search,wording;
+    public ImageView icon_search,icon_filter;
 
 
     @Override
@@ -62,20 +64,20 @@ public class SearchDetails extends AppCompatActivity implements View.OnClickList
 
         word = (EditText) findViewById(R.id.word);
 
+
         search = getIntent().getStringExtra("search");
         wording = getIntent().getStringExtra("word");
 
         word.setHint(search);
-        word.setFocusableInTouchMode(true);
-        word.requestFocus();
+        word.setFocusable(false);
 
         word.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if(MotionEvent.ACTION_UP == event.getAction()) {
-                    Intent cate = new Intent(SearchDetails.this,SearchDetails.class);
-                    cate.putExtra("search","S04");
-                    cate.putExtra("word",word.getText().toString());
+                    Intent cate = new Intent(SearchDetails.this,SpecificSearch.class);
+                    cate.putExtra("search",search);
+                    cate.putExtra("word","");
                     startActivity(cate);
                 }
 
