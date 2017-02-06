@@ -9,7 +9,11 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.captain_pc.beautyblinkcustomer.fragments.Fragment_Setting;
@@ -33,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ActionBarDrawerToggle actionBarDrawerToggle;
     Toolbar toolbar;
     String uid;
+    EditText word;
 
 
     @Override
@@ -62,6 +67,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
 
         }
+
+        word = (EditText) findViewById(R.id.word);
+        word.setFocusable(false);
+        word.requestFocus();
+
+        word.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if(MotionEvent.ACTION_UP == event.getAction()) {
+                    Intent cate = new Intent(MainActivity.this,SpecificByUser.class);
+                    startActivity(cate);
+                }
+
+                return true; // return is important...
+            }
+        });
+
+
+
         initInstances();
 
     }

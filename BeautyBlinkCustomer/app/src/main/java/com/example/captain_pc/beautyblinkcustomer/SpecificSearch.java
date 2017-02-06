@@ -3,101 +3,110 @@ package com.example.captain_pc.beautyblinkcustomer;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.KeyEvent;
-import android.view.View;
-import android.view.inputmethod.EditorInfo;
+import android.util.Log;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.Toast;
 
-import com.example.captain_pc.beautyblinkcustomer.fragments.SearchByPlace;
-import com.example.captain_pc.beautyblinkcustomer.fragments.SearchByUser;
-import com.example.captain_pc.beautyblinkcustomer.fragments.SearchLatest;
-import com.example.captain_pc.beautyblinkcustomer.fragments.SearchNearby;
-import com.example.captain_pc.beautyblinkcustomer.fragments.SearchPopular;
-import com.example.captain_pc.beautyblinkcustomer.fragments.SearchPrice;
+import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlaceAutocomplete;
+
+import static com.bumptech.glide.gifdecoder.GifHeaderParser.TAG;
 
 
 /**
  * Created by NunePC on 31/1/2560.
  */
 
-public class SpecificSearch extends AppCompatActivity implements View.OnClickListener {
+public class SpecificSearch extends AppCompatActivity  {
+
+    /**
+     * Request code for the autocomplete activity. This will be used to identify results from the
+     * autocomplete activity in onActivityResult.
+     */
+    private static final int REQUEST_CODE_AUTOCOMPLETE = 1;
 
     EditText word;
-    String wording,search;
+    public String wording;
+    public String search;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_specific_search);
+        setContentView(R.layout.fragment_specific_place);
 
-        if(savedInstanceState==null){
-            //first create
-            //Place fragment
 
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.contentcontainer,new SearchByUser())
-                    .commit();
+        try {
+            // The autocomplete activity requires Google Play Services to be available. The intent
+            // builder checks this and throws an exception if it is not the case.
+            Intent intent = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_OVERLAY)
+                    .build(this);
+            startActivityForResult(intent, REQUEST_CODE_AUTOCOMPLETE);
+        } catch (GooglePlayServicesRepairableException e) {
+            // Indicates that Google Play Services is either not installed or not up to date. Prompt
+            // the user to correct the issue.
+            GoogleApiAvailability.getInstance().getErrorDialog(this, e.getConnectionStatusCode(),
+                    0 /* requestCode */).show();
+        } catch (GooglePlayServicesNotAvailableException e) {
+            // Indicates that Google Play Services is not available and the problem is not easily
+            // resolvable.
+            String message = "Google Play Services is not available: " +
+                    GoogleApiAvailability.getInstance().getErrorString(e.errorCode);
+
+            Log.e(TAG, message);
+            Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
         }
 
-        search = getIntent().getStringExtra("search");
-        wording = getIntent().getStringExtra("word");
 
-        word = (EditText) findViewById(R.id.word);
-
-        word.setHint(search);
-        word.setFocusableInTouchMode(true);
-        word.requestFocus();
-
-        word.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if ( (actionId == EditorInfo.IME_ACTION_SEARCH) || ((event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN ))) {
-
-                    Intent cate = new Intent(SpecificSearch.this,SearchDetails.class);
-                    cate.putExtra("search",search);
-                    cate.putExtra("word",word.getText().toString());
-                    startActivity(cate);
-                    return true;
-
-                }
-
-                return false;
-            }
-        });
-
-
-        //tab button
-        findViewById(R.id.btn_cancel).setOnClickListener(this);
-        findViewById(R.id.user).setOnClickListener(this);
-        findViewById(R.id.place).setOnClickListener(this);
 
     }
 
+    /**
+     * Called after the autocomplete activity has finished to return its result.
+     */
     @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btn_cancel:
-                Intent cate = new Intent(SpecificSearch.this,SearchDetails.class);
-                cate.putExtra("search",search);
-                cate.putExtra("word","");
-                startActivity(cate);
-                break;
-            case R.id.user:
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.contentcontainer, SearchByUser.newInstance())
-                        .addToBackStack(null)
-                        .commit();
-                break;
-            case R.id.place:
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.contentcontainer, SearchByPlace.newInstance())
-                        .addToBackStack(null)
-                        .commit();
-                break;
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
+        // Check that the result was from the autocomplete widget.
+        if (requestCode == REQUEST_CODE_AUTOCOMPLETE) {
+            if (resultCode == RESULT_OK) {
+                // Get the user's selected place from the Intent.
+                Place place = PlaceAutocomplete.getPlace(this, data);
+                Log.i(TAG, "Place Selected: " + place.getName());
+
+                Intent cPro = new Intent(this,SearchDetails.class);
+                        cPro.putExtra("search", getIntent().getStringExtra("search"));
+                        cPro.putExtra("word","");
+                        cPro.putExtra("latlag", place.getLatLng());
+                        startActivity(cPro);
+
+                /*// Format the place's details and display them in the TextView.
+                mPlaceDetailsText.setText(formatPlaceDetails(getResources(), place.getName(),
+                        place.getId(), place.getAddress(), place.getPhoneNumber(),
+                        place.getWebsiteUri()));
+
+                // Display attributions if required.
+                CharSequence attributions = place.getAttributions();
+                if (!TextUtils.isEmpty(attributions)) {
+                    mPlaceAttribution.setText(Html.fromHtml(attributions.toString()));
+                } else {
+                    mPlaceAttribution.setText("");
+                }*/
+            } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
+                Status status = PlaceAutocomplete.getStatus(this, data);
+                Log.e(TAG, "Error: Status = " + status.toString());
+            } else if (resultCode == RESULT_CANCELED) {
+                // Indicates that the activity closed before a selection was made. For example if
+                // the user pressed the back button.
+            }
         }
     }
+
+
 
 
 

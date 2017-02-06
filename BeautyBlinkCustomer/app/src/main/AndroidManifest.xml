@@ -5,9 +5,14 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label=""
+        android:label="BeautyBlink"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDmkxWcBpGQSVItBi_5oGPW10OHW4wtnbY"/>
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,6 +27,7 @@
         <activity android:name=".SearchDetails"></activity>
         <activity android:name=".PromotionDetails"></activity>
         <activity android:name=".SpecificSearch"></activity>
+        <activity android:name=".SpecificByUser"></activity>
         <activity android:name=".MyAccount"></activity>
 
     </application>

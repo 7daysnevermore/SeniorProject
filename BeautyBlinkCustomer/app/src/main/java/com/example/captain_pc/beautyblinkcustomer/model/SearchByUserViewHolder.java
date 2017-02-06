@@ -16,7 +16,7 @@ import com.squareup.picasso.Picasso;
 public class SearchByUserViewHolder extends RecyclerView.ViewHolder {
 
     public View mview;
-    ImageView addpromotepic1, addpromotepic2, addpromotepic3,profile;
+    ImageView like,profile;
     TextView namepromote ,locationpromote ,priceS01,priceS02,priceS03,priceS04;
 
     public SearchByUserViewHolder(View itemView){
@@ -24,38 +24,18 @@ public class SearchByUserViewHolder extends RecyclerView.ViewHolder {
         mview=itemView;
 
     }
-
     public void setName(String name){
-        namepromote = (TextView) mview.findViewById(R.id.namepromote);
+        namepromote = (TextView) mview.findViewById(R.id.name);
         namepromote.setText(name);
     }
-    public void setLocation(String dist,String province){
-        locationpromote = (TextView) mview.findViewById(R.id.locationpromote);
-        locationpromote.setText(dist+", "+province);
 
-    }
-    public void setPicture1(Context context, String image){
-        addpromotepic1 = (ImageView) mview.findViewById(R.id.addpromotepic1);
-        Picasso.with(context).load(image).fit().centerCrop().into(addpromotepic1);
-    }
-
-    public void setPicture2(Context context, String image) {
-        addpromotepic2 = (ImageView) mview.findViewById(R.id.addpromotepic2);
-        Picasso.with(context).load(image).fit().centerCrop().into(addpromotepic2);
-    }
-
-    public void setPicture3(Context context, String image) {
-        addpromotepic3 = (ImageView) mview.findViewById(R.id.addpromotepic3);
-        Picasso.with(context).load(image).fit().centerCrop().into(addpromotepic3);
+    public void setLiked(Context context, String image) {
+        like = (ImageView) mview.findViewById(R.id.like);
+        Picasso.with(context).load(image).fit().centerCrop().into(like);
     }
 
     public void setProfile(Context context, String image) {
-        profile = (ImageView) mview.findViewById(R.id.picpromote);
+        profile = (ImageView) mview.findViewById(R.id.profile);
         Picasso.with(context).load(image).fit().centerCrop().into(profile);
-    }
-
-    public void setStart(Integer price){
-        priceS01 = (TextView) mview.findViewById(R.id.startprice);
-        priceS01.setText("฿"+price);
     }
 }
