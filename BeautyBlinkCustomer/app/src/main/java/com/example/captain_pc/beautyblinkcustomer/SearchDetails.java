@@ -2,6 +2,7 @@ package com.example.captain_pc.beautyblinkcustomer;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -48,8 +49,11 @@ public class SearchDetails extends AppCompatActivity implements View.OnClickList
     private DatabaseReference databaseReference;
 
     public EditText word;
-    public String search,wording;
-    public ImageView icon_search,icon_filter;
+    public TextView popular,latest,nearby,price;
+    public String search,wording,previous=null;
+    public ImageView icon_search,icon_filter,up,down,tab_popular,tab_nearby,tab_latest,tab_price;
+    public boolean checking;
+    int clickcount=0;
 
 
     @Override
@@ -61,7 +65,16 @@ public class SearchDetails extends AppCompatActivity implements View.OnClickList
         mFirebaseUser = mAuth.getCurrentUser();
 
 
-
+        popular = (TextView) findViewById(R.id.popular);
+        latest = (TextView) findViewById(R.id.latest);
+        nearby = (TextView) findViewById(R.id.nearby);
+        price = (TextView) findViewById(R.id.price);
+        up = (ImageView) findViewById(R.id.up);
+        down = (ImageView) findViewById(R.id.down);
+        tab_popular = (ImageView) findViewById(R.id.tap_popular);
+        tab_latest = (ImageView) findViewById(R.id.tap_latest);
+        tab_nearby = (ImageView) findViewById(R.id.tap_nearby);
+        tab_price = (ImageView) findViewById(R.id.tap_price);
         word = (EditText) findViewById(R.id.word);
 
 
@@ -89,7 +102,8 @@ public class SearchDetails extends AppCompatActivity implements View.OnClickList
             if(savedInstanceState==null){
                 //first create
                 //Place fragment
-
+                popular.setTextColor(Color.parseColor("#f07c7c"));
+                previous = "popular";
                 getSupportFragmentManager().beginTransaction()
                         .add(R.id.contentcontainer,new SearchPopular())
                         .commit();
@@ -114,24 +128,108 @@ public class SearchDetails extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.popular:
+                if(previous.equals("latest")){
+                    tab_latest.setVisibility(View.GONE);
+                    latest.setTextColor(getResources().getColor(R.color.streak_color_light));
+                }
+                if (previous.equals("nearby")) {
+                    tab_nearby.setVisibility(View.GONE);
+                    nearby.setTextColor(getResources().getColor(R.color.streak_color_light));
+                }
+                if (previous.equals("price")) {
+                    clickcount =0;
+                    up.setImageResource(R.drawable.arrowup);
+                    down.setImageResource(R.drawable.arrowdown);
+                    tab_price.setVisibility(View.GONE);
+                    price.setTextColor(getResources().getColor(R.color.streak_color_light));
+                }
+                tab_popular.setVisibility(View.VISIBLE);
+                popular.setTextColor(getResources().getColor(R.color.colorPrimary));
+                previous = "popular";
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.contentcontainer,SearchPopular.newInstance())
                         .addToBackStack(null)
                         .commit();
                 break;
             case R.id.latest:
+                if(previous.equals("popular")){
+                    tab_popular.setVisibility(View.GONE);
+                    popular.setTextColor(getResources().getColor(R.color.streak_color_light));
+                }
+                if (previous.equals("nearby")) {
+                    tab_nearby.setVisibility(View.GONE);
+                    nearby.setTextColor(getResources().getColor(R.color.streak_color_light));
+                }
+                if (previous.equals("price")) {
+                    clickcount =0;
+                    up.setImageResource(R.drawable.arrowup);
+                    down.setImageResource(R.drawable.arrowdown);
+                    tab_price.setVisibility(View.GONE);
+                    price.setTextColor(getResources().getColor(R.color.streak_color_light));
+                }
+                tab_latest.setVisibility(View.VISIBLE);
+                latest.setTextColor(getResources().getColor(R.color.colorPrimary));
+                previous = "latest";
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.contentcontainer, SearchLatest.newInstance())
                         .addToBackStack(null)
                         .commit();
                 break;
             case R.id.nearby:
+                if(previous.equals("popular")){
+                    tab_popular.setVisibility(View.GONE);
+                    popular.setTextColor(getResources().getColor(R.color.streak_color_light));
+                }
+                if(previous.equals("latest")){
+                    tab_latest.setVisibility(View.GONE);
+                    latest.setTextColor(getResources().getColor(R.color.streak_color_light));
+                }
+                if (previous.equals("price")) {
+                    clickcount =0;
+                    up.setImageResource(R.drawable.arrowup);
+                    down.setImageResource(R.drawable.arrowdown);
+                    tab_price.setVisibility(View.GONE);
+                    price.setTextColor(getResources().getColor(R.color.streak_color_light));
+                }
+                tab_nearby.setVisibility(View.VISIBLE);
+                nearby.setTextColor(getResources().getColor(R.color.colorPrimary));
+                previous = "nearby";
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.contentcontainer, SearchNearby.newInstance())
                         .addToBackStack(null)
                         .commit();
                 break;
             case R.id.price:
+
+                if(previous.equals("popular")){
+                    tab_popular.setVisibility(View.GONE);
+                    popular.setTextColor(getResources().getColor(R.color.streak_color_light));
+                }
+                if(previous.equals("latest")){
+                    tab_latest.setVisibility(View.GONE);
+                    latest.setTextColor(getResources().getColor(R.color.streak_color_light));
+                }
+                if (previous.equals("nearby")) {
+                    tab_nearby.setVisibility(View.GONE);
+                    nearby.setTextColor(getResources().getColor(R.color.streak_color_light));
+                }
+
+                tab_price.setVisibility(View.VISIBLE);
+                price.setTextColor(getResources().getColor(R.color.colorPrimary));
+                previous = "price";
+                clickcount=clickcount+1;
+                if(clickcount%2==0)
+                {
+                    checking = true;
+                    up.setImageResource(R.drawable.arrowup);
+                    down.setImageResource(R.drawable.c_arrowupdown);
+                }
+                else
+                {
+                    checking = false;
+                    up.setImageResource(R.drawable.c_arrowup);
+                    down.setImageResource(R.drawable.arrowdown);
+                }
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.contentcontainer, SearchPrice.newInstance())
                         .addToBackStack(null)
