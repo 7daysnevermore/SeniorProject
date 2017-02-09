@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.captain_pc.beautyblinkcustomer.MyAccount;
@@ -27,7 +28,8 @@ public class Fragment_Setting extends Fragment{
         // Required empty public constructor
     }
 
-    TextView myAccount, myLikes, recentlyViewed, myPromotion, setting, support, logout;
+    TextView myAccount, recentlyViewed, myPromotion, setting, support, logout;
+    LinearLayout myLikes;
 
     @Nullable
     @Override
@@ -41,7 +43,7 @@ public class Fragment_Setting extends Fragment{
     private void initInstance(View rootView){
 
         myAccount = (TextView) rootView.findViewById(R.id.myAccount);
-        myLikes = (TextView) rootView.findViewById(R.id.myLikes);
+        myLikes = (LinearLayout) rootView.findViewById(R.id.myLikes);
         recentlyViewed = (TextView) rootView.findViewById(R.id.recentlyViewed);
         myPromotion = (TextView) rootView.findViewById(R.id.myPromotion);
         setting = (TextView) rootView.findViewById(R.id.setting);

@@ -75,6 +75,7 @@ public class SearchDetails extends AppCompatActivity implements View.OnClickList
         tab_latest = (ImageView) findViewById(R.id.tap_latest);
         tab_nearby = (ImageView) findViewById(R.id.tap_nearby);
         tab_price = (ImageView) findViewById(R.id.tap_price);
+        icon_filter = (ImageView) findViewById(R.id.icon_filter);
         word = (EditText) findViewById(R.id.word);
 
 
@@ -114,6 +115,7 @@ public class SearchDetails extends AppCompatActivity implements View.OnClickList
         findViewById(R.id.latest).setOnClickListener(this);
         findViewById(R.id.nearby).setOnClickListener(this);
         findViewById(R.id.price).setOnClickListener(this);
+        findViewById(R.id.icon_filter).setOnClickListener(this);
 
     }
 
@@ -234,6 +236,10 @@ public class SearchDetails extends AppCompatActivity implements View.OnClickList
                         .replace(R.id.contentcontainer, SearchPrice.newInstance())
                         .addToBackStack(null)
                         .commit();
+                break;
+            case R.id.icon_filter:
+                Intent cPro = new Intent(this,Filter.class);
+                startActivity(cPro);
                 break;
         }
     }

@@ -6,7 +6,7 @@ package com.example.captain_pc.beautyblinkcustomer.model;
 
 public class DataCustomerLiked {
 
-    String name,profile,uid;
+    public String name,profile,uid;
 
     public DataCustomerLiked(){
 
