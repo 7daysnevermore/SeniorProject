@@ -1,0 +1,34 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:weightSum="1">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:textColor="#000"
+        android:layout_marginLeft="10dp"
+        android:textSize="14dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/userName" />
+    <LinearLayout
+        android:id="@+id/singleMessageContainer"
+        android:layout_width="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="vertical"
+        android:background="@drawable/rouned_coner"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000"
+            android:textSize="14dp"
+            android:layout_margin="10dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/msgText" />
+    </LinearLayout>
+
+</LinearLayout>

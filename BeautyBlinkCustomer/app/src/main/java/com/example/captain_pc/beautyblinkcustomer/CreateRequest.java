@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -81,7 +82,7 @@ public class CreateRequest extends AppCompatActivity {
                 }else {
                     username = user.firstname;
                     input_name = (TextView) findViewById(R.id.name);
-                    input_name.setText(username);
+                    //input_name.setText(username);
                 }
             }
 
@@ -228,6 +229,17 @@ public class CreateRequest extends AppCompatActivity {
             });
 
             }
+    }
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                //NavUtils.navigateUpFromSameTask(this);
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
     }
 
