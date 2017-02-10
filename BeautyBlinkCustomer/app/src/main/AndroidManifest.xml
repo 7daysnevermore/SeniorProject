@@ -4,6 +4,105 @@
 
     <application
         android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label=""
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".GoogleSignIn"></activity>
+        <activity android:name=".Register"></activity>
+        <activity android:name=".CreateRequest"></activity>
+        <activity android:name=".SearchDetails"></activity>
+        <activity android:name=".PromotionDetails"></activity>
+        <activity android:name=".SpecificSearch"></activity>
+
+        <activity android:name=".MyAccount"></activity>
+        <activity android:name=".EditProfile"></activity>
+        <activity android:name=".MyLikes"></activity>
+        <activity android:name=".RecentlyViewed"></activity>
+        <activity android:name=".MyPromotion"></activity>
+        <activity android:name=".Setting"></activity>
+        <activity android:name=".Support"></activity>
+
+        <activity android:name=".CreateRequest" />
+        <activity android:name=".Register" />
+        <activity android:name=".PromotionDetails" />
+        <activity android:name=".OfferPage"></activity>
+    </application>
+
+</manifest>
+
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.captain_pc.beautyblinkcustomer">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label=""
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".GoogleSignIn" />
+        <activity android:name=".Register" />
+        <activity android:name=".CreateRequest" />
+        <activity android:name=".SearchDetails" />
+        <activity android:name=".PromotionDetails" />
+        <activity android:name=".SpecificSearch" />
+        <activity android:name=".MyAccount" />
+        <activity android:name=".EditProfile" />
+        <activity android:name=".MyLikes" />
+        <activity android:name=".RecentlyViewed" />
+        <activity android:name=".MyPromotion" />
+        <activity android:name=".Setting" />
+        <activity android:name=".Support" />
+        <activity android:name=".CreateRequest" />
+        <activity android:name=".Register" />
+        <activity android:name=".PromotionDetails" />
+        <activity android:name=".OfferPage" />
+        <activity android:name=".Payment" />
+
+        <service android:name=".MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service android:name=".MyFirebaseInstanceIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+
+        <activity android:name=".TestNoti" />
+        <activity android:name=".Second">
+            <intent-filter>
+                <action android:name="OPEN_ACTIVITY_1" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".MessagePage" />
+        <activity android:name=".Review"></activity>
+    </application>
+
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.captain_pc.beautyblinkcustomer">
+
+    <application
+        android:allowBackup="true"
         android:icon="@drawable/testlogo3"
         android:label="BeautyBlink"
         android:supportsRtl="true"
@@ -33,5 +132,3 @@
         <activity android:name=".Filter"></activity>
 
     </application>
-
-</manifest>

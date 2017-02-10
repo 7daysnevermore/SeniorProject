@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
-
+    private Button testNo;
     private String displayname;
     private String personalEmail;
     DrawerLayout drawerLayout;
@@ -92,6 +93,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     private  void initInstances(){
+        testNo = (Button)findViewById(R.id.testNoti);
+        testNo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,TestNoti.class);
+                startActivity(intent);
+            }
+        });
         DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);

@@ -23,6 +23,17 @@ android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:text=""
+            android:gravity="center_vertical"
+            android:textSize="30dp"
+            />
+        <Button
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="right"
+            android:background="@drawable/ic_send"
+            android:id="@+id/testNoti"
+            android:layout_marginRight="20dp" />
             android:gravity="center"
             android:orientation="horizontal">
 
