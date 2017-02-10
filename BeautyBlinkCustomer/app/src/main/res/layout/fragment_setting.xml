@@ -63,6 +63,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:id="@+id/myLikes"
                 android:paddingBottom="5dp"
                 android:paddingTop="5dp">
 
@@ -73,7 +74,6 @@
                     android:src="@mipmap/profile" />
 
                 <TextView
-                    android:id="@+id/myLikes"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"

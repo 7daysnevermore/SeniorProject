@@ -55,7 +55,7 @@
                             android:background="#E3E3E3"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Hairdressing"/>
+                            android:text="MakeupandHair"/>
 
                     </RelativeLayout>
 
@@ -138,7 +138,7 @@
                             android:layout_alignBottom="@+id/cate4"
                             android:background="#E3E3E3"
                             android:gravity="center"
-                            android:text="Makeup and Hair"
+                            android:text="Hairdressing"
                             android:textSize="18sp" />
 
                     </RelativeLayout>

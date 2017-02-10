@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
+        android:layout_marginBottom="15dp"
         android:titleTextColor="#1111">
 
         <LinearLayout
@@ -30,49 +31,25 @@
                 android:background="@drawable/input_outline"
                 android:padding="5dp" />
 
-            <ImageView
+            <TextView
+                android:id="@+id/btn_cancel"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="5"
-                android:src="@mipmap/filter_70"/>
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Cancel"
+                android:layout_weight="5"/>
 
         </LinearLayout>
 
     </android.support.v7.widget.Toolbar>
 
-    <LinearLayout
-        android:orientation="horizontal"
+    <!-- TODO: Update blank fragment layout -->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:background="#FCFCFC"
-        android:gravity="center"
-        android:layout_height="35dp">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/user"
-            android:gravity="center"
-            android:layout_weight="1"
-            android:text="User"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:id="@+id/place"
-            android:gravity="center"
-            android:text="Place" />
-
-
-    </LinearLayout>
-
-    <!--Fragment-->
-    <FrameLayout
-        android:id="@+id/contentcontainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    </FrameLayout>
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical"
+        />
 
 
 </LinearLayout>
