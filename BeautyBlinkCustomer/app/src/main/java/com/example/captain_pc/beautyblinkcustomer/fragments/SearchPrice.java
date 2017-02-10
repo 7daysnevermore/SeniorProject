@@ -8,17 +8,26 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.captain_pc.beautyblinkcustomer.R;
 import com.example.captain_pc.beautyblinkcustomer.SearchDetails;
+import com.example.captain_pc.beautyblinkcustomer.model.DataCustomerLiked;
 import com.example.captain_pc.beautyblinkcustomer.model.DataProfilePromote;
 import com.example.captain_pc.beautyblinkcustomer.model.SearchViewHolder;
+import com.example.captain_pc.beautyblinkcustomer.model.User;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by NunePC on 30/1/2560.
@@ -63,32 +72,46 @@ public class SearchPrice extends Fragment {
 
         //Get search to order in fragment
         final SearchDetails search = (SearchDetails) getActivity();
-        //search for each service
-        databaseQuery = databaseReference.orderByChild(search.search).startAt(1);
 
-        if(!search.wording.equals("")){
-            //Method to multiple queries
-            DatabaseReference databaseRef =databaseQuery.getRef();
-            dataQuery1 = databaseRef.orderByChild("name").equalTo(search.wording);
-            QueryRecycle(dataQuery1,search);
-        }else{
-            QueryRecycle(databaseQuery,search);
+
+
+        if(search.checking == true){
+
+            //search for each service
+            databaseQuery = databaseReference.orderByChild(search.search).startAt(1);
+            final DatabaseReference databaseRef = databaseQuery.getRef();
+            Query order =  databaseRef.orderByValue();
+            QueryRecycle(order, search,true);
         }
+        else {
+            //search for each service
+            databaseQuery = databaseReference.orderByChild(search.search).startAt(1);
+            final DatabaseReference databaseRef = databaseQuery.getRef();
+            Query order =  databaseRef.orderByValue();
+            QueryRecycle(order, search,false);
+        }
+
+
 
     }
 
-    public void QueryRecycle(Query dataQuery, final SearchDetails search){
+    public void QueryRecycle(Query dataQuery, final SearchDetails search,Boolean checking){
 
         //Order from latest data
         final LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
-        mLayoutManager.setReverseLayout(true);
+        if(checking==false){
+            mLayoutManager.setReverseLayout(true);
+        }
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 
         final FirebaseRecyclerAdapter<DataProfilePromote,SearchViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<DataProfilePromote, SearchViewHolder>
                 (DataProfilePromote.class,R.layout.profilepromote_row,SearchViewHolder.class,dataQuery) {
 
             @Override
-            protected void populateViewHolder(SearchViewHolder viewHolder, final DataProfilePromote model, final int position) {
+            protected void populateViewHolder(final SearchViewHolder viewHolder, final DataProfilePromote model, final int position) {
+
+                final Boolean[] checklike = new Boolean[1];
+                checklike[0] = false;
 
                 viewHolder.setName(model.name);
                 viewHolder.setLocation(model.district,model.province);
@@ -120,6 +143,94 @@ public class SearchPrice extends Fragment {
                     viewHolder.setStart(model.S04);
                 }
 
+                DatabaseReference mRoot = FirebaseDatabase.getInstance().getReference();
+                mRoot.child("customer-liked").child(mFirebaseUser.getUid()).child(model.uid).addListenerForSingleValueEvent(new ValueEventListener() {
+
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        DataCustomerLiked like = dataSnapshot.getValue(DataCustomerLiked.class);
+                        if (like != null) {
+                            viewHolder.setLike();
+                            checklike[0] = true;
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+
+
+                });
+
+                viewHolder.like.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        if(checklike[0]==true ){
+                            DatabaseReference mRoot = FirebaseDatabase.getInstance().getReference();
+                            mRoot.child("customer-liked").child(mFirebaseUser.getUid()).child(model.uid).removeValue();
+                            viewHolder.setUnLike();
+                            checklike[0]=false;
+                        }
+                        else{
+
+                            final DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+                            //DatabaseReference databaseBeauLike = mRootRef.child("beautician-liked");
+
+                            final String cshow = getRef(position).getKey();
+
+                            final HashMap<String, Object> CustomerValues = new HashMap<>();
+
+                            //Keep beautician profile
+                            CustomerValues.put("name",model.name);
+                            CustomerValues.put("profile",model.BeauticianProfile);
+                            CustomerValues.put("uid",model.uid);
+
+                            mRootRef.child("customer").child(mFirebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    User user = dataSnapshot.getValue(User.class);
+                                    if (user == null) {
+                                        Toast.makeText(getActivity(), "Error: could not fetch user.", Toast.LENGTH_LONG).show();
+                                    } else {
+
+                                        final HashMap<String, Object> BeauticianValues = new HashMap<>();
+
+                                        //Keep beautician profile
+                                        BeauticianValues.put("name",user.firstname);
+                                        BeauticianValues.put("profile","");
+                                        BeauticianValues.put("uid",model.uid);
+
+                                        Map<String,Object> childUpdate = new HashMap<>();
+                                        childUpdate.put("/customer-liked/"+mFirebaseUser.getUid()+"/"+model.uid, CustomerValues);
+                                        childUpdate.put("/beautician-liked/"+model.uid+"/"+mFirebaseUser.getUid().toString(), BeauticianValues);
+
+                                        mRootRef.updateChildren(childUpdate);
+
+                                        viewHolder.setLike();
+                                        checklike[0]=true;
+
+
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+
+                                }
+
+
+                            });
+
+
+                        }
+
+
+
+                    }
+                });
 
                 viewHolder.mview.setOnClickListener(new View.OnClickListener() {
                     //private static final String TAG = "Promotion";

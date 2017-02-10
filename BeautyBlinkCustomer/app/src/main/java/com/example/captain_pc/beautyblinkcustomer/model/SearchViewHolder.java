@@ -16,13 +16,23 @@ import com.squareup.picasso.Picasso;
 public class SearchViewHolder extends RecyclerView.ViewHolder  {
 
     public View mview;
+    public ImageView like;
     ImageView addpromotepic1, addpromotepic2, addpromotepic3,profile;
     TextView namepromote ,locationpromote ,priceS01,priceS02,priceS03,priceS04;
 
     public SearchViewHolder(View itemView){
         super(itemView);
         mview=itemView;
+        like = (ImageView) mview.findViewById(R.id.like);
 
+    }
+
+    public void setLike(){
+        like.setImageResource(R.mipmap.liked);
+    }
+
+    public void setUnLike(){
+        like.setImageResource(R.mipmap.like);
     }
 
     public void setName(String name){
