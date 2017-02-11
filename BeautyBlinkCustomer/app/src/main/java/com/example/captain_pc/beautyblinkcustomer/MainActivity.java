@@ -93,14 +93,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     private  void initInstances(){
-        testNo = (Button)findViewById(R.id.testNoti);
-        testNo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,TestNoti.class);
-                startActivity(intent);
-            }
-        });
+
         DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);

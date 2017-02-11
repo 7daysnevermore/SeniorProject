@@ -1,142 +1,131 @@
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:tools="http://schemas.android.com/tools"
-android:id="@+id/drawerLayout"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-tools:context="com.example.captain_pc.beautyblinkcustomer.MainActivity"
-    android:background="@color/colorBG"
-android:orientation="vertical">
-
-<!--HomeMenu-->
-<LinearLayout
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
+    tools:context="com.example.captain_pc.beautyblinkcustomer.MainActivity"
+    android:background="@color/colorBG"
     android:orientation="vertical">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:titleTextColor="#1111">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text=""
-            android:gravity="center_vertical"
-            android:textSize="30dp"
-            />
-        <Button
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_gravity="right"
-            android:background="@drawable/ic_send"
-            android:id="@+id/testNoti"
-            android:layout_marginRight="20dp" />
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <EditText
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:maxLines="1"
-                android:ems="10"
-                android:id="@+id/word"
-                android:imeOptions="actionSearch"
-                android:hint="Search by name"
-                android:background="@drawable/input_outline"
-                android:padding="5dp" />
-
-            <ImageView
-                android:visibility="gone"
-                android:id="@+id/icon_search"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:src="@drawable/ic_action_search"/>
-
-
-        </LinearLayout>
-
-    </android.support.v7.widget.Toolbar>
-
-    <!--Menu-->
+    <!--HomeMenu-->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:orientation="horizontal"
-        android:background="#BEBEBE">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:titleTextColor="#1111">
 
-            <ImageView
-                android:id="@+id/bt_search"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_action_search"/>
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:ems="10"
+                    android:id="@+id/word"
+                    android:imeOptions="actionSearch"
+                    android:hint="Search by name"
+                    android:background="@drawable/input_outline"
+                    android:padding="5dp" />
+
+                <ImageView
+                    android:visibility="gone"
+                    android:id="@+id/icon_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:src="@drawable/ic_action_search"/>
+
+
+            </LinearLayout>
+
+        </android.support.v7.widget.Toolbar>
+
+        <!--Menu-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:orientation="horizontal"
+            android:background="#BEBEBE">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/bt_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_action_search"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/bt_request"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/request_70"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/bt_noti"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/noti_70"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/bt_userprofile"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/setting_70"/>
+            </LinearLayout>
 
         </LinearLayout>
 
-        <LinearLayout
+        <!--Fragment-->
+        <FrameLayout
+            android:id="@+id/contentcontainer"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_height="wrap_content"
+            android:layout_weight="15">
 
-            <ImageView
-                android:id="@+id/bt_request"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:src="@mipmap/request_70"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <ImageView
-                android:id="@+id/bt_noti"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:src="@mipmap/noti_70"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <ImageView
-                android:id="@+id/bt_userprofile"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:src="@mipmap/setting_70"/>
-        </LinearLayout>
+        </FrameLayout>
 
     </LinearLayout>
-
-    <!--Fragment-->
-    <FrameLayout
-        android:id="@+id/contentcontainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="15">
-
-    </FrameLayout>
-
-</LinearLayout>
     <!--Menu-->
 
     <LinearLayout

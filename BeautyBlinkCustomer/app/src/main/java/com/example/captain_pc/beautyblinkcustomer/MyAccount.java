@@ -24,7 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class MyAccount extends AppCompatActivity implements View.OnClickListener {
 
-    TextView fname,lname,birthday,gender,phone,addr;
+    TextView bbuilding,fname,lname,birthday,gender,phone,addr;
     Button edit;
 
     private FirebaseAuth mFirebaseAuth;
@@ -42,6 +42,7 @@ public class MyAccount extends AppCompatActivity implements View.OnClickListener
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
         uid = mFirebaseUser.getUid().toString();
 
+        bbuilding = (TextView) findViewById(R.id.username);
         fname = (TextView) findViewById(R.id.firstname);
         lname = (TextView) findViewById(R.id.lastname);
         birthday = (TextView) findViewById(R.id.birthday);
@@ -62,6 +63,7 @@ public class MyAccount extends AppCompatActivity implements View.OnClickListener
                     Toast.makeText(MyAccount.this, "Error: could not fetch user.", Toast.LENGTH_LONG).show();
                 } else {
 
+                    bbuilding.setText(user.address_building);
                     fname.setText(user.firstname);
                     lname.setText(user.lastname);
                     birthday.setText(user.birthday);
