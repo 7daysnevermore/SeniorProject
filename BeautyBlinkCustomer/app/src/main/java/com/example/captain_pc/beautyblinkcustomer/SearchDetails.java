@@ -86,7 +86,7 @@ public class SearchDetails extends AppCompatActivity implements View.OnClickList
         lng = getIntent().getStringExtra("lng");
 
         word.setHint(search);
-        word.setFocusable(false);
+        word.setFocusable(true);
 
         word.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -154,6 +154,9 @@ public class SearchDetails extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.popular:
+                if(!lat.equals("")){
+                    popular.setText("Result");
+                }
                 if(previous.equals("latest")){
                     tab_latest.setVisibility(View.GONE);
                     latest.setTextColor(getResources().getColor(R.color.streak_color_light));

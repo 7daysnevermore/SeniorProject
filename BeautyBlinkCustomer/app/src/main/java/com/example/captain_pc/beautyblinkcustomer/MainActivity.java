@@ -162,7 +162,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void signOut() {
         // Firebase sign out
         FirebaseAuth.getInstance().signOut();
-        finish();
+        Intent intent = new Intent(this,MainActivity.class);
+        startActivity(intent);
     }
 
 

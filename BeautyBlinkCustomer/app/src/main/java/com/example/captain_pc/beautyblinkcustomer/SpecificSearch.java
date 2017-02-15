@@ -76,7 +76,6 @@ public class SpecificSearch extends AppCompatActivity  {
             if (resultCode == RESULT_OK) {
                 // Get the user's selected place from the Intent.
                 Place place = PlaceAutocomplete.getPlace(this, data);
-                Log.i(TAG, "Place Selected: " + place.getName()+place.getLatLng().latitude);
 
                 Intent cPro = new Intent(this,SearchDetails.class);
                         cPro.putExtra("search", getIntent().getStringExtra("search"));

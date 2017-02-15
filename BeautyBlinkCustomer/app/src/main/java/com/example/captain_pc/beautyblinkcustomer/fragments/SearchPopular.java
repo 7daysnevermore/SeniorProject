@@ -138,7 +138,7 @@ public class SearchPopular extends Fragment {
 
                     if (distance(Double.parseDouble(search.lat), Double.parseDouble(search.lng),
                             Double.parseDouble(model.latitude),Double.parseDouble(model.longitude)) < 10.0) { // if distance < 0.1 miles we take locations as equal
-                        viewHolder.setName(model.name);
+                        viewHolder.setName(model.username);
                         viewHolder.setLocation(model.district,model.province);
 
                         if(!model.BeauticianProfile.equals("")){
@@ -172,7 +172,7 @@ public class SearchPopular extends Fragment {
                     }
                 }else if(search.lat.equals("")&&search.lng.equals("")){
 
-                    viewHolder.setName(model.name);
+                    viewHolder.setName(model.username);
                     viewHolder.setLocation(model.district,model.province);
 
                     if(!model.BeauticianProfile.equals("")){
@@ -244,7 +244,7 @@ public class SearchPopular extends Fragment {
                                 final HashMap<String, Object> CustomerValues = new HashMap<>();
 
                                 //Keep beautician profile
-                                CustomerValues.put("name",model.name);
+                                CustomerValues.put("name",model.username);
                                 CustomerValues.put("profile",model.BeauticianProfile);
                                 CustomerValues.put("uid",model.uid);
 
