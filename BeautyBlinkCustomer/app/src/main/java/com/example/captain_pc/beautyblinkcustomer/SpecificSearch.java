@@ -76,26 +76,15 @@ public class SpecificSearch extends AppCompatActivity  {
             if (resultCode == RESULT_OK) {
                 // Get the user's selected place from the Intent.
                 Place place = PlaceAutocomplete.getPlace(this, data);
-                Log.i(TAG, "Place Selected: " + place.getName());
+                Log.i(TAG, "Place Selected: " + place.getName()+place.getLatLng().latitude);
 
                 Intent cPro = new Intent(this,SearchDetails.class);
                         cPro.putExtra("search", getIntent().getStringExtra("search"));
                         cPro.putExtra("word","");
-                        cPro.putExtra("latlag", place.getLatLng());
+                        cPro.putExtra("lat",String.valueOf(place.getLatLng().latitude));
+                        cPro.putExtra("lng",String.valueOf(place.getLatLng().longitude));
                         startActivity(cPro);
 
-                /*// Format the place's details and display them in the TextView.
-                mPlaceDetailsText.setText(formatPlaceDetails(getResources(), place.getName(),
-                        place.getId(), place.getAddress(), place.getPhoneNumber(),
-                        place.getWebsiteUri()));
-
-                // Display attributions if required.
-                CharSequence attributions = place.getAttributions();
-                if (!TextUtils.isEmpty(attributions)) {
-                    mPlaceAttribution.setText(Html.fromHtml(attributions.toString()));
-                } else {
-                    mPlaceAttribution.setText("");
-                }*/
             } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
                 Status status = PlaceAutocomplete.getStatus(this, data);
                 Log.e(TAG, "Error: Status = " + status.toString());

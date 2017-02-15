@@ -10,14 +10,16 @@ public class DataProfilePromote {
 
     public String sub_district,district,province,username,picture1,picture2,picture3,BeauticianProfile,rating,uid,latitude,longitude;
     public Integer S01,S02,S03,S04;
+    public String latitude,longitude;
 
 
     public DataProfilePromote(){
 
     }
 
-    public DataProfilePromote(Integer S01,Integer S02,Integer S03,Integer S04,String sub_district, String district, String province,String username,String picture1,String picture2,String picture3, String BeauticianProfile, String rating, String uid
-            , String latitude,String longitude){
+    public DataProfilePromote(Integer S01,Integer S02,Integer S03,Integer S04,String sub_district, String district, String province
+            ,String name,String picture1,String picture2,String picture3, String BeauticianProfile, String rating, String uid
+    ,String latitude,String longitude){
 
         this.S01 = S01;
         this.S02 = S02;

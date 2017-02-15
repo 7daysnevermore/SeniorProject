@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.captain_pc.beautyblinkcustomer.R;
@@ -17,6 +18,7 @@ public class SearchViewHolder extends RecyclerView.ViewHolder  {
 
     public View mview;
     public ImageView like;
+    LinearLayout row;
     ImageView addpromotepic1, addpromotepic2, addpromotepic3,profile;
     TextView namepromote ,locationpromote ,priceS01,priceS02,priceS03,priceS04;
 
@@ -25,6 +27,10 @@ public class SearchViewHolder extends RecyclerView.ViewHolder  {
         mview=itemView;
         like = (ImageView) mview.findViewById(R.id.like);
 
+    }
+
+    public void deleteView(){
+        mview.setVisibility(View.GONE);
     }
 
     public void setLike(){
