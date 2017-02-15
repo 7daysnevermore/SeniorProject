@@ -5,6 +5,7 @@
     >
 
     <LinearLayout
+        android:id="@+id/row"
         android:layout_width="match_parent"
         android:layout_height="230dp"
         android:layout_marginLeft="15dp"

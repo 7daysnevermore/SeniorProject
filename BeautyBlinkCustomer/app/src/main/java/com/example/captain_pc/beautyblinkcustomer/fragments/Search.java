@@ -147,6 +147,8 @@ public class Search extends Fragment {
                 Intent cate = new Intent(getActivity(),SearchDetails.class);
                 cate.putExtra("search","S01");
                 cate.putExtra("word","");
+                cate.putExtra("lat", "");
+                cate.putExtra("lng", "");
                 startActivity(cate);
             }
         });
@@ -156,6 +158,8 @@ public class Search extends Fragment {
                 Intent cate = new Intent(getActivity(),SearchDetails.class);
                 cate.putExtra("search","S02");
                 cate.putExtra("word","");
+                cate.putExtra("lat", "");
+                cate.putExtra("lng", "");
                 startActivity(cate);
             }
         });
@@ -165,6 +169,8 @@ public class Search extends Fragment {
                 Intent cate = new Intent(getActivity(),SearchDetails.class);
                 cate.putExtra("search","S03");
                 cate.putExtra("word","");
+                cate.putExtra("lat", "");
+                cate.putExtra("lng", "");
                 startActivity(cate);
             }
         });
@@ -174,6 +180,8 @@ public class Search extends Fragment {
                 Intent cate = new Intent(getActivity(),SearchDetails.class);
                 cate.putExtra("search","S04");
                 cate.putExtra("word","");
+                cate.putExtra("lat", "");
+                cate.putExtra("lng", "");
                 startActivity(cate);
             }
         });

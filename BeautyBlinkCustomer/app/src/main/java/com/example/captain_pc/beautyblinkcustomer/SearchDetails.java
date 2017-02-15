@@ -27,6 +27,7 @@ import com.example.captain_pc.beautyblinkcustomer.fragments.SearchPrice;
 import com.example.captain_pc.beautyblinkcustomer.model.DataProfilePromote;
 import com.example.captain_pc.beautyblinkcustomer.model.SearchViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -50,7 +51,7 @@ public class SearchDetails extends AppCompatActivity implements View.OnClickList
 
     public EditText word;
     public TextView popular,latest,nearby,price;
-    public String search,wording,previous=null;
+    public String search,wording,previous=null,lat,lng;
     public ImageView icon_search,icon_filter,up,down,tab_popular,tab_nearby,tab_latest,tab_price;
     public boolean checking;
     int clickcount=0;
@@ -81,6 +82,8 @@ public class SearchDetails extends AppCompatActivity implements View.OnClickList
 
         search = getIntent().getStringExtra("search");
         wording = getIntent().getStringExtra("word");
+        lat = getIntent().getStringExtra("lat");
+        lng = getIntent().getStringExtra("lng");
 
         word.setHint(search);
         word.setFocusable(false);
