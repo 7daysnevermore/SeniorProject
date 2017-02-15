@@ -39,7 +39,7 @@
                 android:text="hh:mm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/time"
+                android:id="@+id/btnTime"
                 android:layout_weight="1"
                 android:gravity="top|right" />
 

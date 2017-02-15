@@ -5,17 +5,18 @@ package com.example.captain_pc.beautyblinkcustomer.model;
  */
 
 public class DataRequest {
-    private String date,event,service,special_cus,status,time,numP,maxP,special_beau,locate;
+    private String date,dateform,event,service,special_cus,status,time,numP,maxP,special_beau,locate;
     private int color;
 
     public DataRequest(){
 
     }
 
-    public DataRequest(int color,String date, String event,String service,String special_cus,String status,
+    public DataRequest(int color,String dateform,String date, String event,String service,String special_cus,String status,
                        String time, String numP,String maxP,String special_beau,String locate){
 
         this.color=color;
+        this.dateform=dateform;
         this.date=date;
         this.event=event;
         this.service=service;
@@ -28,26 +29,28 @@ public class DataRequest {
         this.locate=locate;
 
     }
-    public String getLocate(){
+    public String getDateform(){return  this.dateform;}
+    public void setDateform(String dateform){this.dateform=dateform;}
+    public String getLocation(){
         return this.locate;
     }
-    public void setLocate(String locate){
+    public void setLocattion(String locate){
         this.locate=locate;
     }
-    public String getNumP(){
+    public String getNumberofcustomer(){
         return this.numP;
     }
-    public void setNumP(String numP){
+    public void setNumberofcustomer(String numP){
         this.numP=numP;
     }
-    public String getMaxP(){
+    public String getMaxprice(){
         return this.maxP;
     }
-    public void setMaxP(String maxP){this.maxP=maxP;}
-    public String getBeau(){
+    public void setMaxprice(String maxP){this.maxP=maxP;}
+    public String getBeauticianoffer(){
         return  this.special_beau;
     }
-    public void setBeau(String special_beau){
+    public void setBeauticianoffer(String special_beau){
         this.special_beau = special_beau;
     }
      public int getColor(){
@@ -74,10 +77,10 @@ public class DataRequest {
     public void setService(String service){
         this.service=service;
     }
-    public String getCus(){
+    public String getSpecualcus(){
         return this.special_cus;
     }
-    public void setCus(String special_cus){
+    public void setSpecialcus(String special_cus){
         this.special_cus=special_cus;
     }
     public String getStatus(){

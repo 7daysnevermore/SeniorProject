@@ -79,7 +79,7 @@ public class SpecificByUser extends AppCompatActivity {
         recyclerView =(RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
 
-        String search = word.getText().toString();
+        String search = word.getText().toString().toLowerCase();
 
         if(!search.equals("")){
             //Method to multiple queries
@@ -96,7 +96,7 @@ public class SpecificByUser extends AppCompatActivity {
                 @Override
                 protected void populateViewHolder(SearchByUserViewHolder viewHolder, DataProfilePromote model, final int position) {
 
-                    viewHolder.setName(model.name);
+                    viewHolder.setName(model.username);
 
                     if(!model.BeauticianProfile.equals("")){
                         viewHolder.setProfile(getApplicationContext(),model.BeauticianProfile);

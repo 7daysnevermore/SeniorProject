@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_payment"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#FFFFFF"
+    android:orientation="vertical"
+    tools:context="com.example.captain_pc.beautyblinkcustomer.Payment">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:layout_scrollFlags="scroll|enterAlways"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+        <Button
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="right"
+            android:background="@drawable/ic_send"
+            android:id="@+id/payConfirm"
+            android:layout_marginRight="20dp" />
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Payment confirm"
+            android:textSize="20sp"/>
+        <View
+            android:layout_width="350dp"
+            android:layout_marginTop="10dp"
+            android:layout_height="1dp"
+            android:layout_gravity="center"
+            android:background="#EEEEEE"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:text="Event    :"
+                    android:textSize="18sp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btnEvent"
+                    android:textSize="18sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="5dp">
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:text="Service :"
+                    android:textSize="18sp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btnService"
+                    android:textSize="18sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Date"
+                    android:textSize="18sp"
+                    android:layout_weight="1" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:background="@drawable/input_outline"
+                    android:ems="10"
+                    android:id="@+id/editDate"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+        <View
+            android:layout_width="350dp"
+            android:layout_marginTop="10dp"
+            android:layout_height="1dp"
+            android:layout_gravity="center"
+            android:background="#EEEEEE"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ฺBank categories"
+                android:textSize="18sp"/>
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:id="@+id/bankRadio">
+
+                    <RadioButton
+                        android:id="@+id/radioKB"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:text="Kasikorn Bank"
+                        android:checked="false"
+                        />
+
+
+                        <RadioButton
+                            android:id="@+id/radioSCB"
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            android:text="SCB Bank"
+                            android:checked="false"
+                            />
+
+
+                        <RadioButton
+                            android:id="@+id/radioKrung"
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            android:text="Krungthai Bank"
+                            android:checked="false"
+                            />
+
+            </RadioGroup>
+        </LinearLayout>
+        <View
+            android:layout_width="350dp"
+            android:layout_marginTop="10dp"
+            android:layout_height="1dp"
+            android:layout_gravity="center"
+            android:background="#EEEEEE"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Payment slip"
+            android:textSize="18sp"
+            android:layout_marginTop="10dp" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@drawable/ic_action_camera"
+            android:scaleType="fitCenter"
+            android:id="@+id/paySlip"
+            android:adjustViewBounds="true"
+            android:background="@drawable/add_picture"
+            />
+    </LinearLayout>
+</LinearLayout>
