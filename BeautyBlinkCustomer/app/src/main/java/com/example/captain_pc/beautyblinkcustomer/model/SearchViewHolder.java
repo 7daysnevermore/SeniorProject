@@ -1,6 +1,7 @@
 package com.example.captain_pc.beautyblinkcustomer.model;
 
 import android.content.Context;
+import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -18,6 +19,7 @@ public class SearchViewHolder extends RecyclerView.ViewHolder  {
 
     public View mview;
     public ImageView like;
+    SearchViewHolder binding;
     LinearLayout row;
     ImageView addpromotepic1, addpromotepic2, addpromotepic3,profile;
     TextView namepromote ,locationpromote ,priceS01,priceS02,priceS03,priceS04;
@@ -30,7 +32,8 @@ public class SearchViewHolder extends RecyclerView.ViewHolder  {
     }
 
     public void deleteView(){
-        mview.setVisibility(View.GONE);
+        row = (LinearLayout) mview.findViewById(R.id.row);
+        row.setVisibility(View.GONE);
     }
 
     public void setLike(){

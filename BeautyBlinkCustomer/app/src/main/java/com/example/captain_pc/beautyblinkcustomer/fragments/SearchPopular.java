@@ -294,8 +294,6 @@ public class SearchPopular extends Fragment {
                     });
 
 
-
-
                 viewHolder.mview.setOnClickListener(new View.OnClickListener() {
                     //private static final String TAG = "Promotion";
                     final String cshow = getRef(position).getKey();
