@@ -103,7 +103,7 @@ public class SearchNearby extends Fragment {
                 final Boolean[] checklike = new Boolean[1];
                 checklike[0] = false;
 
-                viewHolder.setName(model.name);
+                viewHolder.setName(model.username);
                 viewHolder.setLocation(model.district,model.province);
 
                 if(!model.BeauticianProfile.equals("")){
@@ -173,7 +173,7 @@ public class SearchNearby extends Fragment {
                             final HashMap<String, Object> CustomerValues = new HashMap<>();
 
                             //Keep beautician profile
-                            CustomerValues.put("name",model.name);
+                            CustomerValues.put("name",model.username);
                             CustomerValues.put("profile",model.BeauticianProfile);
                             CustomerValues.put("uid",model.uid);
 
