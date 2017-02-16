@@ -45,11 +45,13 @@ public class SpecificSearch extends AppCompatActivity  {
             Intent intent = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_OVERLAY)
                     .build(this);
             startActivityForResult(intent, REQUEST_CODE_AUTOCOMPLETE);
+            Log.e(TAG, "show intent");
         } catch (GooglePlayServicesRepairableException e) {
             // Indicates that Google Play Services is either not installed or not up to date. Prompt
             // the user to correct the issue.
             GoogleApiAvailability.getInstance().getErrorDialog(this, e.getConnectionStatusCode(),
                     0 /* requestCode */).show();
+            Log.e(TAG, "show available");
         } catch (GooglePlayServicesNotAvailableException e) {
             // Indicates that Google Play Services is not available and the problem is not easily
             // resolvable.
@@ -83,6 +85,7 @@ public class SpecificSearch extends AppCompatActivity  {
                         cPro.putExtra("lat",String.valueOf(place.getLatLng().latitude));
                         cPro.putExtra("lng",String.valueOf(place.getLatLng().longitude));
                         startActivity(cPro);
+                Log.i(TAG, "Place: " + place.getName());
 
             } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
                 Status status = PlaceAutocomplete.getStatus(this, data);
@@ -90,6 +93,8 @@ public class SpecificSearch extends AppCompatActivity  {
             } else if (resultCode == RESULT_CANCELED) {
                 // Indicates that the activity closed before a selection was made. For example if
                 // the user pressed the back button.
+
+
             }
         }
     }

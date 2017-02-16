@@ -83,7 +83,7 @@ public class SpecificByUser extends AppCompatActivity {
 
         if(!search.equals("")){
             //Method to multiple queries
-            databaseQuery = databaseReference.orderByChild("name").equalTo(search);
+            databaseQuery = databaseReference.orderByChild("username").equalTo(search);
 
             //Order from latest data
             final LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
