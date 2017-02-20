@@ -16,6 +16,7 @@
             android:layout_height="match_parent"
             android:text="Profile"
             android:gravity="center"
+            android:paddingRight="60dp"
             android:textSize="25dp"
             android:layout_weight="0.84" />
 

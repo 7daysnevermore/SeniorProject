@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.captain_pc.beautyblinkcustomer.model.User;
@@ -30,6 +31,8 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
 
     Button editprofile;
 
+    TextView cancel;
+
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
 
@@ -44,6 +47,9 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
         uid = mFirebaseUser.getUid().toString();
+
+        cancel = (TextView) findViewById(R.id.cancel_edit);
+        cancel.setOnClickListener(this);
 
         firstname = (EditText) findViewById(R.id.fname);
         lastname = (EditText) findViewById(R.id.lname);
@@ -100,7 +106,8 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
             case R.id.btn_editprofile:
                 Editprofile();
                 break;
-
+            case R.id.cancel_edit:
+                startActivity(new Intent(EditProfile.this, MyAccount.class));
         }
 
     }

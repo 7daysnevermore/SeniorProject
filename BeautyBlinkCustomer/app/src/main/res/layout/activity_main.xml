@@ -35,7 +35,7 @@
                     android:ems="10"
                     android:id="@+id/word"
                     android:imeOptions="actionSearch"
-                    android:hint="Search by name"
+                    android:hint="Search by user"
                     android:background="@drawable/input_outline"
                     android:padding="5dp" />
 
@@ -68,6 +68,8 @@
                     android:id="@+id/bt_search"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:paddingTop="1dp"
+                    android:paddingBottom="1dp"
                     android:layout_gravity="center"
                     android:src="@mipmap/ic_action_search1"/>
 
@@ -82,6 +84,8 @@
                     android:id="@+id/bt_request"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:paddingTop="1dp"
+                    android:paddingBottom="1dp"
                     android:layout_gravity="center"
                     android:src="@mipmap/request_702"/>
 
@@ -96,6 +100,8 @@
                     android:id="@+id/bt_noti"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:paddingTop="2dp"
+                    android:paddingBottom="2dp"
                     android:layout_gravity="center"
                     android:src="@mipmap/noti_702"/>
 
@@ -110,6 +116,8 @@
                     android:id="@+id/bt_userprofile"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:paddingTop="1dp"
+                    android:paddingBottom="1dp"
                     android:layout_gravity="center"
                     android:src="@mipmap/setting_703"/>
             </LinearLayout>

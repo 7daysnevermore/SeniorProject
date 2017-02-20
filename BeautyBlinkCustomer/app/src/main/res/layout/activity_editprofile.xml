@@ -12,9 +12,18 @@
         android:weightSum="1">
 
         <TextView
+            android:id="@+id/cancel_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:textSize="14sp"
+            android:text="Cancel"/>
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="Edit Profile"
+            android:paddingRight="40dp"
             android:gravity="center"
             android:textSize="25dp"
             android:layout_weight="0.84" />

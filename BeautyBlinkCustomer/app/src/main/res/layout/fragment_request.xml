@@ -9,6 +9,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.2dp"
+            android:background="@android:color/darker_gray"/>
+
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -31,6 +36,11 @@
                 android:text="Create new promotion"
                 android:layout_gravity="center" />
         </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.3dp"
+            android:background="@android:color/darker_gray"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view"
