@@ -33,7 +33,7 @@
                     android:padding="10dp"
                     android:textSize="18sp"
                     android:background="#F5F5F5"
-                    android:text="Category"
+                    android:text="Categories"
                     android:id="@+id/textView3" />
 
                 <View
