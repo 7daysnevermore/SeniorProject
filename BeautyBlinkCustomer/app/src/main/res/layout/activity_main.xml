@@ -57,7 +57,7 @@
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:orientation="horizontal"
-            android:background="#BEBEBE">
+            android:background="#ffffff">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -69,7 +69,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:src="@drawable/ic_action_search"/>
+                    android:src="@mipmap/ic_action_search1"/>
 
             </LinearLayout>
 
@@ -83,7 +83,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:src="@mipmap/request_70"/>
+                    android:src="@mipmap/request_702"/>
 
             </LinearLayout>
 
@@ -97,7 +97,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:src="@mipmap/noti_70"/>
+                    android:src="@mipmap/noti_702"/>
 
             </LinearLayout>
 
@@ -111,7 +111,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:src="@mipmap/setting_70"/>
+                    android:src="@mipmap/setting_703"/>
             </LinearLayout>
 
         </LinearLayout>
