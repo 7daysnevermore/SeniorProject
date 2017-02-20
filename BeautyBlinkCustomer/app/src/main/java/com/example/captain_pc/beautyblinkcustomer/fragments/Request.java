@@ -110,14 +110,17 @@ public class Request extends Fragment {
                         RequestValues.put("service", model.getService());
                         RequestValues.put("event", model.getEvent());
                         RequestValues.put("numberofperson", model.getNumberofcustomer());
-                        RequestValues.put("maxP", model.getMaxprice()+"");
+                        RequestValues.put("maxprice", model.getMaxprice());
                         RequestValues.put("date", model.getDate());
                         RequestValues.put("time", model.getTime());
                         RequestValues.put("location", model.getLocation());
+                        RequestValues.put("beauticianoffer",model.getBeauticianoffer());
+                        //Log.d("text",model.getLocation());
                         RequestValues.put("color",model.getColor());
-                        RequestValues.put("specialrequest", model.getSpecualcus());
+                        RequestValues.put("specialrequest", model.getSpecialcus());
                         RequestValues.put("offer",model.getStatus());
                         RequestValues.put("uid", mFirebaseUser.getUid().toString());
+
                         RequestValues.put("specialbeau",model.getBeauticianoffer());
 
                         Intent intent = new Intent(getActivity(),OfferPage.class);

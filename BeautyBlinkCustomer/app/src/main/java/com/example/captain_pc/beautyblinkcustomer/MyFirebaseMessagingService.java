@@ -9,19 +9,18 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.media.RingtoneManager;
+import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
+
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.Map;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
-    /**
-     * Called when message is received.
-     *
-     * @param remoteMessage Object representing the message received from Firebase Cloud Messaging.
-     */
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
@@ -29,23 +28,25 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         // If the application is in the foreground handle both data and notification messages here.
         // Also if you intend on generating your own notifications as a result of a received FCM
         // message, here is where that should be initiated. See sendNotification method below.
+       // String click_action =remoteMessage.getNotification().getClickAction();
+        //Intent intent = new Intent(click_action);
+
         RemoteMessage.Notification notification = remoteMessage.getNotification();
         Map<String, String> data = remoteMessage.getData();
-
+        Log.e("FROM", remoteMessage.getFrom());
         sendNotification(notification, data);
     }
 
-    /**
-     * Create and show a custom notification containing the received FCM message.
-     *
-     * @param notification FCM notification payload received.
-     * @param data FCM data payload received.
-     */
     private void sendNotification(RemoteMessage.Notification notification, Map<String, String> data) {
         Bitmap icon = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
 
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, Second.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+        Bundle bundle = new Bundle();
+        bundle.putString("picture_url", data.get("picture_url"));
+        intent.putExtras(bundle);
+
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
 
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
@@ -53,10 +54,13 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 .setContentText(notification.getBody())
                 .setAutoCancel(true)
                 .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
+                //.setSound(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.win))
                 .setContentIntent(pendingIntent)
-                .setContentInfo(notification.getTitle())
+                .setContentInfo("Hello")
                 .setLargeIcon(icon)
                 .setColor(Color.RED)
+                .setLights(Color.RED, 1000, 300)
+                .setDefaults(Notification.DEFAULT_VIBRATE)
                 .setSmallIcon(R.mipmap.ic_launcher);
 
         try {
@@ -71,9 +75,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        notificationBuilder.setDefaults(Notification.DEFAULT_VIBRATE);
-        notificationBuilder.setLights(Color.YELLOW, 1000, 300);
 
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(0, notificationBuilder.build());

@@ -129,17 +129,17 @@
     </LinearLayout>
     <!--Menu-->
 
-    <LinearLayout
-        android:layout_gravity="start"
-        android:background="#ffffff"
-        android:layout_width="@dimen/drawer_menu_width"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+<LinearLayout
+android:layout_gravity="start"
+android:background="#ffffff"
+android:layout_width="@dimen/drawer_menu_width"
+android:layout_height="match_parent"
+android:orientation="vertical">
 
 
-    </LinearLayout>
+</LinearLayout>
 
 
 
 
-</android.support.v4.widget.DrawerLayout>
+    </android.support.v4.widget.DrawerLayout>

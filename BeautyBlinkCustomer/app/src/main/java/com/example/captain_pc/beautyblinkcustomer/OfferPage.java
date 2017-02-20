@@ -30,6 +30,7 @@ public class OfferPage extends AppCompatActivity {
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
     private Toolbar toolbar;
+    String np,mp,sp,loca;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,14 +57,16 @@ public class OfferPage extends AppCompatActivity {
         date.setText(requestValues.get("date").toString());
         service.setText((String)requestValues.get("service"));
         event.setText(requestValues.get("event").toString());
-        numofPer.setText((String)requestValues.get("numberofperson"));
-        //maxprice.setText("Maxprice: "+ requestValues.get("maxP").toString());
+        time.setText(requestValues.get("time").toString());
+        special.setText("Special request: "+requestValues.get("specialrequest").toString());
+        location.setText("Location: "+requestValues.get("location").toString());
+        maxprice.setText("Max price: "+requestValues.get("maxprice").toString());
+        numofPer.setText("N/P: "+requestValues.get("numberofperson").toString());
+        spe_b.setText(requestValues.get("beauticianoffer").toString());
 
 
 
-        //time.setText(requestValues.get("time").toString());
-        //location.setText(requestValues.get("location").toString());
-        //special.setText(requestValues.get("specialrequest").toString());
+
 
         btnOffer = (Button)findViewById(R.id.acceptOffer);
 
@@ -71,7 +74,7 @@ public class OfferPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                /*final String d = date.getText().toString();
+                final String d = date.getText().toString();
                 final String ser = service.getText().toString();
                 final String eve = event.getText().toString();
                 final String maxP = maxprice.getText().toString();
@@ -79,7 +82,7 @@ public class OfferPage extends AppCompatActivity {
                 final String ti = time.getText().toString();
                 final String specus = special.getText().toString();
                 final String locate = location.getText().toString();
-                final String spebeau = spe_b.getText().toString();*/
+                final String spebeau = spe_b.getText().toString();
 
                 final String status = "confirm";
 
@@ -98,7 +101,15 @@ public class OfferPage extends AppCompatActivity {
                     RequestValues.put("status",status);
                     RequestValues.put("type","accept");
                     RequestValues.put("currenttime", date);
-
+                    RequestValues.put("date",d);
+                    RequestValues.put("location",requestValues.get("location").toString());
+                    RequestValues.put("event",eve);
+                    RequestValues.put("time",ti);
+                    RequestValues.put("numberofperson",requestValues.get("numberofperson").toString());
+                    RequestValues.put("maxprice",requestValues.get("maxprice").toString());
+                    RequestValues.put("service",ser);
+                    RequestValues.put("beauticianoffer",spebeau);
+                    RequestValues.put("specialrequest",requestValues.get("specialrequest").toString());
                     Map<String, Object> childUpdate = new HashMap<>();
                     childUpdate.put("/request/" + key, RequestValues);
                     childUpdate.put("/customer-request/" + mFirebaseUser.getUid().toString() + "/" + key, RequestValues);
