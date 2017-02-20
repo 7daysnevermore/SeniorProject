@@ -1,5 +1,8 @@
 package com.example.captain_pc.beautyblinkcustomer.model;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 /**
  * Created by chin- on 1/16/2017.
  */
@@ -34,7 +37,7 @@ public class DataRequest {
     public String getLocation(){
         return this.locate;
     }
-    public void setLocattion(String locate){
+    public void setLocation(String locate){
         this.locate=locate;
     }
     public String getNumberofcustomer(){
@@ -43,6 +46,8 @@ public class DataRequest {
     public void setNumberofcustomer(String numP){
         this.numP=numP;
     }
+    public String getMaxP(){return this.maxP;}
+    public void setMaxP(String maxP){this.maxP=maxP;}
     public String getMaxprice(){
         return this.maxP;
     }
@@ -77,7 +82,7 @@ public class DataRequest {
     public void setService(String service){
         this.service=service;
     }
-    public String getSpecualcus(){
+    public String getSpecialcus(){
         return this.special_cus;
     }
     public void setSpecialcus(String special_cus){

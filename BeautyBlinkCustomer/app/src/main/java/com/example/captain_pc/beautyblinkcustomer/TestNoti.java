@@ -41,17 +41,17 @@ public class TestNoti extends AppCompatActivity {
         }
     }
     public void showToken(View view) {
-        // แสดง token มาให้ดูหน่อยเสะ
+
         mTextView.setText(FirebaseInstanceId.getInstance().getToken());
         Log.i("token", FirebaseInstanceId.getInstance().getToken());
     }
     public void subscribe(View view) {
-        // สับตะไคร้หัวข้อ news
+
         FirebaseMessaging.getInstance().subscribeToTopic("news");
         mTextView.setText(R.string.subscribed);
     }
     public void unsubscribe(View view) {
-        // ยกเลิกสับตะไคร้หัวข้อ news
+        
         FirebaseMessaging.getInstance().unsubscribeFromTopic("news");
         mTextView.setText(R.string.unsubscribed);
     }
