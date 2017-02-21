@@ -55,62 +55,94 @@
         <!--Menu-->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="35dp"
+            android:layout_height="40dp"
             android:orientation="horizontal"
             android:background="#ffffff">
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
+
 
                 <ImageView
                     android:id="@+id/bt_search"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:paddingTop="1dp"
-                    android:paddingBottom="1dp"
+                    android:paddingBottom="3dp"
                     android:layout_gravity="center"
                     android:src="@mipmap/ic_action_search1"/>
 
-            </LinearLayout>
 
-            <LinearLayout
+                <ImageView
+                    android:visibility="visible"
+                    android:id="@+id/tap_search"
+                    android:layout_alignBottom="@+id/bt_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/tab2"
+                    />
+
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
+
 
                 <ImageView
                     android:id="@+id/bt_request"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:paddingTop="1dp"
-                    android:paddingBottom="1dp"
+                    android:paddingBottom="4dp"
                     android:layout_gravity="center"
                     android:src="@mipmap/request_702"/>
 
-            </LinearLayout>
 
-            <LinearLayout
+                <ImageView
+                    android:id="@+id/tap_request"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/bt_request"
+                    android:src="@drawable/tab2"
+                    android:visibility="gone" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
+
 
                 <ImageView
                     android:id="@+id/bt_noti"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:paddingTop="2dp"
-                    android:paddingBottom="2dp"
+                    android:paddingBottom="4dp"
                     android:layout_gravity="center"
                     android:src="@mipmap/noti_702"/>
 
-            </LinearLayout>
 
-            <LinearLayout
+                <ImageView
+                    android:id="@+id/tap_noti"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/bt_noti"
+                    android:src="@drawable/tab2"
+                    android:visibility="gone" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
+
 
                 <ImageView
                     android:id="@+id/bt_userprofile"
@@ -120,7 +152,18 @@
                     android:paddingBottom="1dp"
                     android:layout_gravity="center"
                     android:src="@mipmap/setting_703"/>
-            </LinearLayout>
+
+
+                <ImageView
+                    android:id="@+id/tap_user"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/bt_userprofile"
+                    android:src="@drawable/tab2"
+                    android:visibility="gone" />
+
+            </RelativeLayout>
+
 
         </LinearLayout>
 
