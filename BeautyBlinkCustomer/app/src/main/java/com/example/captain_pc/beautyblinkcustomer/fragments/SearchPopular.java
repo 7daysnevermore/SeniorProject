@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.captain_pc.beautyblinkcustomer.BeauticianProfile;
 import com.example.captain_pc.beautyblinkcustomer.EditProfile;
 import com.example.captain_pc.beautyblinkcustomer.PromotionDetails;
 import com.example.captain_pc.beautyblinkcustomer.R;
@@ -304,9 +305,10 @@ public class SearchPopular extends Fragment {
                         //Toast.makeText(Promotion.this, "This is my Toast message!",
                         // Toast.LENGTH_LONG).show();
 
-                        /*Intent cPro = new Intent(getActivity(),PromotionDetails.class);
+                        Intent cPro = new Intent(getActivity(),BeauticianProfile.class);
                         cPro.putExtra("uid",  model.uid);
-                        startActivity(cPro);*/
+                        cPro.putExtra("username",model.username);
+                        startActivity(cPro);
                     }
                 });
 
