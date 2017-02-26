@@ -47,6 +47,7 @@
         <activity android:name=".OfferPage"></activity>
         <activity android:name=".MessagePage" />
         <activity android:name=".Review"></activity>
+        <activity android:name=".BeauticianProfile"></activity>
 
         <service android:name=".MyFirebaseMessagingService">
             <intent-filter>
