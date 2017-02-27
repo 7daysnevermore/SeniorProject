@@ -32,6 +32,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.squareup.picasso.Picasso;
 import java.util.HashMap;
 
@@ -66,6 +67,7 @@ public class Search extends Fragment {
     private void initInstance(final View rootView) {
 
         databaseReference = FirebaseDatabase.getInstance().getReference().child("promotion");
+        Query query1 = databaseReference.orderByChild("timestamp");
         //professor promotion feeds
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
@@ -76,7 +78,7 @@ public class Search extends Fragment {
 
 
         final FirebaseRecyclerAdapter<DataPromotion, PromotionViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<DataPromotion, PromotionViewHolder>
-                (DataPromotion.class, R.layout.promotion_row, PromotionViewHolder.class, databaseReference) {
+                (DataPromotion.class, R.layout.promotion_row, PromotionViewHolder.class, query1) {
 
             @Override
             protected void populateViewHolder(PromotionViewHolder viewHolder, final DataPromotion model, final int position) {

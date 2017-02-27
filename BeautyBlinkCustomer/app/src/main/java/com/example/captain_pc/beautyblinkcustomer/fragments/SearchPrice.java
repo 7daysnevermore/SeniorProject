@@ -79,16 +79,16 @@ public class SearchPrice extends Fragment {
 
             //search for each service
             databaseQuery = databaseReference.orderByChild(search.search).startAt(1);
-            final DatabaseReference databaseRef = databaseQuery.getRef();
-            Query order =  databaseRef.orderByValue();
-            QueryRecycle(order, search,true);
+            //final DatabaseReference databaseRef = databaseQuery.getRef();
+            //Query order =  databaseRef.orderByValue();
+            QueryRecycle(databaseQuery, search,true);
         }
         else {
             //search for each service
             databaseQuery = databaseReference.orderByChild(search.search).startAt(1);
-            final DatabaseReference databaseRef = databaseQuery.getRef();
-            Query order =  databaseRef.orderByValue();
-            QueryRecycle(order, search,false);
+            //final DatabaseReference databaseRef = databaseQuery.getRef();
+            //Query order =  databaseRef.orderByValue();
+            QueryRecycle(databaseQuery, search,false);
         }
 
 

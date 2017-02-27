@@ -235,10 +235,9 @@
                 android:orientation="horizontal"
                 android:layout_marginTop="70dp"
                 android:id="@+id/afteroffer"
-                android:visibility="gone"
                 >
                 <Button
-
+                    android:visibility="gone"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:id="@+id/message"
@@ -248,6 +247,7 @@
                     android:fadeScrollbars="false" />
                 <Button
 
+                    android:visibility="gone"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:id="@+id/payment"
@@ -256,6 +256,7 @@
                     android:layout_marginLeft="10dp" />
                 <Button
 
+                    android:visibility="gone"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:id="@+id/review"

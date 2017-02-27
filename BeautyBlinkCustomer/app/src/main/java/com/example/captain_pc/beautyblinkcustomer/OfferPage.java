@@ -54,8 +54,9 @@ public class OfferPage extends AppCompatActivity {
         Log.d("orange",""+k);
       Log.d("jajajajaja",""+m);
 
+
+        /*date= (TextView)findViewById(R.id.cusD);
         t= (TextView)findViewById(R.id.tg);
-        date= (TextView)findViewById(R.id.cusD);
         service =(TextView)findViewById(R.id.cusSer);
         event =(TextView)findViewById(R.id.cusEve);
         time = (TextView)findViewById(R.id.cusTime);
@@ -64,7 +65,7 @@ public class OfferPage extends AppCompatActivity {
         maxprice = (TextView)findViewById(R.id.cusMax);
         name = (TextView)findViewById(R.id.tname);
         numofPer = (TextView)findViewById(R.id.cusNum);
-        spe_b = (TextView)findViewById(R.id.speB);
+        //spe_b = (TextView)findViewById(R.id.speB);
 
 
       DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference().child("offer/"+k+"/"+m);
@@ -91,11 +92,7 @@ public class OfferPage extends AppCompatActivity {
                 }
             }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
+        });*/
 
 
     }

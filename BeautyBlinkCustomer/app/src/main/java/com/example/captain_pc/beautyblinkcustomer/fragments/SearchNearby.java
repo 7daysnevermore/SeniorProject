@@ -137,61 +137,34 @@ public class SearchNearby extends Fragment {
                         if (model.S04 != 0 && search.search.equals("S04")) {
                             viewHolder.setStart(model.S04);
                         }
+
+                        DatabaseReference mRoot = FirebaseDatabase.getInstance().getReference();
+                        mRoot.child("customer-liked").child(mFirebaseUser.getUid()).child(model.uid).addListenerForSingleValueEvent(new ValueEventListener() {
+
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                DataCustomerLiked like = dataSnapshot.getValue(DataCustomerLiked.class);
+                                if (like != null) {
+                                    viewHolder.setLike();
+                                    checklike[0] = true;
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+
+
+                        });
                     }else{
                         viewHolder.deleteView();
                     }
 
                 }
+                else {
 
-                viewHolder.setName(model.username);
-                viewHolder.setLocation(model.district,model.province);
-
-                if(!model.BeauticianProfile.equals("")){
-                    viewHolder.setProfile(getActivity().getApplicationContext(),model.BeauticianProfile);
                 }
-
-                if(!model.picture1.equals("")){
-                    viewHolder.setPicture1(getActivity().getApplicationContext(),model.picture1);
-                }
-                if (!model.picture2.equals("")) {
-                    viewHolder.setPicture2(getActivity().getApplicationContext(), model.picture2);
-                }
-                if (!model.picture3.equals("")) {
-                    viewHolder.setPicture3(getActivity().getApplicationContext(), model.picture3);
-                }
-
-                if(model.S01 != 0 && search.search.equals("S01")){
-                    viewHolder.setStart(model.S01);
-                }
-                if (model.S02 != 0 && search.search.equals("S02")) {
-                    viewHolder.setStart(model.S02);
-                }
-                if (model.S03 != 0 && search.search.equals("S03")) {
-                    viewHolder.setStart(model.S03);
-                }
-                if (model.S04 != 0 && search.search.equals("S04")) {
-                    viewHolder.setStart(model.S04);
-                }
-
-                DatabaseReference mRoot = FirebaseDatabase.getInstance().getReference();
-                mRoot.child("customer-liked").child(mFirebaseUser.getUid()).child(model.uid).addListenerForSingleValueEvent(new ValueEventListener() {
-
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        DataCustomerLiked like = dataSnapshot.getValue(DataCustomerLiked.class);
-                        if (like != null) {
-                            viewHolder.setLike();
-                            checklike[0] = true;
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-
-
-                });
 
                 viewHolder.like.setOnClickListener(new View.OnClickListener() {
                     @Override

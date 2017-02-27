@@ -14,13 +14,14 @@ public class DataPromotion {
     private String dateto;
     private String uid;
     private String name,service,status,profile;
+    public Long timestamp;
 
     public DataPromotion(){
 
     }
 
     public DataPromotion(String promotion,String image,String details,String price,String sale
-            , String datefrom, String dateto,String uid, String name,String service,String statu,String profile){
+            , String datefrom, String dateto,String uid, String name,String service,String status,String profile,Long timestamp){
 
         this.promotion=promotion;
         this.image=image;
@@ -34,6 +35,7 @@ public class DataPromotion {
         this.service = service;
         this.status = status;
         this.profile = profile;
+        this.timestamp = timestamp;
     }
     public String getPromotion(){
         return this.promotion;
@@ -129,6 +131,14 @@ public class DataPromotion {
 
     public void setProfile(String profile) {
         this.profile = profile;
+    }
+
+    public void setTimestamp(Long timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public Long getTimestamp() {
+        return this.timestamp;
     }
 
 
