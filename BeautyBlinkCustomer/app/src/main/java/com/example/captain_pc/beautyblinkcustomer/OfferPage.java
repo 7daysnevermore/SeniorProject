@@ -43,7 +43,7 @@ public class OfferPage extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-        date= (TextView)findViewById(R.id.cusD);
+        /*date= (TextView)findViewById(R.id.cusD);
         service =(TextView)findViewById(R.id.cusSer);
         event =(TextView)findViewById(R.id.cusEve);
         time = (TextView)findViewById(R.id.cusTime);
@@ -52,7 +52,7 @@ public class OfferPage extends AppCompatActivity {
         maxprice = (TextView)findViewById(R.id.cusMax);
         name = (TextView)findViewById(R.id.tname);
         numofPer = (TextView)findViewById(R.id.cusNum);
-        spe_b = (TextView)findViewById(R.id.speB);
+        //spe_b = (TextView)findViewById(R.id.speB);
 
         date.setText(requestValues.get("date").toString());
         service.setText((String)requestValues.get("service"));
@@ -122,7 +122,7 @@ public class OfferPage extends AppCompatActivity {
 
             }
 
-        });
+        });*/
 
     }
     public boolean onOptionsItemSelected(MenuItem item) {

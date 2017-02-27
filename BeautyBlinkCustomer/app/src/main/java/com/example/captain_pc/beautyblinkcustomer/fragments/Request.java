@@ -2,6 +2,7 @@ package com.example.captain_pc.beautyblinkcustomer.fragments;
 
 import android.app.FragmentManager;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -22,6 +23,7 @@ import com.example.captain_pc.beautyblinkcustomer.OfferPage;
 import com.example.captain_pc.beautyblinkcustomer.Payment;
 import com.example.captain_pc.beautyblinkcustomer.PromotionDetails;
 import com.example.captain_pc.beautyblinkcustomer.R;
+import com.example.captain_pc.beautyblinkcustomer.RequestDetails;
 import com.example.captain_pc.beautyblinkcustomer.Review;
 import com.example.captain_pc.beautyblinkcustomer.model.DataRequest;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -78,7 +80,7 @@ public class Request extends Fragment {
 
     private void initInstance(View rootView){
 
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("offer");
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("customer-request1").child(mFirebaseUser.getUid());
         //professor promotion feeds
         recyclerView =(RecyclerView)rootView.findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
@@ -92,14 +94,14 @@ public class Request extends Fragment {
 
             @Override
             protected void populateViewHolder(RequestViewHolder viewHolder, final DataRequest model, final int position) {
-               viewHolder.setStatus(model.getStatus());
-                viewHolder.setDate(model.getDate());
-                viewHolder.setEvent(model.getEvent());
-                viewHolder.setColor(model.getColor());
-                viewHolder.setService(model.getService());
-                viewHolder.setColor(model.getColor());
-                viewHolder.setMaxP(model.getMaxprice());
-                viewHolder.setCurrenttime(model.getDateform());
+               viewHolder.setStatus(model.status);
+                viewHolder.setDate(model.date);
+                viewHolder.setEvent(model.event);
+                viewHolder.setColor("#ff0000");
+                viewHolder.setService(model.service);
+                viewHolder.setMaxP(model.maxprice);
+                //viewHolder.setCurrenttime(model.dateform);
+
 
                 viewHolder.mview.setOnClickListener(new View.OnClickListener() {
                     final String cshow = getRef(position).getKey();
@@ -107,23 +109,18 @@ public class Request extends Fragment {
                     public void onClick(View v) {
                         HashMap<String, Object> RequestValues = new HashMap<>();
                         RequestValues.put("key",cshow);
-                        RequestValues.put("service", model.getService());
-                        RequestValues.put("event", model.getEvent());
-                        RequestValues.put("numberofperson", model.getNumberofcustomer());
-                        RequestValues.put("maxprice", model.getMaxprice());
-                        RequestValues.put("date", model.getDate());
-                        RequestValues.put("time", model.getTime());
-                        RequestValues.put("location", model.getLocation());
-                        RequestValues.put("beauticianoffer",model.getBeauticianoffer());
-                        //Log.d("text",model.getLocation());
-                        RequestValues.put("color",model.getColor());
-                        RequestValues.put("specialrequest", model.getSpecialcus());
-                        RequestValues.put("offer",model.getStatus());
+                        RequestValues.put("service", model.service);
+                        RequestValues.put("event", model.event);
+                        RequestValues.put("numberofperson", model.numberofperson);
+                        RequestValues.put("maxprice", model.maxprice);
+                        RequestValues.put("date", model.date);
+                        RequestValues.put("time", model.time);
+                        RequestValues.put("location", model.location);
+                        RequestValues.put("specialrequest", model.specialrequest);
+                        RequestValues.put("status",model.status);
                         RequestValues.put("uid", mFirebaseUser.getUid().toString());
 
-                        RequestValues.put("specialbeau",model.getBeauticianoffer());
-
-                        Intent intent = new Intent(getActivity(),OfferPage.class);
+                        Intent intent = new Intent(getActivity(),RequestDetails.class);
                         intent.putExtra("request",  RequestValues);
                         startActivity(intent);
                     }
@@ -136,8 +133,8 @@ public class Request extends Fragment {
 
                         HashMap<String, Object> confirmValues = new HashMap<String, Object>();
                         confirmValues.put("key",key);
-                        confirmValues.put("event",model.getEvent());
-                        confirmValues.put("service",model.getService());
+                        //confirmValues.put("event",model.getEvent());
+                        //confirmValues.put("service",model.getService());
 
                         Intent goPaymentP = new Intent(getActivity(),Payment.class);
                         goPaymentP.putExtra("payment", confirmValues);
@@ -152,7 +149,7 @@ public class Request extends Fragment {
 
                         HashMap<String,Object> map = new HashMap<String, Object>();
                         map.put("key",key);
-                        map.put("event",model.getEvent());
+                        map.put("event",model.event);
                         //DatabaseReference ref = FirebaseDatabase.getInstance().getReference().getRoot().child("message").child(key);
                         //ref.updateChildren(map);
                         Intent goMessage = new Intent(getActivity(), MessagePage.class);
@@ -248,13 +245,13 @@ public class Request extends Fragment {
             post_event.setText(event);
 
         }
-        public void setColor(int color){
+        public void setColor(String color){
             LinearLayout cC = (LinearLayout)mview.findViewById(R.id.ch_color);
-            cC.setBackgroundColor(color);
+            cC.setBackgroundColor(Color.parseColor(color));
         }
-        public void setMaxP(String maxP){
+        public void setMaxP(Integer maxP){
             TextView post_maxprice = (TextView)mview.findViewById(R.id.price_des);
-            post_maxprice.setText(maxP);
+            post_maxprice.setText(String.valueOf(maxP));
         }
         public void setService(String service){
             TextView post_service = (TextView)mview.findViewById(R.id.tService);
@@ -262,21 +259,26 @@ public class Request extends Fragment {
 
         }
         public void setStatus(String status){
-
+            String finalstatus = null;
+            if(status.equals("1")||status.equals("2")){
+                finalstatus = "Offer";
+            }
+            if(status.equals("3")){ finalstatus = "Unpaid"; }
+            if(status.equals("4")){ finalstatus = "To receive"; }
+            if(status.equals("5")){ finalstatus = "Completed"; }
             Button post_service = (Button)mview.findViewById(R.id.btnStat);
-            post_service.setText(status);
+            post_service.setText(finalstatus);
 
         }
         public void setCurrenttime(String dateform){
             TextView tm= (TextView)mview.findViewById(R.id.btnTime);
             DataRequest r = new DataRequest();
-            r.setDateform(dateform);
-            Log.d("Bye","="+r.getDateform());
+            Log.d("Bye","="+r.dateform);
             //String d = "JAN 31 2017 10:11 PM";
             SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd yyyy hh:mm a");
             Date convertedDate = null;
             try{
-                convertedDate = dateFormat.parse(r.getDateform());
+                convertedDate = dateFormat.parse(r.dateform);
                 //convertedDate = dateFormat.parse(d);
             } catch (ParseException e) {
                 e.printStackTrace();

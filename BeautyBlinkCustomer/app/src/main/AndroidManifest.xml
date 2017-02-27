@@ -2,16 +2,18 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.captain_pc.beautyblinkcustomer">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
     <uses-feature
         android:glEsVersion="0x00020000"
         android:required="true" />
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/testlogo3"
+        android:icon="@drawable/logo2"
         android:label="BeautyBlink"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -48,6 +50,7 @@
         <activity android:name=".MessagePage" />
         <activity android:name=".Review"></activity>
         <activity android:name=".BeauticianProfile"></activity>
+        <activity android:name=".RequestDetails"></activity>
 
         <service android:name=".MyFirebaseMessagingService">
             <intent-filter>

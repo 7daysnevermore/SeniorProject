@@ -19,6 +19,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.captain_pc.beautyblinkcustomer.model.DataProfilePromote;
 import com.example.captain_pc.beautyblinkcustomer.model.User;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,6 +28,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
@@ -35,6 +37,7 @@ import com.google.firebase.storage.UploadTask;
 
 import java.sql.Time;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -44,12 +47,11 @@ public class CreateRequest extends AppCompatActivity {
 
     private Spinner chService;
     private int SELECT_FILE =1;
-    private String username;
-    private TextView input_name;
     private EditText eEvent,eNperson,eMaxp,eDateD,eDateM,eDateY,eTime,eLocation,eSpecial;
     private Toolbar toolbar;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
+    String servicecode = null;
     private Button btnReq;
     private ImageView addP;
     private String kSer;
@@ -57,6 +59,8 @@ public class CreateRequest extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private StorageReference storageReference,filepath;
     private DatabaseReference databaseReference;
+    private String username,userprofile;
+    ArrayList<HashMap<String,String>> BeauID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,17 +76,17 @@ public class CreateRequest extends AppCompatActivity {
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Request");
         progressDialog = new ProgressDialog(this);
 
-        DatabaseReference userRootRef = FirebaseDatabase.getInstance().getReference();
-        userRootRef.child("customer").child(mFirebaseUser.getUid().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
+        DatabaseReference RootRef = FirebaseDatabase.getInstance().getReference().child("customer").child(mFirebaseUser.getUid());
+        RootRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
                 if(user == null){
                     Toast.makeText(CreateRequest.this,"Error: could not fetch user.",Toast.LENGTH_LONG).show();
                 }else {
-                    username = user.firstname;
-                    input_name = (TextView) findViewById(R.id.name);
-                    //input_name.setText(username);
+                    username = user.firstname+" "+user.lastname;
+                    userprofile = user.profile;
+
                 }
             }
 
@@ -116,10 +120,129 @@ public class CreateRequest extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
-                Toast.makeText(parent.getContext(),
-                        "OnItemSelectedListener : " + parent.getItemAtPosition(position).toString(),
-                        Toast.LENGTH_SHORT).show();
                 kSer=parent.getItemAtPosition(position).toString();
+                DatabaseReference userRootRef = FirebaseDatabase.getInstance().getReference().child("profilepromote");
+                if(kSer.equals("MakeupandHair"))
+                { servicecode = "S01";
+                    BeauID = new ArrayList<>();
+                    Query databaseQuery = userRootRef.orderByChild("S01").startAt(1);
+                    databaseQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            for (DataSnapshot startChild : dataSnapshot.getChildren()){
+
+                                DataProfilePromote user = startChild.getValue(DataProfilePromote.class);
+
+                                if(user == null){
+                                    Toast.makeText(CreateRequest.this,"Error: could not fetch user.",Toast.LENGTH_LONG).show();
+                                }else {
+
+                                    HashMap<String,String> hashID = new HashMap<>();
+                                    hashID.put("uid",user.uid);
+                                    hashID.put("price",String.valueOf(user.S01));
+                                    BeauID.add(hashID);
+                                }
+
+                            }
+
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });}
+                else if (kSer.equals("HairStyle"))
+                { servicecode = "S02";
+                    BeauID = new ArrayList<>();
+                    Query databaseQuery = userRootRef.orderByChild("S02").startAt(1);
+                    databaseQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            for (DataSnapshot startChild : dataSnapshot.getChildren()){
+
+                                DataProfilePromote user = startChild.getValue(DataProfilePromote.class);
+
+                                if(user == null){
+                                    Toast.makeText(CreateRequest.this,"Error: could not fetch user.",Toast.LENGTH_LONG).show();
+                                }else {
+
+                                    HashMap<String,String> hashID = new HashMap<>();
+                                    hashID.put("uid",user.uid);
+                                    hashID.put("price",String.valueOf(user.S02));
+                                    BeauID.add(hashID);
+                                }
+
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });}
+                else if(kSer.equals("Makeup"))
+                { servicecode = "S03";
+                    BeauID = new ArrayList<>();
+                    Query databaseQuery = userRootRef.orderByChild("S03").startAt(1);
+                    databaseQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            for (DataSnapshot startChild : dataSnapshot.getChildren()){
+
+                                DataProfilePromote user = startChild.getValue(DataProfilePromote.class);
+
+                                if(user == null){
+                                    Toast.makeText(CreateRequest.this,"Error: could not fetch user.",Toast.LENGTH_LONG).show();
+                                }else {
+
+                                    HashMap<String,String> hashID = new HashMap<>();
+                                    hashID.put("uid",user.uid);
+                                    hashID.put("price",String.valueOf(user.S03));
+                                    BeauID.add(hashID);
+                                }
+
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+                }
+                else
+                { servicecode = "S04";
+                    BeauID = new ArrayList<>();
+                    Query databaseQuery = userRootRef.orderByChild("S04").startAt(1);
+                    databaseQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            for (DataSnapshot startChild : dataSnapshot.getChildren()){
+
+                                DataProfilePromote user = startChild.getValue(DataProfilePromote.class);
+
+                                if(user == null){
+                                    Toast.makeText(CreateRequest.this,"Error: could not fetch user.",Toast.LENGTH_LONG).show();
+                                }else {
+
+                                    HashMap<String,String> hashID = new HashMap<>();
+                                    hashID.put("uid",user.uid);
+                                    hashID.put("price",String.valueOf(user.S04));
+                                    BeauID.add(hashID);
+                                }
+
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+
+                }
+
             }
 
             @Override
@@ -158,24 +281,24 @@ public class CreateRequest extends AppCompatActivity {
 
     }
     private void startRequest(){
-        progressDialog.setMessage("Requesting ...");
-        progressDialog.show();
+        //progressDialog.setMessage("Requesting ...");
+        //progressDialog.show();
 
 
         final String service = kSer;
         final String event = eEvent.getText().toString();
-        final String numberP = eNperson.getText().toString();
-        final String maxPrice = eMaxp.getText().toString();
+        final Integer numberP = Integer.parseInt(eNperson.getText().toString());
+        final Integer maxPrice = Integer.parseInt(eMaxp.getText().toString());
         final String dt_day = eDateD.getText().toString();
         final String dt_month = eDateM.getText().toString();
         final String dt_year = eDateY.getText().toString();
         final String location = eLocation.getText().toString();
         final String time = eTime.getText().toString();
         final String specialReq = eSpecial.getText().toString();
-        final String status = "offer";
+        final String status = "1";
 
         if(!TextUtils.isEmpty(service) && !TextUtils.isEmpty(event) &&
-                !TextUtils.isEmpty(numberP) && !TextUtils.isEmpty(maxPrice) &&
+                numberP!=0 && maxPrice!=0 &&
                 !TextUtils.isEmpty(dt_day) && !TextUtils.isEmpty(dt_month) &&
                 !TextUtils.isEmpty(dt_year) && !TextUtils.isEmpty(time)&&
                 !TextUtils.isEmpty(location) && !TextUtils.isEmpty(specialReq) &&
@@ -190,10 +313,10 @@ public class CreateRequest extends AppCompatActivity {
                     Uri dowloadUrl = taskSnapshot.getDownloadUrl();
 
                     //Create root of Request
-                    DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
-                    DatabaseReference mRequestRef = mRootRef.child("request");
+                    final DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+                    DatabaseReference mRequestRef = mRootRef.child("request1");
 
-                    String key = mRequestRef.push().getKey();
+                    final String key = mRequestRef.push().getKey();
                     Calendar c = Calendar.getInstance();
                     SimpleDateFormat sdf = new SimpleDateFormat("MMM dd yyyy hh:mm a");
                     String date = sdf.format(c.getTime());
@@ -201,6 +324,8 @@ public class CreateRequest extends AppCompatActivity {
                     final HashMap<String, Object> RequestValues = new HashMap<String, Object>();
                     RequestValues.put("service", service);
                     RequestValues.put("event", event);
+                    RequestValues.put("username", username);
+                    RequestValues.put("userprofile", userprofile);
                     RequestValues.put("numberofperson", numberP);
                     RequestValues.put("maxprice", maxPrice);
                     RequestValues.put("date", dt_day + "/" + dt_month + "/" + dt_year);
@@ -208,26 +333,29 @@ public class CreateRequest extends AppCompatActivity {
                     RequestValues.put("location", location);
                     RequestValues.put("specialrequest", specialReq);
                     RequestValues.put("status",status);
-                    RequestValues.put("uid", mFirebaseUser.getUid().toString());
-                    RequestValues.put("name", username);
-                    RequestValues.put("color", "#f2f2f2");
+                    RequestValues.put("customerid", mFirebaseUser.getUid().toString());
                     RequestValues.put("currenttime", date);
-                    Map<String, Object> childUpdate = new HashMap<>();
-                    childUpdate.put("/request/" + key, RequestValues);
-                    childUpdate.put("/customer-request/" + mFirebaseUser.getUid().toString() + "/" + key, RequestValues);
+                    RequestValues.put("reqpic",dowloadUrl.toString());
 
 
+                    final Map<String, Object> childUpdate = new HashMap<>();
+                    childUpdate.put("/request1/" + key, RequestValues);
+                    childUpdate.put("/customer-request1/" + mFirebaseUser.getUid().toString() + "/" + key, RequestValues);
 
-
+                    for (HashMap<String,String> hash : BeauID){
+                        if(Integer.parseInt(hash.get("price").toString())<maxPrice){
+                            childUpdate.put("/beautician-received/" + hash.get("uid").toString() + "/" + key, RequestValues);
+                        }
+                    }
                     mRootRef.updateChildren(childUpdate);
-
-                    progressDialog.dismiss();
-                Intent intent = new Intent(CreateRequest.this,MainActivity.class);
-                    startActivity(intent);
-
                 }
             });
 
+
+
+            progressDialog.dismiss();
+            Intent intent = new Intent(CreateRequest.this,MainActivity.class);
+            startActivity(intent);
             }
     }
     public boolean onOptionsItemSelected(MenuItem item) {

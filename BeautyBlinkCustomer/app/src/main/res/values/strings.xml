@@ -8,11 +8,10 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string-array name="pro_sercive">
-        <item>HairCut</item>
+        <item>MakeupandHair</item>
         <item>HairStyle</item>
         <item>MakeUp</item>
         <item>Hairdressing</item>
-        <item>Cafe Zorro</item>
     </string-array>
     <string name="btn_send_token">Send Token</string>
     <string name="btn_send_tokens">Send Tokens</string>
