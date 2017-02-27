@@ -283,7 +283,7 @@ public class CreateRequest extends AppCompatActivity {
         eTime = (EditText)findViewById(R.id.time);
         eLocation=(EditText)findViewById(R.id.location);
         eSpecial=(EditText)findViewById(R.id.speacial);
-        ImageView btns = (ImageView) findViewById(R.id.imageButton);
+        /*ImageView btns = (ImageView) findViewById(R.id.imageButton);
         btns.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -292,7 +292,7 @@ public class CreateRequest extends AppCompatActivity {
                 sendWithOtherThread("topic");
 
             }
-        });
+        });*/
         btnReq=(Button)findViewById(R.id.sendReq);
         btnReq.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -454,27 +454,16 @@ public class CreateRequest extends AppCompatActivity {
                     RequestValues.put("currenttime", date);
                     RequestValues.put("reqpic",dowloadUrl.toString());
 
-                    final HashMap<String, Object> RequestValues1 = new HashMap<String, Object>();
-                    RequestValues1.put("service", service);
-                    RequestValues1.put("event", event);
-                    RequestValues1.put("numberofperson", numberP);
-                    RequestValues1.put("maxprice", maxPrice);
-                    RequestValues1.put("date", dt_day + "/" + dt_month + "/" + dt_year);
-                    RequestValues1.put("time", time);
-                    RequestValues1.put("location", location);
-                    RequestValues1.put("specialrequest", specialReq);
-                    RequestValues1.put("status","toprovide");
-                    RequestValues1.put("uid", mFirebaseUser.getUid().toString());
-                    RequestValues1.put("name", username);
-                    RequestValues1.put("keyrequest",key);
-                    // RequestValues.put("color", "#f2f2f2");
-                    RequestValues1.put("color", "#FC264D");
-                    RequestValues1.put("currenttime", date);
-                    childUpdate.put("/customer-request/" + mFirebaseUser.getUid().toString() + "/" + key, RequestValues1);
-
                     final Map<String, Object> childUpdate = new HashMap<>();
                     childUpdate.put("/request1/" + key, RequestValues);
                     childUpdate.put("/customer-request1/" + mFirebaseUser.getUid().toString() + "/" + key, RequestValues);
+
+                    for (HashMap<String,String> hash : BeauID){
+                        if(Integer.parseInt(hash.get("price").toString())<maxPrice){
+                            childUpdate.put("/beautician-received/" + hash.get("uid").toString() + "/" + key, RequestValues);
+                        }
+                    }
+
                     final HashMap<String,Object> request_noti = new HashMap<String, Object>();
                     request_noti.put("name",username);
                     request_noti.put("service",service);
@@ -484,11 +473,7 @@ public class CreateRequest extends AppCompatActivity {
                     //Map<String,Object>requestNotiUpdate = new HashMap<>();
                     childUpdate.put("/requestnotifromcus/"+key,request_noti);
 
-                    for (HashMap<String,String> hash : BeauID){
-                        if(Integer.parseInt(hash.get("price").toString())<maxPrice){
-                            childUpdate.put("/beautician-received/" + hash.get("uid").toString() + "/" + key, RequestValues);
-                        }
-                    }
+
                     final HashMap<String,Object> statusS = new HashMap<String, Object>();
                     statusS.put("status",status.toString());
                     statusS.put("name",username);
@@ -496,12 +481,10 @@ public class CreateRequest extends AppCompatActivity {
 
                     childUpdate.put("/statusfornoti/",statusS);
 
-
                     mRootRef.updateChildren(childUpdate);
+
                 }
             });
-
-
 
             progressDialog.dismiss();
             Intent intent = new Intent(CreateRequest.this,MainActivity.class);

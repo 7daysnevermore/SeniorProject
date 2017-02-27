@@ -3,6 +3,7 @@ package com.example.captain_pc.beautyblinkcustomer.fragments;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -100,17 +101,17 @@ public class Request extends Fragment {
         mLayoutManager.setReverseLayout(true);
         mLayoutManager.setStackFromEnd(true);
 
-        final FirebaseRecyclerAdapter<ModelRequest,Request.RequestViewHolder>firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<ModelRequest, Request.RequestViewHolder>
-                (ModelRequest.class,R.layout.cus_request_card,Request.RequestViewHolder.class,ref) {
+        final FirebaseRecyclerAdapter<DataRequest,Request.RequestViewHolder>firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<DataRequest, Request.RequestViewHolder>
+                (DataRequest.class,R.layout.cus_request_card,Request.RequestViewHolder.class,databaseReference) {
             @Override
             protected void populateViewHolder(RequestViewHolder viewHolder, final DataRequest model, final int position) {
                viewHolder.setStatus(model.status);
                 viewHolder.setDate(model.date);
                 viewHolder.setEvent(model.event);
-                viewHolder.setColor("#ff0000");
+                viewHolder.setLocation(model.location);
                 viewHolder.setService(model.service);
                 viewHolder.setMaxP(model.maxprice);
-                //viewHolder.setCurrenttime(model.dateform);
+                viewHolder.setCurrenttime(model.currenttime);
 
 
                 viewHolder.mview.setOnClickListener(new View.OnClickListener() {
@@ -137,9 +138,9 @@ public class Request extends Fragment {
                 });
                 btnPayment = (Button)viewHolder.mview.findViewById(R.id.payment);
                 btnPayment.setOnClickListener(new View.OnClickListener() {
-                    final String key = getRef(position).getKey();
                     @Override
-                    public void onCancelled(DatabaseError databaseError) {
+                    public void onClick(View v) {
+                        final String key = getRef(position).getKey();
 
                         HashMap<String, Object> confirmValues = new HashMap<String, Object>();
                         confirmValues.put("key",key);
@@ -150,24 +151,20 @@ public class Request extends Fragment {
                         goPaymentP.putExtra("payment", confirmValues);
                         startActivity(goPaymentP);
                     }
+
                 });
                 //Log.d("dumaa",""+kg);
+                final String key = getRef(position).getKey();
                tv = (TextView)viewHolder.mview.findViewById(R.id.tcount);
-                DatabaseReference c = FirebaseDatabase.getInstance().getReference().child("offer/"+ke);
+                DatabaseReference c = FirebaseDatabase.getInstance().getReference().child("offer/"+key);
                 c.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         int countt = (int) dataSnapshot.getChildrenCount();
 
-                        HashMap<String,Object> map = new HashMap<String, Object>();
-                        map.put("key",key);
-                        map.put("event",model.event);
-                        //DatabaseReference ref = FirebaseDatabase.getInstance().getReference().getRoot().child("message").child(key);
-                        //ref.updateChildren(map);
-                        Intent goMessage = new Intent(getActivity(), MessagePage.class);
-                        goMessage.putExtra("message",map);
-                        startActivity(goMessage);
-                        //ref.updateChildren(map);
+                        tv.setVisibility(View.VISIBLE);
+                        tv.setText(""+countt);
+                        Log.d("countnum","="+countt);
                     }
 
                     @Override
@@ -233,8 +230,8 @@ public class Request extends Fragment {
                                 String l = list.get(position);
                                 HashMap<String, Object> confirmValues = new HashMap<String, Object>();
                                 confirmValues.put("key",key);
-                                confirmValues.put("event",model.getEvent());
-                                confirmValues.put("service",model.getService());
+                                confirmValues.put("event",model.event);
+                                confirmValues.put("service",model.service);
                                 confirmValues.put("insidekey",l);
 
                                 Intent goPaymentP = new Intent(getActivity(),Payment.class);
@@ -242,7 +239,7 @@ public class Request extends Fragment {
                                 startActivity(goPaymentP);
                             }
                         });
-                        btnMessage = (Button)viewHolder.mview.findViewById(R.id.message);
+                        /*btnMessage = (Button)viewHolder.mview.findViewById(R.id.message);
                         btnMessage.setOnClickListener(new View.OnClickListener() {
                             final String key = getRef(position).getKey();
                             @Override
@@ -250,7 +247,7 @@ public class Request extends Fragment {
 
                                 HashMap<String,Object> map = new HashMap<String, Object>();
                                 map.put("key",key);
-                                map.put("event",model.getEvent());
+                                map.put("event",model.event);
                                 //DatabaseReference ref = FirebaseDatabase.getInstance().getReference().getRoot().child("message").child(key);
                                 //ref.updateChildren(map);
                                 Intent goMessage = new Intent(getActivity(), MessagePage.class);
@@ -258,7 +255,7 @@ public class Request extends Fragment {
                                 startActivity(goMessage);
                                 //ref.updateChildren(map);
                             }
-                        });
+                        });*/
                         btnReview=(Button)viewHolder.mview.findViewById(R.id.review);
                         btnReview.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -354,12 +351,8 @@ public class Request extends Fragment {
             TextView tv = (TextView)mview.findViewById(R.id.tevent);
             tv.setText(event);
         }
-        public void setColor(String color){
-            LinearLayout cC = (LinearLayout)mview.findViewById(R.id.ch_color);
-            cC.setBackgroundColor(Color.parseColor(color));
-        }
         public void setMaxP(Integer maxP){
-            TextView post_maxprice = (TextView)mview.findViewById(R.id.price_des);
+            TextView post_maxprice = (TextView)mview.findViewById(R.id.tPrice);
             post_maxprice.setText(String.valueOf(maxP));
         }
         public void setService(String service){
@@ -374,19 +367,31 @@ public class Request extends Fragment {
             if(status.equals("3")){ finalstatus = "Unpaid"; }
             if(status.equals("4")){ finalstatus = "To receive"; }
             if(status.equals("5")){ finalstatus = "Completed"; }
-            Button post_service = (Button)mview.findViewById(R.id.btnStat);
-            post_service.setText(finalstatus);
+            //Button post_service = (Button)mview.findViewById(R.id.btnStat);
+            //post_service.setText(finalstatus);
 
         }
-        public void setCurrenttime(String dateform){
-            TextView tm= (TextView)mview.findViewById(R.id.btnTime);
-            DataRequest r = new DataRequest();
-            Log.d("Bye","="+r.dateform);
-            //String d = "JAN 31 2017 10:11 PM";
+
+        public void setColorcircle(String color){
+            ImageView cC = (ImageView)mview.findViewById(R.id.cirNoti);
+            int colorc = Color.parseColor(color);
+            //PorterDuffColorFilter greyFilter = new PorterDuffColorFilter(colorc, PorterDuff.Mode.MULTIPLY);
+            GradientDrawable drawable = (GradientDrawable) cC.getBackground();
+            drawable.setColor(colorc);
+            //((GradientDrawable)cC.getBackground().setColorFilter(greyFilter);
+            //cC.setBackgroundColor(Color.parseColor(color));
+            //GradientDrawable bgShape = (GradientDrawable)cC.getBackground();
+            //bgShape.setColor(Color.parseColor(color));
+        }
+        public void setCurrenttime(String currenttime){
+            TextView tv = (TextView)mview.findViewById(R.id.tTime);
+            DataRequest mr = new DataRequest();
+            mr.setCurrenttime(currenttime);
+
             SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd yyyy hh:mm a");
             Date convertedDate = null;
             try{
-                convertedDate = dateFormat.parse(r.dateform);
+                convertedDate = dateFormat.parse(mr.getCurrenttime());
                 //convertedDate = dateFormat.parse(d);
             } catch (ParseException e) {
                 e.printStackTrace();
