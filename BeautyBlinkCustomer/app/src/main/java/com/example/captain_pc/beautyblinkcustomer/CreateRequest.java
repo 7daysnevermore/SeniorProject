@@ -3,6 +3,8 @@ package com.example.captain_pc.beautyblinkcustomer;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -31,10 +33,21 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -42,9 +55,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 public class CreateRequest extends AppCompatActivity {
 
+    private static final String AUTH_KEY = "key=AAAAU3g0xJ0:APA91bFc_Bf77RiEJwf4kWxgnqlZFl0fmIZLP32zPSL1VW3aGfyZ-Zt92JbY5_SUIHepL5ZljcEZzukypPSypg6i8U7x8Y4cGn19McqcsNfqjTK4BEaLhPYIaZLFrZHtsiz487XJXfWwLHZd8Nt0-Jb7GOwW1Hxz2g";
     private Spinner chService;
     private int SELECT_FILE =1;
     private EditText eEvent,eNperson,eMaxp,eDateD,eDateM,eDateY,eTime,eLocation,eSpecial;
@@ -71,7 +86,15 @@ public class CreateRequest extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
-
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            String tmp = "";
+            for (String key : bundle.keySet()) {
+                Object value = bundle.get(key);
+                tmp += key + ": " + value + "\n\n";
+            }
+            //mTextView.setText(tmp);
+        }
         storageReference = FirebaseStorage.getInstance().getReference();
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Request");
         progressDialog = new ProgressDialog(this);
@@ -260,7 +283,16 @@ public class CreateRequest extends AppCompatActivity {
         eTime = (EditText)findViewById(R.id.time);
         eLocation=(EditText)findViewById(R.id.location);
         eSpecial=(EditText)findViewById(R.id.speacial);
+        ImageView btns = (ImageView) findViewById(R.id.imageButton);
+        btns.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //FirebaseMessaging.getInstance().subscribeToTopic("news");
 
+                sendWithOtherThread("topic");
+
+            }
+        });
         btnReq=(Button)findViewById(R.id.sendReq);
         btnReq.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -268,6 +300,91 @@ public class CreateRequest extends AppCompatActivity {
                 startRequest();
             }
         });
+    }
+    public void sendToken(View view) {
+        sendWithOtherThread("token");
+    }
+
+    public void sendTokens(View view) {
+        sendWithOtherThread("tokens");
+    }
+
+    public void sendTopic(View view) {
+        sendWithOtherThread("topic");
+    }
+    private void sendWithOtherThread(final String type) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                pushNotification(type);
+            }
+        }).start();
+    }
+    private void pushNotification(String type) {
+        JSONObject jPayload = new JSONObject();
+        JSONObject jNotification = new JSONObject();
+        JSONObject jData = new JSONObject();
+        try {
+            jNotification.put("title", "Google I/O 2016");
+            jNotification.put("body", "Firebase Cloud Messaging (App)");
+            jNotification.put("sound", "default");
+            jNotification.put("badge", "1");
+            jNotification.put("click_action", "OPEN_ACTIVITY_1");
+
+            jData.put("picture_url", "http://opsbug.com/static/google-io.jpg");
+
+            switch(type) {
+                case "tokens":
+                    JSONArray ja = new JSONArray();
+                    ja.put("c5pBXXsuCN0:APA91bH8nLMt084KpzMrmSWRS2SnKZudyNjtFVxLRG7VFEFk_RgOm-Q5EQr_oOcLbVcCjFH6vIXIyWhST1jdhR8WMatujccY5uy1TE0hkppW_TSnSBiUsH_tRReutEgsmIMmq8fexTmL");
+                    ja.put(FirebaseInstanceId.getInstance().getToken());
+                    jPayload.put("registration_ids", ja);
+                    break;
+                case "topic":
+                    jPayload.put("to", "/topics/news");
+                    Log.d("TEst","Noti");
+                    break;
+                case "condition":
+                    jPayload.put("condition", "'sport' in topics || 'news' in topics");
+                    break;
+                default:
+                    jPayload.put("to", FirebaseInstanceId.getInstance().getToken());
+            }
+
+            jPayload.put("priority", "high");
+            jPayload.put("notification", jNotification);
+            jPayload.put("data", jData);
+
+            URL url = new URL("https://fcm.googleapis.com/fcm/send");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Authorization", AUTH_KEY);
+            conn.setRequestProperty("Content-Type", "application/json");
+            conn.setDoOutput(true);
+
+            // Send FCM message content.
+            OutputStream outputStream = conn.getOutputStream();
+            outputStream.write(jPayload.toString().getBytes());
+
+            // Read FCM response.
+            InputStream inputStream = conn.getInputStream();
+            final String resp = convertStreamToString(inputStream);
+
+            Handler h = new Handler(Looper.getMainLooper());
+            h.post(new Runnable() {
+                @Override
+                public void run() {
+                    //mTextView.setText(resp);
+                }
+            });
+        } catch (JSONException | IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private String convertStreamToString(InputStream is) {
+        Scanner s = new Scanner(is).useDelimiter("\\A");
+        return s.hasNext() ? s.next().replace(",", ",\n") : "";
     }
     @Override
     protected  void onActivityResult(int requestCode, int resultCode, Intent data ){
@@ -337,16 +454,49 @@ public class CreateRequest extends AppCompatActivity {
                     RequestValues.put("currenttime", date);
                     RequestValues.put("reqpic",dowloadUrl.toString());
 
+                    final HashMap<String, Object> RequestValues1 = new HashMap<String, Object>();
+                    RequestValues1.put("service", service);
+                    RequestValues1.put("event", event);
+                    RequestValues1.put("numberofperson", numberP);
+                    RequestValues1.put("maxprice", maxPrice);
+                    RequestValues1.put("date", dt_day + "/" + dt_month + "/" + dt_year);
+                    RequestValues1.put("time", time);
+                    RequestValues1.put("location", location);
+                    RequestValues1.put("specialrequest", specialReq);
+                    RequestValues1.put("status","toprovide");
+                    RequestValues1.put("uid", mFirebaseUser.getUid().toString());
+                    RequestValues1.put("name", username);
+                    RequestValues1.put("keyrequest",key);
+                    // RequestValues.put("color", "#f2f2f2");
+                    RequestValues1.put("color", "#FC264D");
+                    RequestValues1.put("currenttime", date);
+                    childUpdate.put("/customer-request/" + mFirebaseUser.getUid().toString() + "/" + key, RequestValues1);
 
                     final Map<String, Object> childUpdate = new HashMap<>();
                     childUpdate.put("/request1/" + key, RequestValues);
                     childUpdate.put("/customer-request1/" + mFirebaseUser.getUid().toString() + "/" + key, RequestValues);
+                    final HashMap<String,Object> request_noti = new HashMap<String, Object>();
+                    request_noti.put("name",username);
+                    request_noti.put("service",service);
+                    request_noti.put("currenttime",date);
+                    request_noti.put("status",status);
+                    request_noti.put("event",event);
+                    //Map<String,Object>requestNotiUpdate = new HashMap<>();
+                    childUpdate.put("/requestnotifromcus/"+key,request_noti);
 
                     for (HashMap<String,String> hash : BeauID){
                         if(Integer.parseInt(hash.get("price").toString())<maxPrice){
                             childUpdate.put("/beautician-received/" + hash.get("uid").toString() + "/" + key, RequestValues);
                         }
                     }
+                    final HashMap<String,Object> statusS = new HashMap<String, Object>();
+                    statusS.put("status",status.toString());
+                    statusS.put("name",username);
+                    statusS.put("service",service);
+
+                    childUpdate.put("/statusfornoti/",statusS);
+
+
                     mRootRef.updateChildren(childUpdate);
                 }
             });
