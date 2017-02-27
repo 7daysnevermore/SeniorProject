@@ -82,6 +82,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //Place fragment
                 previous = "search";
                 bt_search.setImageResource(R.mipmap.ic_action_search_click);
+
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.contentcontainer, new Search())
                         .addToBackStack(null)

@@ -1,9 +1,11 @@
 package com.example.captain_pc.beautyblinkcustomer.fragments;
 
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -68,6 +70,7 @@ public class Request extends Fragment {
     private LinearLayout create_request;
     private Button btnPayment,btnMessage,btnReview;
     private ImageView reqbtn;
+    private Button btnOf,btnUnp,btnTor,btnCo;
     String uid,kg;
     ArrayList<String> list = new ArrayList<String>();
     List<String> reverseView ;
@@ -91,6 +94,10 @@ public class Request extends Fragment {
 
     private void initInstance(View rootView) {
 
+        btnOf = (Button)rootView.findViewById(R.id.btnOffer);
+        btnUnp = (Button)rootView.findViewById(R.id.btnUnpaid);
+        btnTor = (Button)rootView.findViewById(R.id.btnToreceive);
+        btnCo = (Button)rootView.findViewById(R.id.btnCompleted);
         databaseReference = FirebaseDatabase.getInstance().getReference().child("customer-request1").child(mFirebaseUser.getUid());
         //professor promotion feeds
         recyclerView =(RecyclerView)rootView.findViewById(R.id.recycler_view);
@@ -239,7 +246,7 @@ public class Request extends Fragment {
                                 startActivity(goPaymentP);
                             }
                         });
-                        /*btnMessage = (Button)viewHolder.mview.findViewById(R.id.message);
+                        btnMessage = (Button)viewHolder.mview.findViewById(R.id.message);
                         btnMessage.setOnClickListener(new View.OnClickListener() {
                             final String key = getRef(position).getKey();
                             @Override
@@ -255,7 +262,7 @@ public class Request extends Fragment {
                                 startActivity(goMessage);
                                 //ref.updateChildren(map);
                             }
-                        });*/
+                        });
                         btnReview=(Button)viewHolder.mview.findViewById(R.id.review);
                         btnReview.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -297,6 +304,49 @@ public class Request extends Fragment {
                 startActivity(intent);
             }
         });
+        btnOf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recyclerView.setVisibility(View.GONE);
+                android.support.v4.app.FragmentManager fm = getFragmentManager();
+                android.support.v4.app.FragmentTransaction ft = fm.beginTransaction();
+                ft.replace(R.id.contentstatus, new OfferFragment(), "fragment_screen");
+                ft.commit();
+            }
+        });
+
+        btnUnp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recyclerView.setVisibility(View.GONE);
+                android.support.v4.app.FragmentManager fm = getFragmentManager();
+                android.support.v4.app.FragmentTransaction ft = fm.beginTransaction();
+                ft.replace(R.id.contentstatus, new UnpaidFragment(), "fragment_screen");
+                ft.commit();
+            }
+        });
+        btnTor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recyclerView.setVisibility(View.GONE);
+                android.support.v4.app.FragmentManager fm = getFragmentManager();
+                android.support.v4.app.FragmentTransaction ft = fm.beginTransaction();
+                ft.replace(R.id.contentstatus, new ToreceiveFragment(), "fragment_screen");
+                ft.commit();
+            }
+        });
+        btnCo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recyclerView.setVisibility(View.GONE);
+                android.support.v4.app.FragmentManager fm = getFragmentManager();
+                android.support.v4.app.FragmentTransaction ft = fm.beginTransaction();
+                ft.replace(R.id.contentstatus, new CompletedFragment(), "fragment_screen");
+                ft.commit();
+            }
+        });
+
+
 
 
     }
