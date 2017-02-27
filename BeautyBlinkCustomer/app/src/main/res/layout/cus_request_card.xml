@@ -36,10 +36,10 @@
                 android:layout_marginTop="10dp"
                 android:layout_weight="1">
                 <TextView
-                    android:text="Beyond D."
+                    android:text="Event"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tname"
+                    android:id="@+id/tevent"
                     android:layout_marginLeft="5dp"
                     android:textStyle="bold"
                     android:textColor="@color/colorPrimary"
@@ -52,15 +52,15 @@
                         android:text="hh:mm"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/btnTime"
+                        android:id="@+id/tTime"
                         android:layout_weight="1"
                         android:textSize="10dp"
                         android:gravity="top|right" />
                     <TextView
-                        android:text="Description"
+                        android:text="service"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/btnDes"
+                        android:id="@+id/tSer"
                         android:textSize="12dp"
                         android:textColor="@color/colorAccent"
                         android:layout_weight="1"
@@ -75,6 +75,7 @@
                 android:background="@drawable/circlestatus"
                 android:layout_marginTop="8dp"
                 android:id="@+id/cirNoti"/>
+
             <Button
                 android:layout_width="30dp"
                 android:layout_height="30dp"
@@ -97,30 +98,6 @@
                 android:layout_width="199dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.50">
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="5dp">
-
-                    <TextView
-                        android:text="Event :"
-                        android:layout_width="56dp"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/event_topic"
-                        android:layout_weight="0.24" />
-
-                    <TextView
-                        android:text="TextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/event_des"
-                        android:layout_weight="1" />
-
-
-                </LinearLayout>
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
@@ -132,7 +109,7 @@
                         android:text="Service :"
                         android:layout_width="56dp"
                         android:layout_height="wrap_content"
-                        android:id="@+id/service"
+
                         android:layout_weight="0.14" />
 
                     <TextView
@@ -140,6 +117,28 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/tService"
+                        android:layout_weight="0.55" />
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp">
+
+                    <TextView
+                        android:text="Location :"
+                        android:layout_width="58dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/service"
+                        android:layout_weight="0.14" />
+
+                    <TextView
+                        android:text="TextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tLocation"
+                        android:textSize="12dp"
                         android:layout_weight="0.55" />
                 </LinearLayout>
                 <LinearLayout
@@ -160,7 +159,7 @@
                         android:text="TextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/date_des"
+                        android:id="@+id/tDate"
                         android:layout_weight="1" />
 
                 </LinearLayout>
@@ -182,56 +181,88 @@
                         android:text="TextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/price_des"
+                        android:id="@+id/tPrice"
                         android:layout_weight="0.55" />
 
                 </LinearLayout>
 
             </LinearLayout>
 
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <RelativeLayout
+
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+
                 android:layout_weight="0.50">
 
-
-                <LinearLayout
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="70dp"
-                    android:layout_marginLeft="40dp">
-                    <Button
-
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:id="@+id/message"
-                        android:background="@drawable/ic_email"
-                        android:layout_weight="1"
-                        android:layout_marginLeft="10dp"
-                        android:fadeScrollbars="false" />
-                    <Button
-
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:id="@+id/payment"
-                        android:background="@drawable/ic_credit_card"
-                        android:layout_weight="1"
-                        android:layout_marginLeft="10dp" />
-                    <Button
-
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:id="@+id/review"
-                        android:background="@drawable/ic_rate_review"
-                        android:layout_weight="1"
-                        android:layout_marginLeft="10dp" />
-                </LinearLayout>
+                    android:text="0"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="34dp"
+                    android:layout_above="@+id/imageView3"
+                    android:id="@+id/tcount"
+                    android:visibility="gone"
+                    android:textColor="@color/colorAccent"
 
 
+                    android:layout_alignStart="@+id/imageView3" />
+                <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/ic_beautician"
+                    android:id="@+id/imageView3"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true" />
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/ic_chat_bubble_outline"
+                    android:id="@+id/imageView2"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="24dp" />
+
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="70dp"
+                android:id="@+id/afteroffer"
+                android:visibility="gone"
+                >
+                <Button
+
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:id="@+id/message"
+                    android:background="@drawable/ic_email"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:fadeScrollbars="false" />
+                <Button
+
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:id="@+id/payment"
+                    android:background="@drawable/ic_credit_card"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp" />
+                <Button
+
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:id="@+id/review"
+                    android:background="@drawable/ic_rate_review"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp" />
             </LinearLayout>
-
 
         </LinearLayout>
 

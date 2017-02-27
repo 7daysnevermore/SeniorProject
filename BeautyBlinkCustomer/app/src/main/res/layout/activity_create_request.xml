@@ -103,8 +103,6 @@
                                 android:background="@drawable/input_outline" />
 
                         </LinearLayout>
-
-
                     </LinearLayout>
 
                     <LinearLayout
@@ -128,7 +126,6 @@
                         android:paddingRight="5sp"
                         android:background="@drawable/input_outline"
                         android:layout_width="40dp" />
-
                 </LinearLayout>
 
                     <LinearLayout
@@ -228,7 +225,7 @@
                         <EditText
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:inputType="time"
+                            android:inputType="text"
                             android:paddingLeft="5sp"
                             android:paddingRight="5sp"
 
