@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -24,8 +26,10 @@ import com.google.firebase.database.ValueEventListener;
 
 public class MyAccount extends AppCompatActivity implements View.OnClickListener {
 
-    TextView fname,lname,birthday,gender,phone,addr;
+    TextView bbuilding,fname,lname,birthday,gender,phone,addr;
     Button edit;
+
+    Toolbar toolbar;
 
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
@@ -37,11 +41,17 @@ public class MyAccount extends AppCompatActivity implements View.OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_myaccount);
 
+        //up button
+        toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         //Initialize Firebase Auth
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
         uid = mFirebaseUser.getUid().toString();
 
+        bbuilding = (TextView) findViewById(R.id.username);
         fname = (TextView) findViewById(R.id.firstname);
         lname = (TextView) findViewById(R.id.lastname);
         birthday = (TextView) findViewById(R.id.birthday);
@@ -62,6 +72,7 @@ public class MyAccount extends AppCompatActivity implements View.OnClickListener
                     Toast.makeText(MyAccount.this, "Error: could not fetch user.", Toast.LENGTH_LONG).show();
                 } else {
 
+                    bbuilding.setText(user.address_building);
                     fname.setText(user.firstname);
                     lname.setText(user.lastname);
                     birthday.setText(user.birthday);
@@ -84,6 +95,19 @@ public class MyAccount extends AppCompatActivity implements View.OnClickListener
         edit.setOnClickListener(this);
 
 
+    }
+
+    // up button method
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                //NavUtils.navigateUpFromSameTask(this);
+                startActivity(new Intent(MyAccount.this, MainActivity.class));
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

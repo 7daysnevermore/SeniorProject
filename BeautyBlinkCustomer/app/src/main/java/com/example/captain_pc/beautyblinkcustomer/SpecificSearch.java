@@ -45,11 +45,13 @@ public class SpecificSearch extends AppCompatActivity  {
             Intent intent = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_OVERLAY)
                     .build(this);
             startActivityForResult(intent, REQUEST_CODE_AUTOCOMPLETE);
+            Log.e(TAG, "show intent");
         } catch (GooglePlayServicesRepairableException e) {
             // Indicates that Google Play Services is either not installed or not up to date. Prompt
             // the user to correct the issue.
             GoogleApiAvailability.getInstance().getErrorDialog(this, e.getConnectionStatusCode(),
                     0 /* requestCode */).show();
+            Log.e(TAG, "show available");
         } catch (GooglePlayServicesNotAvailableException e) {
             // Indicates that Google Play Services is not available and the problem is not easily
             // resolvable.
@@ -76,32 +78,23 @@ public class SpecificSearch extends AppCompatActivity  {
             if (resultCode == RESULT_OK) {
                 // Get the user's selected place from the Intent.
                 Place place = PlaceAutocomplete.getPlace(this, data);
-                Log.i(TAG, "Place Selected: " + place.getName());
 
                 Intent cPro = new Intent(this,SearchDetails.class);
                         cPro.putExtra("search", getIntent().getStringExtra("search"));
                         cPro.putExtra("word","");
-                        cPro.putExtra("latlag", place.getLatLng());
+                        cPro.putExtra("lat",String.valueOf(place.getLatLng().latitude));
+                        cPro.putExtra("lng",String.valueOf(place.getLatLng().longitude));
                         startActivity(cPro);
+                Log.i(TAG, "Place: " + place.getName());
 
-                /*// Format the place's details and display them in the TextView.
-                mPlaceDetailsText.setText(formatPlaceDetails(getResources(), place.getName(),
-                        place.getId(), place.getAddress(), place.getPhoneNumber(),
-                        place.getWebsiteUri()));
-
-                // Display attributions if required.
-                CharSequence attributions = place.getAttributions();
-                if (!TextUtils.isEmpty(attributions)) {
-                    mPlaceAttribution.setText(Html.fromHtml(attributions.toString()));
-                } else {
-                    mPlaceAttribution.setText("");
-                }*/
             } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
                 Status status = PlaceAutocomplete.getStatus(this, data);
                 Log.e(TAG, "Error: Status = " + status.toString());
             } else if (resultCode == RESULT_CANCELED) {
                 // Indicates that the activity closed before a selection was made. For example if
                 // the user pressed the back button.
+
+
             }
         }
     }

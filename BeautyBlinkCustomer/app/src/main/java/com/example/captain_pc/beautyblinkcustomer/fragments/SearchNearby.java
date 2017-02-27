@@ -76,6 +76,7 @@ public class SearchNearby extends Fragment {
         databaseQuery = databaseReference.orderByChild(search.search).startAt(1);
 
         if(!search.wording.equals("")){
+
             //Method to multiple queries
             DatabaseReference databaseRef =databaseQuery.getRef();
             dataQuery1 = databaseRef.orderByChild("name").equalTo(search.wording);
@@ -103,7 +104,46 @@ public class SearchNearby extends Fragment {
                 final Boolean[] checklike = new Boolean[1];
                 checklike[0] = false;
 
-                viewHolder.setName(model.name);
+                if(search.cur_lat!=null){
+
+                    if (distance(search.cur_lat, search.cur_lng,
+                            Double.parseDouble(model.latitude),Double.parseDouble(model.longitude)) < 10.0) { // if distance < 0.1 miles we take locations as equal
+                        viewHolder.setName(model.username);
+                        viewHolder.setLocation(model.district,model.province);
+
+                        if(!model.BeauticianProfile.equals("")){
+                            viewHolder.setProfile(getActivity().getApplicationContext(),model.BeauticianProfile);
+                        }
+
+                        if(!model.picture1.equals("")){
+                            viewHolder.setPicture1(getActivity().getApplicationContext(),model.picture1);
+                        }
+                        if (!model.picture2.equals("")) {
+                            viewHolder.setPicture2(getActivity().getApplicationContext(), model.picture2);
+                        }
+                        if (!model.picture3.equals("")) {
+                            viewHolder.setPicture3(getActivity().getApplicationContext(), model.picture3);
+                        }
+
+                        if(model.S01 != 0 && search.search.equals("S01")){
+                            viewHolder.setStart(model.S01);
+                        }
+                        if (model.S02 != 0 && search.search.equals("S02")) {
+                            viewHolder.setStart(model.S02);
+                        }
+                        if (model.S03 != 0 && search.search.equals("S03")) {
+                            viewHolder.setStart(model.S03);
+                        }
+                        if (model.S04 != 0 && search.search.equals("S04")) {
+                            viewHolder.setStart(model.S04);
+                        }
+                    }else{
+                        viewHolder.deleteView();
+                    }
+
+                }
+
+                viewHolder.setName(model.username);
                 viewHolder.setLocation(model.district,model.province);
 
                 if(!model.BeauticianProfile.equals("")){
@@ -173,7 +213,7 @@ public class SearchNearby extends Fragment {
                             final HashMap<String, Object> CustomerValues = new HashMap<>();
 
                             //Keep beautician profile
-                            CustomerValues.put("name",model.name);
+                            CustomerValues.put("name",model.username);
                             CustomerValues.put("profile",model.BeauticianProfile);
                             CustomerValues.put("uid",model.uid);
 
@@ -263,6 +303,27 @@ public class SearchNearby extends Fragment {
         recyclerView.setAdapter(firebaseRecyclerAdapter);
         recyclerView.setLayoutManager(mLayoutManager);
 
+    }
+
+    /** calculates the distance between two locations in MILES */
+    private double distance(double lat1, double lng1, double lat2, double lng2) {
+
+        double earthRadius = 6371; // in miles, change to 6371 for kilometer output
+
+        double dLat = Math.toRadians(lat2-lat1);
+        double dLng = Math.toRadians(lng2-lng1);
+
+        double sindLat = Math.sin(dLat / 2);
+        double sindLng = Math.sin(dLng / 2);
+
+        double a = Math.pow(sindLat, 2) + Math.pow(sindLng, 2)
+                * Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2));
+
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+
+        double dist = earthRadius * c;
+
+        return dist; // output distance, in MILES
     }
 
 

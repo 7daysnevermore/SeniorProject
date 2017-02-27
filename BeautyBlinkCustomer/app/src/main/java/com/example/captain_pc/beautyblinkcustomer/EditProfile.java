@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.captain_pc.beautyblinkcustomer.model.User;
@@ -25,10 +26,12 @@ import java.util.Map;
  */
 
 public class EditProfile extends AppCompatActivity implements View.OnClickListener {
-    EditText firstname, lastname, phone, address_number,
+    EditText firstname, lastname, phone, address_number, address_building,
             address_sub_district, address_district, address_province, address_code;
 
     Button editprofile;
+
+    TextView cancel;
 
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
@@ -45,10 +48,14 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
         uid = mFirebaseUser.getUid().toString();
 
+        cancel = (TextView) findViewById(R.id.cancel_edit);
+        cancel.setOnClickListener(this);
+
         firstname = (EditText) findViewById(R.id.fname);
         lastname = (EditText) findViewById(R.id.lname);
         phone = (EditText) findViewById(R.id.phone);
         address_number = (EditText) findViewById(R.id.addressnum);
+        address_building = (EditText) findViewById(R.id.building);
         address_sub_district = (EditText) findViewById(R.id.sub_district);
         address_district = (EditText) findViewById(R.id.district);
         address_province = (EditText) findViewById(R.id.province);
@@ -71,6 +78,7 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
                     lastname.setText(user.lastname);
                     phone.setText(user.phone);
                     address_number.setText(user.address_number);
+                    address_building.setText(user.address_building);
                     address_sub_district.setText(user.address_sub_district);
                     address_district.setText(user.address_district);
                     address_province.setText(user.address_province);
@@ -98,7 +106,8 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
             case R.id.btn_editprofile:
                 Editprofile();
                 break;
-
+            case R.id.cancel_edit:
+                startActivity(new Intent(EditProfile.this, MyAccount.class));
         }
 
     }
@@ -109,6 +118,7 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
         final String lname = lastname.getText().toString();
         final String in_phone = phone.getText().toString();
         final String addr_num = address_number.getText().toString();
+        final String addr_building = address_building.getText().toString();
         final String addr_s_dist = address_sub_district.getText().toString();
         final String addr_dist = address_district.getText().toString();
         final String addr_province = address_province.getText().toString();
@@ -128,6 +138,7 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
         UserUpdate.put("lastname", lname);
         UserUpdate.put("phone", in_phone);
         UserUpdate.put("address_number", addr_num);
+        UserUpdate.put("building", addr_building);
         UserUpdate.put("address_sub_district", addr_s_dist);
         UserUpdate.put("address_district", addr_dist);
         UserUpdate.put("address_province", addr_province);

@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.captain_pc.beautyblinkcustomer.fragments.Fragment_Setting;
@@ -36,8 +37,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private String personalEmail;
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle actionBarDrawerToggle;
+    ImageView bt_search,tap_search,bt_request,tap_request,bt_noti,tap_noti,bt_userprofile,tap_user;
     Toolbar toolbar;
-    String uid;
+    String uid, previous = null;
     EditText word;
 
 
@@ -56,11 +58,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         }else {
 
+            bt_search = (ImageView) findViewById(R.id.bt_search);
+            bt_request = (ImageView) findViewById(R.id.bt_request);
+            bt_noti = (ImageView) findViewById(R.id.bt_noti);
+            bt_userprofile = (ImageView) findViewById(R.id.bt_userprofile);
+            tap_search = (ImageView) findViewById(R.id.tap_search);
+            tap_request = (ImageView) findViewById(R.id.tap_request);
+            tap_noti = (ImageView) findViewById(R.id.tap_noti);
+            tap_user = (ImageView) findViewById(R.id.tap_user);
+
             uid = mFirebaseUser.getUid().toString();
             //fragment
             if(savedInstanceState==null){
                 //first create
                 //Place fragment
+                previous = "search";
+                bt_search.setImageResource(R.mipmap.ic_action_search_click);
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.contentcontainer, new Search())
                         .addToBackStack(null)
@@ -93,14 +106,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     private  void initInstances(){
-        testNo = (Button)findViewById(R.id.testNoti);
-        testNo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,TestNoti.class);
-                startActivity(intent);
-            }
-        });
+
         DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
@@ -135,24 +141,92 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bt_search:
+                if(previous.equals("request")){
+                    tap_request.setVisibility(View.GONE);
+                    bt_request.setImageResource(R.mipmap.request_702);
+                }
+                if (previous.equals("noti")) {
+                    tap_noti.setVisibility(View.GONE);
+                    bt_noti.setImageResource(R.mipmap.noti_702);
+                }
+                if (previous.equals("user")) {
+                    tap_user.setVisibility(View.GONE);
+                    bt_userprofile.setImageResource(R.mipmap.setting_703);
+                }
+
+                previous = "search";
+                bt_search.setImageResource(R.mipmap.ic_action_search_click);
+                tap_search.setVisibility(View.VISIBLE);
+
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.contentcontainer, Search.newInstance())
                         .addToBackStack(null)
                         .commit();
                 break;
             case R.id.bt_request:
+                if(previous.equals("search")){
+                    tap_search.setVisibility(View.GONE);
+                    bt_search.setImageResource(R.mipmap.ic_action_search1);
+                }
+                if (previous.equals("noti")) {
+                    tap_noti.setVisibility(View.GONE);
+                    bt_noti.setImageResource(R.mipmap.noti_702);
+                }
+                if (previous.equals("user")) {
+                    tap_user.setVisibility(View.GONE);
+                    bt_userprofile.setImageResource(R.mipmap.setting_703);
+                }
+
+                previous = "request";
+                bt_request.setImageResource(R.mipmap.request_702_click);
+                tap_request.setVisibility(View.VISIBLE);
+
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.contentcontainer, Request.newInstance())
                         .addToBackStack(null)
                         .commit();
                 break;
             case R.id.bt_noti:
+                if(previous.equals("search")){
+                    tap_search.setVisibility(View.GONE);
+                    bt_search.setImageResource(R.mipmap.ic_action_search1);
+                }
+                if (previous.equals("request")) {
+                    tap_request.setVisibility(View.GONE);
+                    bt_request.setImageResource(R.mipmap.request_702);
+                }
+                if (previous.equals("user")) {
+                    tap_user.setVisibility(View.GONE);
+                    bt_userprofile.setImageResource(R.mipmap.setting_703);
+                }
+
+                previous = "noti";
+                bt_noti.setImageResource(R.mipmap.noti_702_click);
+                tap_noti.setVisibility(View.VISIBLE);
+
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.contentcontainer, Notification.newInstance())
                         .addToBackStack(null)
                         .commit();
                 break;
             case R.id.bt_userprofile:
+                if(previous.equals("search")){
+                    tap_search.setVisibility(View.GONE);
+                    bt_search.setImageResource(R.mipmap.ic_action_search1);
+                }
+                if (previous.equals("request")) {
+                    tap_request.setVisibility(View.GONE);
+                    tap_request.setImageResource(R.mipmap.request_702);
+                }
+                if (previous.equals("noti")) {
+                    tap_noti.setVisibility(View.GONE);
+                    bt_noti.setImageResource(R.mipmap.noti_702);
+                }
+
+                previous = "user";
+                bt_userprofile.setImageResource(R.mipmap.setting_703_click);
+                tap_user.setVisibility(View.VISIBLE);
+
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.contentcontainer, Fragment_Setting.newInstance())
                         .addToBackStack(null)
@@ -169,7 +243,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void signOut() {
         // Firebase sign out
         FirebaseAuth.getInstance().signOut();
-        finish();
+        Intent intent = new Intent(this,MainActivity.class);
+        startActivity(intent);
     }
 
 

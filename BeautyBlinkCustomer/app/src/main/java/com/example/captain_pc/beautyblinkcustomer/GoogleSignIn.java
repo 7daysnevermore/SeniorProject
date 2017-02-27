@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.captain_pc.beautyblinkcustomer.model.User;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -27,8 +28,12 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -127,7 +132,7 @@ public class GoogleSignIn extends AppCompatActivity implements View.OnClickListe
         }
     }
     private void EmailPasswordLogin() {
-        String email = inputEmail.getText().toString();
+        final String email = inputEmail.getText().toString();
         final String password = inputPassword.getText().toString();
 
         if (TextUtils.isEmpty(email)) {
@@ -155,7 +160,72 @@ public class GoogleSignIn extends AppCompatActivity implements View.OnClickListe
                             Toast.makeText(GoogleSignIn.this, "Fail", Toast.LENGTH_LONG).show();
 
                         } else {
-                            updateUI();
+
+                            mFirebaseAuth = FirebaseAuth.getInstance();
+                            mFirebaseUser = mFirebaseAuth.getCurrentUser();
+
+                            final DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+
+                            mRootRef.child("customer").child(mFirebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    User user = dataSnapshot.getValue(User.class);
+
+                                    //If beautician signin for customer application for the first time
+                                    if (user == null) {
+
+                                        final DatabaseReference mCheckRef = FirebaseDatabase.getInstance().getReference();
+
+                                        mCheckRef.child("beautician").child(mFirebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+
+                                            @Override
+                                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                                User user = dataSnapshot.getValue(User.class);
+
+                                                DatabaseReference mUsersRef = mRootRef.child("customer");
+
+                                                HashMap<String, Object> UserValues = new HashMap<>();
+                                                UserValues.put("profile", user.profile);
+                                                UserValues.put("email", email);
+                                                UserValues.put("firstname", user.firstname);
+                                                UserValues.put("lastname", user.lastname);
+                                                UserValues.put("phone", user.phone);
+                                                UserValues.put("birthday", user.birthday );
+                                                UserValues.put("gender", user.gender);
+                                                UserValues.put("address_number", user.address_number);
+                                                UserValues.put("address_building", user.address_building);
+                                                UserValues.put("address_sub_district", user.address_sub_district);
+                                                UserValues.put("address_district", user.address_district);
+                                                UserValues.put("address_province", user.address_province);
+                                                UserValues.put("address_code", user.address_code);
+
+                                                mFirebaseUser = mAuth.getCurrentUser();
+                                                Map<String, Object> childUpdates = new HashMap<>();
+                                                childUpdates.put(mFirebaseUser.getUid(), UserValues);
+                                                mUsersRef.updateChildren(childUpdates);
+
+                                            }
+
+                                            @Override
+                                            public void onCancelled(DatabaseError databaseError) {
+
+                                            }
+                                        });
+
+                                    } else {
+
+                                        updateUI();
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+
+                                }
+                            });
+
+
                         }
                     }
                 });

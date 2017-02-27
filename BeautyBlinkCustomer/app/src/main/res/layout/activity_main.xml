@@ -19,112 +19,164 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             android:titleTextColor="#1111">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:ems="10"
+                    android:id="@+id/word"
+                    android:imeOptions="actionSearch"
+                    android:hint="Search by user"
+                    android:background="@drawable/input_outline"
+                    android:padding="5dp" />
+
+                <ImageView
+                    android:visibility="gone"
+                    android:id="@+id/icon_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:src="@drawable/ic_action_search"/>
+
+
+            </LinearLayout>
+
+        </android.support.v7.widget.Toolbar>
+
+        <!--Menu-->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:background="#ffffff">
 
-            <EditText
-                android:layout_weight="1"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:maxLines="1"
-                android:ems="10"
-                android:id="@+id/word"
-                android:imeOptions="actionSearch"
-                android:hint="Search by name"
-                android:background="@drawable/input_outline"
-                android:padding="5dp" />
-            <ImageView
-                android:visibility="gone"
-                android:id="@+id/icon_search"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+
+                <ImageView
+                    android:id="@+id/bt_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingTop="1dp"
+                    android:paddingBottom="3dp"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/ic_action_search1"/>
+
+
+                <ImageView
+                    android:visibility="visible"
+                    android:id="@+id/tap_search"
+                    android:layout_alignBottom="@+id/bt_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/tab2"
+                    />
+
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:src="@drawable/ic_action_search"/>
-            <Button
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="right"
-                android:background="@drawable/ic_send"
-                android:id="@+id/testNoti"
-                android:layout_marginRight="20dp" />
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+
+                <ImageView
+                    android:id="@+id/bt_request"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingTop="1dp"
+                    android:paddingBottom="4dp"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/request_702"/>
+
+
+                <ImageView
+                    android:id="@+id/tap_request"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/bt_request"
+                    android:src="@drawable/tab2"
+                    android:visibility="gone" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+
+                <ImageView
+                    android:id="@+id/bt_noti"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingTop="2dp"
+                    android:paddingBottom="4dp"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/noti_702"/>
+
+
+                <ImageView
+                    android:id="@+id/tap_noti"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/bt_noti"
+                    android:src="@drawable/tab2"
+                    android:visibility="gone" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+
+                <ImageView
+                    android:id="@+id/bt_userprofile"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingTop="1dp"
+                    android:paddingBottom="1dp"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/setting_703"/>
+
+
+                <ImageView
+                    android:id="@+id/tap_user"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/bt_userprofile"
+                    android:src="@drawable/tab2"
+                    android:visibility="gone" />
+
+            </RelativeLayout>
+
 
         </LinearLayout>
-</android.support.v7.widget.Toolbar>
 
-    <!--Menu-->
-<LinearLayout
-android:layout_width="match_parent"
-android:layout_height="35dp"
-android:orientation="horizontal"
-android:background="#BEBEBE">
+        <!--Fragment-->
+        <FrameLayout
+            android:id="@+id/contentcontainer"
+            android:layout_width="match_parent"
+            android:background="@color/even_color"
+            android:layout_height="wrap_content"
+            android:layout_weight="15">
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_weight="1">
-
-    <ImageView
-        android:id="@+id/bt_search"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:src="@drawable/ic_action_search"/>
-
-</LinearLayout>
-
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_weight="1">
-
-    <ImageView
-        android:id="@+id/bt_request"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:src="@mipmap/request_70"/>
-
-</LinearLayout>
-
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_weight="1">
-
-    <ImageView
-        android:id="@+id/bt_noti"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:src="@mipmap/noti_70"/>
-
-</LinearLayout>
-
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_weight="1">
-
-    <ImageView
-        android:id="@+id/bt_userprofile"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:src="@mipmap/setting_70"/>
-</LinearLayout>
-
-</LinearLayout>
-
-    <!--Fragment-->
-<FrameLayout
-android:id="@+id/contentcontainer"
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:layout_weight="15">
-
-</FrameLayout>
+        </FrameLayout>
 
     </LinearLayout>
     <!--Menu-->

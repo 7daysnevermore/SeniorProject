@@ -12,9 +12,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.captain_pc.beautyblinkcustomer.BeauticianProfile;
 import com.example.captain_pc.beautyblinkcustomer.EditProfile;
 import com.example.captain_pc.beautyblinkcustomer.PromotionDetails;
 import com.example.captain_pc.beautyblinkcustomer.R;
@@ -33,6 +35,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -50,6 +53,7 @@ public class SearchPopular extends Fragment {
     private FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference databaseReference;
     private Query databaseQuery,dataQuery1;
+    SearchDetails search;
 
 
 
@@ -82,7 +86,7 @@ public class SearchPopular extends Fragment {
         recyclerView.setHasFixedSize(true);
 
         //Get search to order in fragment
-        final SearchDetails search = (SearchDetails) getActivity();
+        search = (SearchDetails) getActivity();
 
         //search for each service
         databaseQuery = databaseReference.orderByChild(search.search).startAt(1);
@@ -131,55 +135,95 @@ public class SearchPopular extends Fragment {
                 final Boolean[] checklike = new Boolean[1];
                 checklike[0] = false;
 
-                viewHolder.setName(model.name);
-                viewHolder.setLocation(model.district,model.province);
+                if(!search.lat.equals("")&&!search.lng.equals("")){
 
-                if(!model.BeauticianProfile.equals("")){
-                    viewHolder.setProfile(getActivity().getApplicationContext(),model.BeauticianProfile);
-                }
+                    if (distance(Double.parseDouble(search.lat), Double.parseDouble(search.lng),
+                            Double.parseDouble(model.latitude),Double.parseDouble(model.longitude)) < 10.0) { // if distance < 0.1 miles we take locations as equal
+                        viewHolder.setName(model.username);
+                        viewHolder.setLocation(model.district,model.province);
 
-                if(!model.picture1.equals("")){
-                    viewHolder.setPicture1(getActivity().getApplicationContext(),model.picture1);
-                }
-                if (!model.picture2.equals("")) {
-                    viewHolder.setPicture2(getActivity().getApplicationContext(), model.picture2);
-                }
-                if (!model.picture3.equals("")) {
-                    viewHolder.setPicture3(getActivity().getApplicationContext(), model.picture3);
-                }
-
-                if(model.S01 != 0 && search.search.equals("S01")){
-                    viewHolder.setStart(model.S01);
-                }
-                if (model.S02 != 0 && search.search.equals("S02")) {
-                    viewHolder.setStart(model.S02);
-                }
-                if (model.S03 != 0 && search.search.equals("S03")) {
-                    viewHolder.setStart(model.S03);
-                }
-                if (model.S04 != 0 && search.search.equals("S04")) {
-                    viewHolder.setStart(model.S04);
-                }
-
-                DatabaseReference mRoot = FirebaseDatabase.getInstance().getReference();
-                mRoot.child("customer-liked").child(mFirebaseUser.getUid()).child(model.uid).addListenerForSingleValueEvent(new ValueEventListener() {
-
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        DataCustomerLiked like = dataSnapshot.getValue(DataCustomerLiked.class);
-                        if (like != null) {
-                            viewHolder.setLike();
-                            checklike[0] = true;
+                        if(!model.BeauticianProfile.equals("")){
+                            viewHolder.setProfile(getActivity().getApplicationContext(),model.BeauticianProfile);
                         }
+
+                        if(!model.picture1.equals("")){
+                            viewHolder.setPicture1(getActivity().getApplicationContext(),model.picture1);
+                        }
+                        if (!model.picture2.equals("")) {
+                            viewHolder.setPicture2(getActivity().getApplicationContext(), model.picture2);
+                        }
+                        if (!model.picture3.equals("")) {
+                            viewHolder.setPicture3(getActivity().getApplicationContext(), model.picture3);
+                        }
+
+                        if(model.S01 != 0 && search.search.equals("S01")){
+                            viewHolder.setStart(model.S01);
+                        }
+                        if (model.S02 != 0 && search.search.equals("S02")) {
+                            viewHolder.setStart(model.S02);
+                        }
+                        if (model.S03 != 0 && search.search.equals("S03")) {
+                            viewHolder.setStart(model.S03);
+                        }
+                        if (model.S04 != 0 && search.search.equals("S04")) {
+                            viewHolder.setStart(model.S04);
+                        }
+                    }else{
+                        viewHolder.deleteView();
+                    }
+                }else if(search.lat.equals("")&&search.lng.equals("")){
+
+                    viewHolder.setName(model.username);
+                    viewHolder.setLocation(model.district,model.province);
+
+                    if(!model.BeauticianProfile.equals("")){
+                        viewHolder.setProfile(getActivity().getApplicationContext(),model.BeauticianProfile);
                     }
 
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
+                    if(!model.picture1.equals("")){
+                        viewHolder.setPicture1(getActivity().getApplicationContext(),model.picture1);
+                    }
+                    if (!model.picture2.equals("")) {
+                        viewHolder.setPicture2(getActivity().getApplicationContext(), model.picture2);
+                    }
+                    if (!model.picture3.equals("")) {
+                        viewHolder.setPicture3(getActivity().getApplicationContext(), model.picture3);
                     }
 
+                    if(model.S01 != 0 && search.search.equals("S01")){
+                        viewHolder.setStart(model.S01);
+                    }
+                    if (model.S02 != 0 && search.search.equals("S02")) {
+                        viewHolder.setStart(model.S02);
+                    }
+                    if (model.S03 != 0 && search.search.equals("S03")) {
+                        viewHolder.setStart(model.S03);
+                    }
+                    if (model.S04 != 0 && search.search.equals("S04")) {
+                        viewHolder.setStart(model.S04);
+                    }
 
-                });
+                    DatabaseReference mRoot = FirebaseDatabase.getInstance().getReference();
+                    mRoot.child("customer-liked").child(mFirebaseUser.getUid()).child(model.uid).addListenerForSingleValueEvent(new ValueEventListener() {
+
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            DataCustomerLiked like = dataSnapshot.getValue(DataCustomerLiked.class);
+                            if (like != null) {
+                                viewHolder.setLike();
+                                checklike[0] = true;
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+
+
+                    });
+                }
+
 
                 viewHolder.like.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -201,7 +245,7 @@ public class SearchPopular extends Fragment {
                                 final HashMap<String, Object> CustomerValues = new HashMap<>();
 
                                 //Keep beautician profile
-                                CustomerValues.put("name",model.name);
+                                CustomerValues.put("name",model.username);
                                 CustomerValues.put("profile",model.BeauticianProfile);
                                 CustomerValues.put("uid",model.uid);
 
@@ -251,8 +295,6 @@ public class SearchPopular extends Fragment {
                     });
 
 
-
-
                 viewHolder.mview.setOnClickListener(new View.OnClickListener() {
                     //private static final String TAG = "Promotion";
                     final String cshow = getRef(position).getKey();
@@ -263,15 +305,18 @@ public class SearchPopular extends Fragment {
                         //Toast.makeText(Promotion.this, "This is my Toast message!",
                         // Toast.LENGTH_LONG).show();
 
-                        /*Intent cPro = new Intent(getActivity(),PromotionDetails.class);
+                        Intent cPro = new Intent(getActivity(),BeauticianProfile.class);
                         cPro.putExtra("uid",  model.uid);
-                        startActivity(cPro);*/
+                        cPro.putExtra("username",model.username);
+                        startActivity(cPro);
                     }
                 });
 
 
             }
         };
+
+
 
         firebaseRecyclerAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override
@@ -293,6 +338,27 @@ public class SearchPopular extends Fragment {
         recyclerView.setAdapter(firebaseRecyclerAdapter);
         recyclerView.setLayoutManager(mLayoutManager);
 
+    }
+
+    /** calculates the distance between two locations in MILES */
+    private double distance(double lat1, double lng1, double lat2, double lng2) {
+
+        double earthRadius = 6371; // in miles, change to 6371 for kilometer output
+
+        double dLat = Math.toRadians(lat2-lat1);
+        double dLng = Math.toRadians(lng2-lng1);
+
+        double sindLat = Math.sin(dLat / 2);
+        double sindLng = Math.sin(dLng / 2);
+
+        double a = Math.pow(sindLat, 2) + Math.pow(sindLng, 2)
+                * Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2));
+
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+
+        double dist = earthRadius * c;
+
+        return dist; // output distance, in MILES
     }
 
 
