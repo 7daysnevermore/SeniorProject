@@ -20,7 +20,7 @@ public class OfferFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.fragment_unpaid,container,false);
+        View rootView = inflater.inflate(R.layout.fragment_offer,container,false);
         initInstance(rootView);
         return rootView;
     }
