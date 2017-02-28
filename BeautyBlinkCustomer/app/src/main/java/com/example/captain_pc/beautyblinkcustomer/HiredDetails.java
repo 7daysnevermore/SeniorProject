@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.example.captain_pc.beautyblinkcustomer.model.DataOffer;
 import com.example.captain_pc.beautyblinkcustomer.model.DataPayment;
 import com.example.captain_pc.beautyblinkcustomer.model.DataRequest;
+import com.example.captain_pc.beautyblinkcustomer.model.DataReview;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -38,12 +39,13 @@ public class HiredDetails extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseUser mFirebaseUser;
     String beauid;
-    TextView payment_date, payment_time, payment_bank, payment_amount;
-    LinearLayout bt_payment, bt_finish, bt_review, payment;
+    TextView payment_date, payment_time, payment_bank, payment_amount,topic,desc;
+    LinearLayout bt_payment, bt_finish, bt_review, payment,review;
     private TextView date, service, event, time, special, location, maxprice, numofPer, amount, beauname, yes, no;
     ImageView picpro, slip;
     String status;
     private AlertDialog dialog;
+    View view1,view2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,10 +59,15 @@ public class HiredDetails extends AppCompatActivity {
         bt_finish = (LinearLayout) findViewById(R.id.bt_finish);
         bt_review = (LinearLayout) findViewById(R.id.bt_review);
         payment = (LinearLayout) findViewById(R.id.payment);
+        review = (LinearLayout) findViewById(R.id.review);
         payment_date = (TextView) findViewById(R.id.payment_date);
         payment_time = (TextView) findViewById(R.id.payment_time);
         payment_bank = (TextView) findViewById(R.id.payment_bank);
         payment_amount = (TextView) findViewById(R.id.payment_amount);
+        view1 = (View) findViewById(R.id.view1);
+        view2 = (View) findViewById(R.id.view2);
+        topic = (TextView) findViewById(R.id.topic);
+        desc = (TextView) findViewById(R.id.des);
         slip = (ImageView) findViewById(R.id.slip);
 
         mAuth = FirebaseAuth.getInstance();
@@ -75,6 +82,7 @@ public class HiredDetails extends AppCompatActivity {
         if (status.equals("5")) {
             bt_review.setVisibility(View.VISIBLE);
             payment.setVisibility(View.VISIBLE);
+            view2.setVisibility(View.VISIBLE);
 
             DatabaseReference data = FirebaseDatabase.getInstance().getReference().child("customer-payment").child(requestValues.get("uid").toString())
                     .child(requestValues.get("key").toString());
@@ -108,6 +116,70 @@ public class HiredDetails extends AppCompatActivity {
             });
 
 
+        }
+        if(status.equals("7")){
+            review.setVisibility(View.VISIBLE);
+            bt_review.setVisibility(View.VISIBLE);
+            payment.setVisibility(View.VISIBLE);
+            view2.setVisibility(View.VISIBLE);
+            view1.setVisibility(View.VISIBLE);
+
+            DatabaseReference data = FirebaseDatabase.getInstance().getReference().child("customer-payment").child(requestValues.get("uid").toString())
+                    .child(requestValues.get("key").toString());
+
+            data.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+
+                    for (DataSnapshot datashot : dataSnapshot.getChildren()) {
+
+
+                        if (datashot.getValue() == null) {
+                        } else {
+
+                            DataPayment hired = datashot.getValue(DataPayment.class);
+                            Picasso.with(getApplicationContext()).load(hired.slip).fit().centerCrop().into(slip);
+                            payment_date.setText(hired.date);
+                            payment_time.setText(hired.time);
+                            payment_bank.setText(hired.bank);
+                            payment_amount.setText(hired.amount);
+
+                        }
+                    }
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+            DatabaseReference dataReview = FirebaseDatabase.getInstance().getReference().child("customer-review").child(requestValues.get("uid").toString())
+                    .child(requestValues.get("key").toString());
+
+            dataReview.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+
+                    for (DataSnapshot datashot : dataSnapshot.getChildren()) {
+
+
+                        if (datashot.getValue() == null) {
+                        } else {
+                            DataReview rev = datashot.getValue(DataReview.class);
+                            topic.setText(rev.topic);
+                            desc.setText(rev.desc);
+
+                        }
+                    }
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
         }
 
         date = (TextView) findViewById(R.id.cusD);
