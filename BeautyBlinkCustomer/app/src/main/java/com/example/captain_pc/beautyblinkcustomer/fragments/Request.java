@@ -137,6 +137,8 @@ public class Request extends Fragment {
                         RequestValues.put("location", model.location);
                         RequestValues.put("specialrequest", model.specialrequest);
                         RequestValues.put("status",model.status);
+                        RequestValues.put("custname",model.username);
+                        RequestValues.put("userprofile", model.userprofile);
                         RequestValues.put("uid", mFirebaseUser.getUid().toString());
 
                         if(model.status.equals("1")||model.status.equals("2")){
@@ -144,7 +146,7 @@ public class Request extends Fragment {
                             intent.putExtra("request",  RequestValues);
                             startActivity(intent);
                         }
-                        if (model.status.equals("3") || model.status.equals("4") || model.status.equals("5")) {
+                        if (model.status.equals("3") || model.status.equals("4") || model.status.equals("5")|| model.status.equals("7")) {
                             Intent intent = new Intent(getActivity(), HiredDetails.class);
                             intent.putExtra("status",model.status);
                             intent.putExtra("request", RequestValues);

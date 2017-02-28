@@ -153,6 +153,7 @@ public class Payment extends AppCompatActivity {
                     });
 
                     Intent intent = new Intent(Payment.this,MainActivity.class);
+                    intent.putExtra("menu", "request");
                     startActivity(intent);
                 }
 
