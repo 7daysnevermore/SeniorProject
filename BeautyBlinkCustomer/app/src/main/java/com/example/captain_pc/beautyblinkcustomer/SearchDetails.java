@@ -21,8 +21,10 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -76,6 +78,7 @@ public class SearchDetails extends AppCompatActivity implements View.OnClickList
     public TextView popular, latest, nearby, price;
     public String search, wording, previous = null, lat, lng;
     public ImageView icon_search, icon_filter, up, down, tab_popular, tab_nearby, tab_latest, tab_price;
+    Toolbar toolbar;
     public boolean checking;
     int clickcount = 0;
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
@@ -89,6 +92,11 @@ public class SearchDetails extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+
+        //up button
+        toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mAuth.getCurrentUser();
@@ -159,6 +167,19 @@ public class SearchDetails extends AppCompatActivity implements View.OnClickList
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
 
 
+    }
+
+    // up button method
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                //NavUtils.navigateUpFromSameTask(this);
+                startActivity(new Intent(SearchDetails.this, MainActivity.class));
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
