@@ -51,6 +51,7 @@
         <activity android:name=".Review"></activity>
         <activity android:name=".BeauticianProfile"></activity>
         <activity android:name=".RequestDetails"></activity>
+        <activity android:name=".OfferDetails"></activity>
 
         <service android:name=".MyFirebaseMessagingService">
             <intent-filter>

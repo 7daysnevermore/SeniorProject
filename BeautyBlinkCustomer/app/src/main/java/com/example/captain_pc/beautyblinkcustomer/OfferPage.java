@@ -1,6 +1,7 @@
 package com.example.captain_pc.beautyblinkcustomer;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -14,6 +15,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.captain_pc.beautyblinkcustomer.fragments.OfferPagePopular;
+import com.example.captain_pc.beautyblinkcustomer.fragments.OfferPagePrice;
+import com.example.captain_pc.beautyblinkcustomer.fragments.SearchLatest;
+import com.example.captain_pc.beautyblinkcustomer.fragments.SearchNearby;
+import com.example.captain_pc.beautyblinkcustomer.fragments.SearchPopular;
+import com.example.captain_pc.beautyblinkcustomer.fragments.SearchPrice;
 import com.example.captain_pc.beautyblinkcustomer.model.DataRequest;
 import com.example.captain_pc.beautyblinkcustomer.model.Offerss;
 import com.google.firebase.auth.FirebaseAuth;
@@ -30,69 +37,45 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-public class OfferPage extends AppCompatActivity {
-    private TextView date,service,event,time,special,location,maxprice,numofPer,name,spe_b,t;
-    HashMap<String, Object> requestValues;
+public class OfferPage extends AppCompatActivity implements View.OnClickListener {
+    private TextView popular,price;
+    public HashMap<String, Object> requestValues;
     private Button btnOffer;
     private String username,k,m;
+    ImageView up,down;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
+    Boolean checking;
+    Integer clickcount;
     private Toolbar toolbar;
-    String np,mp,sp,loca;
+    public String requestid,previous=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_offer_page);
         requestValues = (HashMap<String, Object>) getIntent().getExtras().getSerializable("request");
-        mFirebaseAuth = FirebaseAuth.getInstance();
-        mFirebaseUser = mFirebaseAuth.getCurrentUser();
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        k=requestValues.get("keyrequest").toString();
-        m=requestValues.get("keyoffer").toString();
-        Log.d("orange",""+k);
-      Log.d("jajajajaja",""+m);
+        requestid = requestValues.get("key").toString();
 
+        popular = (TextView) findViewById(R.id.popular);
+        price = (TextView) findViewById(R.id.price);
+        up = (ImageView) findViewById(R.id.up);
+        down = (ImageView) findViewById(R.id.down);
 
-        /*date= (TextView)findViewById(R.id.cusD);
-        t= (TextView)findViewById(R.id.tg);
-        service =(TextView)findViewById(R.id.cusSer);
-        event =(TextView)findViewById(R.id.cusEve);
-        time = (TextView)findViewById(R.id.cusTime);
-        special = (TextView)findViewById(R.id.cusSpe);
-        location = (TextView)findViewById(R.id.cusLo);
-        maxprice = (TextView)findViewById(R.id.cusMax);
-        name = (TextView)findViewById(R.id.tname);
-        numofPer = (TextView)findViewById(R.id.cusNum);
-        //spe_b = (TextView)findViewById(R.id.speB);
+        if (savedInstanceState == null) {
+            //first create
+            //Place fragment
+            previous = "popular";
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.contentcontainer, new OfferPagePopular())
+                    .commit();
+        }
 
-
-      DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference().child("offer/"+k+"/"+m);
-
-        mRootRef.addListenerForSingleValueEvent(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Offerss user = dataSnapshot.getValue(Offerss.class);
-                if (user == null) {
-                    Toast.makeText(OfferPage.this, "Error: could not fetch user.", Toast.LENGTH_LONG).show();
-                } else {
-
-                    service.setText("Service: "+user.service);
-                    date.setText("Date: "+user.date);
-                    event.setText("Event: "+user.event);
-                    time.setText("Time: "+user.time);
-                    special.setText("Special requirement: "+user.specialcus);
-                    location.setText("Location: "+user.location);
-                    maxprice.setText("Maxprice: "+user.maxprice);
-                    name.setText(user.namecus);
-                    numofPer.setText("Number/person: "+user.numberofcustomer);
-                    spe_b.setText(user.beauticianoffer);
-                }
-            }
-
-        });*/
+        //tab button
+        findViewById(R.id.popular).setOnClickListener(this);
+        findViewById(R.id.price).setOnClickListener(this);
 
 
     }
@@ -108,4 +91,47 @@ public class OfferPage extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.popular:
+                if (previous.equals("price")) {
+                    clickcount = 0;
+                    up.setImageResource(R.drawable.arrowup);
+                    down.setImageResource(R.drawable.arrowdown);
+                    price.setTextColor(getResources().getColor(R.color.streak_color_light));
+                }
+                popular.setTextColor(getResources().getColor(R.color.colorPrimary));
+                previous = "popular";
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.contentcontainer, OfferPagePopular.newInstance())
+                        .addToBackStack(null)
+                        .commit();
+                break;
+
+            case R.id.price:
+
+                if (previous.equals("popular")) {
+                    popular.setTextColor(getResources().getColor(R.color.streak_color_light));
+                }
+
+                price.setTextColor(getResources().getColor(R.color.colorPrimary));
+                previous = "price";
+                clickcount = clickcount + 1;
+                if (clickcount % 2 == 0) {
+                    checking = true;
+                    up.setImageResource(R.drawable.arrowup);
+                    down.setImageResource(R.drawable.c_arrowupdown);
+                } else {
+                    checking = false;
+                    up.setImageResource(R.drawable.c_arrowup);
+                    down.setImageResource(R.drawable.arrowdown);
+                }
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.contentcontainer, OfferPagePrice.newInstance())
+                        .addToBackStack(null)
+                        .commit();
+                break;
+        }
+    }
 }
