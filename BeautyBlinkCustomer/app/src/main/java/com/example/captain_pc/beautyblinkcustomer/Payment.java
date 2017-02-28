@@ -1,9 +1,12 @@
 package com.example.captain_pc.beautyblinkcustomer;
 
+import android.content.Intent;
 import android.media.Image;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.captain_pc.beautyblinkcustomer.model.Offerss;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -24,23 +28,30 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class Payment extends AppCompatActivity {
     private Toolbar toolbar;
-    private TextView event,service;
-    private EditText date;
-    private ImageView payment;
-    private RadioGroup typeBank;
-    private RadioButton bankBtn;
-    private Button btnCon;
+    private EditText editDate,editTime,editBank,editPrice;
+    private ImageView paySlip;
+    private TextView send;
     private static final String TAG = "Payment";
-    private String typeB;
     private FirebaseAuth mAuth;
     private FirebaseUser mFirebaseUser;
     private HashMap<String, Object> confirmValues;
+    private StorageReference storageReference,filepath;
+    private String beauid;
+    private DatabaseReference databaseReference;
+    private Uri imageUri = null;
+    private int SELECT_FILE =1;
 
     String key,keyin,uid,uBeau;
     @Override
@@ -61,61 +72,90 @@ public class Payment extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-        confirmValues =(HashMap<String,Object>)getIntent().getExtras().getSerializable("payment");
+        storageReference = FirebaseStorage.getInstance().getReference();
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Payment");
+        confirmValues =(HashMap<String,Object>)getIntent().getExtras().getSerializable("request");
+        beauid = getIntent().getStringExtra("beauid");
 
 
-        date = (EditText)findViewById(R.id.editDate);
-        payment = (ImageView)findViewById(R.id.paySlip);
-        btnCon = (Button)findViewById(R.id.payConfirm);
+        editDate = (EditText)findViewById(R.id.editDate);
+        editTime = (EditText) findViewById(R.id.editTime);
+        editBank = (EditText) findViewById(R.id.editBank);
+        editPrice = (EditText) findViewById(R.id.editPrice);
+        paySlip = (ImageView)findViewById(R.id.paySlip);
+        send = (TextView) findViewById(R.id.send);
 
-        event.setText(confirmValues.get("event").toString());
-        service.setText(confirmValues.get("service").toString());
-        key = confirmValues.get("key").toString();
-        keyin = confirmValues.get("insidekey").toString();
-        Log.d("payment",""+key);
-        Log.d("payment2",""+keyin);
-        DatabaseReference mRootRef1 = FirebaseDatabase.getInstance().getReference().child("beautician-key/"+key);
-
-        mRootRef1.addListenerForSingleValueEvent(new ValueEventListener() {
-
+        paySlip.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Offerss user = dataSnapshot.getValue(Offerss.class);
-                if (user == null) {
-                    Toast.makeText(Payment.this, "Error: could not fetch user.", Toast.LENGTH_LONG).show();
-                } else {
-
-                    uBeau=user.uid;
-                    Log.d("uidd",""+uBeau);
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
+            public void onClick(View v) {
+                Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT);
+                galleryIntent.setType("image/*");
+                startActivityForResult(galleryIntent,SELECT_FILE);
             }
         });
 
-        btnCon.setOnClickListener(new View.OnClickListener() {
+
+
+        send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                int selected = typeBank.getCheckedRadioButtonId();
-                RadioButton rb = (RadioButton) findViewById(selected);
-                if(rb!=null)
-                {
-                    Toast.makeText(Payment.this,
-                            "Game"+rb.getText(), Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(Payment.this,
-                            "Bye", Toast.LENGTH_SHORT).show();
-                }
-                //Log.d(TAG, "InstanceID token: " + FirebaseInstanceId.getInstance().getToken());
-                DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference().child("/customer-request/" +uid+"/"+key);
-                mRootRef.child("status").setValue("Paid");
+                final String ddate = editDate.getText().toString();
+                final String time = editTime.getText().toString();
+                final String bank = editBank.getText().toString();
+                final String price = editPrice.getText().toString();
+                final String status = "4";
 
-                DatabaseReference RootRef = FirebaseDatabase.getInstance().getReference().child("/beauticianbusiness/" +uBeau+"/"+keyin);
-                RootRef.child("afterofferstatus").setValue("Paid");
+                if(!TextUtils.isEmpty(ddate) && !TextUtils.isEmpty(bank) &&
+                        !TextUtils.isEmpty(time) && !TextUtils.isEmpty(price) &&
+                        imageUri !=null){
+
+
+                    filepath = storageReference.child("Payment").child(imageUri.getLastPathSegment());
+                    filepath.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                            Uri dowloadUrl = taskSnapshot.getDownloadUrl();
+
+                            //Create root of Request
+                            final DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+                            DatabaseReference mPaymentRef = mRootRef.child("payment");
+
+                            final String key = mPaymentRef.push().getKey();
+                            Calendar c = Calendar.getInstance();
+                            SimpleDateFormat sdf = new SimpleDateFormat("MMM dd yyyy hh:mm a");
+                            String date = sdf.format(c.getTime());
+
+                            final HashMap<String, Object> RequestValues = new HashMap<String, Object>();
+                            RequestValues.put("bank", bank);
+                            RequestValues.put("amount", price);
+                            RequestValues.put("date", ddate);
+                            RequestValues.put("time", time);
+                            RequestValues.put("status",status);
+                            RequestValues.put("customerid", mFirebaseUser.getUid().toString());
+                            RequestValues.put("currenttime", date);
+                            RequestValues.put("slip",dowloadUrl.toString());
+
+                            final Map<String, Object> childUpdate = new HashMap<>();
+                            childUpdate.put("/payment/" + key, RequestValues);
+                            childUpdate.put("/customer-payment/" + mFirebaseUser.getUid().toString()+ "/" + confirmValues.get("key").toString() + "/" + key, RequestValues);
+
+                            mRootRef.updateChildren(childUpdate);
+
+                            DatabaseReference mCustRef = FirebaseDatabase.getInstance().getReference().child("/customer-request1/" + mFirebaseUser.getUid().toString()+"/"+confirmValues.get("key").toString());
+                            mCustRef.child("status").setValue(status);
+
+                            DatabaseReference mBeauRef = FirebaseDatabase.getInstance().getReference().child("/beautician-received/" +beauid+"/"+confirmValues.get("key").toString());
+                            mBeauRef.child("status").setValue(status);
+
+                        }
+                    });
+
+                    Intent intent = new Intent(Payment.this,MainActivity.class);
+                    intent.putExtra("menu", "request");
+                    startActivity(intent);
+                }
 
 
             }
@@ -123,6 +163,19 @@ public class Payment extends AppCompatActivity {
 
 
     }
+
+    @Override
+    protected  void onActivityResult(int requestCode, int resultCode, Intent data ){
+        super.onActivityResult(requestCode,resultCode,data);
+
+        if(requestCode == SELECT_FILE && resultCode == RESULT_OK){
+            imageUri = data.getData();
+            paySlip.setImageURI(imageUri);
+
+        }
+
+    }
+
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         switch (id) {

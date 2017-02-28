@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -33,8 +34,8 @@
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:layout_width="match_parent"
             android:id="@+id/scroll"
+            android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <ScrollView
@@ -45,18 +46,212 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
                     android:layout_marginTop="15dp"
                     android:orientation="vertical">
 
                     <LinearLayout
-                        android:background="#FFFFFF"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:id="@+id/payment"
+                        android:orientation="vertical">
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@android:color/darker_gray" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="#FFFFFF"
+                            android:orientation="vertical"
+                            android:paddingLeft="20sp"
+                            android:paddingRight="20sp"
+                            android:paddingTop="10sp">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginBottom="10dp"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center_vertical"
+                                    android:text="Payment Details"
+                                    android:textSize="18sp"
+                                    android:layout_alignParentTop="true"
+                                    android:layout_alignParentStart="true"
+                                    android:id="@+id/textView6" />
+
+
+                            </RelativeLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@android:color/darker_gray" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_marginBottom="5dp"
+                                    android:orientation="vertical">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:orientation="horizontal">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="match_parent"
+                                            android:gravity="center_vertical"
+                                            android:text="Date       : "
+                                            android:textColor="#FF424242"
+                                            android:textSize="16sp" />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="match_parent"
+                                            android:gravity="center_vertical"
+                                            android:id="@+id/payment_date"
+                                            android:text=""
+                                            android:textSize="16sp" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:orientation="horizontal">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="match_parent"
+                                            android:gravity="center_vertical"
+                                            android:text="Time      : "
+                                            android:textColor="#FF424242"
+                                            android:textSize="16sp" />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="match_parent"
+                                            android:gravity="center_vertical"
+                                            android:id="@+id/payment_time"
+                                            android:text=""
+                                            android:textSize="16sp" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:orientation="horizontal">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="match_parent"
+                                            android:gravity="center_vertical"
+                                            android:text="Bank      : "
+                                            android:textColor="#FF424242"
+                                            android:textSize="16sp" />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="match_parent"
+                                            android:gravity="center_vertical"
+                                            android:id="@+id/payment_bank"
+                                            android:text=""
+                                            android:textSize="16sp" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:orientation="horizontal">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="match_parent"
+                                            android:gravity="center_vertical"
+                                            android:text="Amount : "
+                                            android:textColor="#FF424242"
+                                            android:textSize="16sp" />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="match_parent"
+                                            android:gravity="center_vertical"
+                                            android:id="@+id/payment_amount"
+                                            android:text=""
+                                            android:textSize="16sp" />
+
+                                    </LinearLayout>
+
+
+                                </LinearLayout>
+
+                                <View
+                                    android:layout_width="1dp"
+                                    android:layout_height="match_parent"
+                                    android:background="@android:color/darker_gray" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="120dp"
+                                    android:padding="5dp"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <ImageView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:id="@+id/slip"
+                                        android:src="@mipmap/add_200"/>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@android:color/darker_gray" />
+
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="20dp"
+                        android:layout_height="1dp"
+                        android:background="@android:color/darker_gray" />
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:background="#FFFFFF"
+                        android:orientation="vertical"
                         android:paddingLeft="20sp"
                         android:paddingRight="20sp"
-                        android:paddingTop="10sp"
-                        android:orientation="vertical">
+                        android:paddingTop="10sp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -71,8 +266,8 @@
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:text="Hired Details"
                                     android:gravity="center_vertical"
+                                    android:text="Hired Details"
                                     android:textSize="18sp" />
 
 
@@ -87,10 +282,10 @@
 
 
                         <LinearLayout
-                            android:layout_marginTop="10dp"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginBottom="10dp"
+                            android:layout_marginTop="10dp"
                             android:orientation="vertical">
 
                             <LinearLayout
@@ -112,11 +307,11 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
-                                    android:textColor="#FF424242"
                                     android:gravity="center_vertical"
-                                    android:textSize="18sp"
                                     android:text="Name"
-                                    android:textStyle="bold"/>
+                                    android:textColor="#FF424242"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -128,11 +323,10 @@
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-
-                                    android:textColor="#FF424242"
                                     android:layout_weight="1"
                                     android:gravity="center_vertical"
                                     android:text="Service: "
+                                    android:textColor="#FF424242"
                                     android:textSize="16sp" />
 
                                 <TextView
@@ -155,10 +349,10 @@
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:textColor="#FF424242"
                                     android:layout_weight="1"
                                     android:gravity="center_vertical"
                                     android:text="Event: "
+                                    android:textColor="#FF424242"
                                     android:textSize="16sp" />
 
                                 <TextView
@@ -181,9 +375,9 @@
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:textColor="#FF424242"
                                     android:layout_weight="1"
                                     android:text="Date: "
+                                    android:textColor="#FF424242"
                                     android:textSize="16sp" />
 
                                 <TextView
@@ -207,9 +401,9 @@
                                     android:id="@+id/settime"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:textColor="#FF424242"
                                     android:layout_weight="1"
                                     android:text="Time: "
+                                    android:textColor="#FF424242"
                                     android:textSize="16sp" />
 
                                 <TextView
@@ -231,10 +425,10 @@
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:textColor="#FF424242"
                                     android:layout_weight="1"
-                                    android:textSize="16sp"
-                                    android:text="Number of person: "/>
+                                    android:text="Number of person: "
+                                    android:textColor="#FF424242"
+                                    android:textSize="16sp" />
 
                                 <TextView
                                     android:id="@+id/cusNum"
@@ -257,20 +451,20 @@
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:textColor="#FF424242"
-                                    android:text="Price : "
-                                    android:textSize="16sp"
+                                    android:layout_weight="1"
                                     android:gravity="center_vertical"
-                                    android:layout_weight="1"/>
+                                    android:text="Price : "
+                                    android:textColor="#FF424242"
+                                    android:textSize="16sp" />
 
                                 <TextView
                                     android:id="@+id/cusMax"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
-                                    android:textColor="#FF424242"
                                     android:gravity="right"
                                     android:text="Max price"
+                                    android:textColor="#FF424242"
                                     android:textSize="16sp" />
 
                             </LinearLayout>
@@ -315,17 +509,17 @@
                                     android:id="@+id/setlocation"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:textColor="#FF424242"
                                     android:gravity="center_vertical"
-                                    android:textSize="16sp"
-                                    android:text="Location: "/>
+                                    android:text="Location: "
+                                    android:textColor="#FF424242"
+                                    android:textSize="16sp" />
 
                                 <TextView
                                     android:id="@+id/cusLo"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:text="Location"
                                     android:minLines="2"
+                                    android:text="Location"
                                     android:textSize="16sp" />
 
                             </LinearLayout>
@@ -338,11 +532,11 @@
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:textColor="#FF424242"
                                     android:layout_weight="1"
                                     android:gravity="center_vertical"
-                                    android:textSize="16sp"
-                                    android:text="Special Requirement: "/>
+                                    android:text="Special Requirement: "
+                                    android:textColor="#FF424242"
+                                    android:textSize="16sp" />
 
                                 <TextView
                                     android:id="@+id/cusSpe"
@@ -357,14 +551,16 @@
 
                         </LinearLayout>
 
-
-
                     </LinearLayout>
 
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_marginBottom="20dp"
+                        android:layout_height="1dp"
+                        android:background="@android:color/darker_gray" />
 
 
                 </LinearLayout>
-
 
 
             </ScrollView>
@@ -372,40 +568,62 @@
         </LinearLayout>
 
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/scroll"
+            android:id="@+id/bt_payment"
+            android:layout_margin="7dp"
+            android:visibility="gone"
+            android:background="#FFFFFF"
+            android:gravity="bottom">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="Send payment slip"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:gravity="bottom"
-            android:background="#FFFFFF"
-            android:layout_margin="7dp"
+            android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/scroll"
-            android:layout_height="wrap_content">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:gravity="center"
-                android:id="@+id/bt_payment"
-                android:background="@color/colorPrimary"
-                android:visibility="gone"
-                android:textSize="18sp"
-                android:textColor="#FFFFFF"
-                android:text="Send payment slip"/>
+            android:id="@+id/bt_finish"
+            android:layout_margin="7dp"
+            android:background="#FFFFFF"
+            android:visibility="gone"
+            android:gravity="bottom">
 
             <TextView
-                android:id="@+id/bt_finish"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorPrimary"
                 android:gravity="center"
                 android:padding="5dp"
-                android:visibility="gone"
                 android:text="Finish service"
                 android:textColor="#FFFFFF"
                 android:textSize="18sp" />
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/bt_review"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/scroll"
+            android:layout_margin="7dp"
+            android:visibility="gone"
+            android:background="#FFFFFF"
+            android:gravity="bottom">
+
+
             <TextView
-                android:id="@+id/bt_review"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorPrimary"
@@ -413,10 +631,14 @@
                 android:padding="5dp"
                 android:text="Rate your beautician"
                 android:textColor="#FFFFFF"
-                android:textSize="18sp" />
-        </LinearLayout>
-    </RelativeLayout>
+                android:textSize="18sp"
+                 />
 
+        </LinearLayout>
+
+
+
+    </RelativeLayout>
 
 
 </LinearLayout>
