@@ -7,8 +7,12 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RatingBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class Review extends AppCompatActivity {
 
@@ -18,6 +22,12 @@ public class Review extends AppCompatActivity {
     private Uri reviewImg_show;
 
     private int SELECT_FILE = 1;
+
+    //Rating Bar
+    private TextView txtView1;
+    private RatingBar rating_Bar;
+    private String str;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +49,19 @@ public class Review extends AppCompatActivity {
                 startActivityForResult(galleryIntent,SELECT_FILE);
             }
         });
+
+        txtView1 = (TextView)findViewById(R.id.service);
+        rating_Bar = (RatingBar)findViewById(R.id.ratingBar);
+
+        rating_Bar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            public void onRatingChanged(RatingBar ratingBar, float rating,
+                                        boolean fromUser) {
+                str = String.valueOf(rating);
+                txtView1.setText("Your Selected : " + str);
+                Toast.makeText(Review.this, str, Toast.LENGTH_LONG).show();
+            }
+        });
+
     }
 
     @Override

@@ -1,10 +1,13 @@
 package com.example.captain_pc.beautyblinkcustomer;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import static com.example.captain_pc.beautyblinkcustomer.R.id.toolbar;
 
@@ -15,6 +18,7 @@ import static com.example.captain_pc.beautyblinkcustomer.R.id.toolbar;
 public class RecentlyViewed extends AppCompatActivity {
 
     Toolbar toolbar;
+    Button btn_write_review;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -25,6 +29,14 @@ public class RecentlyViewed extends AppCompatActivity {
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        btn_write_review = (Button) findViewById(R.id.btn_write_review);
+        btn_write_review.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(RecentlyViewed.this, Review.class));
+            }
+        });
     }
 
     // up button method

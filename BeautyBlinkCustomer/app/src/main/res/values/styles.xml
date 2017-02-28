@@ -18,7 +18,7 @@
         <item name="android:layout_weight">1</item>
     </style>
     <style name="RatingBar" parent="Theme.AppCompat" >
-        <item name="colorControlNormal">#D8D8D8</item>
         <item name="colorControlActivated">@color/ratingstar</item>
+        <item name="colorControlNormal">#D8D8D8</item>
     </style>
 </resources>
