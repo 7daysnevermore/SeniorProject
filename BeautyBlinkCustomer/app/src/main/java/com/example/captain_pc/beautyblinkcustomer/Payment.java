@@ -64,9 +64,6 @@ public class Payment extends AppCompatActivity {
         confirmValues =(HashMap<String,Object>)getIntent().getExtras().getSerializable("payment");
 
 
-        typeBank = (RadioGroup)findViewById(R.id.bankRadio);
-        event =(TextView)findViewById(R.id.btnEvent);
-        service = (TextView)findViewById(R.id.btnService);
         date = (EditText)findViewById(R.id.editDate);
         payment = (ImageView)findViewById(R.id.paySlip);
         btnCon = (Button)findViewById(R.id.payConfirm);
