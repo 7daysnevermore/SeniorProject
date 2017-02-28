@@ -49,38 +49,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:text="Event    :"
-                    android:textSize="18sp"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/btnEvent"
-                    android:textSize="18sp"/>
-            </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingTop="5dp">
-                <TextView
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:text="Service :"
-                    android:textSize="18sp"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/btnService"
-                    android:textSize="18sp"/>
-            </LinearLayout>
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -93,12 +62,15 @@
                     android:layout_height="wrap_content"
                     android:text="Date"
                     android:textSize="18sp"
-                    android:layout_weight="1" />
+                    android:layout_weight="5"
+                    android:id="@+id/textView5" />
 
                 <EditText
+                    android:padding="3sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
+                    android:inputType="text"
+                    android:hint="dd/MM/yyyy"
                     android:background="@drawable/input_outline"
                     android:ems="10"
                     android:id="@+id/editDate"
@@ -106,57 +78,86 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:paddingTop="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:text="Time"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/editTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="3sp"
+                    android:background="@drawable/input_outline"
+                    android:ems="10"
+                    android:hint="HH:mm"
+                    android:inputType="text" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:paddingTop="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Bank Account"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/editBank"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/input_outline"
+                    android:ems="10"
+                    android:hint="Kasikorn"
+                    android:inputType="text"
+                    android:padding="3sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:paddingTop="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:text="Amount"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/editPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/input_outline"
+                    android:ems="10"
+                    android:hint="xxx Bath"
+                    android:inputType="number"
+                    android:padding="3sp" />
+
+            </LinearLayout>
+
         </LinearLayout>
-        <View
-            android:layout_width="350dp"
-            android:layout_marginTop="10dp"
-            android:layout_height="1dp"
-            android:layout_gravity="center"
-            android:background="#EEEEEE"/>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="10dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="ฺBank categories"
-                android:textSize="18sp"/>
-            <RadioGroup
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:id="@+id/bankRadio">
 
-                    <RadioButton
-                        android:id="@+id/radioKB"
-                        android:layout_width="150dp"
-                        android:layout_height="wrap_content"
-                        android:text="Kasikorn Bank"
-                        android:checked="false"
-                        />
-
-
-                        <RadioButton
-                            android:id="@+id/radioSCB"
-                            android:layout_width="150dp"
-                            android:layout_height="wrap_content"
-                            android:text="SCB Bank"
-                            android:checked="false"
-                            />
-
-
-                        <RadioButton
-                            android:id="@+id/radioKrung"
-                            android:layout_width="150dp"
-                            android:layout_height="wrap_content"
-                            android:text="Krungthai Bank"
-                            android:checked="false"
-                            />
-
-            </RadioGroup>
-        </LinearLayout>
         <View
             android:layout_width="350dp"
             android:layout_marginTop="10dp"

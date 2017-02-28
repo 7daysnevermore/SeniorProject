@@ -3,183 +3,142 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+
+
     <LinearLayout
         android:id="@+id/row"
         android:layout_width="match_parent"
-        android:layout_height="230dp"
+        android:layout_height="130dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:layout_marginBottom="15dp"
-        android:background="@drawable/border"
-        android:orientation="vertical">
+        android:background="@drawable/input_outline"
+        android:backgroundTint="#FFFFFF"
+        android:orientation="horizontal">
+
+
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:background="@android:color/darker_gray" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#FFFFFF"
-            android:layout_weight="1.4"
-            android:orientation="horizontal">
+            android:padding="8dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="2.7">
+                android:layout_weight="1">
 
                 <ImageView
-                    android:id="@+id/picpromote"
-                    android:layout_width="match_parent"
+                    android:id="@+id/beauprofile"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:padding="6dp"
                     android:src="@mipmap/profile" />
 
             </LinearLayout>
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/username"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
+                android:layout_weight="1.5"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:text="Jamsirisoponsin"
+                android:textSize="13sp" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1.8"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/namepromote"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical"
-                        android:paddingLeft="10dp"
-                        android:textStyle="bold"
-                        android:text="Jamsirisoponsin"
-                        android:textSize="15sp" />
-
-                    <TextView
-                        android:id="@+id/ratingprofile"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2"
-                        android:gravity="right|center"
-                        android:paddingRight="10dp"
-                        android:text="Rating: 5"
-                        android:textSize="13sp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="3sp"
-                    android:layout_weight="2.3">
-
-                    <TextView
-                        android:layout_weight="1"
-                        android:id="@+id/price"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center_vertical"
-                        android:maxLines="1"
-                        android:textColor="@color/colorPrimary"
-                        android:paddingLeft="10dp"
-                        android:text="Offer Price: "
-                        android:textStyle="bold"
-                        android:textSize="16sp" />
-
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="3sp"
-                    android:layout_weight="2.3">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_weight="10"
-                        android:layout_height="match_parent"
-                        android:src="@mipmap/location_point_70"/>
-
-                    <TextView
-                        android:layout_weight="1"
-                        android:id="@+id/locationpromote"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center_vertical"
-                        android:maxLines="1"
-                        android:text=""
-                        android:textSize="12sp" />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
+            <TextView
+                android:layout_weight="1.5"
+                android:id="@+id/price"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="2.8">
+                android:gravity="center"
+                android:maxLines="1"
+                android:textColor="@color/colorPrimary"
+                android:text="Price: "
+                android:textStyle="bold"
+                android:textSize="16sp" />
 
-                <ImageView
-                    android:id="@+id/like"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="13dp"
-                    android:src="@mipmap/like" />
+            <TextView
+                android:id="@+id/rating"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.5"
+                android:gravity="center"
+                android:text="Rating: 5"
+                android:textSize="12sp" />
 
-            </LinearLayout>
 
         </LinearLayout>
 
-
         <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
             android:background="@android:color/darker_gray" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#FFFFFF"
-            android:layout_weight="0.7"
-            android:orientation="horizontal">
+            android:padding="5dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/addpromotepic1"
-                android:layout_width="match_parent"
-                android:layout_margin="2dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
+                android:layout_margin="3dp"
                 android:layout_weight="1"
-                android:adjustViewBounds="true"
-                android:scaleType="centerCrop" />
+                android:id="@+id/regpic"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@mipmap/profile" />
 
-            <ImageView
-                android:layout_marginRight="2dp"
-                android:layout_marginTop="2dp"
-                android:layout_marginBottom="2dp"
-                android:id="@+id/addpromotepic2"
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:adjustViewBounds="true"
-                android:scaleType="centerCrop" />
-
+                android:gravity="center"
+                android:layout_weight="8"
+                android:textSize="12sp"
+                android:text="Your request"/>
 
         </LinearLayout>
 
         <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
             android:background="@android:color/darker_gray" />
 
-        <View
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0.1dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <ImageView
+                android:layout_margin="3dp"
+                android:layout_weight="1"
+                android:id="@+id/offerpic"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@mipmap/profile" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_weight="8"
+                android:textSize="12sp"
+                android:text="Offer"/>
+
+        </LinearLayout>
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
             android:background="@android:color/darker_gray" />
 
 
