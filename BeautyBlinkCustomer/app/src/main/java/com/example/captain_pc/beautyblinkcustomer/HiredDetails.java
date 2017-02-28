@@ -2,7 +2,9 @@ package com.example.captain_pc.beautyblinkcustomer;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
@@ -11,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,6 +48,7 @@ public class HiredDetails extends AppCompatActivity {
     ImageView picpro, slip;
     String status;
     private AlertDialog dialog;
+    private RatingBar rating_Bar;
     View view1,view2;
 
     @Override
@@ -69,6 +73,7 @@ public class HiredDetails extends AppCompatActivity {
         topic = (TextView) findViewById(R.id.topic);
         desc = (TextView) findViewById(R.id.des);
         slip = (ImageView) findViewById(R.id.slip);
+        rating_Bar = (RatingBar) findViewById(R.id.rating);
 
         mAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mAuth.getCurrentUser();
@@ -119,7 +124,6 @@ public class HiredDetails extends AppCompatActivity {
         }
         if(status.equals("7")){
             review.setVisibility(View.VISIBLE);
-            bt_review.setVisibility(View.VISIBLE);
             payment.setVisibility(View.VISIBLE);
             view2.setVisibility(View.VISIBLE);
             view1.setVisibility(View.VISIBLE);
@@ -166,7 +170,9 @@ public class HiredDetails extends AppCompatActivity {
 
                         if (datashot.getValue() == null) {
                         } else {
+
                             DataReview rev = datashot.getValue(DataReview.class);
+                            rating_Bar.setRating((float) (rev.rating*1.0));
                             topic.setText(rev.topic);
                             desc.setText(rev.desc);
 

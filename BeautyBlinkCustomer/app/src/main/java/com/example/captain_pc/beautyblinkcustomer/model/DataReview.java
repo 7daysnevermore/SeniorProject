@@ -7,7 +7,7 @@ package com.example.captain_pc.beautyblinkcustomer.model;
 public class DataReview {
 
     public String topic,desc,currenttime,customerid,image,name,profile,beauid,requestid;
-    Integer rating;
+    public Integer rating;
 
     public DataReview() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)

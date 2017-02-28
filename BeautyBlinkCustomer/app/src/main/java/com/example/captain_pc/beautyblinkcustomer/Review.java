@@ -86,6 +86,8 @@ public class Review extends AppCompatActivity {
             public void onRatingChanged(RatingBar ratingBar, float rating,
                                         boolean fromUser) {
                 str = Math.round(rating);
+
+
             }
         });
 
