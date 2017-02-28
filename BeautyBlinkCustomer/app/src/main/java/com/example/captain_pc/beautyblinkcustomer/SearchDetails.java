@@ -120,7 +120,6 @@ public class SearchDetails extends AppCompatActivity implements View.OnClickList
         lat = getIntent().getStringExtra("lat");
         lng = getIntent().getStringExtra("lng");
 
-        word.setHint(search);
         word.setFocusable(true);
 
         word.setOnTouchListener(new View.OnTouchListener() {
@@ -249,8 +248,6 @@ public class SearchDetails extends AppCompatActivity implements View.OnClickList
                         .commit();
                 break;
             case R.id.nearby:
-
-                Toast.makeText(getApplicationContext(), "Location !"+cur_lat, Toast.LENGTH_SHORT).show();
 
                 if (previous.equals("popular")) {
                     tab_popular.setVisibility(View.GONE);
