@@ -104,7 +104,9 @@ public class MyAccount extends AppCompatActivity implements View.OnClickListener
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
                 //NavUtils.navigateUpFromSameTask(this);
-                startActivity(new Intent(MyAccount.this, MainActivity.class));
+                Intent intent = new Intent(MyAccount.this,MainActivity.class);
+                intent.putExtra("menu","user");
+                startActivity(intent);
                 return true;
         }
         return super.onOptionsItemSelected(item);

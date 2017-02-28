@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Toolbar toolbar;
     String uid, previous = null;
     EditText word;
+    String menu = null;
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
 
 
@@ -82,18 +83,64 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             tap_user = (ImageView) findViewById(R.id.tap_user);
 
             uid = mFirebaseUser.getUid().toString();
-            //fragment
-            if(savedInstanceState==null){
-                //first create
-                //Place fragment
-                previous = "search";
-                bt_search.setImageResource(R.mipmap.ic_action_search_click);
 
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.contentcontainer, new Search())
-                        .addToBackStack(null)
-                        .commit();
+
+            menu = getIntent().getStringExtra("menu");
+            if (menu != null) {
+                if (menu.equals("request")) {
+                    previous = "request";
+                    bt_request.setImageResource(R.mipmap.request_702_click);
+                    tap_request.setVisibility(View.VISIBLE);
+                    tap_search.setVisibility(View.GONE);
+                    getSupportFragmentManager().beginTransaction()
+                            .add(R.id.contentcontainer, new Request())
+                            .commit();
+                }
+                if (menu.equals("search")) {
+                    previous = "search";
+                    bt_search.setImageResource(R.mipmap.ic_action_search_click);
+                    tap_search.setVisibility(View.VISIBLE);
+                    tap_search.setVisibility(View.GONE);
+                    getSupportFragmentManager().beginTransaction()
+                            .add(R.id.contentcontainer, new Search())
+                            .commit();
+                }
+                if (menu.equals("noti")) {
+                    previous = "noti";
+                    bt_noti.setImageResource(R.mipmap.noti_702_click);
+                    tap_noti.setVisibility(View.VISIBLE);
+                    tap_search.setVisibility(View.GONE);
+                    getSupportFragmentManager().beginTransaction()
+                            .add(R.id.contentcontainer, new Notification())
+                            .commit();
+                }
+                if (menu.equals("user")) {
+                    previous = "user";
+                    bt_userprofile.setImageResource(R.mipmap.setting_703_click);
+                    tap_user.setVisibility(View.VISIBLE);
+                    tap_search.setVisibility(View.GONE);
+                    getSupportFragmentManager().beginTransaction()
+                            .add(R.id.contentcontainer, new Fragment_Setting())
+                            .commit();
+                }
+            } else {
+                //fragment
+                if(savedInstanceState==null){
+                    //first create
+                    //Place fragment
+                    previous = "search";
+                    bt_search.setImageResource(R.mipmap.ic_action_search_click);
+                    tap_search.setVisibility(View.VISIBLE);
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.contentcontainer, new Search())
+                            .addToBackStack(null)
+                            .commit();
+                }
             }
+
+
+
+
             String beauid = getIntent().getStringExtra("chooseoffer_beauid");
             if(beauid!=null){
                 DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
