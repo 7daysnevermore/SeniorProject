@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.captain_pc.beautyblinkcustomer.model.DataOffer;
 import com.example.captain_pc.beautyblinkcustomer.model.DataProfilePromote;
 import com.example.captain_pc.beautyblinkcustomer.model.DataRequest;
 import com.google.firebase.auth.FirebaseAuth;
@@ -113,6 +114,33 @@ public class OfferDetails extends AppCompatActivity {
                 DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
                 final DatabaseReference mCustReqRef = mRootRef.child("customer-request1").child(requestValues.get("custid").toString()).child(requestValues.get("requestid").toString());
                 final DatabaseReference mBeauReqRef = mRootRef.child("beautician-received").child(requestValues.get("beauid").toString()).child(requestValues.get("requestid").toString());
+
+                DatabaseReference deleteReq = mRootRef.child("customer-received").child(requestValues.get("custid").toString()).child(requestValues.get("requestid").toString());
+                deleteReq.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        for (DataSnapshot datashot : dataSnapshot.getChildren()) {
+
+                            if (datashot.getValue() == null) {
+                            } else {
+
+                                DataOffer hired = datashot.getValue(DataOffer.class);
+                                if (!hired.offerid.equals(requestValues.get("offerid").toString())) {
+                                    datashot.getRef().setValue(null);
+                                }
+
+                            }
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+
+                });
 
                 mCustReqRef.child("status").setValue("3");
                 mBeauReqRef.child("status").setValue("3");

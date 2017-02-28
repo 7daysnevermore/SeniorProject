@@ -18,13 +18,15 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true">
-        <Button
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_gravity="right"
-            android:background="@drawable/ic_send"
-            android:id="@+id/payConfirm"
-            android:layout_marginRight="20dp" />
+        <TextView
+            android:gravity="right"
+            android:layout_marginRight="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/send"
+            android:textSize="14sp"
+            android:textColor="#FFFFFF"
+            android:text="Send"/>
     </android.support.v7.widget.Toolbar>
 
     <LinearLayout
@@ -113,7 +115,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="1.3"
                     android:text="Bank Account"
                     android:textSize="18sp" />
 
@@ -139,7 +141,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="5"
+                    android:layout_weight="4.8"
                     android:text="Amount"
                     android:textSize="18sp" />
 

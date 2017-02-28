@@ -24,7 +24,6 @@
             </intent-filter>
         </activity>
 
->>>>>>>
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
@@ -53,6 +52,7 @@
         <activity android:name=".BeauticianProfile"></activity>
         <activity android:name=".RequestDetails"></activity>
         <activity android:name=".OfferDetails"></activity>
+        <activity android:name=".HiredDetails"></activity>
 
         <service android:name=".MyFirebaseMessagingService">
             <intent-filter>

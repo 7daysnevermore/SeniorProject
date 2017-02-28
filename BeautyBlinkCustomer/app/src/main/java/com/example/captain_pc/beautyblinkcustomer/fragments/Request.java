@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.example.captain_pc.beautyblinkcustomer.CheckBeautician;
 import com.example.captain_pc.beautyblinkcustomer.CreateRequest;
+import com.example.captain_pc.beautyblinkcustomer.HiredDetails;
 import com.example.captain_pc.beautyblinkcustomer.MessagePage;
 import com.example.captain_pc.beautyblinkcustomer.OfferPage;
 import com.example.captain_pc.beautyblinkcustomer.Payment;
@@ -138,9 +139,17 @@ public class Request extends Fragment {
                         RequestValues.put("status",model.status);
                         RequestValues.put("uid", mFirebaseUser.getUid().toString());
 
-                        Intent intent = new Intent(getActivity(),RequestDetails.class);
-                        intent.putExtra("request",  RequestValues);
-                        startActivity(intent);
+                        if(model.status.equals("1")||model.status.equals("2")){
+                            Intent intent = new Intent(getActivity(),RequestDetails.class);
+                            intent.putExtra("request",  RequestValues);
+                            startActivity(intent);
+                        }
+                        if (model.status.equals("3") || model.status.equals("4") || model.status.equals("5")) {
+                            Intent intent = new Intent(getActivity(), HiredDetails.class);
+                            intent.putExtra("status",model.status);
+                            intent.putExtra("request", RequestValues);
+                            startActivity(intent);
+                        }
                     }
                 });
                 btnPayment = (Button)viewHolder.mview.findViewById(R.id.payment);

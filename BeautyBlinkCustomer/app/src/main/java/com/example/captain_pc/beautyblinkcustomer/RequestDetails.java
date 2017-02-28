@@ -25,7 +25,7 @@ import java.util.Map;
  */
 
 public class RequestDetails extends AppCompatActivity {
-    private TextView date,service,event,time,special,location,maxprice,numofPer,bt_coffer,cusSpe;
+    private TextView date,service,event,time,special,location,maxprice,numofPer,bt_coffer;
     HashMap<String, Object> requestValues;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
@@ -50,7 +50,6 @@ public class RequestDetails extends AppCompatActivity {
         location = (TextView)findViewById(R.id.cusLo);
         maxprice = (TextView)findViewById(R.id.cusMax);
         numofPer = (TextView)findViewById(R.id.cusNum);
-        cusSpe = (TextView)findViewById(R.id.cusSpe);
 
         date.setText(requestValues.get("date").toString());
         service.setText((String)requestValues.get("service"));
