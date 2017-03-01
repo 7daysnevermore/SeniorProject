@@ -1,5 +1,6 @@
 package com.example.captain_pc.beautyblinkcustomer.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.captain_pc.beautyblinkcustomer.BeauticianProfile;
 import com.example.captain_pc.beautyblinkcustomer.R;
 import com.example.captain_pc.beautyblinkcustomer.SearchDetails;
 import com.example.captain_pc.beautyblinkcustomer.model.DataCustomerLiked;
@@ -241,14 +243,13 @@ public class SearchNearby extends Fragment {
                     final String cshow = getRef(position).getKey();
                     @Override
                     public void onClick(View view) {
-                        //Log.w(TAG, "You clicked on "+position);
-                        //firebaseRecyclerAdapter.getRef(position).removeValue();
-                        //Toast.makeText(Promotion.this, "This is my Toast message!",
-                        // Toast.LENGTH_LONG).show();
 
-                        /*Intent cPro = new Intent(getActivity(),PromotionDetails.class);
+                        Intent cPro = new Intent(getActivity(),BeauticianProfile.class);
                         cPro.putExtra("uid",  model.uid);
-                        startActivity(cPro);*/
+                        cPro.putExtra("username",model.username);
+                        cPro.putExtra("search", search.search);
+                        cPro.putExtra("word", "");
+                        startActivity(cPro);
                     }
                 });
 

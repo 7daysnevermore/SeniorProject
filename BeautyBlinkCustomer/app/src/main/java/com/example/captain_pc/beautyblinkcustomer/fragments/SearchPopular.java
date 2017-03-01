@@ -308,6 +308,8 @@ public class SearchPopular extends Fragment {
                         Intent cPro = new Intent(getActivity(),BeauticianProfile.class);
                         cPro.putExtra("uid",  model.uid);
                         cPro.putExtra("username",model.username);
+                        cPro.putExtra("search", search.search);
+                        cPro.putExtra("word", "");
                         startActivity(cPro);
                     }
                 });

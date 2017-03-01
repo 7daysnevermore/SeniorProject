@@ -158,7 +158,10 @@ public class BeauticianProfile extends AppCompatActivity implements View.OnClick
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
                 //NavUtils.navigateUpFromSameTask(this);
-                onBackPressed();
+                Intent cPro = new Intent(this,BeauticianProfile.class);
+                cPro.putExtra("search", getIntent().getStringExtra("search"));
+                cPro.putExtra("word", "");
+                startActivity(cPro);
                 return true;
         }
         return super.onOptionsItemSelected(item);
