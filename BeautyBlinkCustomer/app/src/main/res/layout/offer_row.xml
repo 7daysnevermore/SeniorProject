@@ -3,31 +3,35 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@android:color/darker_gray" />
 
     <LinearLayout
         android:id="@+id/row"
         android:layout_width="match_parent"
-        android:layout_height="130dp"
+        android:layout_height="140dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:layout_marginBottom="15dp"
         android:background="@drawable/input_outline"
         android:backgroundTint="#FFFFFF"
         android:orientation="horizontal">
 
 
         <View
-            android:layout_width="0.5dp"
+            android:layout_width="1.5dp"
             android:layout_height="match_parent"
             android:background="@android:color/darker_gray" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="8dp"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="8dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -48,21 +52,21 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1.5"
                 android:gravity="center"
-                android:textStyle="bold"
                 android:text="Jamsirisoponsin"
-                android:textSize="13sp" />
+                android:textSize="13sp"
+                android:textStyle="bold" />
 
             <TextView
-                android:layout_weight="1.5"
                 android:id="@+id/price"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_weight="1.5"
                 android:gravity="center"
                 android:maxLines="1"
-                android:textColor="@color/colorPrimary"
                 android:text="Price: "
-                android:textStyle="bold"
-                android:textSize="16sp" />
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/rating"
@@ -84,65 +88,48 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="5dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_margin="3dp"
-                android:layout_weight="1"
-                android:id="@+id/regpic"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:src="@mipmap/profile" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:layout_weight="8"
-                android:textSize="12sp"
-                android:text="Your request"/>
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="0.5dp"
-            android:layout_height="match_parent"
-            android:background="@android:color/darker_gray" />
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical"
             android:padding="5dp">
 
             <ImageView
+                android:id="@+id/regpic"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_margin="3dp"
                 android:layout_weight="1"
-                android:id="@+id/offerpic"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:src="@mipmap/profile" />
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/ic_launcher" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_weight="7"
                 android:gravity="center"
-                android:layout_weight="8"
-                android:textSize="12sp"
-                android:text="Offer"/>
+                android:text="Offer"
+                android:textSize="12sp" />
 
         </LinearLayout>
+
+
         <View
-            android:layout_width="0.5dp"
+            android:layout_width="1.5dp"
             android:layout_height="match_parent"
             android:background="@android:color/darker_gray" />
 
 
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="15dp"
+        android:background="@android:color/darker_gray" />
+
+
 
 
 </LinearLayout>

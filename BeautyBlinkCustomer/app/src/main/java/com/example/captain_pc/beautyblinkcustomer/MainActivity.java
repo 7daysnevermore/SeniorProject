@@ -138,47 +138,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
 
-
-
-
-            String beauid = getIntent().getStringExtra("chooseoffer_beauid");
-            if(beauid!=null){
-                DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
-                mRootRef.child("beautician-received").addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-
-                        for (DataSnapshot startChild : dataSnapshot.getChildren()){
-
-                                String key = startChild.getKey();
-                                if(!key.equals(getIntent().getStringExtra("chooseoffer_beauid"))){
-
-
-                                    for (DataSnapshot schild : startChild.getChildren()){
-                                        String key1 = schild.getKey();
-                                        if(key1.equals(getIntent().getStringExtra("chooseoffer_requestid"))){
-                                            DatabaseReference m = FirebaseDatabase.getInstance().getReference();
-                                            m.child("beautician-received").child(key).child(key1).child("status").setValue("6");
-
-
-                                        }
-
-                                    }
-
-
-                                }
-                            }
-
-                        }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
-            }
-
             word = (EditText) findViewById(R.id.word);
             word.setFocusable(false);
             word.requestFocus();

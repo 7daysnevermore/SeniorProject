@@ -42,7 +42,7 @@ public class HiredDetails extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseUser mFirebaseUser;
     String beauid;
-    TextView payment_date, payment_time, payment_bank, payment_amount,topic,desc;
+    TextView payment_date, payment_time, payment_bank, payment_amount,topic,desc,toconfirm;
     LinearLayout bt_payment, bt_finish, bt_review, payment,review;
     private TextView date, service, event, time, special, location, maxprice, numofPer, amount, beauname, yes, no;
     ImageView picpro, slip;
@@ -68,6 +68,7 @@ public class HiredDetails extends AppCompatActivity {
         payment_time = (TextView) findViewById(R.id.payment_time);
         payment_bank = (TextView) findViewById(R.id.payment_bank);
         payment_amount = (TextView) findViewById(R.id.payment_amount);
+        toconfirm = (TextView) findViewById(R.id.toconfirm);
         view1 = (View) findViewById(R.id.view1);
         view2 = (View) findViewById(R.id.view2);
         topic = (TextView) findViewById(R.id.topic);
@@ -78,13 +79,16 @@ public class HiredDetails extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mAuth.getCurrentUser();
 
-        if (status.equals("3")) {
-            bt_payment.setVisibility(View.VISIBLE);
+        if(status.equals("3")){
+            toconfirm.setVisibility(View.VISIBLE);
         }
         if (status.equals("4")) {
-            bt_finish.setVisibility(View.VISIBLE);
+            bt_payment.setVisibility(View.VISIBLE);
         }
         if (status.equals("5")) {
+            bt_finish.setVisibility(View.VISIBLE);
+        }
+        if (status.equals("6")) {
             bt_review.setVisibility(View.VISIBLE);
             payment.setVisibility(View.VISIBLE);
             view2.setVisibility(View.VISIBLE);
@@ -187,6 +191,7 @@ public class HiredDetails extends AppCompatActivity {
                 }
             });
         }
+
 
         date = (TextView) findViewById(R.id.cusD);
         service = (TextView) findViewById(R.id.cusSer);

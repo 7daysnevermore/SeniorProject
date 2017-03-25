@@ -415,76 +415,131 @@ public class CreateRequest extends AppCompatActivity {
         final String status = "1";
 
         if(!TextUtils.isEmpty(service) && !TextUtils.isEmpty(event) &&
-                numberP!=0 && maxPrice!=0 &&
-                !TextUtils.isEmpty(dt_day) && !TextUtils.isEmpty(dt_month) &&
-                !TextUtils.isEmpty(dt_year) && !TextUtils.isEmpty(time)&&
-                !TextUtils.isEmpty(location) && !TextUtils.isEmpty(specialReq) &&
-                imageUri !=null){
+                numberP!=0 && maxPrice!=0 ){
 
+            if(imageUri!=null){
+                filepath = storageReference.child("Request").child(imageUri.getLastPathSegment());
+                filepath.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-            filepath = storageReference.child("Request").child(imageUri.getLastPathSegment());
-            filepath.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        Uri dowloadUrl = taskSnapshot.getDownloadUrl();
 
-                    Uri dowloadUrl = taskSnapshot.getDownloadUrl();
+                        //Create root of Request
+                        final DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+                        DatabaseReference mRequestRef = mRootRef.child("request1");
 
-                    //Create root of Request
-                    final DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
-                    DatabaseReference mRequestRef = mRootRef.child("request1");
+                        final String key = mRequestRef.push().getKey();
+                        Calendar c = Calendar.getInstance();
+                        SimpleDateFormat sdf = new SimpleDateFormat("MMM dd yyyy hh:mm a");
+                        String date = sdf.format(c.getTime());
 
-                    final String key = mRequestRef.push().getKey();
-                    Calendar c = Calendar.getInstance();
-                    SimpleDateFormat sdf = new SimpleDateFormat("MMM dd yyyy hh:mm a");
-                    String date = sdf.format(c.getTime());
+                        final HashMap<String, Object> RequestValues = new HashMap<String, Object>();
+                        RequestValues.put("service", service);
+                        RequestValues.put("event", event);
+                        RequestValues.put("username", username);
+                        RequestValues.put("userprofile", userprofile);
+                        RequestValues.put("numberofperson", numberP);
+                        RequestValues.put("maxprice", maxPrice);
+                        RequestValues.put("date", dt_day + "/" + dt_month + "/" + dt_year);
+                        RequestValues.put("time", time);
+                        RequestValues.put("location", location);
+                        RequestValues.put("specialrequest", specialReq);
+                        RequestValues.put("status",status);
+                        RequestValues.put("customerid", mFirebaseUser.getUid().toString());
+                        RequestValues.put("currenttime", date);
+                        RequestValues.put("reqpic",dowloadUrl.toString());
 
-                    final HashMap<String, Object> RequestValues = new HashMap<String, Object>();
-                    RequestValues.put("service", service);
-                    RequestValues.put("event", event);
-                    RequestValues.put("username", username);
-                    RequestValues.put("userprofile", userprofile);
-                    RequestValues.put("numberofperson", numberP);
-                    RequestValues.put("maxprice", maxPrice);
-                    RequestValues.put("date", dt_day + "/" + dt_month + "/" + dt_year);
-                    RequestValues.put("time", time);
-                    RequestValues.put("location", location);
-                    RequestValues.put("specialrequest", specialReq);
-                    RequestValues.put("status",status);
-                    RequestValues.put("customerid", mFirebaseUser.getUid().toString());
-                    RequestValues.put("currenttime", date);
-                    RequestValues.put("reqpic",dowloadUrl.toString());
+                        final Map<String, Object> childUpdate = new HashMap<>();
+                        childUpdate.put("/request1/" + key, RequestValues);
+                        childUpdate.put("/customer-request1/" + mFirebaseUser.getUid().toString() + "/" + key, RequestValues);
 
-                    final Map<String, Object> childUpdate = new HashMap<>();
-                    childUpdate.put("/request1/" + key, RequestValues);
-                    childUpdate.put("/customer-request1/" + mFirebaseUser.getUid().toString() + "/" + key, RequestValues);
-
-                    for (HashMap<String,String> hash : BeauID){
-                        if(Integer.parseInt(hash.get("price").toString())<maxPrice){
-                            childUpdate.put("/beautician-received/" + hash.get("uid").toString() + "/" + key, RequestValues);
+                        for (HashMap<String,String> hash : BeauID){
+                            if(Integer.parseInt(hash.get("price").toString())<maxPrice||Integer.parseInt(hash.get("price").toString())==maxPrice){
+                                childUpdate.put("/beautician-received/" + hash.get("uid").toString() + "/" + key, RequestValues);
+                            }
                         }
+
+                        final HashMap<String,Object> request_noti = new HashMap<String, Object>();
+                        request_noti.put("name",username);
+                        request_noti.put("service",service);
+                        request_noti.put("currenttime",date);
+                        request_noti.put("status",status);
+                        request_noti.put("event",event);
+                        //Map<String,Object>requestNotiUpdate = new HashMap<>();
+                        childUpdate.put("/requestnotifromcus/"+key,request_noti);
+
+
+                        final HashMap<String,Object> statusS = new HashMap<String, Object>();
+                        statusS.put("status",status.toString());
+                        statusS.put("name",username);
+                        statusS.put("service",service);
+
+                        childUpdate.put("/statusfornoti/",statusS);
+
+                        mRootRef.updateChildren(childUpdate);
+
                     }
+                });
+            }
+            if(imageUri == null){
 
-                    final HashMap<String,Object> request_noti = new HashMap<String, Object>();
-                    request_noti.put("name",username);
-                    request_noti.put("service",service);
-                    request_noti.put("currenttime",date);
-                    request_noti.put("status",status);
-                    request_noti.put("event",event);
-                    //Map<String,Object>requestNotiUpdate = new HashMap<>();
-                    childUpdate.put("/requestnotifromcus/"+key,request_noti);
+                        //Create root of Request
+                        final DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+                        DatabaseReference mRequestRef = mRootRef.child("request1");
+
+                        final String key = mRequestRef.push().getKey();
+                        Calendar c = Calendar.getInstance();
+                        SimpleDateFormat sdf = new SimpleDateFormat("MMM dd yyyy hh:mm a");
+                        String date = sdf.format(c.getTime());
+
+                        final HashMap<String, Object> RequestValues = new HashMap<String, Object>();
+                        RequestValues.put("service", service);
+                        RequestValues.put("event", event);
+                        RequestValues.put("username", username);
+                        RequestValues.put("userprofile", userprofile);
+                        RequestValues.put("numberofperson", numberP);
+                        RequestValues.put("maxprice", maxPrice);
+                        RequestValues.put("date", dt_day + "/" + dt_month + "/" + dt_year);
+                        RequestValues.put("time", time);
+                        RequestValues.put("location", location);
+                        RequestValues.put("specialrequest", specialReq);
+                        RequestValues.put("status",status);
+                        RequestValues.put("customerid", mFirebaseUser.getUid().toString());
+                        RequestValues.put("currenttime", date);
+                        RequestValues.put("reqpic","");
+
+                        final Map<String, Object> childUpdate = new HashMap<>();
+                        childUpdate.put("/request1/" + key, RequestValues);
+                        childUpdate.put("/customer-request1/" + mFirebaseUser.getUid().toString() + "/" + key, RequestValues);
+
+                        for (HashMap<String,String> hash : BeauID){
+                            if(Integer.parseInt(hash.get("price").toString())<maxPrice){
+                                childUpdate.put("/beautician-received/" + hash.get("uid").toString() + "/" + key, RequestValues);
+                            }
+                        }
+
+                        final HashMap<String,Object> request_noti = new HashMap<String, Object>();
+                        request_noti.put("name",username);
+                        request_noti.put("service",service);
+                        request_noti.put("currenttime",date);
+                        request_noti.put("status",status);
+                        request_noti.put("event",event);
+                        //Map<String,Object>requestNotiUpdate = new HashMap<>();
+                        childUpdate.put("/requestnotifromcus/"+key,request_noti);
 
 
-                    final HashMap<String,Object> statusS = new HashMap<String, Object>();
-                    statusS.put("status",status.toString());
-                    statusS.put("name",username);
-                    statusS.put("service",service);
+                        final HashMap<String,Object> statusS = new HashMap<String, Object>();
+                        statusS.put("status",status.toString());
+                        statusS.put("name",username);
+                        statusS.put("service",service);
 
-                    childUpdate.put("/statusfornoti/",statusS);
+                        childUpdate.put("/statusfornoti/",statusS);
 
-                    mRootRef.updateChildren(childUpdate);
+                        mRootRef.updateChildren(childUpdate);
 
-                }
-            });
+            }
+
 
             progressDialog.dismiss();
             Intent intent = new Intent(CreateRequest.this,MainActivity.class);

@@ -33,10 +33,10 @@ public class OfferViewHolder extends RecyclerView.ViewHolder {
         Picasso.with(context).load(image).fit().centerCrop().into(img);
     }
 
-    public void setOfferPic(Context context, String image) {
+    /*public void setOfferPic(Context context, String image) {
         ImageView img = (ImageView) mview.findViewById(R.id.offerpic);
         Picasso.with(context).load(image).fit().centerCrop().into(img);
-    }
+    }*/
 
     public void setUsername(String name){
         TextView text = (TextView) mview.findViewById(R.id.username);

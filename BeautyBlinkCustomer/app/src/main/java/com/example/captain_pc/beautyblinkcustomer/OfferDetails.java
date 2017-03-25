@@ -114,6 +114,7 @@ public class OfferDetails extends AppCompatActivity {
                 DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
                 final DatabaseReference mCustReqRef = mRootRef.child("customer-request1").child(requestValues.get("custid").toString()).child(requestValues.get("requestid").toString());
                 final DatabaseReference mBeauReqRef = mRootRef.child("beautician-received").child(requestValues.get("beauid").toString()).child(requestValues.get("requestid").toString());
+                final DatabaseReference CustRef = mRootRef.child("customer-received").child(requestValues.get("custid").toString()).child(requestValues.get("requestid").toString()).child(requestValues.get("offerid").toString();
 
                 DatabaseReference deleteReq = mRootRef.child("customer-received").child(requestValues.get("custid").toString()).child(requestValues.get("requestid").toString());
                 deleteReq.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -144,11 +145,10 @@ public class OfferDetails extends AppCompatActivity {
 
                 mCustReqRef.child("status").setValue("3");
                 mBeauReqRef.child("status").setValue("3");
+                CustRef.child("status").setValue("3");
 
                 Intent intent = new Intent(OfferDetails.this,MainActivity.class);
                 intent.putExtra("menu",  "request");
-                intent.putExtra("chooseoffer_beauid", requestValues.get("beauid").toString());
-                intent.putExtra("chooseoffer_requestid", requestValues.get("requestid").toString());
                 startActivity(intent);
 
             }

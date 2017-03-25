@@ -102,12 +102,12 @@ public class OfferPagePopular extends Fragment {
                 if(model.beaupic!=null){
                     viewHolder.setImage(getActivity().getApplicationContext(),model.beaupic);
                 }
-                if (model.reqpic != null) {
+                if (!model.reqpic.equals("")) {
                     viewHolder.setRequestPic(getActivity().getApplicationContext(), model.reqpic);
                 }
-                if (!model.offerpic.equals("")) {
+                /*if (!model.offerpic.equals("")) {
                     viewHolder.setOfferPic(getActivity().getApplicationContext(), model.offerpic);
-                }
+                }*/
                 viewHolder.setUsername(model.beauname);
                 viewHolder.setPrice(model.price);
 
