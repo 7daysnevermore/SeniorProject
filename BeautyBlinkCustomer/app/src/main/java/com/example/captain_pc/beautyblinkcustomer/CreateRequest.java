@@ -488,6 +488,7 @@ public class CreateRequest extends AppCompatActivity {
 
             progressDialog.dismiss();
             Intent intent = new Intent(CreateRequest.this,MainActivity.class);
+            intent.putExtra("menu","request");
             startActivity(intent);
             }
     }

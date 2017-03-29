@@ -53,6 +53,7 @@
         <activity android:name=".RequestDetails"></activity>
         <activity android:name=".OfferDetails"></activity>
         <activity android:name=".HiredDetails"></activity>
+        <activity android:name=".VerifiedShow"></activity>
 
         <service android:name=".MyFirebaseMessagingService">
             <intent-filter>
