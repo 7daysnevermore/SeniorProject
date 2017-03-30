@@ -104,7 +104,7 @@ public class Payment extends AppCompatActivity {
                 final String time = editTime.getText().toString();
                 final String bank = editBank.getText().toString();
                 final String price = editPrice.getText().toString();
-                final String status = "4";
+                final String status = "5";
 
                 if(!TextUtils.isEmpty(ddate) && !TextUtils.isEmpty(bank) &&
                         !TextUtils.isEmpty(time) && !TextUtils.isEmpty(price) &&
@@ -149,12 +149,14 @@ public class Payment extends AppCompatActivity {
                             DatabaseReference mBeauRef = FirebaseDatabase.getInstance().getReference().child("/beautician-received/" +beauid+"/"+confirmValues.get("key").toString());
                             mBeauRef.child("status").setValue(status);
 
+                            Intent intent = new Intent(Payment.this,MainActivity.class);
+                            intent.putExtra("menu", "request");
+                            startActivity(intent);
+
                         }
                     });
 
-                    Intent intent = new Intent(Payment.this,MainActivity.class);
-                    intent.putExtra("menu", "request");
-                    startActivity(intent);
+
                 }
 
 

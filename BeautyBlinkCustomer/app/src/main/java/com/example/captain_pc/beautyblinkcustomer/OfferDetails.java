@@ -32,7 +32,7 @@ import java.util.HashMap;
 public class OfferDetails extends AppCompatActivity {
 
     private TextView date,service,event,time,special,location,maxprice,numofPer,amount,beauname,hire,decline,settime,setlocation;
-    ImageView picpro;
+    ImageView picpro,attachphoto,offerphoto;
     HashMap<String, Object> requestValues;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
@@ -62,6 +62,8 @@ public class OfferDetails extends AppCompatActivity {
         settime = (TextView) findViewById(R.id.settime);
         setlocation = (TextView) findViewById(R.id.setlocation);
         picpro = (ImageView) findViewById(R.id.pic_pro);
+        attachphoto = (ImageView) findViewById(R.id.attachphoto);
+        offerphoto = (ImageView) findViewById(R.id.offerphoto);
 
         if(requestValues.get("beauprofile")!=null){
             Picasso.with(getApplicationContext()).load(requestValues.get("beauprofile").toString()).fit().centerCrop().into(picpro);
@@ -104,6 +106,12 @@ public class OfferDetails extends AppCompatActivity {
         location.setText(requestValues.get("location").toString());
         maxprice.setText(requestValues.get("price").toString()+" ฿");
         numofPer.setText(requestValues.get("numberofperson").toString());
+       if(requestValues.get("reqpic")!=null){
+            Picasso.with(getApplicationContext()).load(requestValues.get("requestpic").toString()).into(attachphoto);
+        }
+        if (requestValues.get("offerpic")!=null) {
+            Picasso.with(getApplicationContext()).load(requestValues.get("offerpic").toString()).into(offerphoto);
+        }
 
         hire = (TextView) findViewById(R.id.hire);
 
@@ -114,7 +122,7 @@ public class OfferDetails extends AppCompatActivity {
                 DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
                 final DatabaseReference mCustReqRef = mRootRef.child("customer-request1").child(requestValues.get("custid").toString()).child(requestValues.get("requestid").toString());
                 final DatabaseReference mBeauReqRef = mRootRef.child("beautician-received").child(requestValues.get("beauid").toString()).child(requestValues.get("requestid").toString());
-                final DatabaseReference CustRef = mRootRef.child("customer-received").child(requestValues.get("custid").toString()).child(requestValues.get("requestid").toString()).child(requestValues.get("offerid").toString();
+                final DatabaseReference CustRef = mRootRef.child("customer-received").child(requestValues.get("custid").toString()).child(requestValues.get("requestid").toString()).child(requestValues.get("offerid").toString());
 
                 DatabaseReference deleteReq = mRootRef.child("customer-received").child(requestValues.get("custid").toString()).child(requestValues.get("requestid").toString());
                 deleteReq.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -149,6 +157,8 @@ public class OfferDetails extends AppCompatActivity {
 
                 Intent intent = new Intent(OfferDetails.this,MainActivity.class);
                 intent.putExtra("menu",  "request");
+                intent.putExtra("chooseoffer_beauid", requestValues.get("beauid").toString());
+                intent.putExtra("chooseoffer_requestid", requestValues.get("requestid").toString());
                 startActivity(intent);
 
             }

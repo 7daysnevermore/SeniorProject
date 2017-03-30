@@ -48,7 +48,9 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp">
+                    android:layout_marginLeft="5dp"
+                    android:orientation="horizontal">
+
                     <TextView
                         android:text="hh:mm"
                         android:layout_width="wrap_content"
@@ -57,16 +59,18 @@
                         android:layout_weight="1"
                         android:textSize="10dp"
                         android:gravity="top|right" />
-                    <TextView
-                        android:text="Description"
+                    <RelativeLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/btnDes"
-                        android:textSize="12dp"
-                        android:textColor="@color/colorAccent"
-                        android:layout_weight="1"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="12dp"
+                            android:textColor="@color/colorAccent"
+                            android:text=", Offer status"
+                            android:id="@+id/desStatus"/>
 
-                        android:gravity="top|right" />
+                    </RelativeLayout>
 
                 </LinearLayout>
             </LinearLayout>

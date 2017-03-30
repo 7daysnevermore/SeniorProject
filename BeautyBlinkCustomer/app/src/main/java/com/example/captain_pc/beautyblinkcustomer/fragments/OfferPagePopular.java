@@ -103,7 +103,7 @@ public class OfferPagePopular extends Fragment {
                     viewHolder.setImage(getActivity().getApplicationContext(),model.beaupic);
                 }
                 if (!model.reqpic.equals("")) {
-                    viewHolder.setRequestPic(getActivity().getApplicationContext(), model.reqpic);
+                    viewHolder.setRequestPic(getActivity().getApplicationContext(), model.offerpic);
                 }
                 /*if (!model.offerpic.equals("")) {
                     viewHolder.setOfferPic(getActivity().getApplicationContext(), model.offerpic);
@@ -154,6 +154,7 @@ public class OfferPagePopular extends Fragment {
                         RequestValues.put("specialrequest", model.specialrequest);
                         RequestValues.put("status",model.status);
                         RequestValues.put("custid", model.customerid);
+                        RequestValues.put("offerpic", model.offerpic);
                         RequestValues.put("requestpic", model.reqpic);
                         RequestValues.put("currenttime", model.currenttime);
                         Intent intent = new Intent(getActivity(),OfferDetails.class);

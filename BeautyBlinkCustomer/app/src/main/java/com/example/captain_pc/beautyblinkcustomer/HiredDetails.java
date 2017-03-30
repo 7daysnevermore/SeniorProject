@@ -45,7 +45,7 @@ public class HiredDetails extends AppCompatActivity {
     TextView payment_date, payment_time, payment_bank, payment_amount,topic,desc,toconfirm;
     LinearLayout bt_payment, bt_finish, bt_review, payment,review;
     private TextView date, service, event, time, special, location, maxprice, numofPer, amount, beauname, yes, no;
-    ImageView picpro, slip;
+    ImageView picpro, slip,photo,picreview;
     String status;
     private AlertDialog dialog;
     private RatingBar rating_Bar;
@@ -75,6 +75,8 @@ public class HiredDetails extends AppCompatActivity {
         desc = (TextView) findViewById(R.id.des);
         slip = (ImageView) findViewById(R.id.slip);
         rating_Bar = (RatingBar) findViewById(R.id.rating);
+        photo = (ImageView) findViewById(R.id.attachphoto);
+        picreview = (ImageView) findViewById(R.id.picreview);
 
         mAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mAuth.getCurrentUser();
@@ -87,6 +89,39 @@ public class HiredDetails extends AppCompatActivity {
         }
         if (status.equals("5")) {
             bt_finish.setVisibility(View.VISIBLE);
+            payment.setVisibility(View.VISIBLE);
+            view2.setVisibility(View.VISIBLE);
+
+            DatabaseReference data = FirebaseDatabase.getInstance().getReference().child("customer-payment").child(requestValues.get("uid").toString())
+                    .child(requestValues.get("key").toString());
+
+            data.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+
+                    for (DataSnapshot datashot : dataSnapshot.getChildren()) {
+
+
+                        if (datashot.getValue() == null) {
+                        } else {
+
+                            DataPayment hired = datashot.getValue(DataPayment.class);
+                            Picasso.with(getApplicationContext()).load(hired.slip).fit().centerCrop().into(slip);
+                            payment_date.setText(hired.date);
+                            payment_time.setText(hired.time);
+                            payment_bank.setText(hired.bank);
+                            payment_amount.setText(hired.amount);
+
+                        }
+                    }
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
         }
         if (status.equals("6")) {
             bt_review.setVisibility(View.VISIBLE);
@@ -179,6 +214,9 @@ public class HiredDetails extends AppCompatActivity {
                             rating_Bar.setRating((float) (rev.rating*1.0));
                             topic.setText(rev.topic);
                             desc.setText(rev.desc);
+                            if(rev.image!=null){
+                                Picasso.with(getApplicationContext()).load(rev.image).fit().centerCrop().into(picreview);
+                            }
 
                         }
                     }
@@ -234,6 +272,9 @@ public class HiredDetails extends AppCompatActivity {
                         location.setText(hired.location);
                         maxprice.setText(hired.price);
                         numofPer.setText(hired.numberofperson);
+                        if (!hired.offerpic.equals("")) {
+                            Picasso.with(getApplicationContext()).load(hired.offerpic).fit().centerCrop().into(photo);
+                        }
 
                     }
                 }
@@ -263,10 +304,10 @@ public class HiredDetails extends AppCompatActivity {
             public void onClick(View v) {
 
                 DatabaseReference mCustRef = FirebaseDatabase.getInstance().getReference().child("/customer-request1/" + mFirebaseUser.getUid().toString() + "/" + requestValues.get("key").toString());
-                mCustRef.child("status").setValue("5");
+                mCustRef.child("status").setValue("6");
 
                 DatabaseReference mBeauRef = FirebaseDatabase.getInstance().getReference().child("/beautician-received/" + beauid + "/" + requestValues.get("key").toString());
-                mBeauRef.child("status").setValue("5");
+                mBeauRef.child("status").setValue("6");
 
                 AlertDialog.Builder mBuilder = new AlertDialog.Builder(HiredDetails.this);
                 final View mView = HiredDetails.this.getLayoutInflater().inflate(R.layout.dialog_review, null);

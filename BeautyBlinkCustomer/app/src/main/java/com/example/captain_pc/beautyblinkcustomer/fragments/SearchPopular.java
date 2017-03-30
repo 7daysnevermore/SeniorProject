@@ -114,7 +114,9 @@ public class SearchPopular extends Fragment {
             });
 
         }else{
-            QueryRecycle(databaseQuery,search);
+            final DatabaseReference databaseRef = databaseQuery.getRef();
+            dataQuery1 = databaseRef.orderByChild("rating");
+            QueryRecycle(dataQuery1,search);
         }
 
     }
@@ -175,6 +177,7 @@ public class SearchPopular extends Fragment {
 
                     viewHolder.setName(model.username);
                     viewHolder.setLocation(model.district,model.province);
+                    viewHolder.setRating(model.rating);
 
                     if(!model.BeauticianProfile.equals("")){
                         viewHolder.setProfile(getActivity().getApplicationContext(),model.BeauticianProfile);

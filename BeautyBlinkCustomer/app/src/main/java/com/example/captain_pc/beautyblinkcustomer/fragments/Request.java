@@ -2,6 +2,7 @@ package com.example.captain_pc.beautyblinkcustomer.fragments;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
@@ -113,6 +114,10 @@ public class Request extends Fragment {
                 (DataRequest.class,R.layout.cus_request_card,Request.RequestViewHolder.class,databaseReference) {
             @Override
             protected void populateViewHolder(RequestViewHolder viewHolder, final DataRequest model, final int position) {
+
+                if(model.userprofile!=null){
+                    viewHolder.setProfile(getActivity().getApplicationContext(),model.userprofile);
+                }
                viewHolder.setStatus(model.status);
                 viewHolder.setDate(model.date);
                 viewHolder.setEvent(model.event);
@@ -139,6 +144,7 @@ public class Request extends Fragment {
                         RequestValues.put("status",model.status);
                         RequestValues.put("custname",model.username);
                         RequestValues.put("userprofile", model.userprofile);
+                        RequestValues.put("reqpic", model.reqpic);
                         RequestValues.put("uid", mFirebaseUser.getUid().toString());
 
                         if(model.status.equals("1")||model.status.equals("2")){
@@ -154,137 +160,7 @@ public class Request extends Fragment {
                         }
                     }
                 });
-                btnPayment = (Button)viewHolder.mview.findViewById(R.id.payment);
-                btnPayment.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        final String key = getRef(position).getKey();
 
-                        HashMap<String, Object> confirmValues = new HashMap<String, Object>();
-                        confirmValues.put("key",key);
-                        //confirmValues.put("event",model.getEvent());
-                        //confirmValues.put("service",model.getService());
-
-                        Intent goPaymentP = new Intent(getActivity(),Payment.class);
-                        goPaymentP.putExtra("payment", confirmValues);
-                        startActivity(goPaymentP);
-                    }
-
-                });
-                //Log.d("dumaa",""+kg);
-                final String key = getRef(position).getKey();
-               tv = (TextView)viewHolder.mview.findViewById(R.id.tcount);
-                DatabaseReference c = FirebaseDatabase.getInstance().getReference().child("offer/"+key);
-                c.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        int countt = (int) dataSnapshot.getChildrenCount();
-
-                        tv.setVisibility(View.VISIBLE);
-                        tv.setText(""+countt);
-                        Log.d("countnum","="+countt);
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
-                TextView t = (TextView)viewHolder.mview.findViewById(R.id.tSer);
-                String str = t.getText().toString();
-                ModelRequest mr = new ModelRequest();
-                mr.setStatus(str);
-
-                switch (mr.getStatus()){
-
-                    case "toprovide" : //1. -KduSkjJFaaSR8lYG_v3,-KdvBYlZhPjJZvBGf9dK
-                           // 2.-KdvA4JLQvMtPa_Xnci,-KduyWaZfGtIcS2Wc5dV
-                        viewHolder.mview.setOnClickListener(new View.OnClickListener() {
-                            String ke =getRef(position).getKey();
-                            @Override
-                            public void onClick(View v) {
-                                HashMap<String, Object> k = new HashMap<>();
-                                k.put("keyrequest",ke);
-                                Intent intent = new Intent(getActivity(),CheckBeautician.class);
-                                intent.putExtra("request",  k);
-                                startActivity(intent);
-
-
-                            }
-                        });
-                        break;
-                    case "Unpaid" :
-
-                        ImageView img1 = (ImageView)viewHolder.mview.findViewById(R.id.imageView3);
-                        ImageView img2 = (ImageView)viewHolder.mview.findViewById(R.id.imageView2);
-                        TextView to =(TextView)viewHolder.mview.findViewById(R.id.tcount);
-                        to.setVisibility(View.GONE);
-                        img1.setVisibility(View.GONE);
-                        img2.setVisibility(View.GONE);
-                        LinearLayout ll = (LinearLayout)viewHolder.mview.findViewById(R.id.afteroffer);
-                        ll.setVisibility(View.VISIBLE);
-                        viewHolder.mview.setOnClickListener(new View.OnClickListener() {
-                            final String ke =getRef(position).getKey();
-
-                            @Override
-                            public void onClick(View v) {
-                              String l = list.get(position);
-                               Log.d("list",""+l);
-                                HashMap<String, Object> k = new HashMap<>();
-                                k.put("keyrequest",ke);
-                                k.put("keyoffer", l);
-                                Intent intent = new Intent(getActivity(),OfferPage.class);
-                                intent.putExtra("request",  k);
-                                startActivity(intent);
-
-
-                            }
-                        });
-                        btnPayment = (Button)viewHolder.mview.findViewById(R.id.payment);
-                        btnPayment.setOnClickListener(new View.OnClickListener() {
-                            final String key = getRef(position).getKey();
-                            @Override
-                            public void onClick(View v) {
-                                String l = list.get(position);
-                                HashMap<String, Object> confirmValues = new HashMap<String, Object>();
-                                confirmValues.put("key",key);
-                                confirmValues.put("event",model.event);
-                                confirmValues.put("service",model.service);
-                                confirmValues.put("insidekey",l);
-
-                                Intent goPaymentP = new Intent(getActivity(),Payment.class);
-                                goPaymentP.putExtra("payment", confirmValues);
-                                startActivity(goPaymentP);
-                            }
-                        });
-                        btnMessage = (Button)viewHolder.mview.findViewById(R.id.message);
-                        btnMessage.setOnClickListener(new View.OnClickListener() {
-                            final String key = getRef(position).getKey();
-                            @Override
-                            public void onClick(View v) {
-
-                                HashMap<String,Object> map = new HashMap<String, Object>();
-                                map.put("key",key);
-                                map.put("event",model.event);
-                                //DatabaseReference ref = FirebaseDatabase.getInstance().getReference().getRoot().child("message").child(key);
-                                //ref.updateChildren(map);
-                                Intent goMessage = new Intent(getActivity(), MessagePage.class);
-                                goMessage.putExtra("message",map);
-                                startActivity(goMessage);
-                                //ref.updateChildren(map);
-                            }
-                        });
-                        btnReview=(Button)viewHolder.mview.findViewById(R.id.review);
-                        btnReview.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                Intent intent = new Intent(getActivity(),Review.class);
-                                startActivity(intent);
-                            }
-                        });
-
-                        break;
-                }
 
             }
         };
@@ -312,6 +188,12 @@ public class Request extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), CreateRequest.class);
+                intent.putExtra("type",  "");
+                intent.putExtra("beau_id", "");
+                intent.putExtra("service1", "");
+                intent.putExtra("service2", "");
+                intent.putExtra("service3", "");
+                intent.putExtra("service4", "");
                 startActivity(intent);
             }
         });
@@ -394,7 +276,10 @@ public class Request extends Fragment {
             super(itemView);
             mview=itemView;
         }
-
+        public void setProfile(Context context, String img){
+            ImageView tv =(ImageView)mview.findViewById(R.id.pic_pro);
+            Picasso.with(context).load(img).into(tv);
+        }
         public void setMaxprice(String maxprice){
             TextView tv =(TextView)mview.findViewById(R.id.tPrice);
             tv.setText(maxprice);
@@ -424,12 +309,16 @@ public class Request extends Fragment {
             String finalstatus = null;
             if(status.equals("1")||status.equals("2")){
                 finalstatus = "Offer";
+                setColorcircle("#33CC33");
             }
-            if(status.equals("3")){ finalstatus = "Unpaid"; }
-            if(status.equals("4")){ finalstatus = "To receive"; }
-            if(status.equals("5")){ finalstatus = "Completed"; }
-            //Button post_service = (Button)mview.findViewById(R.id.btnStat);
-            //post_service.setText(finalstatus);
+            if(status.equals("3")){ finalstatus = "To confirm"; setColorcircle("#FFFF33"); }
+            if(status.equals("4")){ finalstatus = "Unpaid"; setColorcircle("#FF9933");}
+            if(status.equals("5")){ finalstatus = "To receive"; setColorcircle("#FF0000"); }
+            if(status.equals("6")){ finalstatus = "To review"; setColorcircle("#660033"); }
+            if(status.equals("7")){ finalstatus = "Completed"; setColorcircle("#696969"); }
+            if(status.equals("8")){ finalstatus = "Cancel"; setColorcircle("#F5F5F5"); }
+            TextView post_service = (TextView)mview.findViewById(R.id.tSer);
+            post_service.setText(finalstatus);
 
         }
 

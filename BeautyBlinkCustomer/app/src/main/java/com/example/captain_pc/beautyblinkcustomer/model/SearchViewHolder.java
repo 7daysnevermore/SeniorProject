@@ -22,7 +22,7 @@ public class SearchViewHolder extends RecyclerView.ViewHolder  {
     SearchViewHolder binding;
     LinearLayout row;
     ImageView addpromotepic1, addpromotepic2, addpromotepic3,profile;
-    TextView namepromote ,locationpromote ,priceS01,priceS02,priceS03,priceS04;
+    TextView namepromote ,locationpromote ,priceS01,ratingprofile;
 
     public SearchViewHolder(View itemView){
         super(itemView);
@@ -51,6 +51,15 @@ public class SearchViewHolder extends RecyclerView.ViewHolder  {
     public void setLocation(String dist,String province){
         locationpromote = (TextView) mview.findViewById(R.id.locationpromote);
         locationpromote.setText(dist+", "+province);
+
+    }
+
+    public void setRating(String rating) {
+        ratingprofile = (TextView) mview.findViewById(R.id.ratingprofile);
+        if(!rating.equals("")){
+            ratingprofile.setText("Rating: "+rating);
+        }else{ ratingprofile.setText("Rating: 0"); }
+
 
     }
     public void setPicture1(Context context, String image){

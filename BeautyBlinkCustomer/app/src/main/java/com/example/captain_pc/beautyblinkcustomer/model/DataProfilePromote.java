@@ -9,7 +9,8 @@ import com.google.firebase.database.Exclude;
 public class DataProfilePromote {
 
     public String sub_district,district,province,username,picture1,picture2,picture3,BeauticianProfile,rating,uid;
-    public Integer S01,S02,S03,S04;
+    public Integer S01,S02,S03,S04,custnumber;
+    public Integer sumrate;
     public String latitude,longitude;
 
 
@@ -19,7 +20,7 @@ public class DataProfilePromote {
 
     public DataProfilePromote(Integer S01,Integer S02,Integer S03,Integer S04,String sub_district, String district, String province
             ,String username,String picture1,String picture2,String picture3, String BeauticianProfile, String rating, String uid
-    ,String latitude,String longitude){
+    ,String latitude,String longitude,Integer sumrate,Integer custnumber){
 
         this.S01 = S01;
         this.S02 = S02;
@@ -37,6 +38,8 @@ public class DataProfilePromote {
         this.uid = uid;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.custnumber = custnumber;
+        this.sumrate = sumrate;
     }
 
 

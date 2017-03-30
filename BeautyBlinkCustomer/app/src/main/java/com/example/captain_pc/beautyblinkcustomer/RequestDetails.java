@@ -8,12 +8,14 @@ import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -29,6 +31,7 @@ public class RequestDetails extends AppCompatActivity {
     HashMap<String, Object> requestValues;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
+    private ImageView photo;
     private Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +53,7 @@ public class RequestDetails extends AppCompatActivity {
         location = (TextView)findViewById(R.id.cusLo);
         maxprice = (TextView)findViewById(R.id.cusMax);
         numofPer = (TextView)findViewById(R.id.cusNum);
+        photo = (ImageView)findViewById(R.id.attachphoto);
 
         date.setText(requestValues.get("date").toString());
         service.setText((String)requestValues.get("service"));
@@ -59,6 +63,9 @@ public class RequestDetails extends AppCompatActivity {
         location.setText(requestValues.get("location").toString());
         maxprice.setText(requestValues.get("maxprice").toString()+" ฿");
         numofPer.setText(requestValues.get("numberofperson").toString());
+        if(!requestValues.get("reqpic").toString().equals("")){
+            Picasso.with(getApplicationContext()).load(requestValues.get("reqpic").toString()).into(photo);
+        }
 
         bt_coffer = (TextView) findViewById(R.id.bt_coffer);
 

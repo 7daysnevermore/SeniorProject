@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,6 +17,7 @@ import com.example.captain_pc.beautyblinkcustomer.fragments.PreviewPlannerFragme
 import com.example.captain_pc.beautyblinkcustomer.fragments.PreviewReviewFragment;
 import com.example.captain_pc.beautyblinkcustomer.model.BeauticianUser;
 import com.example.captain_pc.beautyblinkcustomer.model.DataPlanner;
+import com.example.captain_pc.beautyblinkcustomer.model.DataProfilePromote;
 import com.example.captain_pc.beautyblinkcustomer.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -46,6 +48,8 @@ public class BeauticianProfile extends AppCompatActivity implements View.OnClick
     public String b_uid;
     String previous=null;
     ImageView bt_gallery,bt_review,bt_planner,bt_detail;
+    LinearLayout sendReq;
+    Integer service1,service2,service3,service4;
 
     Toolbar toolbar;
 
@@ -73,6 +77,9 @@ public class BeauticianProfile extends AppCompatActivity implements View.OnClick
         bt_planner = (ImageView) findViewById(R.id.bt_planner);
         bt_review = (ImageView) findViewById(R.id.bt_review);
         bt_detail = (ImageView) findViewById(R.id.bt_detail);
+        sendReq = (LinearLayout) findViewById(R.id.sendReq);
+
+
 
 
         DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
@@ -86,6 +93,32 @@ public class BeauticianProfile extends AppCompatActivity implements View.OnClick
                 } else {
                     previewname.setText(user.username);
                 }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(BeauticianProfile.this, "Failed to load user information.",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        mRootRef.child("beautician-profilepromote").child(b_uid).addListenerForSingleValueEvent(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                for(DataSnapshot dateChild : dataSnapshot.getChildren()){
+                    DataProfilePromote user = dateChild.getValue(DataProfilePromote.class);
+                    if (user == null) {
+                        Toast.makeText(BeauticianProfile.this, "Error: could not fetch user.", Toast.LENGTH_LONG).show();
+                    } else {
+                        service1 = user.S01;
+                        service2 = user.S02;
+                        service3 = user.S03;
+                        service4 = user.S04;
+                    }
+                }
+
             }
 
             @Override
@@ -112,6 +145,7 @@ public class BeauticianProfile extends AppCompatActivity implements View.OnClick
         findViewById(R.id.bt_review).setOnClickListener(this);
         findViewById(R.id.bt_planner).setOnClickListener(this);
         findViewById(R.id.bt_detail).setOnClickListener(this);
+        findViewById(R.id.sendReq).setOnClickListener(this);
 
         DatabaseReference mRef = FirebaseDatabase.getInstance().getReference().child("beautician-planner").child(b_uid);
 
@@ -245,6 +279,16 @@ public class BeauticianProfile extends AppCompatActivity implements View.OnClick
                         .replace(R.id.previewContainer, PreviewDetailFragment.newInstance())
                         .addToBackStack(null)
                         .commit();
+                break;
+            case R.id.sendReq:
+                Intent intent = new Intent(BeauticianProfile.this,CreateRequest.class);
+                intent.putExtra("type",  "A");
+                intent.putExtra("beau_id", b_uid);
+                intent.putExtra("service1", String.valueOf(service1));
+                intent.putExtra("service2", String.valueOf(service2));
+                intent.putExtra("service3", String.valueOf(service3));
+                intent.putExtra("service4", String.valueOf(service4));
+                startActivity(intent);
                 break;
         }
     }

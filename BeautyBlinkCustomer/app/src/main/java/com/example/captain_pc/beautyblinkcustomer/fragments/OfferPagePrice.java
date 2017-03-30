@@ -103,7 +103,7 @@ public class OfferPagePrice extends Fragment {
                     viewHolder.setImage(getActivity().getApplicationContext(),model.beaupic);
                 }
                 if (!model.reqpic.equals("")) {
-                    viewHolder.setRequestPic(getActivity().getApplicationContext(), model.reqpic);
+                    viewHolder.setRequestPic(getActivity().getApplicationContext(), model.offerpic);
                 }
                 /*if (!model.offerpic.equals("")) {
                     viewHolder.setOfferPic(getActivity().getApplicationContext(), model.offerpic);
