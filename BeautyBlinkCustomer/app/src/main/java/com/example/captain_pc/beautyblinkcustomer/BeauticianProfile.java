@@ -54,7 +54,7 @@ public class BeauticianProfile extends AppCompatActivity implements View.OnClick
     Toolbar toolbar;
 
     String uid;
-    TextView previewname;
+    TextView previewname,verified_detail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +80,9 @@ public class BeauticianProfile extends AppCompatActivity implements View.OnClick
         sendReq = (LinearLayout) findViewById(R.id.sendReq);
 
 
+
+        verified_detail = (TextView) findViewById(R.id.verified_detail);
+        verified_detail.setOnClickListener(this);
 
 
         DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
@@ -204,6 +207,9 @@ public class BeauticianProfile extends AppCompatActivity implements View.OnClick
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.verified_detail:
+                startActivity(new Intent(BeauticianProfile.this, VerifiedShow.class));
+                break;
             case R.id.bt_gallery:
                 if(previous=="review"){
                     bt_review.setImageResource(R.mipmap.request_702);

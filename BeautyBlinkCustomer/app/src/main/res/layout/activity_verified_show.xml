@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/row_color"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:titleTextColor="#1111">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/verifyToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="50dp"
+                android:gravity="center"
+                android:text="Profile Verification"
+                android:textSize="25dp" />
+
+        </RelativeLayout>
+
+
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/even_color"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            android:orientation="vertical"
+            android:paddingBottom="7dp"
+            android:paddingTop="7dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.2"
+                android:gravity="center"
+                android:text="Trust and Verification"
+                android:textSize="22sp" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="@android:color/darker_gray" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="170dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="7dp"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:background="#ffffff"
+                    android:layout_marginRight="3dp"
+                    android:paddingBottom="5dp"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/email_img"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:src="@mipmap/mail_confirm1"
+                        android:layout_weight="1.2"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Email Confirmation"
+                        android:textColor="#91dc5a"
+                        android:textSize="15sp"
+                        android:gravity="center"
+                        android:layout_weight="2.2" />
+
+                    <!--<Button
+                        android:id="@+id/email"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:text="Verified"
+                        android:layout_weight="1.9"/>-->
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:gravity="center"
+                        android:textSize="17sp"
+                        android:text="Verified"
+                        android:layout_weight="1.9"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="3dp"
+                    android:paddingBottom="5dp"
+                    android:orientation="vertical"
+                    android:background="#ffffff"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/identity_img"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginBottom="5dp"
+                        android:src="@mipmap/useradd"
+                        android:layout_weight="1.2" />
+
+                    <TextView
+                        android:id="@+id/identitytext"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Identity Verification"
+                        android:textSize="15sp"
+                        android:gravity="center"
+                        android:layout_weight="2.2" />
+
+
+                    <TextView
+                        android:id="@+id/verifieduser"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:gravity="center"
+                        android:textSize="17sp"
+                        android:text="Not verified yet"
+                        android:layout_weight="1.9"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:background="@android:color/darker_gray"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="170dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="7dp"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingBottom="5dp"
+                    android:orientation="vertical"
+                    android:background="#ffffff"
+                    android:layout_marginRight="3dp"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/certificate_img"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginBottom="5dp"
+                        android:src="@mipmap/diploma"
+                        android:layout_weight="1.2"/>
+
+                    <TextView
+                        android:id="@+id/cert1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Makeup Cert."
+                        android:textSize="15sp"
+                        android:gravity="center"
+                        android:layout_weight="2.2" />
+
+
+                    <TextView
+                        android:id="@+id/verifieduser1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:gravity="center"
+                        android:textSize="17sp"
+                        android:text="Not verified yet"
+                        android:layout_weight="1.9"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingBottom="5dp"
+                    android:orientation="vertical"
+                    android:background="#ffffff"
+                    android:layout_marginLeft="3dp"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/certificate_img2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+
+                        android:layout_marginBottom="5dp"
+                        android:src="@mipmap/diploma"
+                        android:layout_weight="1.2"/>
+
+                    <TextView
+                        android:id="@+id/cert2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Hairstyle Cert."
+                        android:textSize="15sp"
+                        android:gravity="center"
+                        android:layout_weight="2.2" />
+
+                    <TextView
+                        android:id="@+id/verifieduser2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:gravity="center"
+                        android:textSize="17sp"
+                        android:text="Not verified yet"
+                        android:layout_weight="1.9"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:background="@android:color/darker_gray"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="170dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="7dp"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingBottom="5dp"
+                    android:orientation="vertical"
+                    android:background="#ffffff"
+                    android:layout_marginRight="3dp"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/certificate_img3"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginBottom="5dp"
+                        android:src="@mipmap/diploma"
+                        android:layout_weight="1.2"/>
+
+                    <TextView
+                        android:id="@+id/cert3"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Hairdressing Cert."
+                        android:textSize="15sp"
+                        android:gravity="center"
+                        android:layout_weight="2.2" />
+
+                    <TextView
+                        android:id="@+id/verifieduser3"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:gravity="center"
+                        android:textSize="17sp"
+                        android:text="Not verified yet"
+                        android:layout_weight="1.9"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:background="@color/row_color"
+                    android:layout_marginLeft="3dp"
+                    android:layout_weight="1">
+
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
