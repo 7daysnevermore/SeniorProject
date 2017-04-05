@@ -1,58 +1,42 @@
 package com.example.captain_pc.beautyblinkcustomer.fragments;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Paint;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import android.widget.Button;
-import android.widget.EditText;
-
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-
 import com.example.captain_pc.beautyblinkcustomer.PromotionCate;
 import com.example.captain_pc.beautyblinkcustomer.PromotionDetails;
 import com.example.captain_pc.beautyblinkcustomer.R;
-import com.example.captain_pc.beautyblinkcustomer.SearchDetails;
-import com.example.captain_pc.beautyblinkcustomer.model.PromotionViewHolder;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.example.captain_pc.beautyblinkcustomer.model.DataPromotion;
+import com.example.captain_pc.beautyblinkcustomer.model.PromotionViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
-import com.squareup.picasso.Picasso;
+
 import java.util.HashMap;
 
-public class Search extends Fragment {
+/**
+ * Created by NunePC on 6/4/2560.
+ */
 
-    private EditText mF;
-    private Button mB;
-    private DatabaseReference mRef;
-    private TextView postP,seeall;
+public class FragmentProSer1 extends Fragment {
+
     private RecyclerView recyclerView;
     private FirebaseAuth mAuth;
     private FirebaseUser mFirebaseUser;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference databaseReference;
-    private RelativeLayout btn_cate1, btn_cate2, btn_cate3, btn_cate4;
 
-    public Search() {
+    public FragmentProSer1() {
         // Required empty public constructor
     }
 
@@ -60,37 +44,28 @@ public class Search extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.fragment_search, container, false);
-        mRef = FirebaseDatabase.getInstance().getReference();
-        // mRef.setValue(getContext());
+        View rootView = inflater.inflate(R.layout.fragment_proser1,container,false);
+
         initInstance(rootView);
         return rootView;
     }
 
-    private void initInstance(final View rootView) {
+    private void initInstance(View rootView) {
 
         databaseReference = FirebaseDatabase.getInstance().getReference().child("promotion");
         Query query1 = databaseReference.orderByChild("timestamp");
+        final DatabaseReference databaseRef = query1.getRef();
+        Query dataQuery1 = databaseRef.orderByChild("service").equalTo("S01");
         //professor promotion feeds
-        recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerview);
         recyclerView.setHasFixedSize(true);
-        seeall = (TextView) rootView.findViewById(R.id.seeall);
-        seeall.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent cate = new Intent(getActivity(),PromotionCate.class);
-                cate.putExtra("service","");
-                startActivity(cate);
-            }
-        });
 
         //Order from latest data
         final GridLayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 2);
         mLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
 
-
         final FirebaseRecyclerAdapter<DataPromotion, PromotionViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<DataPromotion, PromotionViewHolder>
-                (DataPromotion.class, R.layout.promotion_row, PromotionViewHolder.class, query1) {
+                (DataPromotion.class, R.layout.promotion_row, PromotionViewHolder.class, dataQuery1) {
 
             @Override
             protected void populateViewHolder(PromotionViewHolder viewHolder, final DataPromotion model, final int position) {
@@ -154,87 +129,33 @@ public class Search extends Fragment {
         recyclerView.setAdapter(firebaseRecyclerAdapter);
         recyclerView.setLayoutManager(mLayoutManager);
 
-
-        rootView.findViewById(R.id.btn_cate1).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent cate = new Intent(getActivity(),SearchDetails.class);
-                cate.putExtra("search","S01");
-                cate.putExtra("word","");
-                cate.putExtra("lat", "");
-                cate.putExtra("lng", "");
-                startActivity(cate);
-            }
-        });
-        rootView.findViewById(R.id.btn_cate2).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent cate = new Intent(getActivity(),SearchDetails.class);
-                cate.putExtra("search","S02");
-                cate.putExtra("word","");
-                cate.putExtra("lat", "");
-                cate.putExtra("lng", "");
-                startActivity(cate);
-            }
-        });
-        rootView.findViewById(R.id.btn_cate3).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent cate = new Intent(getActivity(),SearchDetails.class);
-                cate.putExtra("search","S03");
-                cate.putExtra("word","");
-                cate.putExtra("lat", "");
-                cate.putExtra("lng", "");
-                startActivity(cate);
-            }
-        });
-        rootView.findViewById(R.id.btn_cate4).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent cate = new Intent(getActivity(),SearchDetails.class);
-                cate.putExtra("search","S04");
-                cate.putExtra("word","");
-                cate.putExtra("lat", "");
-                cate.putExtra("lng", "");
-                startActivity(cate);
-            }
-        });
-
-
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-    }
+    public void onStart(){ super.onStart(); }
 
     @Override
-    public void onStop() {
-        super.onStop();
-    }
+    public void onStop(){ super.onStop(); }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(Bundle outState){
         super.onSaveInstanceState(outState);
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
+    public void onActivityCreated(Bundle savedInstanceState){
         super.onActivityCreated(savedInstanceState);
 
-        if (savedInstanceState != null) {
+        if(savedInstanceState != null){
             //Restore Instance State here
         }
     }
 
-    public static Search newInstance() {
-        Search fragment = new Search();
+    public static FragmentProSer1 newInstance(){
+        FragmentProSer1 fragment = new FragmentProSer1();
         Bundle args = new Bundle(); //Argument
         fragment.setArguments(args);
         return fragment;
     }
 
-
 }
-
-

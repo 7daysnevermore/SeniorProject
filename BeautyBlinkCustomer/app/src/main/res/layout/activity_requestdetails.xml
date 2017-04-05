@@ -5,24 +5,26 @@
     android:layout_width="match_parent"
     android:background="@color/row_color"
     android:layout_height="match_parent">
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:background="?attr/colorPrimary"
         app:layout_scrollFlags="scroll|enterAlways"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true">
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
         <TextView
+            android:id="@+id/edit_request"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="right"
+            android:layout_marginRight="20dp"
             android:gravity="center_vertical"
             android:text="Edit"
-            android:textSize="18dp"
-            android:id="@+id/edit_request"
-            android:layout_marginRight="20dp" />
+            android:textSize="18dp" />
     </android.support.v7.widget.Toolbar>
 
     <RelativeLayout

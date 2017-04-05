@@ -94,10 +94,11 @@ public class CreateRequest extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_request);
-
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
         Bundle bundle = getIntent().getExtras();
@@ -951,7 +952,9 @@ public class CreateRequest extends AppCompatActivity {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
                 //NavUtils.navigateUpFromSameTask(this);
-                onBackPressed();
+                Intent intent = new Intent(CreateRequest.this,MainActivity.class);
+                intent.putExtra("menu","request");
+                startActivity(intent);
                 return true;
         }
         return super.onOptionsItemSelected(item);

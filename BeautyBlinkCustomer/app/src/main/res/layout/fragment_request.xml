@@ -54,16 +54,40 @@
                         android:layout_height="40dp"
                         android:background="#ffffff"
                         android:orientation="horizontal">
+
                         <Button
+                            android:id="@+id/btnOffer"
+                            style="@style/Widget.AppCompat.Button.Colored"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/btnOffer"
-                            android:text="Offer"
-                            android:textStyle="bold"
                             android:minHeight="0dp"
                             android:minWidth="0dp"
+                            android:text="Request"
                             android:textSize="14dp"
-                            style="@style/Widget.AppCompat.Button.Colored"/>
+                            android:textStyle="bold" />
+
+                        <Button
+                            android:id="@+id/btnOffer2"
+                            style="@style/Widget.AppCompat.Button.Colored"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:minHeight="0dp"
+                            android:minWidth="0dp"
+                            android:text="Offer"
+                            android:textSize="14dp"
+                            android:textStyle="bold" />
+
+                        <Button
+                            android:id="@+id/btnToconfirm"
+                            style="@style/Widget.AppCompat.Button.Colored"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:minHeight="0dp"
+                            android:minWidth="0dp"
+                            android:text="To confirm"
+                            android:textSize="14dp"
+                            android:textStyle="bold" />
+
                         <Button
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -87,13 +111,35 @@
                         <Button
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/btnCompleted"
-                            android:text="Completed"
+                            android:id="@+id/btnToreview"
+                            android:text="To review"
                             android:minHeight="0dp"
                             android:minWidth="0dp"
                             android:textStyle="bold"
                             android:textSize="14dp"
                             style="@style/Widget.AppCompat.Button.Colored"/>
+
+                        <Button
+                            android:id="@+id/btnCompleted"
+                            style="@style/Widget.AppCompat.Button.Colored"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:minHeight="0dp"
+                            android:minWidth="0dp"
+                            android:text="Completed"
+                            android:textSize="14dp"
+                            android:textStyle="bold" />
+
+                        <Button
+                            android:id="@+id/btnCancel"
+                            style="@style/Widget.AppCompat.Button.Colored"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:minHeight="0dp"
+                            android:minWidth="0dp"
+                            android:text="Cancel"
+                            android:textSize="14dp"
+                            android:textStyle="bold" />
 
 
                     </LinearLayout>

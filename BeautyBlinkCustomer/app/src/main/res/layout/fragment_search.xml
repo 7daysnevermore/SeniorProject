@@ -16,10 +16,10 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:layout_marginBottom="15dp"
                 android:layout_width="match_parent"
-                android:background="#FFFFFF"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:background="#FFFFFF"
                 android:orientation="vertical">
 
                 <View
@@ -28,13 +28,13 @@
                     android:background="@android:color/darker_gray" />
 
                 <TextView
+                    android:id="@+id/textView3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:textSize="18sp"
                     android:background="#F5F5F5"
+                    android:padding="10dp"
                     android:text="Categories"
-                    android:id="@+id/textView3" />
+                    android:textSize="18sp" />
 
                 <View
                     android:layout_width="match_parent"
@@ -47,54 +47,54 @@
                     android:orientation="horizontal">
 
                     <RelativeLayout
-                        android:layout_weight="1"
                         android:id="@+id/btn_cate1"
-                        android:padding="8dp"
                         android:layout_width="match_parent"
-                        android:layout_height="120dp">
+                        android:layout_height="120dp"
+                        android:layout_weight="1"
+                        android:padding="8dp">
 
                         <ImageView
+                            android:id="@+id/cate1"
                             android:layout_width="match_parent"
                             android:layout_height="120dp"
-                            android:id="@+id/cate1"
-                            android:src="@drawable/makehaircate"/>
+                            android:src="@drawable/makehaircate" />
 
                         <TextView
-                            android:gravity="center"
-                            android:layout_alignBottom="@+id/cate1"
-                            android:textSize="17sp"
-                            android:background="@drawable/cate2"
                             android:layout_width="match_parent"
                             android:layout_height="23dp"
+                            android:layout_alignBottom="@+id/cate1"
+                            android:background="@drawable/cate2"
+                            android:gravity="center"
+                            android:text="MakeupandHair"
                             android:textColor="#FFFFFF"
-                            android:text="MakeupandHair"/>
+                            android:textSize="17sp" />
 
                     </RelativeLayout>
 
                     <RelativeLayout
-                        android:layout_weight="1"
                         android:id="@+id/btn_cate2"
-                        android:paddingRight="8dp"
-                        android:paddingBottom="8dp"
-                        android:paddingTop="8dp"
                         android:layout_width="match_parent"
-                        android:layout_height="120dp">
+                        android:layout_height="120dp"
+                        android:layout_weight="1"
+                        android:paddingBottom="8dp"
+                        android:paddingRight="8dp"
+                        android:paddingTop="8dp">
 
                         <ImageView
+                            android:id="@+id/cate2"
                             android:layout_width="match_parent"
                             android:layout_height="120dp"
-                            android:id="@+id/cate2"
-                            android:src="@drawable/s02"/>
+                            android:src="@drawable/s02" />
 
                         <TextView
-                            android:gravity="center"
-                            android:layout_alignBottom="@+id/cate2"
-                            android:textSize="17sp"
-                            android:textColor="#FFFFFF"
-                            android:background="@drawable/cate2"
                             android:layout_width="match_parent"
                             android:layout_height="23dp"
-                            android:text="HairStyle"/>
+                            android:layout_alignBottom="@+id/cate2"
+                            android:background="@drawable/cate2"
+                            android:gravity="center"
+                            android:text="HairStyle"
+                            android:textColor="#FFFFFF"
+                            android:textSize="17sp" />
 
                     </RelativeLayout>
 
@@ -111,8 +111,8 @@
                         android:layout_height="120dp"
                         android:layout_weight="1"
                         android:paddingBottom="8dp"
-                        android:paddingRight="8dp"
-                        android:paddingLeft="8dp">
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp">
 
                         <ImageView
                             android:id="@+id/cate3"
@@ -121,13 +121,13 @@
                             android:src="@drawable/s03" />
 
                         <TextView
-                            android:layout_alignBottom="@+id/cate3"
-                            android:textColor="#FFFFFF"
-                            android:background="@drawable/cate2"
                             android:layout_width="match_parent"
                             android:layout_height="23dp"
+                            android:layout_alignBottom="@+id/cate3"
+                            android:background="@drawable/cate2"
                             android:gravity="center"
                             android:text="Makeup"
+                            android:textColor="#FFFFFF"
                             android:textSize="17sp" />
 
                     </RelativeLayout>
@@ -147,13 +147,13 @@
                             android:src="@drawable/s041" />
 
                         <TextView
-                            android:layout_alignBottom="@+id/cate4"
-                            android:textColor="#FFFFFF"
-                            android:background="@drawable/cate2"
                             android:layout_width="match_parent"
                             android:layout_height="23dp"
+                            android:layout_alignBottom="@+id/cate4"
+                            android:background="@drawable/cate2"
                             android:gravity="center"
                             android:text="Hairdressing"
+                            android:textColor="#FFFFFF"
                             android:textSize="17sp" />
 
                     </RelativeLayout>
@@ -165,8 +165,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="#FFFFFF">
+                android:background="#FFFFFF"
+                android:orientation="vertical">
 
                 <View
                     android:layout_width="match_parent"
@@ -176,30 +176,31 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="8dp"
                     android:background="#F5F5F5"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:padding="8dp">
 
 
                     <TextView
+                        android:id="@+id/textView4"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
                         android:padding="3dp"
-                        android:textSize="18sp"
                         android:text="Promotion"
-                        android:id="@+id/textView4" />
+                        android:textSize="18sp" />
 
                     <TextView
-                        android:layout_marginRight="5dp"
                         android:layout_width="match_parent"
-                        android:padding="3dp"
                         android:layout_height="match_parent"
+                        android:layout_marginRight="5dp"
+                        android:id="@+id/seeall"
                         android:layout_weight="2"
                         android:gravity="end"
-                        android:textStyle="italic"
+                        android:padding="3dp"
                         android:text="See all..."
-                        android:textSize="15sp" />
+                        android:textSize="15sp"
+                        android:textStyle="italic" />
 
                 </LinearLayout>
 
@@ -209,20 +210,17 @@
                     android:background="@color/colorBG" />
 
 
-
-
                 <!-- TODO: Update blank fragment layout -->
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:scrollbars="vertical"
                     android:layout_below="@+id/create_pro"
+                    android:scrollbars="vertical"
 
                     />
 
             </LinearLayout>
-
 
 
         </LinearLayout>

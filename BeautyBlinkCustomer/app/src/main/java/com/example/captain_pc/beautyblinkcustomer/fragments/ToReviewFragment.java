@@ -1,8 +1,6 @@
 package com.example.captain_pc.beautyblinkcustomer.fragments;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,7 +9,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.example.captain_pc.beautyblinkcustomer.CreateRequest;
 import com.example.captain_pc.beautyblinkcustomer.HiredDetails;
 import com.example.captain_pc.beautyblinkcustomer.R;
 import com.example.captain_pc.beautyblinkcustomer.RequestDetails;
@@ -23,9 +26,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
-public class UnpaidFragment extends Fragment {
+/**
+ * Created by NunePC on 4/4/2560.
+ */
+
+public class ToReviewFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private FirebaseAuth mAuth;
@@ -34,8 +43,7 @@ public class UnpaidFragment extends Fragment {
     private DatabaseReference databaseReference;
     private Query dataQuery1;
     String uid,kg;
-
-    public UnpaidFragment() {
+    public ToReviewFragment() {
         // Required empty public constructor
     }
 
@@ -43,7 +51,7 @@ public class UnpaidFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.fragment_unpaid,container,false);
+        View rootView = inflater.inflate(R.layout.fragment_toreview,container,false);
         mAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mAuth.getCurrentUser();
         uid = mFirebaseUser.getUid().toString();
@@ -55,7 +63,7 @@ public class UnpaidFragment extends Fragment {
 
         databaseReference = FirebaseDatabase.getInstance().getReference().child("customer-request1").child(mFirebaseUser.getUid());
         final DatabaseReference databaseRef = databaseReference.getRef();
-        dataQuery1 = databaseRef.orderByChild("status").equalTo("4");
+        dataQuery1 = databaseRef.orderByChild("status").equalTo("6");
         //professor promotion feeds
         recyclerView =(RecyclerView)rootView.findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
@@ -143,7 +151,6 @@ public class UnpaidFragment extends Fragment {
 
     }
 
-
     @Override
     public void onStart(){ super.onStart(); }
 
@@ -164,8 +171,8 @@ public class UnpaidFragment extends Fragment {
         }
     }
 
-    public static UnpaidFragment newInstance(){
-        UnpaidFragment fragment = new UnpaidFragment();
+    public static ToReviewFragment newInstance(){
+        ToReviewFragment fragment = new ToReviewFragment();
         Bundle args = new Bundle(); //Argument
         fragment.setArguments(args);
         return fragment;

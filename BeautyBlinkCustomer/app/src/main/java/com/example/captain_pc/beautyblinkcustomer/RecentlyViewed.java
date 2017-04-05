@@ -28,6 +28,7 @@ public class RecentlyViewed extends AppCompatActivity {
         //up button
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         btn_write_review = (Button) findViewById(R.id.btn_write_review);

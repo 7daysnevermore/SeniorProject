@@ -1,5 +1,6 @@
 package com.example.captain_pc.beautyblinkcustomer;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.media.Image;
 import android.net.Uri;
@@ -51,6 +52,7 @@ public class Payment extends AppCompatActivity {
     private String beauid;
     private DatabaseReference databaseReference;
     private Uri imageUri = null;
+    private ProgressDialog progressDialog;
     private int SELECT_FILE =1;
 
     String key,keyin,uid,uBeau;
@@ -69,6 +71,7 @@ public class Payment extends AppCompatActivity {
         }
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
@@ -99,6 +102,9 @@ public class Payment extends AppCompatActivity {
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                progressDialog.setMessage("Sending ...");
+                progressDialog.show();
 
                 final String ddate = editDate.getText().toString();
                 final String time = editTime.getText().toString();
@@ -149,10 +155,10 @@ public class Payment extends AppCompatActivity {
                             DatabaseReference mBeauRef = FirebaseDatabase.getInstance().getReference().child("/beautician-received/" +beauid+"/"+confirmValues.get("key").toString());
                             mBeauRef.child("status").setValue(status);
 
+                            progressDialog.dismiss();
                             Intent intent = new Intent(Payment.this,MainActivity.class);
                             intent.putExtra("menu", "request");
                             startActivity(intent);
-
                         }
                     });
 

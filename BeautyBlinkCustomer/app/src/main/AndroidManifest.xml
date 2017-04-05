@@ -37,7 +37,7 @@
         <activity android:name=".SearchDetails"></activity>
         <activity android:name=".PromotionDetails"></activity>
         <activity android:name=".SpecificSearch"></activity>
-
+        <activity android:name=".PromotionCate"></activity>
         <activity android:name=".MyAccount"></activity>
         <activity android:name=".EditProfile"></activity>
         <activity android:name=".MyLikes"></activity>

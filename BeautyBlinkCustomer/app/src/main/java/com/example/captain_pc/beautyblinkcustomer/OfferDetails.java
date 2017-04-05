@@ -31,7 +31,7 @@ import java.util.HashMap;
 
 public class OfferDetails extends AppCompatActivity {
 
-    private TextView date,service,event,time,special,location,maxprice,numofPer,amount,beauname,hire,decline,settime,setlocation;
+    private TextView date,service,event,time,special,location,maxprice,numofPer,amount,beauname,hire,decline,settime,setlocation,see;
     ImageView picpro,attachphoto,offerphoto;
     HashMap<String, Object> requestValues;
     private FirebaseAuth mFirebaseAuth;
@@ -46,6 +46,7 @@ public class OfferDetails extends AppCompatActivity {
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
@@ -64,6 +65,7 @@ public class OfferDetails extends AppCompatActivity {
         picpro = (ImageView) findViewById(R.id.pic_pro);
         attachphoto = (ImageView) findViewById(R.id.attachphoto);
         offerphoto = (ImageView) findViewById(R.id.offerphoto);
+        see = (TextView)findViewById(R.id.see);
 
         if(requestValues.get("beauprofile")!=null){
             Picasso.with(getApplicationContext()).load(requestValues.get("beauprofile").toString()).fit().centerCrop().into(picpro);
@@ -174,6 +176,18 @@ public class OfferDetails extends AppCompatActivity {
                 mRootRef.child("status").setValue("6");
                 Intent intent = new Intent(OfferDetails.this, MainActivity.class);
                 intent.putExtra("menu", "request");
+                startActivity(intent);
+
+            }
+
+        });
+
+        see.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(OfferDetails.this, BeauticianProfile.class);
+                intent.putExtra("from", "offer");
+                intent.putExtra("uid", requestValues.get("beauid").toString());
                 startActivity(intent);
 
             }

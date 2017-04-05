@@ -56,6 +56,7 @@ public class OfferPage extends AppCompatActivity implements View.OnClickListener
         requestValues = (HashMap<String, Object>) getIntent().getExtras().getSerializable("request");
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         requestid = requestValues.get("key").toString();
 

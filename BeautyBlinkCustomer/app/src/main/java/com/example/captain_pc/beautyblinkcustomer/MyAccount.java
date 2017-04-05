@@ -44,6 +44,7 @@ public class MyAccount extends AppCompatActivity implements View.OnClickListener
         //up button
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //Initialize Firebase Auth

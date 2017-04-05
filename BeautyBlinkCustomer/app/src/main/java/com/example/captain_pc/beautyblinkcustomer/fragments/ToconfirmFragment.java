@@ -1,8 +1,6 @@
 package com.example.captain_pc.beautyblinkcustomer.fragments;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -25,7 +23,11 @@ import com.google.firebase.database.Query;
 
 import java.util.HashMap;
 
-public class UnpaidFragment extends Fragment {
+/**
+ * Created by NunePC on 4/4/2560.
+ */
+
+public class ToconfirmFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private FirebaseAuth mAuth;
@@ -35,7 +37,7 @@ public class UnpaidFragment extends Fragment {
     private Query dataQuery1;
     String uid,kg;
 
-    public UnpaidFragment() {
+    public ToconfirmFragment() {
         // Required empty public constructor
     }
 
@@ -43,7 +45,7 @@ public class UnpaidFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.fragment_unpaid,container,false);
+        View rootView = inflater.inflate(R.layout.fragment_toconfirm,container,false);
         mAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mAuth.getCurrentUser();
         uid = mFirebaseUser.getUid().toString();
@@ -55,7 +57,7 @@ public class UnpaidFragment extends Fragment {
 
         databaseReference = FirebaseDatabase.getInstance().getReference().child("customer-request1").child(mFirebaseUser.getUid());
         final DatabaseReference databaseRef = databaseReference.getRef();
-        dataQuery1 = databaseRef.orderByChild("status").equalTo("4");
+        dataQuery1 = databaseRef.orderByChild("status").equalTo("3");
         //professor promotion feeds
         recyclerView =(RecyclerView)rootView.findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
@@ -143,7 +145,6 @@ public class UnpaidFragment extends Fragment {
 
     }
 
-
     @Override
     public void onStart(){ super.onStart(); }
 
@@ -164,8 +165,8 @@ public class UnpaidFragment extends Fragment {
         }
     }
 
-    public static UnpaidFragment newInstance(){
-        UnpaidFragment fragment = new UnpaidFragment();
+    public static ToconfirmFragment newInstance(){
+        ToconfirmFragment fragment = new ToconfirmFragment();
         Bundle args = new Bundle(); //Argument
         fragment.setArguments(args);
         return fragment;

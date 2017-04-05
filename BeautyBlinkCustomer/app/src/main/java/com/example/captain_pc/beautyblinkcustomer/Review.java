@@ -1,5 +1,6 @@
 package com.example.captain_pc.beautyblinkcustomer;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
@@ -52,6 +53,7 @@ public class Review extends AppCompatActivity {
     private StorageReference storageReference,filepath;
     private Integer ratingSum;
     private String beauid;
+    private ProgressDialog progressDialog;
     private DatabaseReference databaseReference;
 
 
@@ -61,6 +63,7 @@ public class Review extends AppCompatActivity {
         setContentView(R.layout.activity_review);
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mAuth = FirebaseAuth.getInstance();
@@ -99,6 +102,9 @@ public class Review extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                progressDialog.setMessage("Reviewing ...");
+                progressDialog.show();
+
                 final String topic = reviewTopic.getText().toString();
                 final String desc = reviewDesc.getText().toString();
 
@@ -119,6 +125,7 @@ public class Review extends AppCompatActivity {
                                 }else {
 
                                     DatabaseReference ratingPro = FirebaseDatabase.getInstance().getReference().child("profilepromote");
+
 
                                     if(!user.rating.equals("")){
                                         ratingSum = user.sumrate+str;
@@ -214,6 +221,7 @@ public class Review extends AppCompatActivity {
             }
         });
 
+        progressDialog.dismiss();
 
         Intent intent = new Intent(Review.this, MainActivity.class);
         intent.putExtra("menu", "request");

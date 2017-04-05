@@ -22,6 +22,7 @@ public class VerifiedShow extends AppCompatActivity implements View.OnClickListe
         //up button
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
@@ -33,8 +34,7 @@ public class VerifiedShow extends AppCompatActivity implements View.OnClickListe
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
                 //NavUtils.navigateUpFromSameTask(this);
-                Intent intent = new Intent(VerifiedShow.this,BeauticianProfile.class);
-                startActivity(intent);
+                onBackPressed();
                 return true;
         }
         return super.onOptionsItemSelected(item);

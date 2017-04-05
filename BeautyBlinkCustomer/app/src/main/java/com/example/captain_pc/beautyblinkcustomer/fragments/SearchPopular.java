@@ -312,7 +312,9 @@ public class SearchPopular extends Fragment {
                         cPro.putExtra("uid",  model.uid);
                         cPro.putExtra("username",model.username);
                         cPro.putExtra("search", search.search);
-                        cPro.putExtra("word", "");
+                        cPro.putExtra("lat", search.lat);
+                        cPro.putExtra("lng", search.lng);
+                        cPro.putExtra("word", search.wording);
                         startActivity(cPro);
                     }
                 });

@@ -80,8 +80,10 @@ public class OfferPagePopular extends Fragment {
         recyclerView =(RecyclerView)rootView.findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
 
+        final DatabaseReference databaseRef = databaseReference.getRef();
+        dataQuery1 = databaseRef.orderByChild("rating");
         //Get search to order in fragment
-        QueryRecycle(databaseReference);
+        QueryRecycle(dataQuery1);
 
 
     }

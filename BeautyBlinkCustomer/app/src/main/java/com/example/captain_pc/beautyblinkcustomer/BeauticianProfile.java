@@ -45,7 +45,7 @@ public class BeauticianProfile extends AppCompatActivity implements View.OnClick
     public HashMap<String,Integer> eventday;
     public ArrayList<HashMap<String,Integer>> listevent;
 
-    public String b_uid;
+    public String b_uid,from=null;
     String previous=null;
     ImageView bt_gallery,bt_review,bt_planner,bt_detail;
     LinearLayout sendReq;
@@ -64,6 +64,7 @@ public class BeauticianProfile extends AppCompatActivity implements View.OnClick
         //up button
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mFirebaseAuth = FirebaseAuth.getInstance();
@@ -195,10 +196,16 @@ public class BeauticianProfile extends AppCompatActivity implements View.OnClick
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
                 //NavUtils.navigateUpFromSameTask(this);
-                Intent cPro = new Intent(this,BeauticianProfile.class);
-                cPro.putExtra("search", getIntent().getStringExtra("search"));
-                cPro.putExtra("word", "");
-                startActivity(cPro);
+                if(getIntent().getStringExtra("from")!=null){
+                    onBackPressed();
+                }else{
+                    Intent cPro = new Intent(this,SearchDetails.class);
+                    cPro.putExtra("search", getIntent().getStringExtra("search"));
+                    cPro.putExtra("lat", getIntent().getStringExtra("lat"));
+                    cPro.putExtra("lng", getIntent().getStringExtra("lng"));
+                    cPro.putExtra("word", "");
+                    startActivity(cPro);
+                }
                 return true;
         }
         return super.onOptionsItemSelected(item);
