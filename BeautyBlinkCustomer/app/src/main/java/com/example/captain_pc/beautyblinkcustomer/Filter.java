@@ -85,24 +85,6 @@ public class Filter extends AppCompatActivity {
             }
 
         });
-        verified.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                verified.setBackgroundColor(Color.parseColor("#FFE4E1"));
-                unverified.setBackgroundColor(Color.parseColor("#E8E8E8"));
-                condition = "verified";
-            }
-
-        });
-        unverified.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                unverified.setBackgroundColor(Color.parseColor("#FFE4E1"));
-                verified.setBackgroundColor(Color.parseColor("#E8E8E8"));
-                condition = "unverified";
-            }
-
-        });
         apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
