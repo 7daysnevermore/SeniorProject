@@ -84,6 +84,8 @@ public class SpecificSearch extends AppCompatActivity  {
                         cPro.putExtra("word","");
                         cPro.putExtra("lat",String.valueOf(place.getLatLng().latitude));
                         cPro.putExtra("lng",String.valueOf(place.getLatLng().longitude));
+                        cPro.putExtra("min", "");
+                        cPro.putExtra("max", "");
                         startActivity(cPro);
                 Log.i(TAG, "Place: " + place.getName());
 

@@ -21,7 +21,7 @@ public class SearchViewHolder extends RecyclerView.ViewHolder  {
     public ImageView like;
     SearchViewHolder binding;
     LinearLayout row;
-    ImageView addpromotepic1, addpromotepic2, addpromotepic3,profile;
+    ImageView addpromotepic1, addpromotepic2, addpromotepic3,profile,verified;
     TextView namepromote ,locationpromote ,priceS01,ratingprofile;
 
     public SearchViewHolder(View itemView){
@@ -42,6 +42,11 @@ public class SearchViewHolder extends RecyclerView.ViewHolder  {
 
     public void setUnLike(){
         like.setImageResource(R.mipmap.like);
+    }
+
+    public void setVerified() {
+        verified = (ImageView) mview.findViewById(R.id.verified);
+        verified.setVisibility(View.VISIBLE);
     }
 
     public void setName(String name){

@@ -163,6 +163,8 @@ public class Search extends Fragment {
                 cate.putExtra("word","");
                 cate.putExtra("lat", "");
                 cate.putExtra("lng", "");
+                cate.putExtra("min", "");
+                cate.putExtra("max", "");
                 startActivity(cate);
             }
         });
@@ -174,6 +176,9 @@ public class Search extends Fragment {
                 cate.putExtra("word","");
                 cate.putExtra("lat", "");
                 cate.putExtra("lng", "");
+                cate.putExtra("min", "");
+                cate.putExtra("max", "");
+                cate.putExtra("verifiedcondition", "");
                 startActivity(cate);
             }
         });
@@ -185,6 +190,9 @@ public class Search extends Fragment {
                 cate.putExtra("word","");
                 cate.putExtra("lat", "");
                 cate.putExtra("lng", "");
+                cate.putExtra("min", "");
+                cate.putExtra("max", "");
+                cate.putExtra("verifiedcondition", "");
                 startActivity(cate);
             }
         });
@@ -196,6 +204,9 @@ public class Search extends Fragment {
                 cate.putExtra("word","");
                 cate.putExtra("lat", "");
                 cate.putExtra("lng", "");
+                cate.putExtra("min", "");
+                cate.putExtra("max", "");
+                cate.putExtra("verifiedcondition", "");
                 startActivity(cate);
             }
         });

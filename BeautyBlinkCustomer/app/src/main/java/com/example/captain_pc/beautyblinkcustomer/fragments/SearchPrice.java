@@ -16,6 +16,7 @@ import com.example.captain_pc.beautyblinkcustomer.R;
 import com.example.captain_pc.beautyblinkcustomer.SearchDetails;
 import com.example.captain_pc.beautyblinkcustomer.model.DataCustomerLiked;
 import com.example.captain_pc.beautyblinkcustomer.model.DataProfilePromote;
+import com.example.captain_pc.beautyblinkcustomer.model.DataVerified;
 import com.example.captain_pc.beautyblinkcustomer.model.SearchViewHolder;
 import com.example.captain_pc.beautyblinkcustomer.model.User;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -163,6 +164,26 @@ public class SearchPrice extends Fragment {
                     }
 
 
+                });
+
+                mRoot.child("beautician-verified").child(model.uid).addListenerForSingleValueEvent(new ValueEventListener() {
+
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        DataVerified verified = dataSnapshot.getValue(DataVerified.class);
+                        if (verified == null) {
+                            Toast.makeText(getActivity(), "Error: could not fetch user.", Toast.LENGTH_LONG).show();
+                        } else {
+                            if (verified.makeup != null||verified.hairstyle != null||verified.hairdressing != null) {
+                                viewHolder.setVerified();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
                 });
 
                 viewHolder.like.setOnClickListener(new View.OnClickListener() {

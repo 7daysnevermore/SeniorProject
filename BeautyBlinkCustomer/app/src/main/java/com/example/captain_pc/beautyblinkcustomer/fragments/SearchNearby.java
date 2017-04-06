@@ -16,6 +16,7 @@ import com.example.captain_pc.beautyblinkcustomer.R;
 import com.example.captain_pc.beautyblinkcustomer.SearchDetails;
 import com.example.captain_pc.beautyblinkcustomer.model.DataCustomerLiked;
 import com.example.captain_pc.beautyblinkcustomer.model.DataProfilePromote;
+import com.example.captain_pc.beautyblinkcustomer.model.DataVerified;
 import com.example.captain_pc.beautyblinkcustomer.model.SearchViewHolder;
 import com.example.captain_pc.beautyblinkcustomer.model.User;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -158,6 +159,95 @@ public class SearchNearby extends Fragment {
                             }
 
 
+                        });
+
+                        mRoot.child("beautician-verified").child(model.uid).addListenerForSingleValueEvent(new ValueEventListener() {
+
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                DataVerified verified = dataSnapshot.getValue(DataVerified.class);
+                                if (verified == null) {
+                                    Toast.makeText(getActivity(), "Error: could not fetch user.", Toast.LENGTH_LONG).show();
+                                } else {
+                                    if (verified.makeup != null||verified.hairstyle != null||verified.hairdressing != null) {
+                                        viewHolder.setVerified();
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+
+                        viewHolder.like.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+
+                                if(checklike[0]==true ){
+                                    DatabaseReference mRoot = FirebaseDatabase.getInstance().getReference();
+                                    mRoot.child("customer-liked").child(mFirebaseUser.getUid()).child(model.uid).removeValue();
+                                    viewHolder.setUnLike();
+                                    checklike[0]=false;
+                                }
+                                else{
+
+                                    final DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+                                    //DatabaseReference databaseBeauLike = mRootRef.child("beautician-liked");
+
+                                    final String cshow = getRef(position).getKey();
+
+                                    final HashMap<String, Object> CustomerValues = new HashMap<>();
+
+                                    //Keep beautician profile
+                                    CustomerValues.put("name",model.username);
+                                    CustomerValues.put("profile",model.BeauticianProfile);
+                                    CustomerValues.put("uid",model.uid);
+
+                                    mRootRef.child("customer").child(mFirebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+
+                                        @Override
+                                        public void onDataChange(DataSnapshot dataSnapshot) {
+                                            User user = dataSnapshot.getValue(User.class);
+                                            if (user == null) {
+                                                Toast.makeText(getActivity(), "Error: could not fetch user.", Toast.LENGTH_LONG).show();
+                                            } else {
+
+                                                final HashMap<String, Object> BeauticianValues = new HashMap<>();
+
+                                                //Keep beautician profile
+                                                BeauticianValues.put("name",user.firstname);
+                                                BeauticianValues.put("profile","");
+                                                BeauticianValues.put("uid",model.uid);
+
+                                                Map<String,Object> childUpdate = new HashMap<>();
+                                                childUpdate.put("/customer-liked/"+mFirebaseUser.getUid()+"/"+model.uid, CustomerValues);
+                                                childUpdate.put("/beautician-liked/"+model.uid+"/"+mFirebaseUser.getUid().toString(), BeauticianValues);
+
+                                                mRootRef.updateChildren(childUpdate);
+
+                                                viewHolder.setLike();
+                                                checklike[0]=true;
+
+
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(DatabaseError databaseError) {
+
+                                        }
+
+
+                                    });
+
+
+                                }
+
+
+
+                            }
                         });
                     }else{
                         viewHolder.deleteView();

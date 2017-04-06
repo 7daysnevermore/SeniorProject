@@ -76,7 +76,7 @@ public class SearchDetails extends AppCompatActivity implements View.OnClickList
 
     public EditText word;
     public TextView popular, latest, nearby, price;
-    public String search, wording, previous = null, lat, lng;
+    public String search, wording, previous = null, lat, lng,min,max,condition;
     public ImageView icon_search, icon_filter, up, down, tab_popular, tab_nearby, tab_latest, tab_price;
     Toolbar toolbar;
     public boolean checking;
@@ -120,6 +120,12 @@ public class SearchDetails extends AppCompatActivity implements View.OnClickList
         wording = getIntent().getStringExtra("word");
         lat = getIntent().getStringExtra("lat");
         lng = getIntent().getStringExtra("lng");
+        min = getIntent().getStringExtra("min");
+        max = getIntent().getStringExtra("max");
+
+        if(!lat.equals("") || !min.equals("") || !max.equals("") ){
+            popular.setText("Result");
+        }
 
         word.setFocusable(true);
 
@@ -309,6 +315,10 @@ public class SearchDetails extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.icon_filter:
                 Intent cPro = new Intent(this, Filter.class);
+                cPro.putExtra("search",search);
+                cPro.putExtra("word",wording);
+                cPro.putExtra("lat", lat);
+                cPro.putExtra("lng", lng);
                 startActivity(cPro);
                 break;
         }
@@ -319,7 +329,6 @@ public class SearchDetails extends AppCompatActivity implements View.OnClickList
     public void onLocationChanged(Location location) {
         cur_lat = location.getLatitude();
         cur_lng = location.getLongitude();
-        Toast.makeText(getApplicationContext(), "Location !"+location.getLatitude(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
