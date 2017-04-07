@@ -182,7 +182,7 @@ public class CreateRequest extends AppCompatActivity {
                             Toast.makeText(CreateRequest.this, "This beautician does not have this service.", Toast.LENGTH_LONG).show();
                         }
                     }
-                    else {
+                    if (kSer.equals("Hairdressing")){
                         if (getIntent().getStringExtra("service4").equals("0")) {
                             Toast.makeText(CreateRequest.this, "This beautician does not have this service.", Toast.LENGTH_LONG).show();
                         }
@@ -952,9 +952,16 @@ public class CreateRequest extends AppCompatActivity {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
                 //NavUtils.navigateUpFromSameTask(this);
-                Intent intent = new Intent(CreateRequest.this,MainActivity.class);
-                intent.putExtra("menu","request");
-                startActivity(intent);
+
+                if(type.equals("A")){
+                    onBackPressed();
+                }
+                else{
+                    Intent intent = new Intent(CreateRequest.this,MainActivity.class);
+                    intent.putExtra("menu","request");
+                    startActivity(intent);
+                }
+
                 return true;
         }
         return super.onOptionsItemSelected(item);
