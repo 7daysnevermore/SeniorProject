@@ -46,8 +46,13 @@ public class PromotionDetails extends AppCompatActivity implements View.OnClickL
             proDT.setText("Date to     : "+promotionValues.get("dateTo").toString());
             proDetails.setText(promotionValues.get("details").toString());
 
+        if(!promotionValues.get("image").toString().equals("")){
             Picasso.with(this).load(promotionValues.get("image").toString()).into(proImg);
-            Picasso.with(this).load(promotionValues.get("profile").toString()).into(profile);
+        }
+         if(!promotionValues.get("profile").toString().equals(""))  {
+             Picasso.with(this).load(promotionValues.get("profile").toString()).into(profile);
+         }
+
 
 
         findViewById(R.id.btn_usepromotion).setOnClickListener(this);
