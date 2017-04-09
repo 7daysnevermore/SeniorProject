@@ -60,20 +60,19 @@ public class Payment extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment);
-        mAuth = FirebaseAuth.getInstance();
-        mFirebaseUser = mAuth.getCurrentUser();
-        uid = mFirebaseUser.getUid().toString();
-        if (getIntent().getExtras() != null) {
-            for (String key : getIntent().getExtras().keySet()) {
-                String value = getIntent().getExtras().getString(key);
-                Log.d(TAG, "Key: " + key + " Value: " + value);
-            }
-        }
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        mAuth = FirebaseAuth.getInstance();
+        mFirebaseUser = mAuth.getCurrentUser();
+        uid = mFirebaseUser.getUid().toString();
+        /*if (getIntent().getExtras() != null) {
+            for (String key : getIntent().getExtras().keySet()) {
+                String value = getIntent().getExtras().getString(key);
+                Log.d(TAG, "Key: " + key + " Value: " + value);
+            }
+        }*/
 
         storageReference = FirebaseStorage.getInstance().getReference();
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Payment");
@@ -97,14 +96,9 @@ public class Payment extends AppCompatActivity {
             }
         });
 
-
-
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                progressDialog.setMessage("Sending ...");
-                progressDialog.show();
 
                 final String ddate = editDate.getText().toString();
                 final String time = editTime.getText().toString();
@@ -115,7 +109,6 @@ public class Payment extends AppCompatActivity {
                 if(!TextUtils.isEmpty(ddate) && !TextUtils.isEmpty(bank) &&
                         !TextUtils.isEmpty(time) && !TextUtils.isEmpty(price) &&
                         imageUri !=null){
-
 
                     filepath = storageReference.child("Payment").child(imageUri.getLastPathSegment());
                     filepath.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -155,7 +148,6 @@ public class Payment extends AppCompatActivity {
                             DatabaseReference mBeauRef = FirebaseDatabase.getInstance().getReference().child("/beautician-received/" +beauid+"/"+confirmValues.get("key").toString());
                             mBeauRef.child("status").setValue(status);
 
-                            progressDialog.dismiss();
                             Intent intent = new Intent(Payment.this,MainActivity.class);
                             intent.putExtra("menu", "request");
                             startActivity(intent);
