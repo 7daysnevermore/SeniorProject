@@ -258,8 +258,8 @@ public class HiredDetails extends AppCompatActivity {
                     } else {
 
                         DataOffer hired = datashot.getValue(DataOffer.class);
-                        if (hired.beaupic != null) {
-                            Picasso.with(getApplicationContext()).load(hired.beaupic).fit().centerCrop().into(picpro);
+                        if (!hired.beauprofile.equals("")) {
+                            Picasso.with(getApplicationContext()).load(hired.beauprofile).fit().centerCrop().into(picpro);
                         }
                         beauid = hired.beauid;
                         beauname.setText(hired.beauname);

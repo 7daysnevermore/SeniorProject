@@ -204,6 +204,8 @@ public class BeauticianProfile extends AppCompatActivity implements View.OnClick
                     cPro.putExtra("lat", getIntent().getStringExtra("lat"));
                     cPro.putExtra("lng", getIntent().getStringExtra("lng"));
                     cPro.putExtra("word", "");
+                    cPro.putExtra("min", "");
+                    cPro.putExtra("max", "");
                     startActivity(cPro);
                 }
                 return true;

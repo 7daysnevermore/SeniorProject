@@ -118,6 +118,7 @@ public class SearchPrice extends Fragment {
 
                 viewHolder.setName(model.username);
                 viewHolder.setLocation(model.district,model.province);
+                viewHolder.setRating(model.rating);
 
                 if(!model.BeauticianProfile.equals("")){
                     viewHolder.setProfile(getActivity().getApplicationContext(),model.BeauticianProfile);
@@ -172,7 +173,6 @@ public class SearchPrice extends Fragment {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         DataVerified verified = dataSnapshot.getValue(DataVerified.class);
                         if (verified == null) {
-                            Toast.makeText(getActivity(), "Error: could not fetch user.", Toast.LENGTH_LONG).show();
                         } else {
                             if (verified.makeup != null||verified.hairstyle != null||verified.hairdressing != null) {
                                 viewHolder.setVerified();
@@ -216,7 +216,6 @@ public class SearchPrice extends Fragment {
                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                     User user = dataSnapshot.getValue(User.class);
                                     if (user == null) {
-                                        Toast.makeText(getActivity(), "Error: could not fetch user.", Toast.LENGTH_LONG).show();
                                     } else {
 
                                         final HashMap<String, Object> BeauticianValues = new HashMap<>();

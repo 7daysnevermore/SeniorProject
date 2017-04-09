@@ -99,8 +99,8 @@ public class OfferPagePrice extends Fragment {
             @Override
             protected void populateViewHolder(final OfferViewHolder viewHolder, final DataOffer model, final int position) {
 
-                if(model.beaupic!=null){
-                    viewHolder.setImage(getActivity().getApplicationContext(),model.beaupic);
+                if(model.beauprofile!=null){
+                    viewHolder.setImage(getActivity().getApplicationContext(),model.beauprofile);
                 }
                 if (!model.reqpic.equals("")) {
                     viewHolder.setRequestPic(getActivity().getApplicationContext(), model.offerpic);
@@ -144,7 +144,7 @@ public class OfferPagePrice extends Fragment {
                         RequestValues.put("event", model.event);
                         RequestValues.put("beauticianname", model.beauname);
                         RequestValues.put("beauid", model.beauid);
-                        RequestValues.put("beauprofile", model.beaupic);
+                        RequestValues.put("beauprofile", model.beauprofile);
                         RequestValues.put("numberofperson", model.numberofperson);
                         RequestValues.put("price", model.price);
                         RequestValues.put("amount", model.amount);

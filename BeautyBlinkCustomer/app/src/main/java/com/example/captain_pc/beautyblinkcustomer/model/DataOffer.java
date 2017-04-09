@@ -7,7 +7,7 @@ package com.example.captain_pc.beautyblinkcustomer.model;
 public class DataOffer {
 
         public String date,event,service,specialrequest,status,time,location,reqpic,username,userprofile,customerid,currenttime,
-                        beauid,beauname,offerid,offerpic,requestid,beaupic,numberofperson,price;
+                        beauid,beauname,offerid,offerpic,requestid,beauprofile,numberofperson,price,rating;
         public int amount;
 
         public DataOffer(){
@@ -15,8 +15,8 @@ public class DataOffer {
         }
 
         public DataOffer(String date, String event,String service,String specialrequest,String status,String currenttime,
-                           Integer amount,String time, String numberofperson,String price,String location,String reqpic,String username,
-                         String userprofile,String customerid,String beauid,String beauname,String offerid,String offerpic,String requestid,String beaupic){
+                           String rating,Integer amount,String time, String numberofperson,String price,String location,String reqpic,String username,
+                         String userprofile,String customerid,String beauid,String beauname,String offerid,String offerpic,String requestid,String beauprofile){
 
             this.date=date;
             this.event=event;
@@ -35,10 +35,11 @@ public class DataOffer {
             this.amount = amount;
             this.beauid = beauid;
             this.beauname = beauname;
-            this.beaupic = beaupic;
+            this.beauprofile = beauprofile;
             this.offerid = offerid;
             this.offerpic = offerpic;
             this.requestid = requestid;
+            this.rating = rating;
 
         }
 

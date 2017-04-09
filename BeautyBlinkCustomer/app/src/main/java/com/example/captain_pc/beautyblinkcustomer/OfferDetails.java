@@ -108,7 +108,7 @@ public class OfferDetails extends AppCompatActivity {
         location.setText(requestValues.get("location").toString());
         maxprice.setText(requestValues.get("price").toString()+" ฿");
         numofPer.setText(requestValues.get("numberofperson").toString());
-       if(requestValues.get("reqpic")!=null){
+       if(requestValues.get("requestpic")!=null){
             Picasso.with(getApplicationContext()).load(requestValues.get("requestpic").toString()).into(attachphoto);
         }
         if (requestValues.get("offerpic")!=null) {

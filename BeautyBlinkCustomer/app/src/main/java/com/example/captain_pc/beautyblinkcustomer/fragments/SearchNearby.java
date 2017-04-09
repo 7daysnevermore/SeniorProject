@@ -110,9 +110,10 @@ public class SearchNearby extends Fragment {
                 if(search.cur_lat!=null){
 
                     if (distance(search.cur_lat, search.cur_lng,
-                            Double.parseDouble(model.latitude),Double.parseDouble(model.longitude)) < 10.0) { // if distance < 0.1 miles we take locations as equal
+                            Double.parseDouble(model.latitude),Double.parseDouble(model.longitude)) < 5.0) { // if distance < 0.1 miles we take locations as equal
                         viewHolder.setName(model.username);
                         viewHolder.setLocation(model.district,model.province);
+                        viewHolder.setRating(model.rating);
 
                         if(!model.BeauticianProfile.equals("")){
                             viewHolder.setProfile(getActivity().getApplicationContext(),model.BeauticianProfile);
@@ -167,7 +168,6 @@ public class SearchNearby extends Fragment {
                             public void onDataChange(DataSnapshot dataSnapshot) {
                                 DataVerified verified = dataSnapshot.getValue(DataVerified.class);
                                 if (verified == null) {
-                                    Toast.makeText(getActivity(), "Error: could not fetch user.", Toast.LENGTH_LONG).show();
                                 } else {
                                     if (verified.makeup != null||verified.hairstyle != null||verified.hairdressing != null) {
                                         viewHolder.setVerified();
@@ -211,7 +211,7 @@ public class SearchNearby extends Fragment {
                                         public void onDataChange(DataSnapshot dataSnapshot) {
                                             User user = dataSnapshot.getValue(User.class);
                                             if (user == null) {
-                                                Toast.makeText(getActivity(), "Error: could not fetch user.", Toast.LENGTH_LONG).show();
+
                                             } else {
 
                                                 final HashMap<String, Object> BeauticianValues = new HashMap<>();
@@ -255,77 +255,8 @@ public class SearchNearby extends Fragment {
 
                 }
                 else {
-
+                    viewHolder.deleteView();
                 }
-
-                viewHolder.like.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-                        if(checklike[0]==true ){
-                            DatabaseReference mRoot = FirebaseDatabase.getInstance().getReference();
-                            mRoot.child("customer-liked").child(mFirebaseUser.getUid()).child(model.uid).removeValue();
-                            viewHolder.setUnLike();
-                            checklike[0]=false;
-                        }
-                        else{
-
-                            final DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
-                            //DatabaseReference databaseBeauLike = mRootRef.child("beautician-liked");
-
-                            final String cshow = getRef(position).getKey();
-
-                            final HashMap<String, Object> CustomerValues = new HashMap<>();
-
-                            //Keep beautician profile
-                            CustomerValues.put("name",model.username);
-                            CustomerValues.put("profile",model.BeauticianProfile);
-                            CustomerValues.put("uid",model.uid);
-
-                            mRootRef.child("customer").child(mFirebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-
-                                @Override
-                                public void onDataChange(DataSnapshot dataSnapshot) {
-                                    User user = dataSnapshot.getValue(User.class);
-                                    if (user == null) {
-                                        Toast.makeText(getActivity(), "Error: could not fetch user.", Toast.LENGTH_LONG).show();
-                                    } else {
-
-                                        final HashMap<String, Object> BeauticianValues = new HashMap<>();
-
-                                        //Keep beautician profile
-                                        BeauticianValues.put("name",user.firstname);
-                                        BeauticianValues.put("profile","");
-                                        BeauticianValues.put("uid",model.uid);
-
-                                        Map<String,Object> childUpdate = new HashMap<>();
-                                        childUpdate.put("/customer-liked/"+mFirebaseUser.getUid()+"/"+model.uid, CustomerValues);
-                                        childUpdate.put("/beautician-liked/"+model.uid+"/"+mFirebaseUser.getUid().toString(), BeauticianValues);
-
-                                        mRootRef.updateChildren(childUpdate);
-
-                                        viewHolder.setLike();
-                                        checklike[0]=true;
-
-
-                                    }
-                                }
-
-                                @Override
-                                public void onCancelled(DatabaseError databaseError) {
-
-                                }
-
-
-                            });
-
-
-                        }
-
-
-
-                    }
-                });
 
 
                 viewHolder.mview.setOnClickListener(new View.OnClickListener() {

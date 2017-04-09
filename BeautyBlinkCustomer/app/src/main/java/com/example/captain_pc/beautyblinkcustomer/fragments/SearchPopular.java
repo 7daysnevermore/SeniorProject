@@ -92,10 +92,10 @@ public class SearchPopular extends Fragment {
         search = (SearchDetails) getActivity();
 
         //search for each service
-        databaseQuery = databaseReference.orderByChild(search.search).startAt(1);
+        databaseQuery = databaseReference.orderByChild("rating");
 
         final DatabaseReference databaseRef = databaseQuery.getRef();
-        dataQuery1 = databaseRef.orderByChild("rating");
+        dataQuery1 = databaseRef.orderByChild(search.search).startAt(1);
 
         if(!search.min.equals("")){
             if(!search.max.equals("")){
@@ -140,9 +140,10 @@ public class SearchPopular extends Fragment {
                 if (!search.lat.equals("") && !search.lng.equals("")) {
 
                     if (distance(Double.parseDouble(search.lat), Double.parseDouble(search.lng),
-                            Double.parseDouble(model.latitude), Double.parseDouble(model.longitude)) < 10.0) { // if distance < 0.1 miles we take locations as equal
+                            Double.parseDouble(model.latitude), Double.parseDouble(model.longitude)) < 5.0) { // if distance < 0.1 miles we take locations as equal
                         viewHolder.setName(model.username);
                         viewHolder.setLocation(model.district, model.province);
+                        viewHolder.setRating(model.rating);
 
                         if (!model.BeauticianProfile.equals("")) {
                             viewHolder.setProfile(getActivity().getApplicationContext(), model.BeauticianProfile);
@@ -197,7 +198,6 @@ public class SearchPopular extends Fragment {
                             public void onDataChange(DataSnapshot dataSnapshot) {
                                 DataVerified verified = dataSnapshot.getValue(DataVerified.class);
                                 if (verified == null) {
-                                    Toast.makeText(getActivity(), "Error: could not fetch user.", Toast.LENGTH_LONG).show();
                                 } else {
                                     if (verified.makeup != null||verified.hairstyle != null||verified.hairdressing != null) {
                                         viewHolder.setVerified();
@@ -273,7 +273,6 @@ public class SearchPopular extends Fragment {
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             DataVerified verified = dataSnapshot.getValue(DataVerified.class);
                             if (verified == null) {
-                                Toast.makeText(getActivity(), "Error: could not fetch user.", Toast.LENGTH_LONG).show();
                             } else {
                                 if (verified.makeup != null||verified.hairstyle != null||verified.hairdressing != null) {
                                     viewHolder.setVerified();
@@ -318,7 +317,6 @@ public class SearchPopular extends Fragment {
                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                     User user = dataSnapshot.getValue(User.class);
                                     if (user == null) {
-                                        Toast.makeText(getActivity(), "Error: could not fetch user.", Toast.LENGTH_LONG).show();
                                     } else {
 
                                         final HashMap<String, Object> BeauticianValues = new HashMap<>();
