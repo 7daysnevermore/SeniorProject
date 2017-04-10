@@ -7,74 +7,78 @@
 
 
     <LinearLayout
-        android:orientation="vertical"
+        android:id="@+id/ch_color"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/ch_color"
-        >
+        android:orientation="vertical">
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            >
+            android:orientation="horizontal">
 
             <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/pic_pro"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/profilecirclecompressed"
-                android:id="@+id/pic_pro"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
 
-                android:layout_centerVertical="true"
-                android:foregroundGravity="center" />
+                android:foregroundGravity="center"
+                android:src="@drawable/profilecirclecompressed" />
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:layout_marginTop="10dp"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:orientation="vertical">
+
                 <TextView
-                    android:text="Event"
+                    android:id="@+id/tevent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tevent"
+                    android:layout_gravity="center_vertical"
                     android:layout_marginLeft="5dp"
-                    android:textStyle="bold"
+                    android:text="Event"
                     android:textColor="@color/colorPrimary"
-                    android:layout_gravity="center_vertical" />
+                    android:textStyle="bold" />
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp">
-                    <TextView
-                        android:text="hh:mm"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/tTime"
-                        android:layout_weight="1"
-                        android:textSize="10dp"
-                        android:gravity="top|right" />
-                    <TextView
-                        android:text="service"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/tSer"
-                        android:textSize="12dp"
-                        android:textColor="@color/colorAccent"
-                        android:layout_weight="1"
 
-                        android:gravity="top|right" />
+                    <TextView
+                        android:id="@+id/tTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="top|right"
+                        android:text="hh:mm"
+                        android:textSize="10dp" />
+
+                    <TextView
+                        android:id="@+id/tSer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="top|right"
+                        android:text="service"
+                        android:textColor="@color/colorAccent"
+
+                        android:textSize="12dp" />
 
                 </LinearLayout>
             </LinearLayout>
+
             <ImageView
+                android:id="@+id/cirNoti"
                 android:layout_width="15dp"
                 android:layout_height="15dp"
-                android:background="@drawable/circlestatus"
                 android:layout_marginTop="8dp"
-                android:id="@+id/cirNoti"/>
+                android:background="@drawable/circlestatus" />
 
             <Button
                 android:layout_width="30dp"
@@ -86,103 +90,107 @@
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
             android:weightSum="1">
 
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="199dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.50">
+                android:layout_weight="0.50"
+                android:orientation="vertical">
+
                 <LinearLayout
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_marginTop="5dp">
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
 
                     <TextView
-                        android:text="Service :"
                         android:layout_width="56dp"
                         android:layout_height="wrap_content"
+                        android:layout_weight="0.14"
 
-                        android:layout_weight="0.14" />
+                        android:text="Service :" />
 
                     <TextView
-                        android:text="TextView"
+                        android:id="@+id/tService"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/tService"
-                        android:layout_weight="0.55" />
+                        android:layout_weight="0.55"
+                        android:text="TextView" />
                 </LinearLayout>
+
                 <LinearLayout
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_marginTop="5dp">
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
 
                     <TextView
-                        android:text="Location :"
+                        android:id="@+id/service"
                         android:layout_width="58dp"
                         android:layout_height="wrap_content"
-                        android:id="@+id/service"
-                        android:layout_weight="0.14" />
+                        android:layout_weight="0.14"
+                        android:text="Location :" />
 
                     <TextView
-                        android:text="TextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
                         android:id="@+id/tLocation"
-                        android:textSize="12dp"
-                        android:layout_weight="0.55" />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.55"
+                        android:text="TextView"
+                        android:textSize="12dp" />
                 </LinearLayout>
+
                 <LinearLayout
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_marginTop="5dp">
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
 
                     <TextView
-                        android:text="Date :"
-                        android:layout_width="56dp"
-                        android:layout_height="wrap_content"
                         android:id="@+id/date_topic"
-                        android:layout_weight="0.24" />
+                        android:layout_width="56dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.24"
+                        android:text="Date :" />
 
                     <TextView
-                        android:text="TextView"
+                        android:id="@+id/tDate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/tDate"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:text="TextView" />
 
                 </LinearLayout>
+
                 <LinearLayout
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_marginTop="5dp">
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
 
                     <TextView
-                        android:text="Max Price :"
+                        android:id="@+id/price_topic"
                         android:layout_width="56dp"
                         android:layout_height="wrap_content"
-                        android:id="@+id/price_topic"
-                        android:layout_weight="0.14" />
+                        android:layout_weight="0.14"
+                        android:text="Max Price :" />
 
                     <TextView
-                        android:text="TextView"
+                        android:id="@+id/tPrice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/tPrice"
-                        android:layout_weight="0.55" />
+                        android:layout_weight="0.55"
+                        android:text="TextView" />
 
                 </LinearLayout>
 
@@ -196,73 +204,76 @@
                 android:layout_weight="0.50">
 
                 <TextView
+                    android:id="@+id/tcount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0"
-                    android:textStyle="bold"
-                    android:layout_marginLeft="34dp"
                     android:layout_above="@+id/imageView3"
-                    android:id="@+id/tcount"
-                    android:visibility="gone"
+                    android:layout_alignStart="@+id/imageView3"
+                    android:layout_marginLeft="34dp"
+                    android:text="0"
                     android:textColor="@color/colorAccent"
+                    android:textStyle="bold"
 
 
-                    android:layout_alignStart="@+id/imageView3" />
+                    android:visibility="gone" />
+
                 <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:background="@drawable/ic_beautician"
                     android:id="@+id/imageView3"
-                    android:layout_alignParentBottom="true"
-                    android:layout_centerHorizontal="true" />
-
-                <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_marginLeft="20dp"
-                    android:background="@drawable/ic_chat_bubble_outline"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/ic_beautician" />
+
+                <ImageView
                     android:id="@+id/imageView2"
-                    android:layout_alignParentTop="true"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="24dp" />
+                    android:layout_alignParentTop="true"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/ic_chat_bubble_outline" />
 
 
             </RelativeLayout>
 
             <LinearLayout
+                android:id="@+id/afteroffer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginTop="70dp"
-                android:id="@+id/afteroffer"
-                >
+                android:orientation="horizontal">
+
                 <Button
-                    android:visibility="gone"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
                     android:id="@+id/message"
-                    android:background="@drawable/ic_email"
-                    android:layout_weight="1"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_marginLeft="10dp"
-                    android:fadeScrollbars="false" />
+                    android:layout_weight="1"
+                    android:background="@drawable/ic_email"
+                    android:fadeScrollbars="false"
+                    android:visibility="gone" />
+
                 <Button
 
-                    android:visibility="gone"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
                     android:id="@+id/payment"
-                    android:background="@drawable/ic_credit_card"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="10dp" />
-                <Button
-
-                    android:visibility="gone"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:id="@+id/review"
-                    android:background="@drawable/ic_rate_review"
+                    android:layout_marginLeft="10dp"
                     android:layout_weight="1"
-                    android:layout_marginLeft="10dp" />
+                    android:background="@drawable/ic_credit_card"
+                    android:visibility="gone" />
+
+                <Button
+
+                    android:id="@+id/review"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/ic_rate_review"
+                    android:visibility="gone" />
             </LinearLayout>
 
         </LinearLayout>

@@ -173,7 +173,7 @@ public class OfferDetails extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference().child("beautician-received").child(requestValues.get("beauid").toString()).child(requestValues.get("requestid").toString());
-                mRootRef.child("status").setValue("6");
+                mRootRef.child("status").setValue("8");
                 Intent intent = new Intent(OfferDetails.this, MainActivity.class);
                 intent.putExtra("menu", "request");
                 startActivity(intent);

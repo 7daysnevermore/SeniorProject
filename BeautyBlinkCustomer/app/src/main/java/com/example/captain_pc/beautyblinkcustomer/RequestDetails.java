@@ -11,10 +11,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.captain_pc.beautyblinkcustomer.model.DataRequest;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
@@ -31,6 +35,7 @@ public class RequestDetails extends AppCompatActivity {
     HashMap<String, Object> requestValues;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
+    private Button cancel;
     private ImageView photo;
     private Toolbar toolbar;
     @Override
@@ -55,6 +60,7 @@ public class RequestDetails extends AppCompatActivity {
         maxprice = (TextView)findViewById(R.id.cusMax);
         numofPer = (TextView)findViewById(R.id.cusNum);
         photo = (ImageView)findViewById(R.id.attachphoto);
+        cancel = (Button) findViewById(R.id.cancel);
 
         date.setText(requestValues.get("date").toString());
         service.setText((String)requestValues.get("service"));
@@ -76,6 +82,55 @@ public class RequestDetails extends AppCompatActivity {
                     Intent intent = new Intent(RequestDetails.this,OfferPage.class);
                     intent.putExtra("request",  requestValues);
                     startActivity(intent);
+
+            }
+
+        });
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                final DatabaseReference mBeauRef = FirebaseDatabase.getInstance().getReference().child("beautician-received");
+                mBeauRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        for (DataSnapshot startChild : dataSnapshot.getChildren()) {
+
+                            String beauid = startChild.getKey();
+
+                            for (DataSnapshot start : startChild.getChildren()) {
+
+                                String key = start.getKey();
+                                DataRequest user = start.getValue(DataRequest.class);
+
+                                if (user == null) {
+                                } else {
+                                    if(key.equals(requestValues.get("key").toString())){
+                                        mBeauRef.child(beauid).child(key).child("status").setValue("8");
+                                    }
+                                }
+
+                            }
+
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
+                DatabaseReference mCustRef = FirebaseDatabase.getInstance().getReference().child("/customer-request1/" + mFirebaseUser.getUid().toString() + "/" + requestValues.get("key").toString());
+                mCustRef.child("status").setValue("8");
+
+                Intent intent = new Intent(RequestDetails.this, MainActivity.class);
+                intent.putExtra("menu", "request");
+                startActivity(intent);
 
             }
 

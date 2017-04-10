@@ -164,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                                         DatabaseReference m = FirebaseDatabase.getInstance().getReference();
 
-                                        m.child("beautician-received").child(key).child(key1).child("status").setValue("6");
+                                        m.child("beautician-received").child(key).child(key1).child("status").setValue("8");
 
 
                                     }

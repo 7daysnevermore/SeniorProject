@@ -43,10 +43,11 @@ public class HiredDetails extends AppCompatActivity {
     private FirebaseUser mFirebaseUser;
     String beauid;
     TextView payment_date, payment_time, payment_bank, payment_amount,topic,desc,toconfirm;
-    LinearLayout bt_payment, bt_finish, bt_review, payment,review;
+    LinearLayout bt_payment, bt_finish, bt_review, payment,review,paymentdetail;
     private TextView date, service, event, time, special, location, maxprice, numofPer, amount, beauname, yes, no;
     ImageView picpro, slip,photo,picreview;
     String status;
+    private Button cancel;
     private AlertDialog dialog;
     private RatingBar rating_Bar;
     View view1,view2;
@@ -64,6 +65,7 @@ public class HiredDetails extends AppCompatActivity {
         bt_review = (LinearLayout) findViewById(R.id.bt_review);
         payment = (LinearLayout) findViewById(R.id.payment);
         review = (LinearLayout) findViewById(R.id.review);
+        paymentdetail = (LinearLayout) findViewById(R.id.paymentdetail);
         payment_date = (TextView) findViewById(R.id.payment_date);
         payment_time = (TextView) findViewById(R.id.payment_time);
         payment_bank = (TextView) findViewById(R.id.payment_bank);
@@ -77,6 +79,7 @@ public class HiredDetails extends AppCompatActivity {
         rating_Bar = (RatingBar) findViewById(R.id.rating);
         photo = (ImageView) findViewById(R.id.attachphoto);
         picreview = (ImageView) findViewById(R.id.picreview);
+        cancel = (Button) findViewById(R.id.cancel);
 
         mAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mAuth.getCurrentUser();
@@ -86,6 +89,7 @@ public class HiredDetails extends AppCompatActivity {
         }
         if (status.equals("4")) {
             bt_payment.setVisibility(View.VISIBLE);
+            paymentdetail.setVisibility(View.VISIBLE);
         }
         if (status.equals("5")) {
             bt_finish.setVisibility(View.VISIBLE);
@@ -287,6 +291,23 @@ public class HiredDetails extends AppCompatActivity {
             }
         });
 
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                final DatabaseReference mBeauRef = FirebaseDatabase.getInstance().getReference().child("beautician-received").child(beauid).child(requestValues.get("key").toString());
+                mBeauRef.child("status").setValue("8");
+
+                DatabaseReference mCustRef = FirebaseDatabase.getInstance().getReference().child("/customer-request1/" + mFirebaseUser.getUid().toString() + "/" + requestValues.get("key").toString());
+                mCustRef.child("status").setValue("8");
+
+                Intent intent = new Intent(HiredDetails.this, MainActivity.class);
+                intent.putExtra("menu", "request");
+                startActivity(intent);
+
+            }
+
+        });
 
         bt_payment.setOnClickListener(new View.OnClickListener() {
             @Override

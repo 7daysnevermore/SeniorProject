@@ -40,13 +40,13 @@
                     android:orientation="vertical">
 
                     <LinearLayout
-                        android:background="#FFFFFF"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:background="#FFFFFF"
+                        android:orientation="vertical"
                         android:paddingLeft="20sp"
                         android:paddingRight="20sp"
-                        android:paddingTop="10sp"
-                        android:orientation="vertical">
+                        android:paddingTop="10sp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -61,8 +61,8 @@
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:text="Request Details"
                                     android:gravity="center_vertical"
+                                    android:text="Request Details"
                                     android:textSize="18sp" />
 
 
@@ -77,10 +77,10 @@
 
 
                         <LinearLayout
-                            android:layout_marginTop="10dp"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginBottom="10dp"
+                            android:layout_marginTop="10dp"
                             android:orientation="vertical">
 
                             <LinearLayout
@@ -93,10 +93,10 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
 
-                                    android:textColor="#FF424242"
                                     android:layout_weight="1"
                                     android:gravity="center_vertical"
                                     android:text="Service: "
+                                    android:textColor="#FF424242"
                                     android:textSize="16sp" />
 
                                 <TextView
@@ -119,10 +119,10 @@
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:textColor="#FF424242"
                                     android:layout_weight="1"
                                     android:gravity="center_vertical"
                                     android:text="Event: "
+                                    android:textColor="#FF424242"
                                     android:textSize="16sp" />
 
                                 <TextView
@@ -145,9 +145,9 @@
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:textColor="#FF424242"
                                     android:layout_weight="1"
                                     android:text="Date: "
+                                    android:textColor="#FF424242"
                                     android:textSize="16sp" />
 
                                 <TextView
@@ -170,9 +170,9 @@
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:textColor="#FF424242"
                                     android:layout_weight="1"
                                     android:text="Time: "
+                                    android:textColor="#FF424242"
                                     android:textSize="16sp" />
 
                                 <TextView
@@ -194,10 +194,10 @@
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:textColor="#FF424242"
                                     android:layout_weight="1"
-                                    android:textSize="16sp"
-                                    android:text="Number of person: "/>
+                                    android:text="Number of person: "
+                                    android:textColor="#FF424242"
+                                    android:textSize="16sp" />
 
                                 <TextView
                                     android:id="@+id/cusNum"
@@ -220,11 +220,11 @@
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:textColor="#FF424242"
-                                    android:text="Max price: "
-                                    android:textSize="16sp"
+                                    android:layout_weight="1"
                                     android:gravity="center_vertical"
-                                    android:layout_weight="1"/>
+                                    android:text="Max price: "
+                                    android:textColor="#FF424242"
+                                    android:textSize="16sp" />
 
                                 <TextView
                                     android:id="@+id/cusMax"
@@ -247,17 +247,17 @@
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:textColor="#FF424242"
                                     android:gravity="center_vertical"
-                                    android:textSize="16sp"
-                                    android:text="Location: "/>
+                                    android:text="Location: "
+                                    android:textColor="#FF424242"
+                                    android:textSize="16sp" />
 
                                 <TextView
                                     android:id="@+id/cusLo"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:text="Location"
                                     android:minLines="2"
+                                    android:text="Location"
                                     android:textSize="16sp" />
 
                             </LinearLayout>
@@ -270,11 +270,11 @@
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:textColor="#FF424242"
                                     android:layout_weight="1"
                                     android:gravity="center_vertical"
-                                    android:textSize="16sp"
-                                    android:text="Special Requirement: "/>
+                                    android:text="Special Requirement: "
+                                    android:textColor="#FF424242"
+                                    android:textSize="16sp" />
 
                                 <TextView
                                     android:id="@+id/cusSpe"
@@ -287,38 +287,43 @@
                             </LinearLayout>
 
                             <LinearLayout
-                                android:layout_marginTop="10dp"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
                                 android:orientation="vertical">
 
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:textColor="#FF424242"
                                     android:layout_weight="1"
                                     android:gravity="center_vertical"
-                                    android:textSize="16sp"
-                                    android:text="Attach Photo: "/>
+                                    android:text="Attach Photo: "
+                                    android:textColor="#FF424242"
+                                    android:textSize="16sp" />
 
                                 <ImageView
                                     android:id="@+id/attachphoto"
-                                    android:layout_marginTop="5dp"
                                     android:layout_width="match_parent"
                                     android:layout_height="220dp"
-                                    android:layout_marginBottom="30dp"/>
+                                    android:layout_marginBottom="20dp"
+                                    android:layout_marginTop="5dp" />
 
                             </LinearLayout>
+
+                            <Button
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/cancel"
+                                android:layout_marginBottom="60dp"
+                                android:text="Cancel"/>
 
 
                         </LinearLayout>
 
 
-
                     </LinearLayout>
 
                 </LinearLayout>
-
 
 
             </ScrollView>
@@ -334,21 +339,20 @@
             android:background="#FFFFFF">
 
             <TextView
-                android:layout_margin="10dp"
+                android:id="@+id/bt_coffer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:gravity="center"
+                android:layout_margin="10dp"
                 android:background="@drawable/input_outline"
-                android:id="@+id/bt_coffer"
+                android:gravity="center"
                 android:padding="5dp"
-                android:text="You got special offers! Click to see it"/>
+                android:text="You got special offers! Click to see it"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
     </RelativeLayout>
-
 
 
 </LinearLayout>

@@ -16,49 +16,18 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:background="@color/bg_grey"/>
+                android:background="@color/bg_grey" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.2dp"
-                android:background="@android:color/darker_gray"/>
+                android:background="@android:color/darker_gray" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
                 android:background="#ffffff"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:paddingLeft="6dp"
-                    android:src="@mipmap/profile"/>
-                <TextView
-                    android:id="@+id/myAccount"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:paddingLeft="11dp"
-                    android:textSize="21sp"
-                    android:gravity="center_vertical"
-                    android:text="My Account"/>
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.1dp"
-                android:layout_marginLeft="40dp"
-                android:background="@android:color/darker_gray"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:background="#ffffff"
-                android:id="@+id/myLikes"
                 android:paddingBottom="5dp"
                 android:paddingTop="5dp">
 
@@ -67,6 +36,38 @@
                     android:layout_height="35dp"
                     android:paddingLeft="6dp"
                     android:src="@mipmap/profile" />
+
+                <TextView
+                    android:id="@+id/myAccount"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="11dp"
+                    android:text="My Account"
+                    android:textSize="21sp" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:layout_marginLeft="40dp"
+                android:background="@android:color/darker_gray" />
+
+            <LinearLayout
+                android:id="@+id/myLikes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:orientation="horizontal"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp">
+
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:paddingLeft="6dp"
+                    android:src="@mipmap/like" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -88,144 +89,146 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#ffffff"
-                android:paddingTop="5dp"
+                android:orientation="horizontal"
                 android:paddingBottom="5dp"
-                android:orientation="horizontal">
+                android:paddingTop="5dp">
 
                 <ImageView
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:paddingLeft="6dp"
-                    android:src="@mipmap/profilepromote"/>
+                    android:src="@mipmap/profilepromote" />
+
                 <TextView
                     android:id="@+id/recentlyViewed"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:paddingLeft="11dp"
-                    android:textSize="21sp"
                     android:gravity="center_vertical"
-                    android:text="Recently Viewed"/>
+                    android:paddingLeft="11dp"
+                    android:text="Recently Viewed"
+                    android:textSize="21sp" />
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.1dp"
                 android:layout_marginLeft="40dp"
-                android:background="@android:color/darker_gray"/>
-
+                android:background="@android:color/darker_gray" />
 
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.1dp"
                 android:layout_marginLeft="40dp"
-                android:background="@android:color/darker_gray"/>
+                android:background="@android:color/darker_gray" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#ffffff"
-                android:paddingTop="5dp"
+                android:orientation="horizontal"
                 android:paddingBottom="5dp"
-                android:orientation="horizontal">
+                android:paddingTop="5dp">
 
                 <ImageView
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:paddingLeft="6dp"
-                    android:src="@mipmap/promotion"/>
+                    android:src="@mipmap/promotion" />
 
                 <TextView
                     android:id="@+id/myPromotion"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:paddingLeft="11dp"
-                    android:textSize="21sp"
                     android:gravity="center_vertical"
-                    android:text="My Promotion"/>
+                    android:paddingLeft="11dp"
+                    android:text="My Promotion"
+                    android:textSize="21sp" />
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.2dp"
-                android:background="@android:color/darker_gray"/>
+                android:background="@android:color/darker_gray" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:background="@color/bg_grey"/>
+                android:background="@color/bg_grey" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.2dp"
-                android:background="@android:color/darker_gray"/>
+                android:background="@android:color/darker_gray" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#ffffff"
-                android:paddingTop="5dp"
+                android:orientation="horizontal"
                 android:paddingBottom="5dp"
-                android:orientation="horizontal">
+                android:paddingTop="5dp">
 
                 <ImageView
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:paddingLeft="6dp"
-                    android:src="@mipmap/setting"/>
+                    android:src="@mipmap/setting" />
+
                 <TextView
                     android:id="@+id/setting"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:paddingLeft="11dp"
-                    android:textSize="21sp"
                     android:gravity="center_vertical"
-                    android:text="Setting"/>
+                    android:paddingLeft="11dp"
+                    android:text="Setting"
+                    android:textSize="21sp" />
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.1dp"
                 android:layout_marginLeft="40dp"
-                android:background="@android:color/darker_gray"/>
+                android:background="@android:color/darker_gray" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#ffffff"
-                android:paddingTop="5dp"
+                android:orientation="horizontal"
                 android:paddingBottom="5dp"
-                android:orientation="horizontal">
+                android:paddingTop="5dp">
 
                 <ImageView
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:paddingLeft="6dp"
-                    android:src="@mipmap/support"/>
+                    android:src="@mipmap/support" />
+
                 <TextView
                     android:id="@+id/support"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:paddingLeft="11dp"
-                    android:textSize="21sp"
                     android:gravity="center_vertical"
-                    android:text="Help and Support"/>
+                    android:paddingLeft="11dp"
+                    android:text="Help and Support"
+                    android:textSize="21sp" />
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.2dp"
-                android:background="@android:color/darker_gray"/>
+                android:background="@android:color/darker_gray" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:background="@color/bg_grey"/>
+                android:background="@color/bg_grey" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.2dp"
-                android:background="@android:color/darker_gray"/>
+                android:background="@android:color/darker_gray" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -237,23 +240,23 @@
                     android:id="@+id/logout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:paddingTop="7dp"
-                    android:paddingBottom="7dp"
-                    android:textSize="21sp"
                     android:gravity="center"
+                    android:paddingBottom="7dp"
+                    android:paddingTop="7dp"
+                    android:text="Logout"
                     android:textColor="@color/darker_orange"
-                    android:text="Logout"/>
+                    android:textSize="21sp" />
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.2dp"
-                android:background="@android:color/darker_gray"/>
+                android:background="@android:color/darker_gray" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/bg_grey"/>
+                android:background="@color/bg_grey" />
 
         </LinearLayout>
 
