@@ -39,7 +39,7 @@ public class Review extends AppCompatActivity {
     private Toolbar toolbar;
     private EditText reviewTopic, reviewDesc;
     private ImageView reviewImg;
-    private Uri reviewImg_show;
+    private Uri reviewImg_show=null;
 
     private int SELECT_FILE = 1;
 
@@ -102,8 +102,6 @@ public class Review extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                progressDialog.setMessage("Reviewing ...");
-                progressDialog.show();
 
                 final String topic = reviewTopic.getText().toString();
                 final String desc = reviewDesc.getText().toString();
@@ -125,7 +123,6 @@ public class Review extends AppCompatActivity {
                                 }else {
 
                                     DatabaseReference ratingPro = FirebaseDatabase.getInstance().getReference().child("profilepromote");
-
 
                                     if(!user.rating.equals("")){
                                         ratingSum = user.sumrate+str;
@@ -209,23 +206,21 @@ public class Review extends AppCompatActivity {
 
                 mRootRef.updateChildren(childUpdate);
 
-                DatabaseReference ratingB = FirebaseDatabase.getInstance().getReference().child("profilepromote").child(beauid);
-
-
                 DatabaseReference mCustRef = FirebaseDatabase.getInstance().getReference().child("/customer-request1/" + mFirebaseUser.getUid().toString() + "/" + confirmValues.get("key").toString());
                 mCustRef.child("status").setValue("7");
 
                 DatabaseReference mBeauRef = FirebaseDatabase.getInstance().getReference().child("/beautician-received/" + beauid + "/" + confirmValues.get("key").toString());
                 mBeauRef.child("status").setValue("7");
 
+                Intent intent = new Intent(Review.this, MainActivity.class);
+                intent.putExtra("menu", "request");
+                startActivity(intent);
+
             }
         });
 
-        progressDialog.dismiss();
 
-        Intent intent = new Intent(Review.this, MainActivity.class);
-        intent.putExtra("menu", "request");
-        startActivity(intent);
+
     }
 
     @Override

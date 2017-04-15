@@ -42,4 +42,20 @@ public class PromotionViewHolder extends RecyclerView.ViewHolder  {
         TextView post_sale= (TextView)mview.findViewById(R.id.sale);
         post_sale.setText(sale);
     }
+
+    public void setService(String service){
+        TextView post_sale= (TextView)mview.findViewById(R.id.service);
+        if(service.equals("S01")){
+            post_sale.setText("MakeupandHair");
+        }
+        if (service.equals("S02")) {
+            post_sale.setText("Makeup");
+        }
+        if (service.equals("S03")) {
+            post_sale.setText("Hairstyle");
+        }if (service.equals("S04")) {
+            post_sale.setText("Hairdressing");
+        }
+
+    }
 }

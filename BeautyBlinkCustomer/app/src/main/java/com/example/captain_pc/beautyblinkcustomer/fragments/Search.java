@@ -99,6 +99,7 @@ public class Search extends Fragment {
                 viewHolder.setPromotion(model.getPromotion());
                 viewHolder.setPrice(model.getPrice());
                 viewHolder.setSale(model.getSale());
+                viewHolder.setService(model.getService());
 
                 viewHolder.mview.setOnClickListener(new View.OnClickListener() {
                     //private static final String TAG = "Promotion";
