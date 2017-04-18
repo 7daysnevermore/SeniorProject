@@ -168,21 +168,25 @@ public class CreateRequest extends AppCompatActivity {
                 DatabaseReference userRootRef = FirebaseDatabase.getInstance().getReference().child("profilepromote");
                 if(type.equals("A")){
                    if(kSer.equals("MakeupandHair")){
+                       ShowSuggestion();
                         if(getIntent().getStringExtra("service1").equals("0") ){
                             Toast.makeText(CreateRequest.this, "This beautician does not have this service.", Toast.LENGTH_LONG).show();
                         }
                     }
                     if (kSer.equals("HairStyle")) {
+                        ShowSuggestion();
                         if (getIntent().getStringExtra("service2").equals("0")) {
                             Toast.makeText(CreateRequest.this, "This beautician does not have this service.", Toast.LENGTH_LONG).show();
                         }
                     }
                     if (kSer.equals("MakeUp")) {
+                        ShowSuggestion();
                         if (getIntent().getStringExtra("service3").equals("0")) {
                             Toast.makeText(CreateRequest.this, "This beautician does not have this service.", Toast.LENGTH_LONG).show();
                         }
                     }
                     if (kSer.equals("Hairdressing")){
+                        ShowSuggestion();
                         if (getIntent().getStringExtra("service4").equals("0")) {
                             Toast.makeText(CreateRequest.this, "This beautician does not have this service.", Toast.LENGTH_LONG).show();
                         }
@@ -640,7 +644,7 @@ public class CreateRequest extends AppCompatActivity {
         sendWithOtherThread("tokens");
     }
 
-    public void sendTopic(View view) {
+    public void sendTopic() {
         sendWithOtherThread("topic");
     }
     private void sendWithOtherThread(final String type) {
@@ -672,7 +676,7 @@ public class CreateRequest extends AppCompatActivity {
                     jPayload.put("registration_ids", ja);
                     break;
                 case "topic":
-                    jPayload.put("to", "/topics/news");
+                    jPayload.put("to", "/topics/beautician");
                     Log.d("TEst","Noti");
                     break;
                 case "condition":
@@ -946,6 +950,7 @@ public class CreateRequest extends AppCompatActivity {
             startActivity(intent);
             }
     }
+
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         switch (id) {
@@ -966,6 +971,8 @@ public class CreateRequest extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
     }
 
 

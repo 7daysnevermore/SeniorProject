@@ -55,7 +55,7 @@ public class FragmentProSer3 extends Fragment {
         databaseReference = FirebaseDatabase.getInstance().getReference().child("promotion");
         Query query1 = databaseReference.orderByChild("timestamp");
         final DatabaseReference databaseRef = query1.getRef();
-        Query dataQuery1 = databaseRef.orderByChild("service").equalTo("S03");
+        Query dataQuery1 = databaseRef.orderByChild("service").equalTo("S02");
         //professor promotion feeds
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerview);
         recyclerView.setHasFixedSize(true);

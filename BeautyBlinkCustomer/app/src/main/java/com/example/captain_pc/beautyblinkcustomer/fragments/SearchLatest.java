@@ -82,7 +82,7 @@ public class SearchLatest extends Fragment {
 
         if(!search.wording.equals("")){
             //Method to multiple queries
-            DatabaseReference databaseRef =databaseQuery.getRef();
+            DatabaseReference databaseRef = databaseQuery.getRef();
             dataQuery1 = databaseRef.orderByChild("name").equalTo(search.wording);
             QueryRecycle(dataQuery1,search);
         }else{

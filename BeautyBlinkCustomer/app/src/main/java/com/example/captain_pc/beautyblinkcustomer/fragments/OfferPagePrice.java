@@ -99,17 +99,16 @@ public class OfferPagePrice extends Fragment {
             @Override
             protected void populateViewHolder(final OfferViewHolder viewHolder, final DataOffer model, final int position) {
 
-                if(model.beauprofile!=null){
+                if(!model.beauprofile.equals("")){
                     viewHolder.setImage(getActivity().getApplicationContext(),model.beauprofile);
                 }
                 if (!model.reqpic.equals("")) {
                     viewHolder.setRequestPic(getActivity().getApplicationContext(), model.offerpic);
                 }
-                /*if (!model.offerpic.equals("")) {
-                    viewHolder.setOfferPic(getActivity().getApplicationContext(), model.offerpic);
-                }*/
                 viewHolder.setUsername(model.beauname);
                 viewHolder.setPrice(model.price);
+                viewHolder.setRating(model.rating);
+
 
                 DatabaseReference data = FirebaseDatabase.getInstance().getReference().child("beautician-profilepromote").child(model.beauid);
                 data.addListenerForSingleValueEvent(new ValueEventListener() {

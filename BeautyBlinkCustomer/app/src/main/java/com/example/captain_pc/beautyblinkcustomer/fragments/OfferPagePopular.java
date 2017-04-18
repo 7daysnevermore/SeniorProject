@@ -107,31 +107,25 @@ public class OfferPagePopular extends Fragment {
                 if (!model.reqpic.equals("")) {
                     viewHolder.setRequestPic(getActivity().getApplicationContext(), model.offerpic);
                 }
-                /*if (!model.offerpic.equals("")) {
-                    viewHolder.setOfferPic(getActivity().getApplicationContext(), model.offerpic);
-                }*/
                 viewHolder.setUsername(model.beauname);
                 viewHolder.setPrice(model.price);
-                viewHolder.setRating(model.rating);
+               viewHolder.setRating(model.rating);
 
-                DatabaseReference data = FirebaseDatabase.getInstance().getReference().child("beautician-profilepromote").child(model.beauid);
+
+                /*DatabaseReference data = FirebaseDatabase.getInstance().getReference().child("beautician-profilepromote").child(model.beauid);
                 data.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         DataProfilePromote promote = dataSnapshot.getValue(DataProfilePromote.class);
-                        if(dataSnapshot.getValue() == null || dataSnapshot.getValue() == ""){
-                            viewHolder.setRating("0");
-                        }
-                        else{
                             viewHolder.setRating(promote.rating);
-                        }
+
                     }
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
 
                     }
-                });
+                });*/
 
 
                 viewHolder.mview.setOnClickListener(new View.OnClickListener() {

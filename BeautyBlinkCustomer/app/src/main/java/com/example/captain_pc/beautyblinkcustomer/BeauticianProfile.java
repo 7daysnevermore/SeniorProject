@@ -27,6 +27,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -47,7 +48,7 @@ public class BeauticianProfile extends AppCompatActivity implements View.OnClick
 
     public String b_uid,from=null;
     String previous=null;
-    ImageView bt_gallery,bt_review,bt_planner,bt_detail;
+    ImageView bt_gallery,bt_review,bt_planner,bt_detail,profilepic;
     LinearLayout sendReq;
     Integer service1,service2,service3,service4;
 
@@ -80,7 +81,7 @@ public class BeauticianProfile extends AppCompatActivity implements View.OnClick
         bt_detail = (ImageView) findViewById(R.id.bt_detail);
         sendReq = (LinearLayout) findViewById(R.id.sendReq);
 
-
+        profilepic = (ImageView) findViewById(R.id.profilepic);
 
         verified_detail = (TextView) findViewById(R.id.verified_detail);
         verified_detail.setOnClickListener(this);
@@ -96,6 +97,9 @@ public class BeauticianProfile extends AppCompatActivity implements View.OnClick
                     Toast.makeText(BeauticianProfile.this, "Error: could not fetch user.", Toast.LENGTH_LONG).show();
                 } else {
                     previewname.setText(user.username);
+                    if(!user.profile.equals("")){
+                        Picasso.with(getApplicationContext()).load(user.profile).fit().centerCrop().into(profilepic);
+                    }
                 }
             }
 

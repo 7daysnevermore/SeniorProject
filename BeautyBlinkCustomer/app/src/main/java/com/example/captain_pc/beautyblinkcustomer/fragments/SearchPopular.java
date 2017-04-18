@@ -92,10 +92,10 @@ public class SearchPopular extends Fragment {
         search = (SearchDetails) getActivity();
 
         //search for each service
-        databaseQuery = databaseReference.orderByChild("rating");
+        databaseQuery = databaseReference.orderByChild(search.search).startAt(1);
 
         final DatabaseReference databaseRef = databaseQuery.getRef();
-        dataQuery1 = databaseRef.orderByChild(search.search).startAt(1);
+        dataQuery1 = databaseRef.orderByChild("rating");
 
         if(!search.min.equals("")){
             if(!search.max.equals("")){
@@ -114,7 +114,7 @@ public class SearchPopular extends Fragment {
                 QueryRecycle(dataQuery2, search);
             }else{
                 QueryRecycle(dataQuery1, search);
-            }
+           }
         }
 
 
@@ -141,9 +141,521 @@ public class SearchPopular extends Fragment {
 
                     if (distance(Double.parseDouble(search.lat), Double.parseDouble(search.lng),
                             Double.parseDouble(model.latitude), Double.parseDouble(model.longitude)) < 5.0) { // if distance < 0.1 miles we take locations as equal
+                        if (model.S01 != 0 && search.search.equals("S01")) {
+                            viewHolder.setName(model.username);
+                            viewHolder.setLocation(model.district, model.province);
+                            viewHolder.setRating(model.rating);
+                            viewHolder.setStart(model.S01);
+
+                            if (!model.BeauticianProfile.equals("")) {
+                                viewHolder.setProfile(getActivity().getApplicationContext(), model.BeauticianProfile);
+                            }
+
+                            if (!model.picture1.equals("")) {
+                                viewHolder.setPicture1(getActivity().getApplicationContext(), model.picture1);
+                            }
+                            if (!model.picture2.equals("")) {
+                                viewHolder.setPicture2(getActivity().getApplicationContext(), model.picture2);
+                            }
+                            if (!model.picture3.equals("")) {
+                                viewHolder.setPicture3(getActivity().getApplicationContext(), model.picture3);
+                            }
+
+                            DatabaseReference mRoot = FirebaseDatabase.getInstance().getReference();
+                            mRoot.child("customer-liked").child(mFirebaseUser.getUid()).child(model.uid).addListenerForSingleValueEvent(new ValueEventListener() {
+
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    DataCustomerLiked like = dataSnapshot.getValue(DataCustomerLiked.class);
+                                    if (like != null) {
+                                        viewHolder.setLike();
+                                        checklike[0] = true;
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+
+                                }
+
+
+                            });
+
+                            mRoot.child("beautician-verified").child(model.uid).addListenerForSingleValueEvent(new ValueEventListener() {
+
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    DataVerified verified = dataSnapshot.getValue(DataVerified.class);
+                                    if (verified == null) {
+                                    } else {
+                                        if (verified.makeup != null || verified.hairstyle != null || verified.hairdressing != null) {
+                                            viewHolder.setVerified();
+                                        }
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+
+                                }
+                            });
+
+                            viewHolder.like.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+
+                                    if (checklike[0] == true) {
+                                        DatabaseReference mRoot = FirebaseDatabase.getInstance().getReference();
+                                        mRoot.child("customer-liked").child(mFirebaseUser.getUid()).child(model.uid).removeValue();
+                                        viewHolder.setUnLike();
+                                        checklike[0] = false;
+                                    } else {
+
+                                        final DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+                                        //DatabaseReference databaseBeauLike = mRootRef.child("beautician-liked");
+
+                                        final String cshow = getRef(position).getKey();
+
+                                        final HashMap<String, Object> CustomerValues = new HashMap<>();
+
+                                        //Keep beautician profile
+                                        CustomerValues.put("name", model.username);
+                                        CustomerValues.put("profile", model.BeauticianProfile);
+                                        CustomerValues.put("uid", model.uid);
+
+                                        mRootRef.child("customer").child(mFirebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+
+                                            @Override
+                                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                                User user = dataSnapshot.getValue(User.class);
+                                                if (user == null) {
+                                                } else {
+
+                                                    final HashMap<String, Object> BeauticianValues = new HashMap<>();
+
+                                                    //Keep beautician profile
+                                                    BeauticianValues.put("name", user.firstname);
+                                                    BeauticianValues.put("profile", "");
+                                                    BeauticianValues.put("uid", model.uid);
+
+                                                    Map<String, Object> childUpdate = new HashMap<>();
+                                                    childUpdate.put("/customer-liked/" + mFirebaseUser.getUid() + "/" + model.uid, CustomerValues);
+                                                    childUpdate.put("/beautician-liked/" + model.uid + "/" + mFirebaseUser.getUid().toString(), BeauticianValues);
+
+                                                    mRootRef.updateChildren(childUpdate);
+
+                                                    viewHolder.setLike();
+                                                    checklike[0] = true;
+
+
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onCancelled(DatabaseError databaseError) {
+
+                                            }
+
+
+                                        });
+
+
+                                    }
+
+
+                                }
+                            });
+                        }
+                        else if (model.S02 != 0 && search.search.equals("S02")) {
+                            viewHolder.setName(model.username);
+                            viewHolder.setLocation(model.district, model.province);
+                            viewHolder.setRating(model.rating);
+                            viewHolder.setStart(model.S02);
+
+                            if (!model.BeauticianProfile.equals("")) {
+                                viewHolder.setProfile(getActivity().getApplicationContext(), model.BeauticianProfile);
+                            }
+
+                            if (!model.picture1.equals("")) {
+                                viewHolder.setPicture1(getActivity().getApplicationContext(), model.picture1);
+                            }
+                            if (!model.picture2.equals("")) {
+                                viewHolder.setPicture2(getActivity().getApplicationContext(), model.picture2);
+                            }
+                            if (!model.picture3.equals("")) {
+                                viewHolder.setPicture3(getActivity().getApplicationContext(), model.picture3);
+                            }
+
+                            DatabaseReference mRoot = FirebaseDatabase.getInstance().getReference();
+                            mRoot.child("customer-liked").child(mFirebaseUser.getUid()).child(model.uid).addListenerForSingleValueEvent(new ValueEventListener() {
+
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    DataCustomerLiked like = dataSnapshot.getValue(DataCustomerLiked.class);
+                                    if (like != null) {
+                                        viewHolder.setLike();
+                                        checklike[0] = true;
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+
+                                }
+
+
+                            });
+
+                            mRoot.child("beautician-verified").child(model.uid).addListenerForSingleValueEvent(new ValueEventListener() {
+
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    DataVerified verified = dataSnapshot.getValue(DataVerified.class);
+                                    if (verified == null) {
+                                    } else {
+                                        if (verified.makeup != null || verified.hairstyle != null || verified.hairdressing != null) {
+                                            viewHolder.setVerified();
+                                        }
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+
+                                }
+                            });
+
+                            viewHolder.like.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+
+                                    if (checklike[0] == true) {
+                                        DatabaseReference mRoot = FirebaseDatabase.getInstance().getReference();
+                                        mRoot.child("customer-liked").child(mFirebaseUser.getUid()).child(model.uid).removeValue();
+                                        viewHolder.setUnLike();
+                                        checklike[0] = false;
+                                    } else {
+
+                                        final DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+                                        //DatabaseReference databaseBeauLike = mRootRef.child("beautician-liked");
+
+                                        final String cshow = getRef(position).getKey();
+
+                                        final HashMap<String, Object> CustomerValues = new HashMap<>();
+
+                                        //Keep beautician profile
+                                        CustomerValues.put("name", model.username);
+                                        CustomerValues.put("profile", model.BeauticianProfile);
+                                        CustomerValues.put("uid", model.uid);
+
+                                        mRootRef.child("customer").child(mFirebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+
+                                            @Override
+                                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                                User user = dataSnapshot.getValue(User.class);
+                                                if (user == null) {
+                                                } else {
+
+                                                    final HashMap<String, Object> BeauticianValues = new HashMap<>();
+
+                                                    //Keep beautician profile
+                                                    BeauticianValues.put("name", user.firstname);
+                                                    BeauticianValues.put("profile", "");
+                                                    BeauticianValues.put("uid", model.uid);
+
+                                                    Map<String, Object> childUpdate = new HashMap<>();
+                                                    childUpdate.put("/customer-liked/" + mFirebaseUser.getUid() + "/" + model.uid, CustomerValues);
+                                                    childUpdate.put("/beautician-liked/" + model.uid + "/" + mFirebaseUser.getUid().toString(), BeauticianValues);
+
+                                                    mRootRef.updateChildren(childUpdate);
+
+                                                    viewHolder.setLike();
+                                                    checklike[0] = true;
+
+
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onCancelled(DatabaseError databaseError) {
+
+                                            }
+
+
+                                        });
+
+
+                                    }
+
+
+                                }
+                            });
+                        }
+                        else if (model.S03 != 0 && search.search.equals("S03")) {
+                            viewHolder.setName(model.username);
+                            viewHolder.setLocation(model.district, model.province);
+                            viewHolder.setRating(model.rating);
+                            viewHolder.setStart(model.S03);
+
+                            if (!model.BeauticianProfile.equals("")) {
+                                viewHolder.setProfile(getActivity().getApplicationContext(), model.BeauticianProfile);
+                            }
+
+                            if (!model.picture1.equals("")) {
+                                viewHolder.setPicture1(getActivity().getApplicationContext(), model.picture1);
+                            }
+                            if (!model.picture2.equals("")) {
+                                viewHolder.setPicture2(getActivity().getApplicationContext(), model.picture2);
+                            }
+                            if (!model.picture3.equals("")) {
+                                viewHolder.setPicture3(getActivity().getApplicationContext(), model.picture3);
+                            }
+
+                            DatabaseReference mRoot = FirebaseDatabase.getInstance().getReference();
+                            mRoot.child("customer-liked").child(mFirebaseUser.getUid()).child(model.uid).addListenerForSingleValueEvent(new ValueEventListener() {
+
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    DataCustomerLiked like = dataSnapshot.getValue(DataCustomerLiked.class);
+                                    if (like != null) {
+                                        viewHolder.setLike();
+                                        checklike[0] = true;
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+
+                                }
+
+
+                            });
+
+                            mRoot.child("beautician-verified").child(model.uid).addListenerForSingleValueEvent(new ValueEventListener() {
+
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    DataVerified verified = dataSnapshot.getValue(DataVerified.class);
+                                    if (verified == null) {
+                                    } else {
+                                        if (verified.makeup != null || verified.hairstyle != null || verified.hairdressing != null) {
+                                            viewHolder.setVerified();
+                                        }
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+
+                                }
+                            });
+
+                            viewHolder.like.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+
+                                    if (checklike[0] == true) {
+                                        DatabaseReference mRoot = FirebaseDatabase.getInstance().getReference();
+                                        mRoot.child("customer-liked").child(mFirebaseUser.getUid()).child(model.uid).removeValue();
+                                        viewHolder.setUnLike();
+                                        checklike[0] = false;
+                                    } else {
+
+                                        final DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+                                        //DatabaseReference databaseBeauLike = mRootRef.child("beautician-liked");
+
+                                        final String cshow = getRef(position).getKey();
+
+                                        final HashMap<String, Object> CustomerValues = new HashMap<>();
+
+                                        //Keep beautician profile
+                                        CustomerValues.put("name", model.username);
+                                        CustomerValues.put("profile", model.BeauticianProfile);
+                                        CustomerValues.put("uid", model.uid);
+
+                                        mRootRef.child("customer").child(mFirebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+
+                                            @Override
+                                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                                User user = dataSnapshot.getValue(User.class);
+                                                if (user == null) {
+                                                } else {
+
+                                                    final HashMap<String, Object> BeauticianValues = new HashMap<>();
+
+                                                    //Keep beautician profile
+                                                    BeauticianValues.put("name", user.firstname);
+                                                    BeauticianValues.put("profile", "");
+                                                    BeauticianValues.put("uid", model.uid);
+
+                                                    Map<String, Object> childUpdate = new HashMap<>();
+                                                    childUpdate.put("/customer-liked/" + mFirebaseUser.getUid() + "/" + model.uid, CustomerValues);
+                                                    childUpdate.put("/beautician-liked/" + model.uid + "/" + mFirebaseUser.getUid().toString(), BeauticianValues);
+
+                                                    mRootRef.updateChildren(childUpdate);
+
+                                                    viewHolder.setLike();
+                                                    checklike[0] = true;
+
+
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onCancelled(DatabaseError databaseError) {
+
+                                            }
+
+
+                                        });
+
+
+                                    }
+
+
+                                }
+                            });
+                        }
+                        else if (model.S04 != 0 && search.search.equals("S04")) {
+                            viewHolder.setName(model.username);
+                            viewHolder.setLocation(model.district, model.province);
+                            viewHolder.setRating(model.rating);
+                            viewHolder.setStart(model.S04);
+
+                            if (!model.BeauticianProfile.equals("")) {
+                                viewHolder.setProfile(getActivity().getApplicationContext(), model.BeauticianProfile);
+                            }
+
+                            if (!model.picture1.equals("")) {
+                                viewHolder.setPicture1(getActivity().getApplicationContext(), model.picture1);
+                            }
+                            if (!model.picture2.equals("")) {
+                                viewHolder.setPicture2(getActivity().getApplicationContext(), model.picture2);
+                            }
+                            if (!model.picture3.equals("")) {
+                                viewHolder.setPicture3(getActivity().getApplicationContext(), model.picture3);
+                            }
+
+                            DatabaseReference mRoot = FirebaseDatabase.getInstance().getReference();
+                            mRoot.child("customer-liked").child(mFirebaseUser.getUid()).child(model.uid).addListenerForSingleValueEvent(new ValueEventListener() {
+
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    DataCustomerLiked like = dataSnapshot.getValue(DataCustomerLiked.class);
+                                    if (like != null) {
+                                        viewHolder.setLike();
+                                        checklike[0] = true;
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+
+                                }
+
+
+                            });
+
+                            mRoot.child("beautician-verified").child(model.uid).addListenerForSingleValueEvent(new ValueEventListener() {
+
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    DataVerified verified = dataSnapshot.getValue(DataVerified.class);
+                                    if (verified == null) {
+                                    } else {
+                                        if (verified.makeup != null || verified.hairstyle != null || verified.hairdressing != null) {
+                                            viewHolder.setVerified();
+                                        }
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+
+                                }
+                            });
+
+                            viewHolder.like.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+
+                                    if (checklike[0] == true) {
+                                        DatabaseReference mRoot = FirebaseDatabase.getInstance().getReference();
+                                        mRoot.child("customer-liked").child(mFirebaseUser.getUid()).child(model.uid).removeValue();
+                                        viewHolder.setUnLike();
+                                        checklike[0] = false;
+                                    } else {
+
+                                        final DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+                                        //DatabaseReference databaseBeauLike = mRootRef.child("beautician-liked");
+
+                                        final String cshow = getRef(position).getKey();
+
+                                        final HashMap<String, Object> CustomerValues = new HashMap<>();
+
+                                        //Keep beautician profile
+                                        CustomerValues.put("name", model.username);
+                                        CustomerValues.put("profile", model.BeauticianProfile);
+                                        CustomerValues.put("uid", model.uid);
+
+                                        mRootRef.child("customer").child(mFirebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+
+                                            @Override
+                                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                                User user = dataSnapshot.getValue(User.class);
+                                                if (user == null) {
+                                                } else {
+
+                                                    final HashMap<String, Object> BeauticianValues = new HashMap<>();
+
+                                                    //Keep beautician profile
+                                                    BeauticianValues.put("name", user.firstname);
+                                                    BeauticianValues.put("profile", "");
+                                                    BeauticianValues.put("uid", model.uid);
+
+                                                    Map<String, Object> childUpdate = new HashMap<>();
+                                                    childUpdate.put("/customer-liked/" + mFirebaseUser.getUid() + "/" + model.uid, CustomerValues);
+                                                    childUpdate.put("/beautician-liked/" + model.uid + "/" + mFirebaseUser.getUid().toString(), BeauticianValues);
+
+                                                    mRootRef.updateChildren(childUpdate);
+
+                                                    viewHolder.setLike();
+                                                    checklike[0] = true;
+
+
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onCancelled(DatabaseError databaseError) {
+
+                                            }
+
+
+                                        });
+
+
+                                    }
+
+
+                                }
+                            });
+                        }
+                        else {
+                            viewHolder.deleteView();
+                        }
+
+
+                    } else {
+                        viewHolder.deleteView();
+                    }
+                } else if (search.lat.equals("") && search.lng.equals("")) {
+
+                    if (model.S01 != 0 && search.search.equals("S01")) {
                         viewHolder.setName(model.username);
                         viewHolder.setLocation(model.district, model.province);
                         viewHolder.setRating(model.rating);
+                        viewHolder.setStart(model.S01);
 
                         if (!model.BeauticianProfile.equals("")) {
                             viewHolder.setProfile(getActivity().getApplicationContext(), model.BeauticianProfile);
@@ -157,19 +669,6 @@ public class SearchPopular extends Fragment {
                         }
                         if (!model.picture3.equals("")) {
                             viewHolder.setPicture3(getActivity().getApplicationContext(), model.picture3);
-                        }
-
-                        if (model.S01 != 0 && search.search.equals("S01")) {
-                            viewHolder.setStart(model.S01);
-                        }
-                        if (model.S02 != 0 && search.search.equals("S02")) {
-                            viewHolder.setStart(model.S02);
-                        }
-                        if (model.S03 != 0 && search.search.equals("S03")) {
-                            viewHolder.setStart(model.S03);
-                        }
-                        if (model.S04 != 0 && search.search.equals("S04")) {
-                            viewHolder.setStart(model.S04);
                         }
 
                         DatabaseReference mRoot = FirebaseDatabase.getInstance().getReference();
@@ -199,7 +698,7 @@ public class SearchPopular extends Fragment {
                                 DataVerified verified = dataSnapshot.getValue(DataVerified.class);
                                 if (verified == null) {
                                 } else {
-                                    if (verified.makeup != null||verified.hairstyle != null||verified.hairdressing != null) {
+                                    if (verified.makeup != null || verified.hairstyle != null || verified.hairdressing != null) {
                                         viewHolder.setVerified();
                                     }
                                 }
@@ -211,149 +710,456 @@ public class SearchPopular extends Fragment {
                             }
                         });
 
-                    } else {
-                        viewHolder.deleteView();
-                    }
-                } else if (search.lat.equals("") && search.lng.equals("")) {
+                        viewHolder.like.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
 
-                    viewHolder.setName(model.username);
-                    viewHolder.setLocation(model.district, model.province);
-                    viewHolder.setRating(model.rating);
+                                if (checklike[0] == true) {
+                                    DatabaseReference mRoot = FirebaseDatabase.getInstance().getReference();
+                                    mRoot.child("customer-liked").child(mFirebaseUser.getUid()).child(model.uid).removeValue();
+                                    viewHolder.setUnLike();
+                                    checklike[0] = false;
+                                } else {
 
-                    if (!model.BeauticianProfile.equals("")) {
-                        viewHolder.setProfile(getActivity().getApplicationContext(), model.BeauticianProfile);
-                    }
+                                    final DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+                                    //DatabaseReference databaseBeauLike = mRootRef.child("beautician-liked");
 
-                    if (!model.picture1.equals("")) {
-                        viewHolder.setPicture1(getActivity().getApplicationContext(), model.picture1);
-                    }
-                    if (!model.picture2.equals("")) {
-                        viewHolder.setPicture2(getActivity().getApplicationContext(), model.picture2);
-                    }
-                    if (!model.picture3.equals("")) {
-                        viewHolder.setPicture3(getActivity().getApplicationContext(), model.picture3);
-                    }
+                                    final String cshow = getRef(position).getKey();
 
-                    if (model.S01 != 0 && search.search.equals("S01")) {
-                        viewHolder.setStart(model.S01);
-                    }
-                    if (model.S02 != 0 && search.search.equals("S02")) {
-                        viewHolder.setStart(model.S02);
-                    }
-                    if (model.S03 != 0 && search.search.equals("S03")) {
-                        viewHolder.setStart(model.S03);
-                    }
-                    if (model.S04 != 0 && search.search.equals("S04")) {
-                        viewHolder.setStart(model.S04);
-                    }
+                                    final HashMap<String, Object> CustomerValues = new HashMap<>();
 
-                    DatabaseReference mRoot = FirebaseDatabase.getInstance().getReference();
-                    mRoot.child("customer-liked").child(mFirebaseUser.getUid()).child(model.uid).addListenerForSingleValueEvent(new ValueEventListener() {
+                                    //Keep beautician profile
+                                    CustomerValues.put("name", model.username);
+                                    CustomerValues.put("profile", model.BeauticianProfile);
+                                    CustomerValues.put("uid", model.uid);
 
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            DataCustomerLiked like = dataSnapshot.getValue(DataCustomerLiked.class);
-                            if (like != null) {
-                                viewHolder.setLike();
-                                checklike[0] = true;
+                                    mRootRef.child("customer").child(mFirebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+
+                                        @Override
+                                        public void onDataChange(DataSnapshot dataSnapshot) {
+                                            User user = dataSnapshot.getValue(User.class);
+                                            if (user == null) {
+                                            } else {
+
+                                                final HashMap<String, Object> BeauticianValues = new HashMap<>();
+
+                                                //Keep beautician profile
+                                                BeauticianValues.put("name", user.firstname);
+                                                BeauticianValues.put("profile", "");
+                                                BeauticianValues.put("uid", model.uid);
+
+                                                Map<String, Object> childUpdate = new HashMap<>();
+                                                childUpdate.put("/customer-liked/" + mFirebaseUser.getUid() + "/" + model.uid, CustomerValues);
+                                                childUpdate.put("/beautician-liked/" + model.uid + "/" + mFirebaseUser.getUid().toString(), BeauticianValues);
+
+                                                mRootRef.updateChildren(childUpdate);
+
+                                                viewHolder.setLike();
+                                                checklike[0] = true;
+
+
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(DatabaseError databaseError) {
+
+                                        }
+
+
+                                    });
+
+
+                                }
+
+
                             }
+                        });
+                    }
+                    else if (model.S02 != 0 && search.search.equals("S02")) {
+                        viewHolder.setName(model.username);
+                        viewHolder.setLocation(model.district, model.province);
+                        viewHolder.setRating(model.rating);
+                        viewHolder.setStart(model.S02);
+
+                        if (!model.BeauticianProfile.equals("")) {
+                            viewHolder.setProfile(getActivity().getApplicationContext(), model.BeauticianProfile);
                         }
 
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-
+                        if (!model.picture1.equals("")) {
+                            viewHolder.setPicture1(getActivity().getApplicationContext(), model.picture1);
+                        }
+                        if (!model.picture2.equals("")) {
+                            viewHolder.setPicture2(getActivity().getApplicationContext(), model.picture2);
+                        }
+                        if (!model.picture3.equals("")) {
+                            viewHolder.setPicture3(getActivity().getApplicationContext(), model.picture3);
                         }
 
+                        DatabaseReference mRoot = FirebaseDatabase.getInstance().getReference();
+                        mRoot.child("customer-liked").child(mFirebaseUser.getUid()).child(model.uid).addListenerForSingleValueEvent(new ValueEventListener() {
 
-                    });
-
-                    mRoot.child("beautician-verified").child(model.uid).addListenerForSingleValueEvent(new ValueEventListener() {
-
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            DataVerified verified = dataSnapshot.getValue(DataVerified.class);
-                            if (verified == null) {
-                            } else {
-                                if (verified.makeup != null||verified.hairstyle != null||verified.hairdressing != null) {
-                                    viewHolder.setVerified();
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                DataCustomerLiked like = dataSnapshot.getValue(DataCustomerLiked.class);
+                                if (like != null) {
+                                    viewHolder.setLike();
+                                    checklike[0] = true;
                                 }
                             }
-                        }
 
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
 
-                        }
-                    });
-                }
+                            }
 
 
-                viewHolder.like.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
+                        });
 
-                        if (checklike[0] == true) {
-                            DatabaseReference mRoot = FirebaseDatabase.getInstance().getReference();
-                            mRoot.child("customer-liked").child(mFirebaseUser.getUid()).child(model.uid).removeValue();
-                            viewHolder.setUnLike();
-                            checklike[0] = false;
-                        } else {
+                        mRoot.child("beautician-verified").child(model.uid).addListenerForSingleValueEvent(new ValueEventListener() {
 
-                            final DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
-                            //DatabaseReference databaseBeauLike = mRootRef.child("beautician-liked");
-
-                            final String cshow = getRef(position).getKey();
-
-                            final HashMap<String, Object> CustomerValues = new HashMap<>();
-
-                            //Keep beautician profile
-                            CustomerValues.put("name", model.username);
-                            CustomerValues.put("profile", model.BeauticianProfile);
-                            CustomerValues.put("uid", model.uid);
-
-                            mRootRef.child("customer").child(mFirebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-
-                                @Override
-                                public void onDataChange(DataSnapshot dataSnapshot) {
-                                    User user = dataSnapshot.getValue(User.class);
-                                    if (user == null) {
-                                    } else {
-
-                                        final HashMap<String, Object> BeauticianValues = new HashMap<>();
-
-                                        //Keep beautician profile
-                                        BeauticianValues.put("name", user.firstname);
-                                        BeauticianValues.put("profile", "");
-                                        BeauticianValues.put("uid", model.uid);
-
-                                        Map<String, Object> childUpdate = new HashMap<>();
-                                        childUpdate.put("/customer-liked/" + mFirebaseUser.getUid() + "/" + model.uid, CustomerValues);
-                                        childUpdate.put("/beautician-liked/" + model.uid + "/" + mFirebaseUser.getUid().toString(), BeauticianValues);
-
-                                        mRootRef.updateChildren(childUpdate);
-
-                                        viewHolder.setLike();
-                                        checklike[0] = true;
-
-
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                DataVerified verified = dataSnapshot.getValue(DataVerified.class);
+                                if (verified == null) {
+                                } else {
+                                    if (verified.makeup != null || verified.hairstyle != null || verified.hairdressing != null) {
+                                        viewHolder.setVerified();
                                     }
                                 }
+                            }
 
-                                @Override
-                                public void onCancelled(DatabaseError databaseError) {
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+
+                        viewHolder.like.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+
+                                if (checklike[0] == true) {
+                                    DatabaseReference mRoot = FirebaseDatabase.getInstance().getReference();
+                                    mRoot.child("customer-liked").child(mFirebaseUser.getUid()).child(model.uid).removeValue();
+                                    viewHolder.setUnLike();
+                                    checklike[0] = false;
+                                } else {
+
+                                    final DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+                                    //DatabaseReference databaseBeauLike = mRootRef.child("beautician-liked");
+
+                                    final String cshow = getRef(position).getKey();
+
+                                    final HashMap<String, Object> CustomerValues = new HashMap<>();
+
+                                    //Keep beautician profile
+                                    CustomerValues.put("name", model.username);
+                                    CustomerValues.put("profile", model.BeauticianProfile);
+                                    CustomerValues.put("uid", model.uid);
+
+                                    mRootRef.child("customer").child(mFirebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+
+                                        @Override
+                                        public void onDataChange(DataSnapshot dataSnapshot) {
+                                            User user = dataSnapshot.getValue(User.class);
+                                            if (user == null) {
+                                            } else {
+
+                                                final HashMap<String, Object> BeauticianValues = new HashMap<>();
+
+                                                //Keep beautician profile
+                                                BeauticianValues.put("name", user.firstname);
+                                                BeauticianValues.put("profile", "");
+                                                BeauticianValues.put("uid", model.uid);
+
+                                                Map<String, Object> childUpdate = new HashMap<>();
+                                                childUpdate.put("/customer-liked/" + mFirebaseUser.getUid() + "/" + model.uid, CustomerValues);
+                                                childUpdate.put("/beautician-liked/" + model.uid + "/" + mFirebaseUser.getUid().toString(), BeauticianValues);
+
+                                                mRootRef.updateChildren(childUpdate);
+
+                                                viewHolder.setLike();
+                                                checklike[0] = true;
+
+
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(DatabaseError databaseError) {
+
+                                        }
+
+
+                                    });
+
 
                                 }
 
 
-                            });
+                            }
+                        });
+                    }
+                    else if (model.S03 != 0 && search.search.equals("S03")) {
+                        viewHolder.setName(model.username);
+                        viewHolder.setLocation(model.district, model.province);
+                        viewHolder.setRating(model.rating);
+                        viewHolder.setStart(model.S03);
 
-
+                        if (!model.BeauticianProfile.equals("")) {
+                            viewHolder.setProfile(getActivity().getApplicationContext(), model.BeauticianProfile);
                         }
 
+                        if (!model.picture1.equals("")) {
+                            viewHolder.setPicture1(getActivity().getApplicationContext(), model.picture1);
+                        }
+                        if (!model.picture2.equals("")) {
+                            viewHolder.setPicture2(getActivity().getApplicationContext(), model.picture2);
+                        }
+                        if (!model.picture3.equals("")) {
+                            viewHolder.setPicture3(getActivity().getApplicationContext(), model.picture3);
+                        }
 
+                        DatabaseReference mRoot = FirebaseDatabase.getInstance().getReference();
+                        mRoot.child("customer-liked").child(mFirebaseUser.getUid()).child(model.uid).addListenerForSingleValueEvent(new ValueEventListener() {
+
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                DataCustomerLiked like = dataSnapshot.getValue(DataCustomerLiked.class);
+                                if (like != null) {
+                                    viewHolder.setLike();
+                                    checklike[0] = true;
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+
+
+                        });
+
+                        mRoot.child("beautician-verified").child(model.uid).addListenerForSingleValueEvent(new ValueEventListener() {
+
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                DataVerified verified = dataSnapshot.getValue(DataVerified.class);
+                                if (verified == null) {
+                                } else {
+                                    if (verified.makeup != null || verified.hairstyle != null || verified.hairdressing != null) {
+                                        viewHolder.setVerified();
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+
+                        viewHolder.like.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+
+                                if (checklike[0] == true) {
+                                    DatabaseReference mRoot = FirebaseDatabase.getInstance().getReference();
+                                    mRoot.child("customer-liked").child(mFirebaseUser.getUid()).child(model.uid).removeValue();
+                                    viewHolder.setUnLike();
+                                    checklike[0] = false;
+                                } else {
+
+                                    final DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+                                    //DatabaseReference databaseBeauLike = mRootRef.child("beautician-liked");
+
+                                    final String cshow = getRef(position).getKey();
+
+                                    final HashMap<String, Object> CustomerValues = new HashMap<>();
+
+                                    //Keep beautician profile
+                                    CustomerValues.put("name", model.username);
+                                    CustomerValues.put("profile", model.BeauticianProfile);
+                                    CustomerValues.put("uid", model.uid);
+
+                                    mRootRef.child("customer").child(mFirebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+
+                                        @Override
+                                        public void onDataChange(DataSnapshot dataSnapshot) {
+                                            User user = dataSnapshot.getValue(User.class);
+                                            if (user == null) {
+                                            } else {
+
+                                                final HashMap<String, Object> BeauticianValues = new HashMap<>();
+
+                                                //Keep beautician profile
+                                                BeauticianValues.put("name", user.firstname);
+                                                BeauticianValues.put("profile", "");
+                                                BeauticianValues.put("uid", model.uid);
+
+                                                Map<String, Object> childUpdate = new HashMap<>();
+                                                childUpdate.put("/customer-liked/" + mFirebaseUser.getUid() + "/" + model.uid, CustomerValues);
+                                                childUpdate.put("/beautician-liked/" + model.uid + "/" + mFirebaseUser.getUid().toString(), BeauticianValues);
+
+                                                mRootRef.updateChildren(childUpdate);
+
+                                                viewHolder.setLike();
+                                                checklike[0] = true;
+
+
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(DatabaseError databaseError) {
+
+                                        }
+
+
+                                    });
+
+
+                                }
+
+
+                            }
+                        });
                     }
-                });
+                    else if (model.S04 != 0 && search.search.equals("S04")) {
+                        viewHolder.setName(model.username);
+                        viewHolder.setLocation(model.district, model.province);
+                        viewHolder.setRating(model.rating);
+                        viewHolder.setStart(model.S04);
 
+                        if (!model.BeauticianProfile.equals("")) {
+                            viewHolder.setProfile(getActivity().getApplicationContext(), model.BeauticianProfile);
+                        }
+
+                        if (!model.picture1.equals("")) {
+                            viewHolder.setPicture1(getActivity().getApplicationContext(), model.picture1);
+                        }
+                        if (!model.picture2.equals("")) {
+                            viewHolder.setPicture2(getActivity().getApplicationContext(), model.picture2);
+                        }
+                        if (!model.picture3.equals("")) {
+                            viewHolder.setPicture3(getActivity().getApplicationContext(), model.picture3);
+                        }
+
+                        DatabaseReference mRoot = FirebaseDatabase.getInstance().getReference();
+                        mRoot.child("customer-liked").child(mFirebaseUser.getUid()).child(model.uid).addListenerForSingleValueEvent(new ValueEventListener() {
+
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                DataCustomerLiked like = dataSnapshot.getValue(DataCustomerLiked.class);
+                                if (like != null) {
+                                    viewHolder.setLike();
+                                    checklike[0] = true;
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+
+
+                        });
+
+                        mRoot.child("beautician-verified").child(model.uid).addListenerForSingleValueEvent(new ValueEventListener() {
+
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                DataVerified verified = dataSnapshot.getValue(DataVerified.class);
+                                if (verified == null) {
+                                } else {
+                                    if (verified.makeup != null || verified.hairstyle != null || verified.hairdressing != null) {
+                                        viewHolder.setVerified();
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+
+                        viewHolder.like.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+
+                                if (checklike[0] == true) {
+                                    DatabaseReference mRoot = FirebaseDatabase.getInstance().getReference();
+                                    mRoot.child("customer-liked").child(mFirebaseUser.getUid()).child(model.uid).removeValue();
+                                    viewHolder.setUnLike();
+                                    checklike[0] = false;
+                                } else {
+
+                                    final DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+                                    //DatabaseReference databaseBeauLike = mRootRef.child("beautician-liked");
+
+                                    final String cshow = getRef(position).getKey();
+
+                                    final HashMap<String, Object> CustomerValues = new HashMap<>();
+
+                                    //Keep beautician profile
+                                    CustomerValues.put("name", model.username);
+                                    CustomerValues.put("profile", model.BeauticianProfile);
+                                    CustomerValues.put("uid", model.uid);
+
+                                    mRootRef.child("customer").child(mFirebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+
+                                        @Override
+                                        public void onDataChange(DataSnapshot dataSnapshot) {
+                                            User user = dataSnapshot.getValue(User.class);
+                                            if (user == null) {
+                                            } else {
+
+                                                final HashMap<String, Object> BeauticianValues = new HashMap<>();
+
+                                                //Keep beautician profile
+                                                BeauticianValues.put("name", user.firstname);
+                                                BeauticianValues.put("profile", "");
+                                                BeauticianValues.put("uid", model.uid);
+
+                                                Map<String, Object> childUpdate = new HashMap<>();
+                                                childUpdate.put("/customer-liked/" + mFirebaseUser.getUid() + "/" + model.uid, CustomerValues);
+                                                childUpdate.put("/beautician-liked/" + model.uid + "/" + mFirebaseUser.getUid().toString(), BeauticianValues);
+
+                                                mRootRef.updateChildren(childUpdate);
+
+                                                viewHolder.setLike();
+                                                checklike[0] = true;
+
+
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(DatabaseError databaseError) {
+
+                                        }
+
+
+                                    });
+
+
+                                }
+
+
+                            }
+                        });
+                    }
+                    else {
+                        viewHolder.deleteView();
+                    }
+
+
+
+
+
+                }
 
                 viewHolder.mview.setOnClickListener(new View.OnClickListener() {
                     //private static final String TAG = "Promotion";
@@ -376,28 +1182,26 @@ public class SearchPopular extends Fragment {
                         startActivity(cPro);
                     }
                 });
-
-
             }
-        };
+            };
 
 
         firebaseRecyclerAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
-            @Override
-            public void onItemRangeInserted(int positionStart, int itemCount) {
-                super.onItemRangeInserted(positionStart, itemCount);
-                int friendlyMessageCount = firebaseRecyclerAdapter.getItemCount();
-                int lastVisiblePosition = mLayoutManager.findLastVisibleItemPosition();
-                // If the recycler view is initially being loaded or the
-                // user is at the bottom of the list, scroll to the bottom
-                // of the list to show the newly added message.
-                if (lastVisiblePosition == -1 ||
-                        (positionStart >= (friendlyMessageCount - 1) &&
-                                lastVisiblePosition == (positionStart - 1))) {
-                    recyclerView.scrollToPosition(positionStart);
+                @Override
+                public void onItemRangeInserted(int positionStart, int itemCount) {
+                    super.onItemRangeInserted(positionStart, itemCount);
+                    int friendlyMessageCount = firebaseRecyclerAdapter.getItemCount();
+                    int lastVisiblePosition = mLayoutManager.findLastVisibleItemPosition();
+                    // If the recycler view is initially being loaded or the
+                    // user is at the bottom of the list, scroll to the bottom
+                    // of the list to show the newly added message.
+                    if (lastVisiblePosition == -1 ||
+                            (positionStart >= (friendlyMessageCount - 1) &&
+                                    lastVisiblePosition == (positionStart - 1))) {
+                        recyclerView.scrollToPosition(positionStart);
+                    }
                 }
-            }
-        });
+            });
 
         recyclerView.setAdapter(firebaseRecyclerAdapter);
         recyclerView.setLayoutManager(mLayoutManager);

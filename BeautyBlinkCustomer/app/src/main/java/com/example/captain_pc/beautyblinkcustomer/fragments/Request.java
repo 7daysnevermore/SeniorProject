@@ -95,7 +95,6 @@ public class Request extends Fragment {
 
     private void initInstance(View rootView) {
 
-        btnOf = (Button)rootView.findViewById(R.id.btnOffer);
         btnUnp = (Button)rootView.findViewById(R.id.btnUnpaid);
         btnTor = (Button)rootView.findViewById(R.id.btnToreceive);
         btnCo = (Button)rootView.findViewById(R.id.btnCompleted);
@@ -200,16 +199,6 @@ public class Request extends Fragment {
                 startActivity(intent);
             }
         });
-        btnOf.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                recyclerView.setVisibility(View.GONE);
-                android.support.v4.app.FragmentManager fm = getFragmentManager();
-                android.support.v4.app.FragmentTransaction ft = fm.beginTransaction();
-                ft.replace(R.id.contentstatus, new OfferFragment(), "fragment_screen");
-                ft.commit();
-            }
-        });
 
         btnUnp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -278,7 +267,7 @@ public class Request extends Fragment {
                 recyclerView.setVisibility(View.GONE);
                 android.support.v4.app.FragmentManager fm = getFragmentManager();
                 android.support.v4.app.FragmentTransaction ft = fm.beginTransaction();
-                ft.replace(R.id.contentstatus, new ToReviewFragment(), "fragment_screen");
+                ft.replace(R.id.contentstatus, new Offer2Fragment(), "fragment_screen");
                 ft.commit();
             }
         });

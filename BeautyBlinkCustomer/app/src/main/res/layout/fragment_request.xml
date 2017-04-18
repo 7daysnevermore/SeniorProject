@@ -56,17 +56,6 @@
                         android:orientation="horizontal">
 
                         <Button
-                            android:id="@+id/btnOffer"
-                            style="@style/Widget.AppCompat.Button.Colored"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:minHeight="0dp"
-                            android:minWidth="0dp"
-                            android:text="Request"
-                            android:textSize="14dp"
-                            android:textStyle="bold" />
-
-                        <Button
                             android:id="@+id/btnOffer2"
                             style="@style/Widget.AppCompat.Button.Colored"
                             android:layout_width="wrap_content"
